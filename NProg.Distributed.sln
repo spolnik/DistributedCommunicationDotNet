@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C63D0373-27C0-4C1C-AEB6-935FBF0465B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Domain", "src\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj", "{1487C697-4873-4265-B346-8782DA31B3AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{842095DB-A845-4F4F-B00C-B1EA348DB446}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{7FED1E69-8B86-4936-93EA-910BCE279F53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "framework", "framework", "{04832DD2-FE42-4845-B39A-5F4B356C74C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Client", "src\NProg.Distributed.Client\NProg.Distributed.Client.csproj", "{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Service", "src\NProg.Distributed.Service\NProg.Distributed.Service.csproj", "{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Thrift", "src\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj", "{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AB3E64C8-1914-4741-8D26-CE354A70FFCB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6E46352C-AA16-4CA2-AE23-73ECA2BFE980}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{C3BB18C4-29E7-4C65-B93F-2DD287582C56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.NDatabase", "src\NProg.Distributed.NDatabase\NProg.Distributed.NDatabase.csproj", "{D0D3D474-E9B1-442D-939C-FD582020475F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Server", "src\NProg.Distributed.Server\NProg.Distributed.Server.csproj", "{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1487C697-4873-4265-B346-8782DA31B3AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1487C697-4873-4265-B346-8782DA31B3AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1487C697-4873-4265-B346-8782DA31B3AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1487C697-4873-4265-B346-8782DA31B3AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0D3D474-E9B1-442D-939C-FD582020475F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D3D474-E9B1-442D-939C-FD582020475F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D3D474-E9B1-442D-939C-FD582020475F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D3D474-E9B1-442D-939C-FD582020475F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1487C697-4873-4265-B346-8782DA31B3AF} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
+		{842095DB-A845-4F4F-B00C-B1EA348DB446} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
+		{7FED1E69-8B86-4936-93EA-910BCE279F53} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
+		{04832DD2-FE42-4845-B39A-5F4B356C74C9} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
+		{DC404E5D-4316-4A82-9F17-2B7F1FE6B209} = {842095DB-A845-4F4F-B00C-B1EA348DB446}
+		{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
+		{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
+		{C3BB18C4-29E7-4C65-B93F-2DD287582C56} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
+		{D0D3D474-E9B1-442D-939C-FD582020475F} = {C3BB18C4-29E7-4C65-B93F-2DD287582C56}
+		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F} = {842095DB-A845-4F4F-B00C-B1EA348DB446}
+	EndGlobalSection
+EndGlobal
