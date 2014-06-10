@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.NDatabase
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Server", "src\NProg.Distributed.Server\NProg.Distributed.Server.csproj", "{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.ZeroMQ", "src\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj", "{1355E9DA-7326-4A28-A117-6333ADC5FF99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1355E9DA-7326-4A28-A117-6333ADC5FF99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1355E9DA-7326-4A28-A117-6333ADC5FF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1355E9DA-7326-4A28-A117-6333ADC5FF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1355E9DA-7326-4A28-A117-6333ADC5FF99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +85,6 @@ Global
 		{C3BB18C4-29E7-4C65-B93F-2DD287582C56} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
 		{D0D3D474-E9B1-442D-939C-FD582020475F} = {C3BB18C4-29E7-4C65-B93F-2DD287582C56}
 		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F} = {842095DB-A845-4F4F-B00C-B1EA348DB446}
+		{1355E9DA-7326-4A28-A117-6333ADC5FF99} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 	EndGlobalSection
 EndGlobal
