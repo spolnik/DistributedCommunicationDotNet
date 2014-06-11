@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NProg.Distributed.ZeroMQ</RootNamespace>
     <AssemblyName>NProg.Distributed.ZeroMQ</AssemblyName>
@@ -33,15 +33,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="clrzmq">
       <HintPath>..\..\packages\clrzmq.2.2.5\lib\clrzmq.dll</HintPath>
     </Reference>
     <Reference Include="clrzmq-ext">
       <HintPath>..\..\packages\clrzmq.2.2.5\lib\clrzmq-ext.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,11 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JsonExtensions.cs" />
+    <Compile Include="Command\AddOrderCommand.cs" />
+    <Compile Include="Command\GetOrderCommand.cs" />
+    <Compile Include="Command\RemoveOrderCommand.cs" />
+    <Compile Include="Messaging\MessageQueueFactory.cs" />
+    <Compile Include="Messaging\ZmqMessageQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZmqOrderClient.cs" />
     <Compile Include="ZmqOrderHandler.cs" />
     <Compile Include="ZmqOrderServer.cs" />
+    <Compile Include="ZmqOrderServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -66,6 +71,10 @@
     <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
       <Name>NProg.Distributed.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.Messaging\NProg.Distributed.Messaging.csproj">
+      <Project>{8fa0b9db-feca-4f4b-8a0b-963bdd2e437b}</Project>
+      <Name>NProg.Distributed.Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.NDatabase\NProg.Distributed.NDatabase.csproj">
       <Project>{D0D3D474-E9B1-442D-939C-FD582020475F}</Project>

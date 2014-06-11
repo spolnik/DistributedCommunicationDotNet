@@ -20,6 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Thrift", "src\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj", "{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AB3E64C8-1914-4741-8D26-CE354A70FFCB}"
+	ProjectSection(SolutionItems) = preProject
+		StartHandlers.cmd = StartHandlers.cmd
+		StopHandlers.cmd = StopHandlers.cmd
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6E46352C-AA16-4CA2-AE23-73ECA2BFE980}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,6 +39,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Server", "src\NProg.Distributed.Server\NProg.Distributed.Server.csproj", "{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.ZeroMQ", "src\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj", "{1355E9DA-7326-4A28-A117-6333ADC5FF99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Messaging", "src\NProg.Distributed.Messaging\NProg.Distributed.Messaging.csproj", "{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +76,10 @@ Global
 		{1355E9DA-7326-4A28-A117-6333ADC5FF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1355E9DA-7326-4A28-A117-6333ADC5FF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1355E9DA-7326-4A28-A117-6333ADC5FF99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +96,6 @@ Global
 		{D0D3D474-E9B1-442D-939C-FD582020475F} = {C3BB18C4-29E7-4C65-B93F-2DD287582C56}
 		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F} = {842095DB-A845-4F4F-B00C-B1EA348DB446}
 		{1355E9DA-7326-4A28-A117-6333ADC5FF99} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
+		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
 	EndGlobalSection
 EndGlobal

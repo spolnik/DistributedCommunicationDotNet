@@ -60,6 +60,10 @@
       <Project>{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}</Project>
       <Name>NProg.Distributed.Thrift</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj">
+      <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
+      <Name>NProg.Distributed.ZeroMQ</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

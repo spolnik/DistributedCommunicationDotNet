@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Text;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
+using NProg.Distributed.ZeroMQ.Command;
+using NProg.Distributed.ZeroMQ.Messaging;
 using ZMQ;
 
 namespace NProg.Distributed.ZeroMQ
@@ -17,32 +19,57 @@ namespace NProg.Distributed.ZeroMQ
         {
             EnsureContext();
             pushSocket = context.Socket(SocketType.PUSH);
-            pushSocket.Connect(serviceUri.ToString());
+            pushSocket.Connect(GetAddress(serviceUri.Host, serviceUri.Port));
 
             requestSocket = context.Socket(SocketType.REQ);
-            requestSocket.Connect(serviceUri.ToString());
+            requestSocket.Connect(GetAddress(serviceUri.Host, serviceUri.Port+1));
         }
 
         public void Add(Order item)
         {
-            var json = item.ToJsonString();
-            pushSocket.Send(json, Encoding.UTF8);
+            var messageQueue = MessageQueueFactory.CreateOutbound(AddOrderCommand.Name, MessagePattern.FireAndForget);
+            messageQueue.Send(new Message
+            {
+                Body = new AddOrderCommand {Order = item}
+            });
         }
 
         public Order Get(Guid guid)
         {
-            var json = guid.ToJsonString();
-            requestSocket.Send(json, Encoding.UTF8);
-            var result = requestSocket.Recv(Encoding.UTF8);
-            return result.ReadFromJson<Order>();
+            var messageQueue = MessageQueueFactory.CreateOutbound(GetOrderCommand.Name, MessagePattern.RequestResponse);
+            messageQueue.Send(new Message
+            {
+                Body = new GetOrderCommand{ OrderId = guid }
+            });
+
+            var responseQueue = messageQueue.GetResponseQueue();
+
+            Order order = null;
+            responseQueue.Receive(x =>
+            {
+                order = x.BodyAs<Order>();
+            });
+
+            return order;
         }
 
         public bool Remove(Guid guid)
         {
-            var json = guid.ToJsonString();
-            requestSocket.Send(json, Encoding.UTF8);
-            var result = requestSocket.Recv(Encoding.UTF8);
-            return result.ReadFromJson<bool>();
+            var messageQueue = MessageQueueFactory.CreateOutbound(RemoveOrderCommand.Name, MessagePattern.RequestResponse);
+            messageQueue.Send(new Message
+            {
+                Body = new RemoveOrderCommand { OrderId = guid }
+            });
+
+            var responseQueue = messageQueue.GetResponseQueue();
+            
+            var status = false;
+            responseQueue.Receive(x =>
+            {
+                status = x.BodyAs<bool>();
+            });
+
+            return status;
         }
 
         private static void EnsureContext()
@@ -73,6 +100,10 @@ namespace NProg.Distributed.ZeroMQ
             if (disposing && pushSocket != null)
                 pushSocket.Dispose();
         }
-    }
 
+        private static string GetAddress(string host, int port)
+        {
+            return string.Format("tcp://{0}:{1}", host, port);
+        }
+    }
 }

@@ -2,6 +2,7 @@
 using NProg.Distributed.Domain;
 using NProg.Distributed.Service;
 using NProg.Distributed.Thrift;
+using NProg.Distributed.ZeroMQ;
 using Order = NProg.Distributed.Domain.Order;
 
 namespace NProg.Distributed.Client
@@ -10,8 +11,9 @@ namespace NProg.Distributed.Client
     {
         static void Main(string[] args)
         {
-            IOrderServiceFactory orderServiceFactory = new ThriftOrderServiceFactory();
-            var client = orderServiceFactory.GetClient(new Uri("tcp://localhost:55001"));
+//            IOrderServiceFactory orderServiceFactory = new ThriftOrderServiceFactory();
+            IOrderServiceFactory orderServiceFactory = new ZmqOrderServiceFactory();
+            var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:55001"));
 
             var order = new Order
             {

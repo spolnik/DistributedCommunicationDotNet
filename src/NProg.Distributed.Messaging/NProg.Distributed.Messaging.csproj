@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Client</RootNamespace>
-    <AssemblyName>NProg.Distributed.Client</AssemblyName>
+    <RootNamespace>NProg.Distributed.Messaging</RootNamespace>
+    <AssemblyName>NProg.Distributed.Messaging</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +24,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,31 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spec\Direction.cs" />
+    <Compile Include="Spec\ICommand.cs" />
+    <Compile Include="Spec\IMessageQueue.cs" />
+    <Compile Include="Spec\Message.cs" />
+    <Compile Include="Spec\MessagePattern.cs" />
+    <Compile Include="Spec\MessageQueueBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
-      <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
-      <Name>NProg.Distributed.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
-      <Project>{3ab7dccb-b549-4f9f-b54d-c8025a139a8c}</Project>
-      <Name>NProg.Distributed.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj">
-      <Project>{0ecfa0cf-d3c2-4dc4-a7f9-6b69f269ff08}</Project>
-      <Name>NProg.Distributed.Thrift</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj">
-      <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
-      <Name>NProg.Distributed.ZeroMQ</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

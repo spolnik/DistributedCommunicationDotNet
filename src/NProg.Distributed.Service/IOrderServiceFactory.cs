@@ -7,7 +7,7 @@ namespace NProg.Distributed.Service
     {
         IHandler<Order> GetHandler();
 
-        IServer GetServer(IHandler<Order> handler, int port);
+        IServer GetServer(IHandler<Order> handler, int port = -1, string eventName = null);
 
         IHandler<Order> GetClient(Uri serviceUri);
     }
