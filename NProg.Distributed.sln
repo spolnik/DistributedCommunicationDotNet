@@ -42,6 +42,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.ZeroMQ", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Messaging", "src\NProg.Distributed.Messaging\NProg.Distributed.Messaging.csproj", "{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{26446979-8C4E-4935-85A8-54FADC0FAFC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Tests", "test\NProg.Distributed.Tests\NProg.Distributed.Tests.csproj", "{7FD0600F-A707-4883-9182-1229C102DB7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +84,10 @@ Global
 		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FD0600F-A707-4883-9182-1229C102DB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FD0600F-A707-4883-9182-1229C102DB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FD0600F-A707-4883-9182-1229C102DB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FD0600F-A707-4883-9182-1229C102DB7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,5 +105,6 @@ Global
 		{FBC30C00-9FEC-4D25-B706-B49E354ACB3F} = {842095DB-A845-4F4F-B00C-B1EA348DB446}
 		{1355E9DA-7326-4A28-A117-6333ADC5FF99} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
+		{7FD0600F-A707-4883-9182-1229C102DB7E} = {26446979-8C4E-4935-85A8-54FADC0FAFC4}
 	EndGlobalSection
 EndGlobal

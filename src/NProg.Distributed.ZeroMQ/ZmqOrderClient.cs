@@ -2,8 +2,8 @@
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
-using NProg.Distributed.ZeroMQ.Command;
 using NProg.Distributed.ZeroMQ.Messaging;
+using NProg.Distributed.ZeroMQ.Queries;
 using ZMQ;
 
 namespace NProg.Distributed.ZeroMQ
@@ -27,23 +27,23 @@ namespace NProg.Distributed.ZeroMQ
 
         public void Add(Order item)
         {
-            var messageQueue = MessageQueueFactory.CreateOutbound(AddOrderCommand.Name, MessagePattern.RequestResponse);
+            var messageQueue = MessageQueueFactory.CreateOutbound(AddOrderRequest.Name, MessagePattern.RequestResponse);
             messageQueue.Send(new Message
             {
-                Body = new AddOrderCommand {Order = item}
+                Body = new AddOrderRequest {Order = item}
             });
 
             var responseQueue = messageQueue.GetResponseQueue();
 
-            responseQueue.Receive(x => Console.WriteLine("Order added: {0}", x.BodyAs<string>()));
+            responseQueue.Receive(x => Console.WriteLine("Order added: {0}", x.BodyAs<StatusResponse>().Status));
         }
 
         public Order Get(Guid guid)
         {
-            var messageQueue = MessageQueueFactory.CreateOutbound(GetOrderCommand.Name, MessagePattern.RequestResponse);
+            var messageQueue = MessageQueueFactory.CreateOutbound(GetOrderRequest.Name, MessagePattern.RequestResponse);
             messageQueue.Send(new Message
             {
-                Body = new GetOrderCommand{ OrderId = guid }
+                Body = new GetOrderRequest{ OrderId = guid }
             });
 
             var responseQueue = messageQueue.GetResponseQueue();
@@ -51,7 +51,7 @@ namespace NProg.Distributed.ZeroMQ
             Order order = null;
             responseQueue.Receive(x =>
             {
-                order = x.BodyAs<Order>();
+                order = x.BodyAs<GetOrderResponse>().Order;
             });
 
             return order;
@@ -59,21 +59,21 @@ namespace NProg.Distributed.ZeroMQ
 
         public bool Remove(Guid guid)
         {
-            var messageQueue = MessageQueueFactory.CreateOutbound(RemoveOrderCommand.Name, MessagePattern.RequestResponse);
+            var messageQueue = MessageQueueFactory.CreateOutbound(RemoveOrderRequest.Name, MessagePattern.RequestResponse);
             messageQueue.Send(new Message
             {
-                Body = new RemoveOrderCommand { OrderId = guid }
+                Body = new RemoveOrderRequest { OrderId = guid }
             });
 
             var responseQueue = messageQueue.GetResponseQueue();
             
-            var status = string.Empty;
+            var status = false;
             responseQueue.Receive(x =>
             {
-                status = x.BodyAs<string>();
+                status = x.BodyAs<StatusResponse>().Status;
             });
 
-            return Convert.ToBoolean(status);
+            return status;
         }
 
         private static void EnsureContext()

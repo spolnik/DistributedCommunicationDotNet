@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
-using NProg.Distributed.ZeroMQ.Command;
 using NProg.Distributed.ZeroMQ.Messaging;
+using NProg.Distributed.ZeroMQ.Queries;
 
 namespace NProg.Distributed.ZeroMQ
 {
@@ -25,11 +25,11 @@ namespace NProg.Distributed.ZeroMQ
         {
             var tasks = new List<Task>();
 
-            addOrderTask = Task.Run(() => StartListening(AddOrderCommand.Name, MessagePattern.RequestResponse));
+            addOrderTask = Task.Run(() => StartListening(AddOrderRequest.Name, MessagePattern.RequestResponse));
             tasks.Add(addOrderTask);
-            getOrderTask = Task.Run(() => StartListening(GetOrderCommand.Name, MessagePattern.RequestResponse));
+            getOrderTask = Task.Run(() => StartListening(GetOrderRequest.Name, MessagePattern.RequestResponse));
             tasks.Add(getOrderTask);
-            removeOrderTask = Task.Run(() => StartListening(RemoveOrderCommand.Name, MessagePattern.RequestResponse));
+            removeOrderTask = Task.Run(() => StartListening(RemoveOrderRequest.Name, MessagePattern.RequestResponse));
             tasks.Add(removeOrderTask);
 
             Task.WaitAll(tasks.ToArray());
@@ -46,24 +46,24 @@ namespace NProg.Distributed.ZeroMQ
             Console.WriteLine("Listening on: {0}", queue.Address);
             queue.Listen(x =>
             {
-                if (x.BodyType == typeof(AddOrderCommand))
+                if (x.BodyType == typeof(AddOrderRequest))
                 {
                     AddOrder(x, queue);
                 }
-                else if (x.BodyType == typeof(GetOrderCommand))
+                else if (x.BodyType == typeof(GetOrderRequest))
                 {
-                    GetOrder(x.BodyAs<GetOrderCommand>().OrderId, x, queue);
+                    GetOrder(x.BodyAs<GetOrderRequest>().OrderId, x, queue);
                 }
-                else if (x.BodyType == typeof(RemoveOrderCommand))
+                else if (x.BodyType == typeof(RemoveOrderRequest))
                 {
-                    RemoveOrder(x.BodyAs<RemoveOrderCommand>().OrderId, x, queue);
+                    RemoveOrder(x.BodyAs<RemoveOrderRequest>().OrderId, x, queue);
                 }
             });
         }
 
         private void AddOrder(Message message, IMessageQueue queue)
         {
-            var order = message.BodyAs<AddOrderCommand>().Order;
+            var order = message.BodyAs<AddOrderRequest>().Order;
             Console.WriteLine("Starting AddOrder for: {0}, at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
 
             handler.Add(order);
@@ -72,7 +72,7 @@ namespace NProg.Distributed.ZeroMQ
 
             responseQueue.Send(new Message
             {
-                Body = "true"
+                Body = new StatusResponse {Status = true}
             });
 
             Console.WriteLine("Order added: {0} at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
@@ -87,7 +87,7 @@ namespace NProg.Distributed.ZeroMQ
 
             responseQueue.Send(new Message
             {
-                Body = order
+                Body = new GetOrderResponse {Order = order}
             });
 
             Console.WriteLine("Returned: {0} for GetOrder, to: {1}, at: {2}", order.OrderId, responseQueue.Address,
@@ -103,7 +103,7 @@ namespace NProg.Distributed.ZeroMQ
 
             responseQueue.Send(new Message
             {
-                Body = status.ToString()
+                Body = new StatusResponse { Status = status }
             });
 
             Console.WriteLine("Returned: {0} for RemoveOrder, to: {1}, at: {2}", status, responseQueue.Address,
