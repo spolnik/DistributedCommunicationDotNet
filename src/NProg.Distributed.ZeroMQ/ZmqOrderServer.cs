@@ -11,15 +11,13 @@ namespace NProg.Distributed.ZeroMQ
 {
     public class ZmqOrderServer : IServer
     {
-        private readonly string eventName;
         private readonly IHandler<Order> handler;
         private Task addOrderTask;
         private Task getOrderTask;
         private Task removeOrderTask;
 
-        public ZmqOrderServer(IHandler<Order> handler, string eventName)
+        public ZmqOrderServer(IHandler<Order> handler)
         {
-            this.eventName = eventName;
             this.handler = handler;
         }
         
@@ -27,7 +25,7 @@ namespace NProg.Distributed.ZeroMQ
         {
             var tasks = new List<Task>();
 
-            addOrderTask = Task.Run(() => StartListening(AddOrderCommand.Name, MessagePattern.FireAndForget));
+            addOrderTask = Task.Run(() => StartListening(AddOrderCommand.Name, MessagePattern.RequestResponse));
             tasks.Add(addOrderTask);
             getOrderTask = Task.Run(() => StartListening(GetOrderCommand.Name, MessagePattern.RequestResponse));
             tasks.Add(getOrderTask);
@@ -50,7 +48,7 @@ namespace NProg.Distributed.ZeroMQ
             {
                 if (x.BodyType == typeof(AddOrderCommand))
                 {
-                    AddOrder(x);
+                    AddOrder(x, queue);
                 }
                 else if (x.BodyType == typeof(GetOrderCommand))
                 {
@@ -63,12 +61,19 @@ namespace NProg.Distributed.ZeroMQ
             });
         }
 
-        private void AddOrder(Message message)
+        private void AddOrder(Message message, IMessageQueue queue)
         {
             var order = message.BodyAs<AddOrderCommand>().Order;
             Console.WriteLine("Starting AddOrder for: {0}, at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
 
             handler.Add(order);
+
+            var responseQueue = queue.GetReplyQueue(message);
+
+            responseQueue.Send(new Message
+            {
+                Body = "true"
+            });
 
             Console.WriteLine("Order added: {0} at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
         }
@@ -98,7 +103,7 @@ namespace NProg.Distributed.ZeroMQ
 
             responseQueue.Send(new Message
             {
-                Body = status
+                Body = status.ToString()
             });
 
             Console.WriteLine("Returned: {0} for RemoveOrder, to: {1}, at: {2}", status, responseQueue.Address,

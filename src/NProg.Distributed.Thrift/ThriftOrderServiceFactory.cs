@@ -10,7 +10,7 @@ namespace NProg.Distributed.Thrift
             return new ThriftOrderHandler();
         }
 
-        public IServer GetServer(IHandler<Domain.Order> handler, int port, string serverName = null)
+        public IServer GetServer(IHandler<Domain.Order> handler, int port)
         {
             return new ThriftOrderServer(handler, port);
         }

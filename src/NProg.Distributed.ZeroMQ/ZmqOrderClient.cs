@@ -27,11 +27,15 @@ namespace NProg.Distributed.ZeroMQ
 
         public void Add(Order item)
         {
-            var messageQueue = MessageQueueFactory.CreateOutbound(AddOrderCommand.Name, MessagePattern.FireAndForget);
+            var messageQueue = MessageQueueFactory.CreateOutbound(AddOrderCommand.Name, MessagePattern.RequestResponse);
             messageQueue.Send(new Message
             {
                 Body = new AddOrderCommand {Order = item}
             });
+
+            var responseQueue = messageQueue.GetResponseQueue();
+
+            responseQueue.Receive(x => Console.WriteLine("Order added: {0}", x.BodyAs<string>()));
         }
 
         public Order Get(Guid guid)
@@ -63,13 +67,13 @@ namespace NProg.Distributed.ZeroMQ
 
             var responseQueue = messageQueue.GetResponseQueue();
             
-            var status = false;
+            var status = string.Empty;
             responseQueue.Receive(x =>
             {
-                status = x.BodyAs<bool>();
+                status = x.BodyAs<string>();
             });
 
-            return status;
+            return Convert.ToBoolean(status);
         }
 
         private static void EnsureContext()
