@@ -4,23 +4,23 @@ using System.Threading.Tasks;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Order.Queries;
 using NProg.Distributed.Messaging.Spec;
+using NProg.Distributed.Msmq.Messaging;
 using NProg.Distributed.Service;
-using NProg.Distributed.ZeroMQ.Messaging;
 
-namespace NProg.Distributed.ZeroMQ
+namespace NProg.Distributed.Msmq
 {
-    public class ZmqOrderServer : IServer
+    public class MsmqOrderServer : IServer
     {
         private readonly IHandler<Order> handler;
         private Task addOrderTask;
         private Task getOrderTask;
         private Task removeOrderTask;
 
-        public ZmqOrderServer(IHandler<Order> handler)
+        public MsmqOrderServer(IHandler<Order> handler)
         {
             this.handler = handler;
         }
-        
+
         public void Start()
         {
             var tasks = new List<Task>();
@@ -37,7 +37,7 @@ namespace NProg.Distributed.ZeroMQ
 
         public void Stop()
         {
-            // cancel logic for tasks
+            throw new System.NotImplementedException();
         }
 
         private void StartListening(string name, MessagePattern pattern)
@@ -72,7 +72,7 @@ namespace NProg.Distributed.ZeroMQ
 
             responseQueue.Send(new Message
             {
-                Body = new StatusResponse {Status = true}
+                Body = new StatusResponse { Status = true }
             });
 
             Console.WriteLine("Order added: {0} at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
@@ -87,7 +87,7 @@ namespace NProg.Distributed.ZeroMQ
 
             responseQueue.Send(new Message
             {
-                Body = new GetOrderResponse {Order = order}
+                Body = new GetOrderResponse { Order = order }
             });
 
             Console.WriteLine("Returned: {0} for GetOrder, to: {1}, at: {2}", order.OrderId, responseQueue.Address,

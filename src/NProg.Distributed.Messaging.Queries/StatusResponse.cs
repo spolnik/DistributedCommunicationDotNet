@@ -1,4 +1,4 @@
-﻿namespace NProg.Distributed.ZeroMQ.Queries
+﻿namespace NProg.Distributed.Messaging.Order.Queries
 {
     public class StatusResponse
     {

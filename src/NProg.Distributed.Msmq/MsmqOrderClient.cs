@@ -2,19 +2,19 @@
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Order.Queries;
 using NProg.Distributed.Messaging.Spec;
+using NProg.Distributed.Msmq.Messaging;
 using NProg.Distributed.Service;
-using NProg.Distributed.ZeroMQ.Messaging;
 
-namespace NProg.Distributed.ZeroMQ
+namespace NProg.Distributed.Msmq
 {
-    public class ZmqOrderClient : IHandler<Order>
-    {   
+    public class MsmqOrderClient : IHandler<Order>
+    {
         public void Add(Order item)
         {
             var messageQueue = MessageQueueFactory.CreateOutbound(AddOrderRequest.Name, MessagePattern.RequestResponse);
             messageQueue.Send(new Message
             {
-                Body = new AddOrderRequest {Order = item}
+                Body = new AddOrderRequest { Order = item }
             });
 
             var responseQueue = messageQueue.GetResponseQueue();
@@ -27,7 +27,7 @@ namespace NProg.Distributed.ZeroMQ
             var messageQueue = MessageQueueFactory.CreateOutbound(GetOrderRequest.Name, MessagePattern.RequestResponse);
             messageQueue.Send(new Message
             {
-                Body = new GetOrderRequest{ OrderId = guid }
+                Body = new GetOrderRequest { OrderId = guid }
             });
 
             var responseQueue = messageQueue.GetResponseQueue();
@@ -50,7 +50,7 @@ namespace NProg.Distributed.ZeroMQ
             });
 
             var responseQueue = messageQueue.GetResponseQueue();
-            
+
             var status = false;
             responseQueue.Receive(x =>
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using NProg.Distributed.Msmq;
 using NProg.Distributed.Service;
 using NProg.Distributed.ZeroMQ;
 
@@ -15,7 +16,8 @@ namespace NProg.Distributed.Server
                 const int port = 55001;
 
 //                IOrderServiceFactory orderServiceFactory = new ThriftOrderServiceFactory();
-                IOrderServiceFactory orderServiceFactory = new ZmqOrderServiceFactory();
+//                IOrderServiceFactory orderServiceFactory = new ZmqOrderServiceFactory();
+                IOrderServiceFactory orderServiceFactory = new MsmqOrderServiceFactory();
                 var ordersHandler = orderServiceFactory.GetHandler();
 
                 server = orderServiceFactory.GetServer(ordersHandler, port);

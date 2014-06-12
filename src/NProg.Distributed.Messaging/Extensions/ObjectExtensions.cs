@@ -15,5 +15,11 @@ namespace NProg.Distributed.Messaging.Extensions
         {
             return JsonConvert.SerializeObject(obj);
         }
+
+        public static Stream ToJsonStream(this object obj)
+        {
+            var json = obj.ToJsonString();
+            return new MemoryStream(Encoding.Default.GetBytes(json));
+        }
     }
 }

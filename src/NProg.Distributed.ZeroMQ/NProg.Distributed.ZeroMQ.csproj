@@ -52,14 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Queries\AddOrderRequest.cs" />
-    <Compile Include="Queries\GetOrderRequest.cs" />
-    <Compile Include="Queries\GetOrderResponse.cs" />
-    <Compile Include="Queries\RemoveOrderRequest.cs" />
     <Compile Include="Messaging\MessageQueueFactory.cs" />
     <Compile Include="Messaging\ZmqMessageQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\StatusResponse.cs" />
     <Compile Include="ZmqOrderClient.cs" />
     <Compile Include="ZmqOrderHandler.cs" />
     <Compile Include="ZmqOrderServer.cs" />
@@ -73,6 +68,10 @@
     <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
       <Name>NProg.Distributed.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.Messaging.Queries\NProg.Distributed.Messaging.Queries.csproj">
+      <Project>{3B8F3264-20CB-4B28-8923-895B7E399FBA}</Project>
+      <Name>NProg.Distributed.Messaging.Queries</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Messaging\NProg.Distributed.Messaging.csproj">
       <Project>{8fa0b9db-feca-4f4b-8a0b-963bdd2e437b}</Project>

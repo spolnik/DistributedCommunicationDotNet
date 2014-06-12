@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}</ProjectGuid>
+    <ProjectGuid>{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Server</RootNamespace>
-    <AssemblyName>NProg.Distributed.Server</AssemblyName>
+    <RootNamespace>NProg.Distributed.Msmq.CreateQueues</RootNamespace>
+    <AssemblyName>NProg.Distributed.Msmq.CreateQueues</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,11 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Messaging" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -46,28 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
-      <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
-      <Name>NProg.Distributed.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Msmq\NProg.Distributed.Msmq.csproj">
-      <Project>{F7BA6185-8C99-462A-B24F-8C5A554F8B87}</Project>
-      <Name>NProg.Distributed.Msmq</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
-      <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
-      <Name>NProg.Distributed.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj">
-      <Project>{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}</Project>
-      <Name>NProg.Distributed.Thrift</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj">
-      <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
-      <Name>NProg.Distributed.ZeroMQ</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

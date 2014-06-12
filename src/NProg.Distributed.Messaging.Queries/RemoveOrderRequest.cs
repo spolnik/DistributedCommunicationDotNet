@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace NProg.Distributed.ZeroMQ.Queries
+namespace NProg.Distributed.Messaging.Order.Queries
 {
     public class RemoveOrderRequest
     {
         public Guid OrderId { get; set; }
 
-        internal const string Name = "remove-order";
+        public const string Name = "remove-order";
     }
 }
