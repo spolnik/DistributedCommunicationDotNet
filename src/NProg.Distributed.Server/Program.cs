@@ -4,9 +4,9 @@ using NProg.Distributed.ZeroMQ;
 
 namespace NProg.Distributed.Server
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             IServer server = null;
             

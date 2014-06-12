@@ -4,27 +4,11 @@ using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
 using NProg.Distributed.ZeroMQ.Messaging;
 using NProg.Distributed.ZeroMQ.Queries;
-using ZMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqOrderClient : IHandler<Order>, IDisposable
-    {
-        private static volatile Context context;
-        private static readonly object ContextLock = new object();
-        private readonly Socket pushSocket;
-        private readonly Socket requestSocket;
-
-        public ZmqOrderClient(Uri serviceUri)
-        {
-            EnsureContext();
-            pushSocket = context.Socket(SocketType.PUSH);
-            pushSocket.Connect(GetAddress(serviceUri.Host, serviceUri.Port));
-
-            requestSocket = context.Socket(SocketType.REQ);
-            requestSocket.Connect(GetAddress(serviceUri.Host, serviceUri.Port+1));
-        }
-
+    public class ZmqOrderClient : IHandler<Order>
+    {   
         public void Add(Order item)
         {
             var messageQueue = MessageQueueFactory.CreateOutbound(AddOrderRequest.Name, MessagePattern.RequestResponse);
@@ -74,40 +58,6 @@ namespace NProg.Distributed.ZeroMQ
             });
 
             return status;
-        }
-
-        private static void EnsureContext()
-        {
-            if (context == null)
-            {
-                lock (ContextLock)
-                {
-                    if (context == null)
-                    {
-                        context = new Context();
-                    }
-                }
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposing && requestSocket != null)
-                requestSocket.Dispose();
-
-            if (disposing && pushSocket != null)
-                pushSocket.Dispose();
-        }
-
-        private static string GetAddress(string host, int port)
-        {
-            return string.Format("tcp://{0}:{1}", host, port);
         }
     }
 }

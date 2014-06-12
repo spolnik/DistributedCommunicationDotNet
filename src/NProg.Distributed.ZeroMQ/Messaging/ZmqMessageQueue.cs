@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using NProg.Distributed.Messaging;
 using NProg.Distributed.Messaging.Extensions;
 using NProg.Distributed.Messaging.Spec;
 using ZMQ;
@@ -14,10 +12,9 @@ namespace NProg.Distributed.ZeroMQ.Messaging
         private static readonly object ContextLock = new object();
         private Socket socket;
 
-        public override void InitialiseOutbound(string name, MessagePattern pattern,
-            Dictionary<string, object> properties = null)
+        public override void InitialiseOutbound(string name, MessagePattern pattern)
         {
-            Initialise(Direction.Outbound, name, pattern, properties);
+            Initialise(Direction.Outbound, name, pattern);
             EnsureContext();
             switch (Pattern)
             {
@@ -52,10 +49,9 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             }
         }
 
-        public override void InitialiseInbound(string name, MessagePattern pattern,
-            Dictionary<string, object> properties = null)
+        public override void InitialiseInbound(string name, MessagePattern pattern)
         {
-            Initialise(Direction.Inbound, name, pattern, properties);
+            Initialise(Direction.Inbound, name, pattern);
             EnsureContext();
             switch (Pattern)
             {

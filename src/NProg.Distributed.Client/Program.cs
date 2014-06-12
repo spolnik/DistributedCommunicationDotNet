@@ -1,15 +1,13 @@
 ﻿using System;
-using NProg.Distributed.Domain;
 using NProg.Distributed.Service;
-using NProg.Distributed.Thrift;
 using NProg.Distributed.ZeroMQ;
 using Order = NProg.Distributed.Domain.Order;
 
 namespace NProg.Distributed.Client
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
 //            IOrderServiceFactory orderServiceFactory = new ThriftOrderServiceFactory();
             IOrderServiceFactory orderServiceFactory = new ZmqOrderServiceFactory();

@@ -19,7 +19,7 @@ namespace NProg.Distributed.ZeroMQ
 
         public IHandler<Order> GetClient(Uri serviceUri)
         {
-            return new ZmqOrderClient(serviceUri);
+            return new ZmqOrderClient();
         }
     }
 }
