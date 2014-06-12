@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
@@ -11,31 +13,33 @@ namespace NProg.Distributed.ZeroMQ
     {
         private readonly string eventName;
         private readonly IHandler<Order> handler;
-        
+        private Task addOrderTask;
+        private Task getOrderTask;
+        private Task removeOrderTask;
+
         public ZmqOrderServer(IHandler<Order> handler, string eventName)
         {
             this.eventName = eventName;
             this.handler = handler;
         }
-
+        
         public void Start()
         {
-            switch (eventName)
-            {
-                case AddOrderCommand.Name:
-                    StartListening(AddOrderCommand.Name, MessagePattern.FireAndForget);
-                    break;
-                case GetOrderCommand.Name:
-                    StartListening(GetOrderCommand.Name, MessagePattern.RequestResponse);
-                    break;
-                case RemoveOrderCommand.Name:
-                    StartListening(RemoveOrderCommand.Name, MessagePattern.RequestResponse);
-                    break;
-            }
+            var tasks = new List<Task>();
+
+            addOrderTask = Task.Run(() => StartListening(AddOrderCommand.Name, MessagePattern.FireAndForget));
+            tasks.Add(addOrderTask);
+            getOrderTask = Task.Run(() => StartListening(GetOrderCommand.Name, MessagePattern.RequestResponse));
+            tasks.Add(getOrderTask);
+            removeOrderTask = Task.Run(() => StartListening(RemoveOrderCommand.Name, MessagePattern.RequestResponse));
+            tasks.Add(removeOrderTask);
+
+            Task.WaitAll(tasks.ToArray());
         }
 
         public void Stop()
         {
+            // cancel logic for tasks
         }
 
         private void StartListening(string name, MessagePattern pattern)
@@ -46,7 +50,7 @@ namespace NProg.Distributed.ZeroMQ
             {
                 if (x.BodyType == typeof(AddOrderCommand))
                 {
-                    handler.Add(x.BodyAs<AddOrderCommand>().Order);
+                    AddOrder(x);
                 }
                 else if (x.BodyType == typeof(GetOrderCommand))
                 {
@@ -57,6 +61,16 @@ namespace NProg.Distributed.ZeroMQ
                     RemoveOrder(x.BodyAs<RemoveOrderCommand>().OrderId, x, queue);
                 }
             });
+        }
+
+        private void AddOrder(Message message)
+        {
+            var order = message.BodyAs<AddOrderCommand>().Order;
+            Console.WriteLine("Starting AddOrder for: {0}, at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
+
+            handler.Add(order);
+
+            Console.WriteLine("Order added: {0} at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
         }
 
         private void GetOrder(Guid orderId, Message message, IMessageQueue queue)
