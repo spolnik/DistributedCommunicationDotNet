@@ -7,7 +7,7 @@ namespace NProg.Distributed.Zyan
 {
     public class ZyanOrderClient : IHandler<Order>
     {
-        private IHandler<Order> proxy;
+        private readonly IHandler<Order> proxy;
 
         public ZyanOrderClient(Uri serviceUri)
         {

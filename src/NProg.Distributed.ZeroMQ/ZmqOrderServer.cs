@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Messaging.Order.Queries;
+using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
 using NProg.Distributed.ZeroMQ.Messaging;

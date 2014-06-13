@@ -1,4 +1,4 @@
-﻿namespace NProg.Distributed.Messaging.Order.Queries
+﻿namespace NProg.Distributed.Messaging.Queries
 {
     public class GetOrderResponse
     {

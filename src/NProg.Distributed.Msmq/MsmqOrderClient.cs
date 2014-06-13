@@ -1,6 +1,6 @@
 ﻿using System;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Messaging.Order.Queries;
+using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Msmq.Messaging;
 using NProg.Distributed.Service;

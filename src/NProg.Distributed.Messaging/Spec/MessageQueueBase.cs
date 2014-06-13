@@ -4,11 +4,11 @@ namespace NProg.Distributed.Messaging.Spec
 {
     public abstract class MessageQueueBase : IMessageQueue
     {
-        public string Address { get; private set; }
 
         protected MessagePattern Pattern { get; private set; }
 
         protected Direction Direction { get; set; }
+        public string Address { get; private set; }
 
         public abstract void InitialiseOutbound(string name, MessagePattern pattern);
 
@@ -20,8 +20,6 @@ namespace NProg.Distributed.Messaging.Spec
 
         public abstract void Receive(Action<Message> onMessageReceived);
 
-        public abstract string GetAddress(string name);
-
         public abstract IMessageQueue GetResponseQueue();
 
         public abstract IMessageQueue GetReplyQueue(Message message);
@@ -31,6 +29,8 @@ namespace NProg.Distributed.Messaging.Spec
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        protected abstract string GetAddress(string name);
 
         protected abstract void Dispose(bool disposing);
 

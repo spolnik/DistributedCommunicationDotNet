@@ -94,7 +94,7 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             onMessageReceived(message);
         }
 
-        public override string GetAddress(string name)
+        protected override string GetAddress(string name)
         {
             switch (name.ToLower())
             {

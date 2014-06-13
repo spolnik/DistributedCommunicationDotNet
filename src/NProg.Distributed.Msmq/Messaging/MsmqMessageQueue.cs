@@ -61,7 +61,7 @@ namespace NProg.Distributed.Msmq.Messaging
             onMessageReceived(message);
         }
 
-        public override string GetAddress(string name)
+        protected override string GetAddress(string name)
         {
             if (Pattern == MessagePattern.RequestResponse && Direction == Direction.Inbound && string.IsNullOrEmpty(name))
             {

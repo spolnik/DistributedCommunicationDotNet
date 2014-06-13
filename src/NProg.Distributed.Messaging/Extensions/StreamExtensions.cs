@@ -1,12 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Newtonsoft.Json;
 
 namespace NProg.Distributed.Messaging.Extensions
 {
     internal static class StreamExtensions
     {
-
         internal static T ReadFromJson<T>(this Stream stream)
         {
             var json = stream.ReadToEnd();

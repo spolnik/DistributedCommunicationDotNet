@@ -16,8 +16,6 @@ namespace NProg.Distributed.Messaging.Spec
 
         void Receive(Action<Message> onMessageReceived);
 
-        string GetAddress(string name);
-
         IMessageQueue GetResponseQueue();
 
         IMessageQueue GetReplyQueue(Message message);
