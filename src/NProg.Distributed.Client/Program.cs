@@ -1,5 +1,6 @@
 ﻿using System;
 using NProg.Distributed.Msmq;
+using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
 using NProg.Distributed.Thrift;
 using NProg.Distributed.WCF;
@@ -12,7 +13,7 @@ namespace NProg.Distributed.Client
     {
         static void Main()
         {
-            var orderServiceFactory = GetOrderServiceFactory("wcf");
+            var orderServiceFactory = GetOrderServiceFactory("remoting");
             var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:55001"));
 
             for (var i = 0; i < 1000; i++)
@@ -57,6 +58,8 @@ namespace NProg.Distributed.Client
                     return new ZmqOrderServiceFactory();
                 case "msmq":
                     return new MsmqOrderServiceFactory();
+                case "remoting":
+                    return new RemotingOrderServiceFactory();
                 default:
                     throw new InvalidOperationException();
             }

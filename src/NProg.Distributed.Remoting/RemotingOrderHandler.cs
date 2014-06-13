@@ -2,17 +2,16 @@
 using NProg.Distributed.Domain;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
-using NProg.Distributed.WCF.Service;
 
-namespace NProg.Distributed.WCF
+namespace NProg.Distributed.Remoting
 {
-    public class WcfOrderHandler : IHandler<Order>, IOrderService
+    public class RemotingOrderHandler : MarshalByRefObject, IHandler<Order>
     {
         private readonly NdbOrderDao ndbOrderDao;
 
-        public WcfOrderHandler()
+        public RemotingOrderHandler()
         {
-            ndbOrderDao = new NdbOrderDao("order_wcf.ndb");
+            ndbOrderDao = new NdbOrderDao("order_remoting.ndb");
         }
 
         public void Add(Order item)

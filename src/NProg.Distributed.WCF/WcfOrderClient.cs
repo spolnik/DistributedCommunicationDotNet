@@ -22,7 +22,7 @@ namespace NProg.Distributed.WCF
             using (var channelFactory = new ChannelFactory<IOrderService>(tcpBinding, endpoint))
             {
                 var orderService = channelFactory.CreateChannel();
-                orderService.Add(OrderMapper.MapOrder(item));
+                orderService.Add(item);
             }
         }
 
@@ -31,7 +31,7 @@ namespace NProg.Distributed.WCF
             using (var channelFactory = new ChannelFactory<IOrderService>(tcpBinding, endpoint))
             {
                 var orderService = channelFactory.CreateChannel();
-                return OrderMapper.MapOrder(orderService.Get(guid));
+                return orderService.Get(guid);
             }
         }
 

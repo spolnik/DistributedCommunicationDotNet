@@ -56,6 +56,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Msmq.Crea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.WCF", "src\NProg.Distributed.WCF\NProg.Distributed.WCF.csproj", "{F84A2E32-9931-4C98-AA25-CE481CB89C0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Remoting", "src\NProg.Distributed.Remoting\NProg.Distributed.Remoting.csproj", "{077DB902-1745-4CEF-9714-E0F3AC17B452}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,10 @@ Global
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077DB902-1745-4CEF-9714-E0F3AC17B452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077DB902-1745-4CEF-9714-E0F3AC17B452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077DB902-1745-4CEF-9714-E0F3AC17B452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077DB902-1745-4CEF-9714-E0F3AC17B452}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,5 +142,6 @@ Global
 		{3B8F3264-20CB-4B28-8923-895B7E399FBA} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
 		{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22} = {111C8F14-7439-4463-98C2-CAFE71DF2703}
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
+		{077DB902-1745-4CEF-9714-E0F3AC17B452} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 	EndGlobalSection
 EndGlobal

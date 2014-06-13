@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using NProg.Distributed.Domain;
 
 namespace NProg.Distributed.WCF.Service
 {
@@ -7,10 +8,10 @@ namespace NProg.Distributed.WCF.Service
     public interface IOrderService
     {
         [OperationContract]
-        void Add(OrderDto item);
+        void Add(Order item);
 
         [OperationContract]
-        OrderDto Get(Guid guid);
+        Order Get(Guid guid);
 
         [OperationContract]
         bool Remove(Guid guid);

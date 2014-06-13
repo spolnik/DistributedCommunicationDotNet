@@ -2,6 +2,7 @@
 
 namespace NProg.Distributed.Domain
 {
+    [Serializable]
     public class Order
     {
         public Guid OrderId { get; set; }
