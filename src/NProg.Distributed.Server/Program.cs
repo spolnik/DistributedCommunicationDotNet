@@ -1,6 +1,8 @@
 ﻿using System;
+using NProg.Distributed.Domain;
 using NProg.Distributed.Msmq;
 using NProg.Distributed.Service;
+using NProg.Distributed.Thrift;
 using NProg.Distributed.WCF;
 using NProg.Distributed.ZeroMQ;
 
@@ -16,10 +18,7 @@ namespace NProg.Distributed.Server
             {
                 const int port = 55001;
 
-//                IOrderServiceFactory orderServiceFactory = new ThriftOrderServiceFactory();
-//                IOrderServiceFactory orderServiceFactory = new ZmqOrderServiceFactory();
-//                IOrderServiceFactory orderServiceFactory = new MsmqOrderServiceFactory();
-                IOrderServiceFactory orderServiceFactory = new WcfOrderServiceFactory();
+                var orderServiceFactory = GetOrderServiceFactory("wcf");
                 var ordersHandler = orderServiceFactory.GetHandler();
 
                 server = orderServiceFactory.GetServer(ordersHandler, port);
@@ -36,7 +35,23 @@ namespace NProg.Distributed.Server
 
                 Console.WriteLine("Server stopped.");    
             }
-            
+        }
+
+        private static IServiceFactory<Order> GetOrderServiceFactory(string framework)
+        {
+            switch (framework)
+            {
+                case "wcf":
+                    return new WcfOrderServiceFactory();
+                case "thrift":
+                    return new ThriftOrderServiceFactory();
+                case "zmq":
+                    return new ZmqOrderServiceFactory();
+                case "msmq":
+                    return new MsmqOrderServiceFactory();
+                default:
+                    throw new InvalidOperationException();
+            }
         }
     }
 }

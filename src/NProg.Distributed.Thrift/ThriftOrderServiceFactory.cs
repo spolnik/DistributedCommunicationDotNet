@@ -3,7 +3,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderServiceFactory : IOrderServiceFactory
+    public class ThriftOrderServiceFactory : IServiceFactory<Domain.Order>
     {
         public IHandler<Domain.Order> GetHandler()
         {

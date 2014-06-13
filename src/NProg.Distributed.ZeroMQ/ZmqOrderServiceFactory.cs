@@ -4,9 +4,8 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqOrderServiceFactory : IOrderServiceFactory
+    public class ZmqOrderServiceFactory : IServiceFactory<Order>
     {
-
         public IHandler<Order> GetHandler()
         {
             return new ZmqOrderHandler();

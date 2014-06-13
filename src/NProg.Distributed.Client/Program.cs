@@ -1,6 +1,7 @@
 ﻿using System;
 using NProg.Distributed.Msmq;
 using NProg.Distributed.Service;
+using NProg.Distributed.Thrift;
 using NProg.Distributed.WCF;
 using NProg.Distributed.ZeroMQ;
 using Order = NProg.Distributed.Domain.Order;
@@ -11,10 +12,7 @@ namespace NProg.Distributed.Client
     {
         static void Main()
         {
-//            IOrderServiceFactory orderServiceFactory = new ThriftOrderServiceFactory();
-//            IOrderServiceFactory orderServiceFactory = new ZmqOrderServiceFactory();
-//            IOrderServiceFactory orderServiceFactory = new MsmqOrderServiceFactory();
-            IOrderServiceFactory orderServiceFactory = new WcfOrderServiceFactory();
+            var orderServiceFactory = GetOrderServiceFactory("wcf");
             var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:55001"));
 
             for (var i = 0; i < 1000; i++)
@@ -44,6 +42,23 @@ namespace NProg.Distributed.Client
                 var removedOrder = client.Get(order.OrderId);
                 Console.WriteLine("Removed Order from DB: {0}", removedOrder);
                 Console.WriteLine("===================");
+            }
+        }
+
+        private static IServiceFactory<Order> GetOrderServiceFactory(string framework)
+        {
+            switch (framework)
+            {
+                case "wcf":
+                    return new WcfOrderServiceFactory();
+                case "thrift":
+                    return new ThriftOrderServiceFactory();
+                case "zmq":
+                    return new ZmqOrderServiceFactory();
+                case "msmq":
+                    return new MsmqOrderServiceFactory();
+                default:
+                    throw new InvalidOperationException();
             }
         }
     }

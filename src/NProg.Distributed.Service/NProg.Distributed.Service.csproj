@@ -39,16 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IOrderServiceFactory.cs" />
+    <Compile Include="IServiceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IHandler.cs" />
     <Compile Include="IServer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
-      <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
-      <Name>NProg.Distributed.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

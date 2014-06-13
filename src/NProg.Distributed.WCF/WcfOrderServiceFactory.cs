@@ -4,7 +4,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfOrderServiceFactory : IOrderServiceFactory
+    public class WcfOrderServiceFactory : IServiceFactory<Order>
     {
         public IHandler<Order> GetHandler()
         {

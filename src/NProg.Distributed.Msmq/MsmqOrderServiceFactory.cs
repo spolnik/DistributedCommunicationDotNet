@@ -4,7 +4,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Msmq
 {
-    public class MsmqOrderServiceFactory : IOrderServiceFactory
+    public class MsmqOrderServiceFactory : IServiceFactory<Order>
     {
         public IHandler<Order> GetHandler()
         {
