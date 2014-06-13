@@ -5,6 +5,7 @@ using NProg.Distributed.Service;
 using NProg.Distributed.Thrift;
 using NProg.Distributed.WCF;
 using NProg.Distributed.ZeroMQ;
+using NProg.Distributed.Zyan;
 using Order = NProg.Distributed.Domain.Order;
 
 namespace NProg.Distributed.Client
@@ -13,7 +14,7 @@ namespace NProg.Distributed.Client
     {
         static void Main()
         {
-            var orderServiceFactory = GetOrderServiceFactory("remoting");
+            var orderServiceFactory = GetOrderServiceFactory("zyan");
             var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:55001"));
 
             for (var i = 0; i < 1000; i++)
@@ -60,6 +61,8 @@ namespace NProg.Distributed.Client
                     return new MsmqOrderServiceFactory();
                 case "remoting":
                     return new RemotingOrderServiceFactory();
+                case "zyan":
+                    return new ZyanOrderServiceFactory();
                 default:
                     throw new InvalidOperationException();
             }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NProg.Distributed.MongoDb")]
+[assembly: AssemblyTitle("NProg.Distributed.Zyan")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NProg.Distributed.MongoDb")]
+[assembly: AssemblyProduct("NProg.Distributed.Zyan")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a01bde74-15b4-4476-9257-a1745c4bfedc")]
+[assembly: Guid("1ff2676a-22e8-4b2f-b53d-7fe1bfd6e1a3")]
 
 // Version information for an assembly consists of the following four values:
 //

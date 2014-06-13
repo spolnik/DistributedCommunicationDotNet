@@ -76,6 +76,10 @@
       <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
       <Name>NProg.Distributed.ZeroMQ</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.Zyan\NProg.Distributed.Zyan.csproj">
+      <Project>{36EE5322-A915-44F7-B096-BE2901F1D9D1}</Project>
+      <Name>NProg.Distributed.Zyan</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
