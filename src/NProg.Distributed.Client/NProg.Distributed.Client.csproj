@@ -64,6 +64,10 @@
       <Project>{0ecfa0cf-d3c2-4dc4-a7f9-6b69f269ff08}</Project>
       <Name>NProg.Distributed.Thrift</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.WCF\NProg.Distributed.WCF.csproj">
+      <Project>{F84A2E32-9931-4C98-AA25-CE481CB89C0E}</Project>
+      <Name>NProg.Distributed.WCF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj">
       <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
       <Name>NProg.Distributed.ZeroMQ</Name>

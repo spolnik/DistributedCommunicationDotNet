@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{F84A2E32-9931-4C98-AA25-CE481CB89C0E}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Server</RootNamespace>
-    <AssemblyName>NProg.Distributed.Server</AssemblyName>
+    <RootNamespace>NProg.Distributed.WCF</RootNamespace>
+    <AssemblyName>NProg.Distributed.WCF</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,6 +32,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,36 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="OrderMapper.cs" />
+    <Compile Include="Service\IOrderService.cs" />
+    <Compile Include="Service\OrderDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="WcfOrderClient.cs" />
+    <Compile Include="WcfOrderHandler.cs" />
+    <Compile Include="WcfOrderServer.cs" />
+    <Compile Include="WcfOrderServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
-      <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
+      <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
       <Name>NProg.Distributed.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Msmq\NProg.Distributed.Msmq.csproj">
-      <Project>{F7BA6185-8C99-462A-B24F-8C5A554F8B87}</Project>
-      <Name>NProg.Distributed.Msmq</Name>
+    <ProjectReference Include="..\NProg.Distributed.NDatabase\NProg.Distributed.NDatabase.csproj">
+      <Project>{D0D3D474-E9B1-442D-939C-FD582020475F}</Project>
+      <Name>NProg.Distributed.NDatabase</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
       <Name>NProg.Distributed.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj">
-      <Project>{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}</Project>
-      <Name>NProg.Distributed.Thrift</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.WCF\NProg.Distributed.WCF.csproj">
-      <Project>{F84A2E32-9931-4C98-AA25-CE481CB89C0E}</Project>
-      <Name>NProg.Distributed.WCF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj">
-      <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
-      <Name>NProg.Distributed.ZeroMQ</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

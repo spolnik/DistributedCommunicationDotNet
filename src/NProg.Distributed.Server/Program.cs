@@ -1,6 +1,7 @@
 ﻿using System;
 using NProg.Distributed.Msmq;
 using NProg.Distributed.Service;
+using NProg.Distributed.WCF;
 using NProg.Distributed.ZeroMQ;
 
 namespace NProg.Distributed.Server
@@ -17,13 +18,16 @@ namespace NProg.Distributed.Server
 
 //                IOrderServiceFactory orderServiceFactory = new ThriftOrderServiceFactory();
 //                IOrderServiceFactory orderServiceFactory = new ZmqOrderServiceFactory();
-                IOrderServiceFactory orderServiceFactory = new MsmqOrderServiceFactory();
+//                IOrderServiceFactory orderServiceFactory = new MsmqOrderServiceFactory();
+                IOrderServiceFactory orderServiceFactory = new WcfOrderServiceFactory();
                 var ordersHandler = orderServiceFactory.GetHandler();
 
                 server = orderServiceFactory.GetServer(ordersHandler, port);
                 
                 Console.WriteLine("Server running ...");
                 server.Start();
+                Console.WriteLine("Press <enter> to stop server...");
+                Console.ReadLine();
             }
             finally
             {
