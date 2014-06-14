@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Threading;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Messaging.Spec;
@@ -12,32 +11,24 @@ namespace NProg.Distributed.Msmq
     public class MsmqOrderServer : IServer
     {
         private readonly IHandler<Order> handler;
-        private Task addOrderTask;
-        private Task getOrderTask;
-        private Task removeOrderTask;
+        private readonly CancellationTokenSource cancellationTokenSource;
 
         public MsmqOrderServer(IHandler<Order> handler)
         {
             this.handler = handler;
+            cancellationTokenSource = new CancellationTokenSource();
         }
 
         public void Start()
         {
-            var tasks = new List<Task>();
-
-            addOrderTask = Task.Run(() => StartListening(AddOrderRequest.Name, MessagePattern.RequestResponse));
-            tasks.Add(addOrderTask);
-            getOrderTask = Task.Run(() => StartListening(GetOrderRequest.Name, MessagePattern.RequestResponse));
-            tasks.Add(getOrderTask);
-            removeOrderTask = Task.Run(() => StartListening(RemoveOrderRequest.Name, MessagePattern.RequestResponse));
-            tasks.Add(removeOrderTask);
-
-            Task.WaitAll(tasks.ToArray());
+            StartListening(AddOrderRequest.Name, MessagePattern.RequestResponse);
+            StartListening(GetOrderRequest.Name, MessagePattern.RequestResponse);
+            StartListening(RemoveOrderRequest.Name, MessagePattern.RequestResponse);
         }
 
         public void Stop()
         {
-            throw new System.NotImplementedException();
+            cancellationTokenSource.Cancel();
         }
 
         private void StartListening(string name, MessagePattern pattern)
@@ -58,46 +49,34 @@ namespace NProg.Distributed.Msmq
                 {
                     RemoveOrder(x.BodyAs<RemoveOrderRequest>().OrderId, x, queue);
                 }
-            });
+            }, cancellationTokenSource.Token);
         }
 
         private void AddOrder(Message message, IMessageQueue queue)
         {
             var order = message.BodyAs<AddOrderRequest>().Order;
-            Console.WriteLine("Starting AddOrder for: {0}, at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
-
             handler.Add(order);
 
             var responseQueue = queue.GetReplyQueue(message);
-
             responseQueue.Send(new Message
             {
-                Body = new StatusResponse { Status = true }
+                Body = new StatusResponse {Status = true}
             });
-
-            Console.WriteLine("Order added: {0} at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
         }
 
         private void GetOrder(Guid orderId, Message message, IMessageQueue queue)
         {
-            Console.WriteLine("Starting GetOrder for: {0}, at: {1}", orderId, DateTime.Now.TimeOfDay);
-
             var order = handler.Get(orderId);
             var responseQueue = queue.GetReplyQueue(message);
 
             responseQueue.Send(new Message
             {
-                Body = new GetOrderResponse { Order = order }
+                Body = new GetOrderResponse {Order = order}
             });
-
-            Console.WriteLine("Returned: {0} for GetOrder, to: {1}, at: {2}", order.OrderId, responseQueue.Address,
-                DateTime.Now.TimeOfDay);
         }
 
         private void RemoveOrder(Guid orderId, Message message, IMessageQueue queue)
         {
-            Console.WriteLine("Starting RemoveOrder for: {0}, at: {1}", orderId, DateTime.Now.TimeOfDay);
-
             var status = handler.Remove(orderId);
             var responseQueue = queue.GetReplyQueue(message);
 
@@ -105,9 +84,6 @@ namespace NProg.Distributed.Msmq
             {
                 Body = new StatusResponse { Status = status }
             });
-
-            Console.WriteLine("Returned: {0} for RemoveOrder, to: {1}, at: {2}", status, responseQueue.Address,
-                DateTime.Now.TimeOfDay);
         }
     }
 }

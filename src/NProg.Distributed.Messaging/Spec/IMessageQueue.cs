@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace NProg.Distributed.Messaging.Spec
 {
@@ -12,9 +13,9 @@ namespace NProg.Distributed.Messaging.Spec
         
         void Send(Message message);
         
-        void Listen(Action<Message> onMessageReceived);
+        void Listen(Action<Message> onMessageReceived, CancellationToken cancellationToken);
 
-        void Receive(Action<Message> onMessageReceived);
+        void Receive(Action<Message> onMessageReceived, int maximumWaitMilliseconds = 0);
 
         IMessageQueue GetResponseQueue();
 
