@@ -1,0 +1,21 @@
+﻿using log4net;
+using log4net.Config;
+
+namespace NProg.Distributed.Client
+{
+    internal static class Log
+    {
+        private static readonly ILog Logger;
+
+        static Log()
+        {
+            XmlConfigurator.Configure();
+            Logger = LogManager.GetLogger(typeof(Program));
+        }
+
+        internal static void WriteLine(string format, params object[] args)
+        {
+            Logger.Debug(string.Format(format, args));
+        }
+    }
+}

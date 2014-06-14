@@ -21,7 +21,7 @@ namespace NProg.Distributed.Client
             var framework = args[0];
             var port = Convert.ToInt32(args[1]);
             var count = Convert.ToInt32(args[2]);
-            Console.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
+            Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
 
             var orderServiceFactory = GetOrderServiceFactory(framework);
             var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port));
@@ -38,21 +38,21 @@ namespace NProg.Distributed.Client
                 };
 
                 client.Add(order);
-                Console.WriteLine("Order added, id: {0}", order.OrderId);
-                Console.WriteLine("===================");
+                Log.WriteLine("Order added, id: {0}", order.OrderId);
+                Log.WriteLine("===================");
 
 
                 var orderFromDb = client.Get(order.OrderId);
-                Console.WriteLine("Order from DB: {0}", orderFromDb);
-                Console.WriteLine("===================");
+                Log.WriteLine("Order from DB: {0}", orderFromDb);
+                Log.WriteLine("===================");
 
                 var removed = client.Remove(order.OrderId);
-                Console.WriteLine("Order removed: {0}", removed);
-                Console.WriteLine("===================");
+                Log.WriteLine("Order removed: {0}", removed);
+                Log.WriteLine("===================");
 
                 var removedOrder = client.Get(order.OrderId);
-                Console.WriteLine("Removed Order from DB: {0}", removedOrder);
-                Console.WriteLine("===================");
+                Log.WriteLine("Removed Order from DB: {0}", removedOrder);
+                Log.WriteLine("===================");
             }
 
             Console.WriteLine("Press <enter> to close client...");
