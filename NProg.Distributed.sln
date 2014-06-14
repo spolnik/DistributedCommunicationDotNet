@@ -21,8 +21,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Thrift", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AB3E64C8-1914-4741-8D26-CE354A70FFCB}"
 	ProjectSection(SolutionItems) = preProject
-		StartHandlers.cmd = StartHandlers.cmd
-		StopHandlers.cmd = StopHandlers.cmd
+		StartClient.Msmq.cmd = StartClient.Msmq.cmd
+		StartClient.Remoting.cmd = StartClient.Remoting.cmd
+		StartClient.Thrift.cmd = StartClient.Thrift.cmd
+		StartClient.Wcf.cmd = StartClient.Wcf.cmd
+		StartClient.ZeroMQ.cmd = StartClient.ZeroMQ.cmd
+		StartClient.Zyan.cmd = StartClient.Zyan.cmd
+		StartServer.Msmq.cmd = StartServer.Msmq.cmd
+		StartServer.Remoting.cmd = StartServer.Remoting.cmd
+		StartServer.Thrift.cmd = StartServer.Thrift.cmd
+		StartServer.Wcf.cmd = StartServer.Wcf.cmd
+		StartServer.ZeroMQ.cmd = StartServer.ZeroMQ.cmd
+		StartServer.Zyan.cmd = StartServer.Zyan.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6E46352C-AA16-4CA2-AE23-73ECA2BFE980}"

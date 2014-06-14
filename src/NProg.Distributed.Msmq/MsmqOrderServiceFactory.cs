@@ -1,5 +1,6 @@
 ﻿using System;
 using NProg.Distributed.Domain;
+using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Msmq
@@ -8,7 +9,7 @@ namespace NProg.Distributed.Msmq
     {
         public IHandler<Order> GetHandler()
         {
-            return new MsmqOrderHandler();
+            return new SimpleOrderHandler("order_msmq.ndb");
         }
 
         public IServer GetServer(IHandler<Order> handler, int port = -1)

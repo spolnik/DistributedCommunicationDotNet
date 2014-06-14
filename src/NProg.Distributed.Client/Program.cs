@@ -12,12 +12,20 @@ namespace NProg.Distributed.Client
 {
     public static class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            var orderServiceFactory = GetOrderServiceFactory("zyan");
-            var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:55001"));
+            if (args.Length < 3)
+                throw new ArgumentException("Usage: NProg.Distributed.Client.exe <framework> <port> <count>");
 
-            for (var i = 0; i < 1000; i++)
+            var framework = args[0];
+            var port = Convert.ToInt32(args[1]);
+            var count = Convert.ToInt32(args[2]);
+            Console.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
+
+            var orderServiceFactory = GetOrderServiceFactory(framework);
+            var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port));
+
+            for (var i = 0; i < count; i++)
             {
                 var order = new Order
                 {
@@ -45,6 +53,9 @@ namespace NProg.Distributed.Client
                 Console.WriteLine("Removed Order from DB: {0}", removedOrder);
                 Console.WriteLine("===================");
             }
+
+            Console.WriteLine("Press <enter> to close client...");
+            Console.ReadLine();
         }
 
         private static IServiceFactory<Order> GetOrderServiceFactory(string framework)

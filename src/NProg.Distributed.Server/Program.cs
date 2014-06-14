@@ -12,15 +12,20 @@ namespace NProg.Distributed.Server
 {
     public static class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
+            if (args.Length < 2)
+                throw new ArgumentException("Usage: NProg.Distributed.Client.exe <framework> <port>");
+
+            var framework = args[0];
+            var port = Convert.ToInt32(args[1]);
+            Console.WriteLine("Running for framework: {0}, port: {1}", framework, port);
+
             IServer server = null;
             
             try
             {
-                const int port = 55001;
-
-                var orderServiceFactory = GetOrderServiceFactory("zyan");
+                var orderServiceFactory = GetOrderServiceFactory(framework);
                 var ordersHandler = orderServiceFactory.GetHandler();
 
                 server = orderServiceFactory.GetServer(ordersHandler, port);

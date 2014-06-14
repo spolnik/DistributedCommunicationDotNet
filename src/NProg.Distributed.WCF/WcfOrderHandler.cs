@@ -1,33 +1,14 @@
-﻿using System;
-using NProg.Distributed.Domain;
-using NProg.Distributed.NDatabase;
-using NProg.Distributed.Service;
+﻿using NProg.Distributed.NDatabase;
 using NProg.Distributed.WCF.Service;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfOrderHandler : IHandler<Order>, IOrderService
+    public class WcfOrderHandler : SimpleOrderHandler, IOrderService
     {
-        private readonly NdbOrderDao ndbOrderDao;
-
         public WcfOrderHandler()
+            : base("order_wcf.ndb")
         {
-            ndbOrderDao = new NdbOrderDao("order_wcf.ndb");
-        }
-
-        public void Add(Order item)
-        {
-            ndbOrderDao.Add(item);
-        }
-
-        public Order Get(Guid guid)
-        {
-            return ndbOrderDao.Get(guid);
-        }
-
-        public bool Remove(Guid guid)
-        {
-            return ndbOrderDao.Remove(guid);
+            
         }
     }
 }

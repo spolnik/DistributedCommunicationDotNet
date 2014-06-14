@@ -43,7 +43,6 @@
     <Compile Include="Messaging\MessageQueueFactory.cs" />
     <Compile Include="Messaging\MsmqMessageQueue.cs" />
     <Compile Include="MsmqOrderClient.cs" />
-    <Compile Include="MsmqOrderHandler.cs" />
     <Compile Include="MsmqOrderServer.cs" />
     <Compile Include="MsmqOrderServiceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

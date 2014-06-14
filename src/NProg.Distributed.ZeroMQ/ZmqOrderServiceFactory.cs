@@ -1,5 +1,6 @@
 ﻿using System;
 using NProg.Distributed.Domain;
+using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 
 namespace NProg.Distributed.ZeroMQ
@@ -8,7 +9,7 @@ namespace NProg.Distributed.ZeroMQ
     {
         public IHandler<Order> GetHandler()
         {
-            return new ZmqOrderHandler();
+            return new SimpleOrderHandler("order_zeromq.ndb");
         }
 
         public IServer GetServer(IHandler<Order> handler, int port = -1)

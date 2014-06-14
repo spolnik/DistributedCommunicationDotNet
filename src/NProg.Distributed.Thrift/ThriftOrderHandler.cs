@@ -1,17 +1,13 @@
 ﻿using System;
-using NProg.Distributed.Domain;
 using NProg.Distributed.NDatabase;
-using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderHandler : OrderService.Iface, IHandler<Order>
+    public class ThriftOrderHandler : SimpleOrderHandler, OrderService.Iface
     {
-        private readonly NdbOrderDao ndbOrderDao;
-
         public ThriftOrderHandler()
+            : base("order_thrift.ndb")
         {
-            ndbOrderDao = new NdbOrderDao("order_thrift.ndb");
         }
 
         public void Add(ThriftOrder order)
@@ -27,21 +23,6 @@ namespace NProg.Distributed.Thrift
         public bool Remove(string orderId)
         {
             return Remove(Guid.Parse(orderId));
-        }
-
-        public void Add(Order item)
-        {
-            ndbOrderDao.Add(item);
-        }
-
-        public Order Get(Guid guid)
-        {
-            return ndbOrderDao.Get(guid);
-        }
-
-        public bool Remove(Guid guid)
-        {
-            return ndbOrderDao.Remove(guid);
         }
     }
 }
