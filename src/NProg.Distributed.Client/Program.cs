@@ -1,5 +1,6 @@
 ﻿using System;
 using NProg.Distributed.Msmq;
+using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
 using NProg.Distributed.Thrift;
@@ -68,6 +69,8 @@ namespace NProg.Distributed.Client
                     return new ThriftOrderServiceFactory();
                 case "zmq":
                     return new ZmqOrderServiceFactory();
+                case "nmq":
+                    return new NmqOrderServiceFactory();
                 case "msmq":
                     return new MsmqOrderServiceFactory();
                 case "remoting":
