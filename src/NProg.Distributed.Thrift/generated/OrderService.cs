@@ -5,15 +5,19 @@
  *  @generated
  */
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Thrift;
+using Thrift.Collections;
+using System.Runtime.Serialization;
 using Thrift.Protocol;
+using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-  public class OrderService {
+  public partial class OrderService {
     public interface Iface {
       void Add(ThriftOrder order);
       #if SILVERLIGHT
@@ -504,7 +508,7 @@ namespace NProg.Distributed.Thrift
         set
         {
           __isset.orderId = true;
-          _orderId = value;
+          this._orderId = value;
         }
       }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using NProg.Distributed.Service;
 using Thrift.Server;
 using Thrift.Transport;
@@ -25,7 +26,7 @@ namespace NProg.Distributed.Thrift
                 var serverTransport = new TServerSocket(port);
                 server = new TThreadPoolServer(processor, serverTransport);
 
-                server.Serve();
+                Task.Factory.StartNew(() => server.Serve());
             }
             catch (Exception ex)
             {

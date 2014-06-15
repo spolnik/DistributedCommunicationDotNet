@@ -28,7 +28,7 @@ namespace NProg.Distributed.Client
             GlobalContext.Properties["count"] = count;
 
             var stopwatch = new Stopwatch();
-
+            
             try
             {
                 Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
@@ -49,25 +49,26 @@ namespace NProg.Distributed.Client
                     };
 
                     client.Add(order);
-                    Log.WriteLine("[{0}] Order added", order.OrderId);
-
-
+                    
                     var orderFromDb = client.Get(order.OrderId);
-                    Log.WriteLine("[{0}] Order from DB: {2}", order.OrderId, orderFromDb);
-
+                    Debug.Assert(orderFromDb.Equals(order));
+                    
                     var removed = client.Remove(order.OrderId);
-                    Log.WriteLine("[{0}] Order removed: {1}", order.OrderId, removed);
+                    Debug.Assert(removed);
 
                     var removedOrder = client.Get(order.OrderId);
-                    Log.WriteLine("[{0}] Removed Order from DB: {1}", order.OrderId, removedOrder);
+                    Debug.Assert(removedOrder.Equals(new Order()));
+
+                    Log.WriteLine("Order {0} done", i);
                 }
             }
             catch (Exception exception)
             {
                 Log.Error(exception);
             }
+            stopwatch.Stop();
 
-            Log.WriteLine("Count: {0}, ellapsed: {1} ms", count, stopwatch.ElapsedMilliseconds);
+            Log.WriteLine("===============\nCount: {0}, ellapsed: {1} ms\n=============== ", count, stopwatch.ElapsedMilliseconds);
             Console.WriteLine("Press <enter> to close client...");
             Console.ReadLine();
         }

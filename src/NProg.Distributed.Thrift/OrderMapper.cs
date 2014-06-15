@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using NProg.Distributed.Domain;
 
 namespace NProg.Distributed.Thrift
@@ -11,7 +10,7 @@ namespace NProg.Distributed.Thrift
             return new Order
             {
                 Count = order.Count,
-                OrderDate = DateTime.Parse(order.OrderDate),
+                OrderDate = new DateTime(order.OrderDate),
                 OrderId = Guid.Parse(order.OrderId),
                 UnitPrice = (decimal) order.UnitPrice,
                 UserName = order.UserName
@@ -23,7 +22,7 @@ namespace NProg.Distributed.Thrift
             return new ThriftOrder
             {
                 Count = order.Count,
-                OrderDate = order.OrderDate.ToString(CultureInfo.InvariantCulture),
+                OrderDate = order.OrderDate.Ticks,
                 OrderId = order.OrderId.ToString(),
                 UnitPrice = Convert.ToDouble(order.UnitPrice),
                 UserName = order.UserName

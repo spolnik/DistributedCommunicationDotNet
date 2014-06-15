@@ -17,7 +17,7 @@ namespace NProg.Distributed.Client
 
         internal static void WriteLine(string format, params object[] args)
         {
-            Task.Factory.StartNew(() => Logger.Debug(string.Format(format, args)));
+            Logger.Debug(string.Format(format, args));
         }
 
         public static void Error(Exception exception)

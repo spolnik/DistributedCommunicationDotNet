@@ -5,8 +5,15 @@
  *  @generated
  */
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
+using System.IO;
+using Thrift;
+using Thrift.Collections;
+using System.Runtime.Serialization;
 using Thrift.Protocol;
+using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
@@ -18,7 +25,7 @@ namespace NProg.Distributed.Thrift
   {
     private string _orderId;
     private int _count;
-    private string _orderDate;
+    private long _orderDate;
     private double _unitPrice;
     private string _userName;
 
@@ -48,7 +55,7 @@ namespace NProg.Distributed.Thrift
       }
     }
 
-    public string OrderDate
+    public long OrderDate
     {
       get
       {
@@ -130,8 +137,8 @@ namespace NProg.Distributed.Thrift
             }
             break;
           case 3:
-            if (field.Type == TType.String) {
-              OrderDate = iprot.ReadString();
+            if (field.Type == TType.I64) {
+              OrderDate = iprot.ReadI64();
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
@@ -179,12 +186,12 @@ namespace NProg.Distributed.Thrift
         oprot.WriteI32(Count);
         oprot.WriteFieldEnd();
       }
-      if (OrderDate != null && __isset.orderDate) {
+      if (__isset.orderDate) {
         field.Name = "orderDate";
-        field.Type = TType.String;
+        field.Type = TType.I64;
         field.ID = 3;
         oprot.WriteFieldBegin(field);
-        oprot.WriteString(OrderDate);
+        oprot.WriteI64(OrderDate);
         oprot.WriteFieldEnd();
       }
       if (__isset.unitPrice) {

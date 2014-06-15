@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Messaging.Spec;
@@ -21,7 +22,7 @@ namespace NProg.Distributed.Msmq
                         ResponseAddress = responseQueue.Address
                     });
 
-                    responseQueue.Receive(x => Console.WriteLine("Order added: {0}", x.BodyAs<StatusResponse>().Status));
+                    responseQueue.Receive(x => Debug.Assert(x.BodyAs<StatusResponse>().Status));
                 }
             }
         }

@@ -3,7 +3,7 @@ namespace csharp NProg.Distributed.Thrift
 struct ThriftOrder {
   1: string orderId,
   2: i32 count,
-  3: string orderDate,
+  3: i64 orderDate,
   4: double unitPrice,
   5: string userName,
 }
