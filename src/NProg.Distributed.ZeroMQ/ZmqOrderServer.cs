@@ -21,7 +21,7 @@ namespace NProg.Distributed.ZeroMQ
         {
             this.port = port;
             this.handler = handler;
-            context = new Context();
+            context = new Context(4);
             responseQueue = new ZmqResponseQueue(context, port);
         }
         

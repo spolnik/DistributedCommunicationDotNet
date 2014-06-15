@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using NetMQ;
 using NProg.Distributed.Domain;
@@ -16,13 +17,16 @@ namespace NProg.Distributed.NetMQ
         private readonly IHandler<Order> handler;
         private readonly NetMQContext context;
         private readonly NmqResponseQueue responseQueue;
+        private readonly CancellationTokenSource token;
 
         public NmqOrderServer(IHandler<Order> handler, int port)
         {
+            token = new CancellationTokenSource();
+
             this.port = port;
             this.handler = handler;
             context = NetMQContext.Create();
-            responseQueue = new NmqResponseQueue(context, port);
+            responseQueue = new NmqResponseQueue(context, port, token);
         }
         
         public void Start()
@@ -32,6 +36,7 @@ namespace NProg.Distributed.NetMQ
 
         public void Stop()
         {
+            token.Cancel();
             Dispose(true);
         }
 

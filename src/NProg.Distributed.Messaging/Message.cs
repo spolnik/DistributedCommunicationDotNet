@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using NProg.Distributed.Messaging.Extensions;
 
 namespace NProg.Distributed.Messaging
@@ -23,21 +22,11 @@ namespace NProg.Distributed.Messaging
             }
         }
 
-        public string ResponseAddress { get; set; }
-
         public string MessageType { get; set; }
 
         public TBody BodyAs<TBody>()
         {
             return (TBody) Body;
-        }
-
-        public static Message FromJson(Stream jsonStream)
-        {
-            var message = jsonStream.ReadFromJson<Message>();
-            //the body is a JObject at this point - deserialize to the real message type:
-            message.Body = message.Body.ToString().ReadFromJson(message.MessageType);
-            return message;
         }
 
         public static Message FromJson(string json)

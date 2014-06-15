@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using NetMQ;
 using NProg.Distributed.Messaging;
 using NProg.Distributed.Messaging.Extensions;
@@ -7,10 +8,13 @@ namespace NProg.Distributed.NetMQ.Messaging
 {
     public class NmqResponseQueue : IMessageQueue
     {
+        private readonly CancellationTokenSource token;
         private readonly NetMQSocket socket;
 
-        public NmqResponseQueue(NetMQContext context, int port)
+        public NmqResponseQueue(NetMQContext context, int port, CancellationTokenSource token)
         {
+            this.token = token;
+
             socket = context.CreateResponseSocket();
             var address = string.Format("tcp://127.0.0.1:{0}", port);
             socket.Bind(address);
@@ -24,9 +28,17 @@ namespace NProg.Distributed.NetMQ.Messaging
 
         public void Listen(Action<Message> onMessageReceived)
         {
-            while (true)
+            socket.ReceiveReady += (sender, args) =>
             {
-                Receive(onMessageReceived);
+                var inbound = socket.ReceiveString();
+
+                var message = Message.FromJson(inbound);
+                onMessageReceived(message);
+            };
+
+            while (!token.IsCancellationRequested)
+            {
+                socket.Poll();
             }
         }
 

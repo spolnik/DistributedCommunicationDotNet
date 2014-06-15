@@ -40,6 +40,11 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             {
                 inbound = socket.Recv(Encoding.UTF8);
             }
+            catch (System.Runtime.InteropServices.SEHException)
+            {
+                Dispose(true);
+                return;
+            }
             catch (Exception)
             {
                 Dispose(true);
