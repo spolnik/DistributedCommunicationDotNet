@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using log4net;
 using NProg.Distributed.Msmq;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
@@ -19,9 +21,14 @@ namespace NProg.Distributed.Client
                 throw new ArgumentException("Usage: NProg.Distributed.Client.exe <framework> <port> <count>");
 
             var framework = args[0];
+            GlobalContext.Properties["framework"] = framework;
+
             var port = Convert.ToInt32(args[1]);
             var count = Convert.ToInt32(args[2]);
+
             Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             var orderServiceFactory = GetOrderServiceFactory(framework);
             var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port));
@@ -55,6 +62,7 @@ namespace NProg.Distributed.Client
                 Log.WriteLine("===================");
             }
 
+            Log.WriteLine("Count: {0}, ellapsed: {1} ms", count, stopwatch.ElapsedMilliseconds);
             Console.WriteLine("Press <enter> to close client...");
             Console.ReadLine();
         }

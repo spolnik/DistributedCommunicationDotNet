@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System.Threading.Tasks;
+using log4net;
 using log4net.Config;
 
 namespace NProg.Distributed.Client
@@ -15,7 +16,7 @@ namespace NProg.Distributed.Client
 
         internal static void WriteLine(string format, params object[] args)
         {
-            Logger.Debug(string.Format(format, args));
+            Task.Factory.StartNew(() => Logger.Debug(string.Format(format, args)));
         }
     }
 }
