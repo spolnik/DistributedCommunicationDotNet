@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using NetMQ;
 using NetMQ.Sockets;
@@ -10,59 +9,51 @@ namespace NProg.Distributed.NetMQ.Messaging
 {
     public class NmqMessageQueue : MessageQueueBase
     {
+        private static volatile NetMQContext context;
+        private static readonly object ContextLock = new object();
         private NetMQSocket socket;
 
-        public override void InitialiseOutbound(string name, MessagePattern pattern, Dictionary<string, object> properties = null)
+        public override void InitialiseOutbound(string name, MessagePattern pattern)
         {
-            Initialise(Direction.Outbound, name, pattern, properties);
+            Initialise(Direction.Outbound, name, pattern);
             EnsureContext();
             switch (Pattern)
             {
                 case MessagePattern.RequestResponse:
-                    socket = GetContext().CreateRequestSocket();
+                    socket = context.CreateRequestSocket();
                     socket.Connect(Address);
                     break;
 
                 case MessagePattern.FireAndForget:
-                    socket = GetContext().CreatePushSocket();
+                    socket = context.CreatePushSocket();
                     socket.Connect(Address);
                     break;
 
                 case MessagePattern.PublishSubscribe:
-                    socket = GetContext().CreatePublisherSocket();
+                    socket = context.CreatePublisherSocket();
                     socket.Bind(Address);
                     break;
             }
         }
 
-        private NetMQContext GetContext()
+        public override void InitialiseInbound(string name, MessagePattern pattern)
         {
-            return GetPropertyValue<NetMQContext>("context");
-        }
-
-        private void EnsureContext()
-        {
-            RequireProperty<NetMQContext>("context");
-        }
-
-        public override void InitialiseInbound(string name, MessagePattern pattern, Dictionary<string, object> properties = null)
-        {
-            Initialise(Direction.Inbound, name, pattern, properties);
+            Initialise(Direction.Inbound, name, pattern);
             EnsureContext();
             switch (Pattern)
             {
                 case MessagePattern.RequestResponse:
-                    socket = GetContext().CreateResponseSocket();
+                    socket = context.CreateResponseSocket();
                     socket.Bind(Address);
                     break;
 
                 case MessagePattern.FireAndForget:
-                    socket = GetContext().CreatePullSocket();
+                    socket = context.CreatePullSocket();
                     socket.Bind(Address);
                     break;
 
                 case MessagePattern.PublishSubscribe:
-                    socket = GetContext().CreateSubscriberSocket();
+                    socket = context.CreateSubscriberSocket();
                     socket.Connect(Address);
                     ((SubscriberSocket)socket).Subscribe("");
                     break;
@@ -134,6 +125,20 @@ namespace NProg.Distributed.NetMQ.Messaging
             if (disposing && socket != null)
             {
                 socket.Dispose();
+            }
+        }
+
+        private static void EnsureContext()
+        {
+            if (context == null)
+            {
+                lock (ContextLock)
+                {
+                    if (context == null)
+                    {
+                        context = NetMQContext.Create();
+                    }
+                }
             }
         }
     }

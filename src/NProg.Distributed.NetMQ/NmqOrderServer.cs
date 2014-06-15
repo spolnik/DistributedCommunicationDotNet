@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
-using NetMQ;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Messaging.Spec;
@@ -14,13 +12,11 @@ namespace NProg.Distributed.NetMQ
     {
         private readonly IHandler<Order> handler;
         private readonly CancellationTokenSource cancellationTokenSource;
-        private readonly NetMQContext context;
 
         public NmqOrderServer(IHandler<Order> handler)
         {
             this.handler = handler;
             cancellationTokenSource = new CancellationTokenSource();
-            context = NetMQContext.Create();
         }
         
         public void Start()
@@ -33,12 +29,11 @@ namespace NProg.Distributed.NetMQ
         public void Stop()
         {
             cancellationTokenSource.Cancel();
-            context.Dispose();
         }
 
         private void StartListening(string name, MessagePattern pattern)
         {
-            var queue = MessageQueueFactory.CreateInbound(name, pattern, GetProperties());
+            var queue = MessageQueueFactory.CreateInbound(name, pattern);
             Console.WriteLine("Listening on: {0}", queue.Address);
             queue.Listen(x =>
             {
@@ -89,11 +84,6 @@ namespace NProg.Distributed.NetMQ
             {
                 Body = new StatusResponse { Status = status }
             });
-        }
-
-        private Dictionary<string, object> GetProperties()
-        {
-            return new Dictionary<string, Object> {{"context", context}};
         }
     }
 }
