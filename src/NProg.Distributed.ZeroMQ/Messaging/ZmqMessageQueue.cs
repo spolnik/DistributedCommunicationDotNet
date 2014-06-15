@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using System.Threading.Tasks;
 using NProg.Distributed.Messaging.Extensions;
 using NProg.Distributed.Messaging.Spec;
 using ZMQ;
@@ -80,19 +79,19 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             socket.Send(json, Encoding.UTF8);
         }
 
-        public override void Receive(Action<Message> onMessageReceived, bool processAsync, int maximumWaitMilliseconds = 0)
+        public override void Listen(Action<Message> onMessageReceived)
         {
-            var inbound = maximumWaitMilliseconds > 0
-                ? socket.Recv(Encoding.UTF8, maximumWaitMilliseconds)
-                : socket.Recv(Encoding.UTF8);
+            while (true)
+            {
+                Receive(onMessageReceived);
+            }
+        }
 
+        public override void Receive(Action<Message> onMessageReceived)
+        {
+            var inbound = socket.Recv(Encoding.UTF8);
             var message = Message.FromJson(inbound);
-            //we can only process ZMQ async if the pattern supports it - we can't call Rec
-            //twice on a REP socket without the Send in between:
-            if (processAsync && Pattern != MessagePattern.RequestResponse)
-                Task.Factory.StartNew(() => onMessageReceived(message));
-            else
-                onMessageReceived(message);
+            onMessageReceived(message);
         }
 
         protected override string GetAddress(string name)

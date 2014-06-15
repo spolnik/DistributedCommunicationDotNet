@@ -1,6 +1,5 @@
 using System;
 using System.Messaging;
-using System.Threading.Tasks;
 using NProg.Distributed.Messaging.Extensions;
 using NProg.Distributed.Messaging.Spec;
 using Message = NProg.Distributed.Messaging.Spec.Message;
@@ -47,18 +46,19 @@ namespace NProg.Distributed.Msmq.Messaging
             queue.Send(outbound);
         }
 
-        public override void Receive(Action<Message> onMessageReceived, bool processAsync, int maximumWaitMilliseconds = 0)
+        public override void Listen(Action<Message> onMessageReceived)
         {
-            var inbound = maximumWaitMilliseconds > 0
-                ? queue.Receive(TimeSpan.FromMilliseconds(maximumWaitMilliseconds))
-                : queue.Receive();
+            while (true)
+            {
+                Receive(onMessageReceived);
+            }
+        }
 
+        public override void Receive(Action<Message> onMessageReceived)
+        {
+            var inbound = queue.Receive();
             var message = Message.FromJson(inbound.BodyStream);
-
-            if (processAsync)
-                Task.Factory.StartNew(() => onMessageReceived(message));
-            else
-                onMessageReceived(message);
+            onMessageReceived(message);
         }
 
         protected override string GetAddress(string name)

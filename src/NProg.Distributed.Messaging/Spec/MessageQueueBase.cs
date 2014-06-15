@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NProg.Distributed.Messaging.Spec
 {
     public abstract class MessageQueueBase : IMessageQueue
     {
-        protected bool isListening;
-        protected int pollingInterval = 100;
 
         protected MessagePattern Pattern { get; private set; }
 
@@ -20,43 +16,9 @@ namespace NProg.Distributed.Messaging.Spec
 
         public abstract void Send(Message message);
 
-        public virtual void Listen(Action<Message> onMessageReceived, CancellationToken cancellationToken)
-        {
-            if (isListening)
-                return;
+        public abstract void Listen(Action<Message> onMessageReceived);
 
-            Task.Factory.StartNew(() => ListenInternal(onMessageReceived, cancellationToken), cancellationToken,
-                TaskCreationOptions.LongRunning, TaskScheduler.Default);
-        }
-
-        protected virtual void ListenInternal(Action<Message> onMessageReceived, CancellationToken cancellationToken)
-        {
-            isListening = true;
-            while (isListening)
-            {
-                if (cancellationToken.IsCancellationRequested)
-                {
-                    isListening = false;
-                    cancellationToken.ThrowIfCancellationRequested();
-                }
-                try
-                {
-                    Receive(onMessageReceived, true);
-                    Thread.Sleep(pollingInterval);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Exception: {0}", ex);
-                }
-            }
-        }
-        
-        public virtual void Receive(Action<Message> onMessageReceived, int maximumWaitMilliseconds = 0)
-        {
-            Receive(onMessageReceived, false, maximumWaitMilliseconds);
-        }
-
-        public abstract void Receive(Action<Message> onMessageReceived, bool processAsync, int maximumWaitMilliseconds = 0);
+        public abstract void Receive(Action<Message> onMessageReceived);
 
         public abstract IMessageQueue GetResponseQueue();
 
