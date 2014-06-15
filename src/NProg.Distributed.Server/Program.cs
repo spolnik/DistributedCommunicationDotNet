@@ -1,6 +1,5 @@
 ﻿using System;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Msmq;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
@@ -57,8 +56,6 @@ namespace NProg.Distributed.Server
                     return new ZmqOrderServiceFactory();
                 case "nmq":
                     return new NmqOrderServiceFactory();
-                case "msmq":
-                    return new MsmqOrderServiceFactory();
                 case "remoting":
                     return new RemotingOrderServiceFactory();
                 case "zyan":

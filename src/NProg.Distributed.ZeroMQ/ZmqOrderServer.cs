@@ -1,69 +1,73 @@
 ﻿using System;
 using System.Threading.Tasks;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Messaging;
 using NProg.Distributed.Messaging.Queries;
-using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
 using NProg.Distributed.ZeroMQ.Messaging;
+using ZMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqOrderServer : IServer
+    public class ZmqOrderServer : IServer, IDisposable
     {
+        private readonly int port;
+
         private readonly IHandler<Order> handler;
-        
-        public ZmqOrderServer(IHandler<Order> handler)
+        private readonly Context context;
+        private readonly ZmqResponseQueue responseQueue;
+
+        public ZmqOrderServer(IHandler<Order> handler, int port)
         {
+            this.port = port;
             this.handler = handler;
+            context = new Context();
+            responseQueue = new ZmqResponseQueue(context, port);
         }
         
         public void Start()
         {
-            Task.Run(() => StartListening(AddOrderRequest.Name, MessagePattern.RequestResponse));
-            Task.Run(() => StartListening(GetOrderRequest.Name, MessagePattern.RequestResponse));
-            Task.Run(() => StartListening(RemoveOrderRequest.Name, MessagePattern.RequestResponse));
+            Task.Run(() => StartListening());
         }
 
         public void Stop()
         {
+            Dispose(true);
         }
 
-        private void StartListening(string name, MessagePattern pattern)
+        private void StartListening()
         {
-            var queue = MessageQueueFactory.CreateInbound(name, pattern);
-            Console.WriteLine("Listening on: {0}", queue.Address);
-            queue.Listen(x =>
+            Console.WriteLine("Listening on: tcp://127.0.0.1:{0}", port);
+            responseQueue.Listen(x =>
             {
                 if (x.BodyType == typeof(AddOrderRequest))
                 {
-                    AddOrder(x, queue);
+                    AddOrder(x);
                 }
                 else if (x.BodyType == typeof(GetOrderRequest))
                 {
-                    GetOrder(x.BodyAs<GetOrderRequest>().OrderId, x, queue);
+                    GetOrder(x.BodyAs<GetOrderRequest>().OrderId);
                 }
                 else if (x.BodyType == typeof(RemoveOrderRequest))
                 {
-                    RemoveOrder(x.BodyAs<RemoveOrderRequest>().OrderId, x, queue);
+                    RemoveOrder(x.BodyAs<RemoveOrderRequest>().OrderId);
                 }
             });
         }
 
-        private void AddOrder(Message message, IMessageQueue queue)
+        private void AddOrder(Message message)
         {
             handler.Add(message.BodyAs<AddOrderRequest>().Order);
 
-            var responseQueue = queue.GetReplyQueue(message);
             responseQueue.Send(new Message
             {
                 Body = new StatusResponse {Status = true}
             });
         }
 
-        private void GetOrder(Guid orderId, Message message, IMessageQueue queue)
+        private void GetOrder(Guid orderId)
         {
             var order = handler.Get(orderId);
-            var responseQueue = queue.GetReplyQueue(message);
 
             responseQueue.Send(new Message
             {
@@ -71,15 +75,29 @@ namespace NProg.Distributed.ZeroMQ
             });
         }
 
-        private void RemoveOrder(Guid orderId, Message message, IMessageQueue queue)
+        private void RemoveOrder(Guid orderId)
         {
             var status = handler.Remove(orderId);
-            var responseQueue = queue.GetReplyQueue(message);
-
+            
             responseQueue.Send(new Message
             {
                 Body = new StatusResponse { Status = status }
             });
+        }
+
+        protected void Dispose(bool disposing)
+        {
+            if (disposing && responseQueue != null)
+                responseQueue.Dispose();
+
+            if (disposing && context != null)
+                context.Dispose();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

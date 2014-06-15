@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace NProg.Distributed.Messaging.Extensions
 {
@@ -14,12 +12,6 @@ namespace NProg.Distributed.Messaging.Extensions
         public static string ToJsonString(this object obj)
         {
             return JsonConvert.SerializeObject(obj);
-        }
-
-        public static Stream ToJsonStream(this object obj)
-        {
-            var json = obj.ToJsonString();
-            return new MemoryStream(Encoding.Default.GetBytes(json));
         }
     }
 }

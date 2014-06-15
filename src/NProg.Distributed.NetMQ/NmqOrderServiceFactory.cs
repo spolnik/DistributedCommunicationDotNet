@@ -15,12 +15,12 @@ namespace NProg.Distributed.NetMQ
 
         public IServer GetServer(IHandler<Order> handler, int port = -1)
         {
-            return new NmqOrderServer(handler);
+            return new NmqOrderServer(handler, port);
         }
 
         public IHandler<Order> GetClient(Uri serviceUri)
         {
-            return new NmqOrderClient();
+            return new NmqOrderClient(serviceUri);
         }
     }
 }

@@ -59,10 +59,6 @@
       <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
       <Name>NProg.Distributed.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Msmq\NProg.Distributed.Msmq.csproj">
-      <Project>{F7BA6185-8C99-462A-B24F-8C5A554F8B87}</Project>
-      <Name>NProg.Distributed.Msmq</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.NetMQ\NProg.Distributed.NetMQ.csproj">
       <Project>{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}</Project>
       <Name>NProg.Distributed.NetMQ</Name>

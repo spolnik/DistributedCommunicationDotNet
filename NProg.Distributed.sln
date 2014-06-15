@@ -21,14 +21,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Thrift", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AB3E64C8-1914-4741-8D26-CE354A70FFCB}"
 	ProjectSection(SolutionItems) = preProject
-		StartClient.Msmq.cmd = StartClient.Msmq.cmd
 		StartClient.NetMQ.cmd = StartClient.NetMQ.cmd
 		StartClient.Remoting.cmd = StartClient.Remoting.cmd
 		StartClient.Thrift.cmd = StartClient.Thrift.cmd
 		StartClient.Wcf.cmd = StartClient.Wcf.cmd
 		StartClient.ZeroMQ.cmd = StartClient.ZeroMQ.cmd
 		StartClient.Zyan.cmd = StartClient.Zyan.cmd
-		StartServer.Msmq.cmd = StartServer.Msmq.cmd
 		StartServer.NetMQ.cmd = StartServer.NetMQ.cmd
 		StartServer.Remoting.cmd = StartServer.Remoting.cmd
 		StartServer.Thrift.cmd = StartServer.Thrift.cmd
@@ -57,8 +55,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{26446979-8C4E-4935-85A8-54FADC0FAFC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Tests", "test\NProg.Distributed.Tests\NProg.Distributed.Tests.csproj", "{7FD0600F-A707-4883-9182-1229C102DB7E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Msmq", "src\NProg.Distributed.Msmq\NProg.Distributed.Msmq.csproj", "{F7BA6185-8C99-462A-B24F-8C5A554F8B87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Messaging.Queries", "src\NProg.Distributed.Messaging.Queries\NProg.Distributed.Messaging.Queries.csproj", "{3B8F3264-20CB-4B28-8923-895B7E399FBA}"
 EndProject
@@ -116,10 +112,6 @@ Global
 		{7FD0600F-A707-4883-9182-1229C102DB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FD0600F-A707-4883-9182-1229C102DB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FD0600F-A707-4883-9182-1229C102DB7E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7BA6185-8C99-462A-B24F-8C5A554F8B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7BA6185-8C99-462A-B24F-8C5A554F8B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7BA6185-8C99-462A-B24F-8C5A554F8B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7BA6185-8C99-462A-B24F-8C5A554F8B87}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B8F3264-20CB-4B28-8923-895B7E399FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B8F3264-20CB-4B28-8923-895B7E399FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B8F3264-20CB-4B28-8923-895B7E399FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -162,7 +154,6 @@ Global
 		{1355E9DA-7326-4A28-A117-6333ADC5FF99} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
 		{7FD0600F-A707-4883-9182-1229C102DB7E} = {26446979-8C4E-4935-85A8-54FADC0FAFC4}
-		{F7BA6185-8C99-462A-B24F-8C5A554F8B87} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{3B8F3264-20CB-4B28-8923-895B7E399FBA} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
 		{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22} = {111C8F14-7439-4463-98C2-CAFE71DF2703}
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}

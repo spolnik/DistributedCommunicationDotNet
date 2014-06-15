@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using log4net;
-using NProg.Distributed.Msmq;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
@@ -85,8 +84,6 @@ namespace NProg.Distributed.Client
                     return new ZmqOrderServiceFactory();
                 case "nmq":
                     return new NmqOrderServiceFactory();
-                case "msmq":
-                    return new MsmqOrderServiceFactory();
                 case "remoting":
                     return new RemotingOrderServiceFactory();
                 case "zyan":

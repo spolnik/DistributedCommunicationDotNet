@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messaging\MessageQueueFactory.cs" />
-    <Compile Include="Messaging\NmqMessageQueue.cs" />
+    <Compile Include="Messaging\NmqResponseQueue.cs" />
+    <Compile Include="Messaging\NmqRequestQueue.cs" />
     <Compile Include="NmqOrderClient.cs" />
     <Compile Include="NmqOrderServer.cs" />
     <Compile Include="NmqOrderServiceFactory.cs" />

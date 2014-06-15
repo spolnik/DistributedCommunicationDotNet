@@ -2,7 +2,7 @@
 using System.IO;
 using NProg.Distributed.Messaging.Extensions;
 
-namespace NProg.Distributed.Messaging.Spec
+namespace NProg.Distributed.Messaging
 {
     public class Message
     {

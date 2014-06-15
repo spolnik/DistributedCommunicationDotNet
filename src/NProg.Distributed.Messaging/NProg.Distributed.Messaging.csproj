@@ -48,11 +48,8 @@
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spec\Direction.cs" />
-    <Compile Include="Spec\IMessageQueue.cs" />
-    <Compile Include="Spec\Message.cs" />
-    <Compile Include="Spec\MessagePattern.cs" />
-    <Compile Include="Spec\MessageQueueBase.cs" />
+    <Compile Include="IMessageQueue.cs" />
+    <Compile Include="Message.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -14,12 +14,12 @@ namespace NProg.Distributed.ZeroMQ
 
         public IServer GetServer(IHandler<Order> handler, int port = -1)
         {
-            return new ZmqOrderServer(handler);
+            return new ZmqOrderServer(handler, port);
         }
 
         public IHandler<Order> GetClient(Uri serviceUri)
         {
-            return new ZmqOrderClient();
+            return new ZmqOrderClient(serviceUri);
         }
     }
 }

@@ -1,40 +1,44 @@
 ﻿using System;
 using System.Diagnostics;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Messaging;
 using NProg.Distributed.Messaging.Queries;
-using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
 using NProg.Distributed.ZeroMQ.Messaging;
+using ZMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqOrderClient : IHandler<Order>
-    {   
+    public class ZmqOrderClient : IHandler<Order>, IDisposable
+    {
+        private readonly Context context;
+        private readonly ZmqRequestQueue requestQueue;
+
+        public ZmqOrderClient(Uri serviceUri)
+        {
+            context = new Context();
+            requestQueue = new ZmqRequestQueue(context, serviceUri);
+        }
+
         public void Add(Order item)
         {
-            var messageQueue = MessageQueueFactory.CreateOutbound(AddOrderRequest.Name, MessagePattern.RequestResponse);
-            messageQueue.Send(new Message
+            requestQueue.Send(new Message
             {
                 Body = new AddOrderRequest {Order = item}
             });
 
-            var responseQueue = messageQueue.GetResponseQueue();
-
-            responseQueue.Receive(x => Debug.Assert(x.BodyAs<StatusResponse>().Status));
+            requestQueue.Receive(x => Debug.Assert(x.BodyAs<StatusResponse>().Status));
         }
 
         public Order Get(Guid guid)
         {
-            var messageQueue = MessageQueueFactory.CreateOutbound(GetOrderRequest.Name, MessagePattern.RequestResponse);
-            messageQueue.Send(new Message
+            requestQueue.Send(new Message
             {
                 Body = new GetOrderRequest{ OrderId = guid }
             });
 
-            var responseQueue = messageQueue.GetResponseQueue();
-
             Order order = null;
-            responseQueue.Receive(x =>
+            requestQueue.Receive(x =>
             {
                 order = x.BodyAs<GetOrderResponse>().Order;
             });
@@ -44,21 +48,33 @@ namespace NProg.Distributed.ZeroMQ
 
         public bool Remove(Guid guid)
         {
-            var messageQueue = MessageQueueFactory.CreateOutbound(RemoveOrderRequest.Name, MessagePattern.RequestResponse);
-            messageQueue.Send(new Message
+            requestQueue.Send(new Message
             {
                 Body = new RemoveOrderRequest { OrderId = guid }
             });
 
-            var responseQueue = messageQueue.GetResponseQueue();
-            
             var status = false;
-            responseQueue.Receive(x =>
+            requestQueue.Receive(x =>
             {
                 status = x.BodyAs<StatusResponse>().Status;
             });
 
             return status;
+        }
+
+        protected void Dispose(bool disposing)
+        {
+            if (disposing && requestQueue != null)
+                requestQueue.Dispose();
+
+            if (disposing && context != null)
+                context.Dispose();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

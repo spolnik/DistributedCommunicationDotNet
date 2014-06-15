@@ -5,7 +5,6 @@ namespace NProg.Distributed.Messaging.Extensions
 {
     public static class StringExtensions
     {
-
         public static object ReadFromJson(this string json, string messageType)
         {
             var type = Type.GetType(messageType);
