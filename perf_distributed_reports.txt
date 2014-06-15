@@ -1,0 +1,25 @@
+1. remoting (6 clients, 150k messages):
+client - 3-7% cpu, 7 mb
+server - 26-36% cpu, 9 mb
+time - 291 sec
+
+2. zeromq (6 clients, 150k messages):
+client - 4-8% cpu, 9.5 mb
+server - 21-27% cpu, 11 mb
+time - 447 sec
+
+3. netmq (6 clients, 150k messages):
+client - 4-8% cpu, 11.5 mb
+server - 21-27% cpu, 12 mb
+time - 476 sec
+
+4. zyan (6 clients, 150k messages):
+client - 4-8% cpu, 7.5 mb
+server - 30-42% cpu, 9 mb
+time - 635 sec
+
+5. thrift (relatively fast, quickly become unusable - 10 clients * 4k messages results in socket buffer overflow)
+
+6. wcf (too slow for 100k messages case or 1k messages * 10 clients case)
+
+7. msmq (too slow for simple cases - 10k messages in one client) - creating temporary queues is very expensive

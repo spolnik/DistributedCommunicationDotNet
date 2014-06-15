@@ -59,7 +59,7 @@ namespace NProg.Distributed.Client
                     var removedOrder = client.Get(order.OrderId);
                     Debug.Assert(removedOrder.Equals(new Order()));
 
-                    Log.WriteLine("Order {0} done", i);
+                    Log.WriteLine("Order {0}", i);
                 }
             }
             catch (Exception exception)

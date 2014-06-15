@@ -15,7 +15,7 @@ namespace NProg.Distributed.Zyan
 
         public void Start()
         {
-            host.RegisterComponent<IHandler<Order>, ZyanOrderHandler>();
+            host.RegisterComponent<IHandler<Order>, ZyanOrderHandler>(ActivationType.Singleton);
         }
 
         public void Stop()
