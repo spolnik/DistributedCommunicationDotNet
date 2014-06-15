@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using NetMQ;
 using NetMQ.Sockets;
 using NProg.Distributed.Messaging.Extensions;
@@ -66,30 +65,19 @@ namespace NProg.Distributed.NetMQ.Messaging
             socket.Send(json);
         }
 
-        public override void Receive(Action<Message> onMessageReceived, bool processAsync, int maximumWaitMilliseconds = 0)
+        public override void Listen(Action<Message> onMessageReceived)
         {
-            var inbound = string.Empty;
-
-            try
+            while (true)
             {
-                inbound = maximumWaitMilliseconds > 0
-                    ? socket.ReceiveString(TimeSpan.FromMilliseconds(maximumWaitMilliseconds))
-                    : socket.ReceiveString();
+                Receive(onMessageReceived);
             }
-            catch (Exception exception)
-            {
-                Console.WriteLine("Error: {0}", exception.Message);
-                Console.WriteLine("Closing socket");
-                Dispose(true);
-            }
+        }
 
+        public override void Receive(Action<Message> onMessageReceived)
+        {
+            var inbound = socket.ReceiveString();
             var message = Message.FromJson(inbound);
-            //we can only process ZMQ async if the pattern supports it - we can't call Rec
-            //twice on a REP socket without the Send in between:
-            if (processAsync && Pattern != MessagePattern.RequestResponse)
-                Task.Factory.StartNew(() => onMessageReceived(message));
-            else
-                onMessageReceived(message);
+            onMessageReceived(message);
         }
 
         protected override string GetAddress(string name)

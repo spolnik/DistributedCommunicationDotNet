@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Messaging.Spec;
@@ -11,24 +11,21 @@ namespace NProg.Distributed.NetMQ
     public class NmqOrderServer : IServer
     {
         private readonly IHandler<Order> handler;
-        private readonly CancellationTokenSource cancellationTokenSource;
 
         public NmqOrderServer(IHandler<Order> handler)
         {
             this.handler = handler;
-            cancellationTokenSource = new CancellationTokenSource();
         }
         
         public void Start()
         {
-            StartListening(AddOrderRequest.Name, MessagePattern.RequestResponse);
-            StartListening(GetOrderRequest.Name, MessagePattern.RequestResponse);
-            StartListening(RemoveOrderRequest.Name, MessagePattern.RequestResponse);
+            Task.Run(() => StartListening(AddOrderRequest.Name, MessagePattern.RequestResponse));
+            Task.Run(() => StartListening(GetOrderRequest.Name, MessagePattern.RequestResponse));
+            Task.Run(() => StartListening(RemoveOrderRequest.Name, MessagePattern.RequestResponse));
         }
 
         public void Stop()
         {
-            cancellationTokenSource.Cancel();
         }
 
         private void StartListening(string name, MessagePattern pattern)
@@ -49,7 +46,7 @@ namespace NProg.Distributed.NetMQ
                 {
                     RemoveOrder(x.BodyAs<RemoveOrderRequest>().OrderId, x, queue);
                 }
-            }, cancellationTokenSource.Token);
+            });
         }
 
         private void AddOrder(Message message, IMessageQueue queue)

@@ -1,3 +1,3 @@
 ﻿@echo off
 
-start "ZeroMQ Client" src\NProg.Distributed.Client\bin\debug\NProg.Distributed.Client.exe zmq 55001 100
+start "ZeroMQ Client" src\NProg.Distributed.Client\bin\debug\NProg.Distributed.Client.exe zmq 55001 1000

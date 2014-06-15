@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Queries;
@@ -12,10 +11,7 @@ namespace NProg.Distributed.ZeroMQ
     public class ZmqOrderServer : IServer
     {
         private readonly IHandler<Order> handler;
-        private Task addOrderTask;
-        private Task getOrderTask;
-        private Task removeOrderTask;
-
+        
         public ZmqOrderServer(IHandler<Order> handler)
         {
             this.handler = handler;
@@ -23,16 +19,9 @@ namespace NProg.Distributed.ZeroMQ
         
         public void Start()
         {
-            var tasks = new List<Task>();
-
-            addOrderTask = Task.Run(() => StartListening(AddOrderRequest.Name, MessagePattern.RequestResponse));
-            tasks.Add(addOrderTask);
-            getOrderTask = Task.Run(() => StartListening(GetOrderRequest.Name, MessagePattern.RequestResponse));
-            tasks.Add(getOrderTask);
-            removeOrderTask = Task.Run(() => StartListening(RemoveOrderRequest.Name, MessagePattern.RequestResponse));
-            tasks.Add(removeOrderTask);
-
-            Task.WaitAll(tasks.ToArray());
+            Task.Run(() => StartListening(AddOrderRequest.Name, MessagePattern.RequestResponse));
+            Task.Run(() => StartListening(GetOrderRequest.Name, MessagePattern.RequestResponse));
+            Task.Run(() => StartListening(RemoveOrderRequest.Name, MessagePattern.RequestResponse));
         }
 
         public void Stop()
