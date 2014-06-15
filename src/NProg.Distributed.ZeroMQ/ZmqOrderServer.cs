@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Messaging.Spec;
 using NProg.Distributed.Service;
 using NProg.Distributed.ZeroMQ.Messaging;
-using ZMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
@@ -14,13 +12,11 @@ namespace NProg.Distributed.ZeroMQ
     {
         private readonly IHandler<Order> handler;
         private readonly CancellationTokenSource cancellationTokenSource;
-        private readonly Context context;
 
         public ZmqOrderServer(IHandler<Order> handler)
         {
             this.handler = handler;
             cancellationTokenSource = new CancellationTokenSource();
-            context = new Context();
         }
         
         public void Start()
@@ -33,12 +29,11 @@ namespace NProg.Distributed.ZeroMQ
         public void Stop()
         {
             cancellationTokenSource.Cancel();
-            context.Dispose();
         }
 
         private void StartListening(string name, MessagePattern pattern)
         {
-            var queue = MessageQueueFactory.CreateInbound(name, pattern, GetProperties());
+            var queue = MessageQueueFactory.CreateInbound(name, pattern);
             Console.WriteLine("Listening on: {0}", queue.Address);
             queue.Listen(x =>
             {
@@ -89,11 +84,6 @@ namespace NProg.Distributed.ZeroMQ
             {
                 Body = new StatusResponse { Status = status }
             });
-        }
-
-        private Dictionary<string, object> GetProperties()
-        {
-            return new Dictionary<string, Object> {{"context", context}};
         }
     }
 }

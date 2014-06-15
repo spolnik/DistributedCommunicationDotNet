@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace NProg.Distributed.Messaging.Spec
@@ -8,11 +7,9 @@ namespace NProg.Distributed.Messaging.Spec
     {
         string Address { get; }
 
-        Dictionary<string, object> Properties { get; }
+        void InitialiseOutbound(string address, MessagePattern pattern);
 
-        void InitialiseOutbound(string address, MessagePattern pattern, Dictionary<string, object> properties = null);
-
-        void InitialiseInbound(string address, MessagePattern pattern, Dictionary<string, object> properties = null);
+        void InitialiseInbound(string address, MessagePattern pattern);
         
         void Send(Message message);
         

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Messaging;
 using System.Threading.Tasks;
 using NProg.Distributed.Messaging.Extensions;
@@ -13,15 +12,15 @@ namespace NProg.Distributed.Msmq.Messaging
         private MessageQueue queue;
         private bool useTemporaryQueue;
 
-        public override void InitialiseOutbound(string name, MessagePattern pattern, Dictionary<string, object> properties = null)
+        public override void InitialiseOutbound(string name, MessagePattern pattern)
         {
-            Initialise(Direction.Outbound, name, pattern, properties);
+            Initialise(Direction.Outbound, name, pattern);
             queue = new MessageQueue(Address);
         }
 
-        public override void InitialiseInbound(string name, MessagePattern pattern, Dictionary<string, object> properties = null)
+        public override void InitialiseInbound(string name, MessagePattern pattern)
         {
-            Initialise(Direction.Inbound, name, pattern, properties);
+            Initialise(Direction.Inbound, name, pattern);
             switch (Pattern)
             {
                 case MessagePattern.PublishSubscribe:
