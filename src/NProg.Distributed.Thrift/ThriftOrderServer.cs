@@ -9,7 +9,7 @@ namespace NProg.Distributed.Thrift
     {
         private readonly int port;
         private readonly OrderService.Iface handler;
-        private TSimpleServer server;
+        private TThreadPoolServer server;
 
         public ThriftOrderServer(IHandler<Domain.Order> handler, int port)
         {
@@ -23,10 +23,7 @@ namespace NProg.Distributed.Thrift
             {
                 var processor = new OrderService.Processor(handler);
                 var serverTransport = new TServerSocket(port);
-                server = new TSimpleServer(processor, serverTransport);
-
-                // Use this for a multithreaded server
-                // server = new TThreadPoolServer(processor, serverTransport);
+                server = new TThreadPoolServer(processor, serverTransport);
 
                 server.Serve();
             }

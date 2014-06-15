@@ -3,6 +3,7 @@ using System.Text;
 using NProg.Distributed.Messaging.Extensions;
 using NProg.Distributed.Messaging.Spec;
 using ZMQ;
+using Exception = ZMQ.Exception;
 
 namespace NProg.Distributed.ZeroMQ.Messaging
 {
@@ -89,7 +90,18 @@ namespace NProg.Distributed.ZeroMQ.Messaging
 
         public override void Receive(Action<Message> onMessageReceived)
         {
-            var inbound = socket.Recv(Encoding.UTF8);
+            string inbound;
+
+            try
+            {
+                inbound = socket.Recv(Encoding.UTF8);
+            }
+            catch (Exception)
+            {
+                Dispose(true);
+                return;
+            }
+
             var message = Message.FromJson(inbound);
             onMessageReceived(message);
         }

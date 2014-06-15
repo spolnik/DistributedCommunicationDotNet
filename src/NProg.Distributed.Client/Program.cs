@@ -27,40 +27,44 @@ namespace NProg.Distributed.Client
             var count = Convert.ToInt32(args[2]);
             GlobalContext.Properties["count"] = count;
 
-            Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
             var stopwatch = new Stopwatch();
-            stopwatch.Start();
 
-            var orderServiceFactory = GetOrderServiceFactory(framework);
-            var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port));
-
-            for (var i = 0; i < count; i++)
+            try
             {
-                var order = new Order
+                Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
+                stopwatch.Start();
+
+                var orderServiceFactory = GetOrderServiceFactory(framework);
+                var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port));
+
+                for (var i = 0; i < count; i++)
                 {
-                    Count = 3,
-                    OrderDate = DateTime.Now,
-                    OrderId = Guid.NewGuid(),
-                    UnitPrice = 12.23m,
-                    UserName = "Mikolaj"
-                };
+                    var order = new Order
+                    {
+                        Count = 3,
+                        OrderDate = DateTime.Now,
+                        OrderId = Guid.NewGuid(),
+                        UnitPrice = 12.23m,
+                        UserName = "Mikolaj"
+                    };
 
-                client.Add(order);
-                Log.WriteLine("Order added, id: {0}", order.OrderId);
-                Log.WriteLine("===================");
+                    client.Add(order);
+                    Log.WriteLine("[{0}] Order added", order.OrderId);
 
 
-                var orderFromDb = client.Get(order.OrderId);
-                Log.WriteLine("Order from DB: {0}", orderFromDb);
-                Log.WriteLine("===================");
+                    var orderFromDb = client.Get(order.OrderId);
+                    Log.WriteLine("[{0}] Order from DB: {2}", order.OrderId, orderFromDb);
 
-                var removed = client.Remove(order.OrderId);
-                Log.WriteLine("Order removed: {0}", removed);
-                Log.WriteLine("===================");
+                    var removed = client.Remove(order.OrderId);
+                    Log.WriteLine("[{0}] Order removed: {1}", order.OrderId, removed);
 
-                var removedOrder = client.Get(order.OrderId);
-                Log.WriteLine("Removed Order from DB: {0}", removedOrder);
-                Log.WriteLine("===================");
+                    var removedOrder = client.Get(order.OrderId);
+                    Log.WriteLine("[{0}] Removed Order from DB: {1}", order.OrderId, removedOrder);
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception);
             }
 
             Log.WriteLine("Count: {0}, ellapsed: {1} ms", count, stopwatch.ElapsedMilliseconds);

@@ -51,25 +51,17 @@ namespace NProg.Distributed.Msmq
 
         private void AddOrder(Message message, IMessageQueue queue)
         {
-            var order = message.BodyAs<AddOrderRequest>().Order;
-            Console.WriteLine("Starting AddOrder for: {0}, at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
-
-            handler.Add(order);
+            handler.Add(message.BodyAs<AddOrderRequest>().Order);
 
             var responseQueue = queue.GetReplyQueue(message);
-
             responseQueue.Send(new Message
             {
                 Body = new StatusResponse { Status = true }
             });
-
-            Console.WriteLine("Order added: {0} at: {1}", order.OrderId, DateTime.Now.TimeOfDay);
         }
 
         private void GetOrder(Guid orderId, Message message, IMessageQueue queue)
         {
-            Console.WriteLine("Starting GetOrder for: {0}, at: {1}", orderId, DateTime.Now.TimeOfDay);
-
             var order = handler.Get(orderId);
             var responseQueue = queue.GetReplyQueue(message);
 
@@ -77,15 +69,10 @@ namespace NProg.Distributed.Msmq
             {
                 Body = new GetOrderResponse { Order = order }
             });
-
-            Console.WriteLine("Returned: {0} for GetOrder, to: {1}, at: {2}", order.OrderId, responseQueue.Address,
-                DateTime.Now.TimeOfDay);
         }
 
         private void RemoveOrder(Guid orderId, Message message, IMessageQueue queue)
         {
-            Console.WriteLine("Starting RemoveOrder for: {0}, at: {1}", orderId, DateTime.Now.TimeOfDay);
-
             var status = handler.Remove(orderId);
             var responseQueue = queue.GetReplyQueue(message);
 
@@ -93,9 +80,6 @@ namespace NProg.Distributed.Msmq
             {
                 Body = new StatusResponse { Status = status }
             });
-
-            Console.WriteLine("Returned: {0} for RemoveOrder, to: {1}, at: {2}", status, responseQueue.Address,
-                DateTime.Now.TimeOfDay);
         }
     }
 }
