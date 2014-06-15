@@ -1,12 +1,13 @@
 ﻿using System;
+using NProg.Distributed.Domain;
 using NProg.Distributed.NDatabase;
 
 namespace NProg.Distributed.Thrift
 {
     public class ThriftOrderHandler : SimpleOrderHandler, OrderService.Iface
     {
-        public ThriftOrderHandler()
-            : base("order_thrift.ndb")
+        public ThriftOrderHandler(IDaoFactory<Order> orderDaoFactory, string dbName)
+            : base(orderDaoFactory, dbName)
         {
         }
 

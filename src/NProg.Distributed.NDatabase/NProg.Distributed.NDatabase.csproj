@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InMemoryOrderDao.cs" />
+    <Compile Include="IDaoFactory.cs" />
     <Compile Include="NdbOrderDao.cs" />
+    <Compile Include="OrderDaoFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleOrderHandler.cs" />
   </ItemGroup>

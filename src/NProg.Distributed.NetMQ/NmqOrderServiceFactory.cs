@@ -10,7 +10,7 @@ namespace NProg.Distributed.NetMQ
 
         public IHandler<Order> GetHandler()
         {
-            return new SimpleOrderHandler("order_netmq.ndb");
+            return new SimpleOrderHandler(new OrderDaoFactory(), "order_netmq.ndb");
         }
 
         public IServer GetServer(IHandler<Order> handler, int port = -1)

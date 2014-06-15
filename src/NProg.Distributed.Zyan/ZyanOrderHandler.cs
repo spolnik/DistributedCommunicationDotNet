@@ -5,7 +5,7 @@ namespace NProg.Distributed.Zyan
     public class ZyanOrderHandler : SimpleOrderHandler
     {
         public ZyanOrderHandler()
-            : base("order_zyan.ndb")
+            : base(new OrderDaoFactory(), "order_zyan.ndb")
         {
         }
     }

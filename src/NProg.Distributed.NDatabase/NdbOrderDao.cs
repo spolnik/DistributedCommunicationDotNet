@@ -10,7 +10,7 @@ namespace NProg.Distributed.NDatabase
     {
         private readonly string dbName;
 
-        public NdbOrderDao(string dbName)
+        internal NdbOrderDao(string dbName)
         {
             this.dbName = dbName;
         }

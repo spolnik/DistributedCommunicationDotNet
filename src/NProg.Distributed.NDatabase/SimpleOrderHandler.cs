@@ -6,11 +6,11 @@ namespace NProg.Distributed.NDatabase
 {
     public class SimpleOrderHandler : IHandler<Order>
     {
-        private readonly NdbOrderDao ndbOrderDao;
+        private readonly IHandler<Order> ndbOrderDao;
 
-        public SimpleOrderHandler(string dbName)
+        public SimpleOrderHandler(IDaoFactory<Order> orderDaoFactory, string dbName)
         {
-            ndbOrderDao = new NdbOrderDao(dbName);
+            ndbOrderDao = orderDaoFactory.CreateDao(dbName);
         }
 
         public void Add(Order item)

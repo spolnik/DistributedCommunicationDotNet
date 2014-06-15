@@ -6,7 +6,7 @@ namespace NProg.Distributed.WCF
     public class WcfOrderHandler : SimpleOrderHandler, IOrderService
     {
         public WcfOrderHandler()
-            : base("order_wcf.ndb")
+            : base(new OrderDaoFactory(), "order_wcf.ndb")
         {
             
         }

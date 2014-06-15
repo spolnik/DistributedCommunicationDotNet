@@ -7,11 +7,11 @@ namespace NProg.Distributed.Remoting
 {
     public class RemotingOrderHandler : MarshalByRefObject, IHandler<Order>
     {
-        private readonly NdbOrderDao ndbOrderDao;
+        private readonly IHandler<Order> ndbOrderDao;
 
         public RemotingOrderHandler()
         {
-            ndbOrderDao = new NdbOrderDao("order_remoting.ndb");
+            ndbOrderDao = new OrderDaoFactory().CreateDao("order_remoting.ndb");
         }
 
         public void Add(Order item)

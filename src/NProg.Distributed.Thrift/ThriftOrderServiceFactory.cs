@@ -1,4 +1,5 @@
 ﻿using System;
+using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Thrift
@@ -7,7 +8,7 @@ namespace NProg.Distributed.Thrift
     {
         public IHandler<Domain.Order> GetHandler()
         {
-            return new ThriftOrderHandler();
+            return new ThriftOrderHandler(new OrderDaoFactory(), "order_thrift.ndb");
         }
 
         public IServer GetServer(IHandler<Domain.Order> handler, int port)

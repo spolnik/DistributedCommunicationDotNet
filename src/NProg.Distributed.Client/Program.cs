@@ -25,6 +25,7 @@ namespace NProg.Distributed.Client
 
             var port = Convert.ToInt32(args[1]);
             var count = Convert.ToInt32(args[2]);
+            GlobalContext.Properties["count"] = count;
 
             Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
             var stopwatch = new Stopwatch();

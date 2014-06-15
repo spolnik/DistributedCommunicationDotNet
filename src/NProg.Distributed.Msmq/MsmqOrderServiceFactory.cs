@@ -9,7 +9,7 @@ namespace NProg.Distributed.Msmq
     {
         public IHandler<Order> GetHandler()
         {
-            return new SimpleOrderHandler("order_msmq.ndb");
+            return new SimpleOrderHandler(new OrderDaoFactory(), "order_msmq.ndb");
         }
 
         public IServer GetServer(IHandler<Order> handler, int port = -1)

@@ -9,7 +9,7 @@ namespace NProg.Distributed.ZeroMQ
     {
         public IHandler<Order> GetHandler()
         {
-            return new SimpleOrderHandler("order_zeromq.ndb");
+            return new SimpleOrderHandler(new OrderDaoFactory(), "order_zeromq.ndb");
         }
 
         public IServer GetServer(IHandler<Order> handler, int port = -1)
