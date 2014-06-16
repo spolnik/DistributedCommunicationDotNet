@@ -1,19 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using NProg.Distributed.Messaging;
 using NProg.Distributed.Messaging.Extensions;
-using ZMQ;
-using Exception = ZMQ.Exception;
+using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ.Messaging
 {
-    public class ZmqRequestQueue : IMessageQueue
+    public class ZmqRequestQueue : IRequestQueue
     {
-        private readonly Socket socket;
+        private readonly ZmqSocket socket;
         
-        public ZmqRequestQueue(Context context, Uri serviceUri)
+        public ZmqRequestQueue(ZmqContext context, Uri serviceUri)
         {
-            socket = context.Socket(SocketType.REQ);
+            socket = context.CreateSocket(SocketType.REQ);
             var address = string.Format("tcp://{0}:{1}", serviceUri.Host, serviceUri.Port);
             socket.Connect(address);
         }
@@ -24,21 +24,13 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             socket.Send(json, Encoding.UTF8);
         }
 
-        public void Listen(Action<Message> onMessageReceived)
-        {
-            while (true)
-            {
-                Receive(onMessageReceived);
-            }
-        }
-
         public void Receive(Action<Message> onMessageReceived)
         {
             string inbound;
 
             try
             {
-                inbound = socket.Recv(Encoding.UTF8);
+                inbound = socket.Receive(Encoding.UTF8);
             }
             catch (Exception)
             {

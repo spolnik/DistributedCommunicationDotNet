@@ -5,7 +5,7 @@ using NProg.Distributed.Messaging.Extensions;
 
 namespace NProg.Distributed.NetMQ.Messaging
 {
-    public class NmqRequestQueue : IMessageQueue
+    public class NmqRequestQueue : IRequestQueue
     {
         private readonly NetMQSocket socket;
 
@@ -20,14 +20,6 @@ namespace NProg.Distributed.NetMQ.Messaging
         {
             var json = message.ToJsonString();
             socket.Send(json);
-        }
-
-        public void Listen(Action<Message> onMessageReceived)
-        {
-            while (true)
-            {
-                Receive(onMessageReceived);
-            }
         }
 
         public void Receive(Action<Message> onMessageReceived)

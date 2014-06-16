@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Messaging;
 using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Service;
 using NProg.Distributed.ZeroMQ.Messaging;
-using ZMQ;
+using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
@@ -14,14 +15,18 @@ namespace NProg.Distributed.ZeroMQ
         private readonly int port;
 
         private readonly IHandler<Order> handler;
-        private readonly Context context;
+        private readonly ZmqContext context;
         private readonly ZmqResponseQueue responseQueue;
+        private readonly CancellationTokenSource token;
 
         public ZmqOrderServer(IHandler<Order> handler, int port)
         {
+            token = new CancellationTokenSource();
+
             this.port = port;
             this.handler = handler;
-            context = new Context(4);
+            context = ZmqContext.Create();
+            context.ThreadPoolSize = 4;
             responseQueue = new ZmqResponseQueue(context, port);
         }
         
@@ -52,7 +57,7 @@ namespace NProg.Distributed.ZeroMQ
                 {
                     RemoveOrder(x.BodyAs<RemoveOrderRequest>().OrderId);
                 }
-            });
+            }, token);
         }
 
         private void AddOrder(Message message)

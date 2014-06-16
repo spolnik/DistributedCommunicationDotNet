@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Threading;
 
 namespace NProg.Distributed.Messaging
 {
-    public interface IMessageQueue : IDisposable
+    public interface IRequestQueue : IDisposable
     {
         void Send(Message message);
         
-        void Listen(Action<Message> onMessageReceived);
+        void Receive(Action<Message> onMessageReceived);
+    }
+
+    public interface IResponseQueue : IDisposable
+    {
+        void Send(Message message);
+
+        void Listen(Action<Message> onMessageReceived, CancellationTokenSource token);
 
         void Receive(Action<Message> onMessageReceived);
     }

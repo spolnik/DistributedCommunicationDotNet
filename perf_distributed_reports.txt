@@ -6,12 +6,12 @@ time - 291 sec
 2. zeromq (6 clients, 150k messages):
 client - 3-7% cpu, 9 mb
 server - 18-22% cpu, 9 mb
-time - 442 sec
+time - 440 sec
 
 3. netmq (6 clients, 150k messages):
 client - 3-8% cpu, 11 mb
 server - 19-24% cpu, 11 mb
-time - 486 sec
+time - 474 sec
 
 4. zyan (6 clients, 150k messages):
 client - 4-8% cpu, 7.5 mb

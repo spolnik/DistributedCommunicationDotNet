@@ -6,15 +6,12 @@ using NProg.Distributed.Messaging.Extensions;
 
 namespace NProg.Distributed.NetMQ.Messaging
 {
-    public class NmqResponseQueue : IMessageQueue
+    public class NmqResponseQueue : IResponseQueue
     {
-        private readonly CancellationTokenSource token;
         private readonly NetMQSocket socket;
 
-        public NmqResponseQueue(NetMQContext context, int port, CancellationTokenSource token)
+        public NmqResponseQueue(NetMQContext context, int port)
         {
-            this.token = token;
-
             socket = context.CreateResponseSocket();
             var address = string.Format("tcp://127.0.0.1:{0}", port);
             socket.Bind(address);
@@ -26,7 +23,7 @@ namespace NProg.Distributed.NetMQ.Messaging
             socket.Send(json);
         }
 
-        public void Listen(Action<Message> onMessageReceived)
+        public void Listen(Action<Message> onMessageReceived, CancellationTokenSource token)
         {
             socket.ReceiveReady += (sender, args) =>
             {

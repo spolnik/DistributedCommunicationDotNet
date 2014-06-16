@@ -26,7 +26,7 @@ namespace NProg.Distributed.NetMQ
             this.port = port;
             this.handler = handler;
             context = NetMQContext.Create();
-            responseQueue = new NmqResponseQueue(context, port, token);
+            responseQueue = new NmqResponseQueue(context, port);
         }
         
         public void Start()
@@ -57,7 +57,7 @@ namespace NProg.Distributed.NetMQ
                 {
                     RemoveOrder(x.BodyAs<RemoveOrderRequest>().OrderId);
                 }
-            });
+            }, token);
         }
 
         private void AddOrder(Message message)

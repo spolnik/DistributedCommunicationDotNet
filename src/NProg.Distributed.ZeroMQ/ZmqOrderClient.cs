@@ -5,18 +5,18 @@ using NProg.Distributed.Messaging;
 using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Service;
 using NProg.Distributed.ZeroMQ.Messaging;
-using ZMQ;
+using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
     public class ZmqOrderClient : IHandler<Order>, IDisposable
     {
-        private readonly Context context;
+        private readonly ZmqContext context;
         private readonly ZmqRequestQueue requestQueue;
 
         public ZmqOrderClient(Uri serviceUri)
         {
-            context = new Context();
+            context = ZmqContext.Create();
             requestQueue = new ZmqRequestQueue(context, serviceUri);
         }
 

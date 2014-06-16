@@ -1,19 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using NProg.Distributed.Messaging;
 using NProg.Distributed.Messaging.Extensions;
-using ZMQ;
-using Exception = ZMQ.Exception;
+using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ.Messaging
 {
-    public class ZmqResponseQueue : IMessageQueue
+    public class ZmqResponseQueue : IResponseQueue
     {
-        private readonly Socket socket;
+        private readonly ZmqSocket socket;
 
-        public ZmqResponseQueue(Context context, int port)
+        public ZmqResponseQueue(ZmqContext context, int port)
         {
-            socket = context.Socket(SocketType.REP);
+            socket = context.CreateSocket(SocketType.REP);
             var address = string.Format("tcp://127.0.0.1:{0}", port);
             socket.Bind(address);
         }
@@ -24,11 +25,21 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             socket.Send(json, Encoding.UTF8);
         }
 
-        public void Listen(Action<Message> onMessageReceived)
+        public void Listen(Action<Message> onMessageReceived, CancellationTokenSource token)
         {
-            while (true)
+            socket.ReceiveReady += (sender, args) =>
             {
-                Receive(onMessageReceived);
+                var inbound = socket.Receive(Encoding.UTF8);
+
+                var message = Message.FromJson(inbound);
+                onMessageReceived(message);
+            };
+
+            var poller = new Poller(new List<ZmqSocket> { socket });
+
+            while (!token.IsCancellationRequested)
+            {
+                poller.Poll();
             }
         }
 
@@ -38,7 +49,7 @@ namespace NProg.Distributed.ZeroMQ.Messaging
 
             try
             {
-                inbound = socket.Recv(Encoding.UTF8);
+                inbound = socket.Receive(Encoding.UTF8);
             }
             catch (System.Runtime.InteropServices.SEHException)
             {
