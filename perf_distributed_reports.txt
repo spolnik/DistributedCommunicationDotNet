@@ -8,18 +8,24 @@ client - 3-7% cpu, 9 mb
 server - 18-22% cpu, 9 mb
 time - 440 sec
 
-3. netmq (6 clients, 150k messages):
+3. thrift (6 clients, 150k messages):
+client - 2-5% cpu, 6 mb
+server - 17-32% cpu, 6 mb
+time - 441 sec
+
+4. netmq (6 clients, 150k messages):
 client - 3-8% cpu, 11 mb
 server - 19-24% cpu, 11 mb
 time - 474 sec
 
-4. zyan (6 clients, 150k messages):
+5. zyan (6 clients, 150k messages):
 client - 4-8% cpu, 7.5 mb
 server - 30-42% cpu, 9 mb
 time - 635 sec
 
-5. thrift (relatively fast, quickly become unusable - 10 clients * 4k messages results in socket buffer overflow)
-
-6. wcf (too slow for 100k messages case or 1k messages * 10 clients case)
+6. wcf (6 clients, 150k messages):
+client - 4-9% cpu, 11 mb
+server - 20-30% cpu, 15 mb
+time - 2615 sec
 
 7. msmq (too slow for simple cases - 10k messages in one client) - creating temporary queues is very expensive - finally removed

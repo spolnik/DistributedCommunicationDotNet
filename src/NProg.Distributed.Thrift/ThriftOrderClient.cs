@@ -6,52 +6,40 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderClient : IHandler<Order>
+    public class ThriftOrderClient : IHandler<Order>, IDisposable
     {
-        private readonly Uri serviceUri;
+        private readonly TBufferedTransport transport;
+        private readonly OrderService.Client client;
+        private readonly TSocket socket;
 
         public ThriftOrderClient(Uri serviceUri)
         {
-            this.serviceUri = serviceUri;
+            socket = new TSocket(serviceUri.Host, serviceUri.Port);
+            transport = new TBufferedTransport(socket);
+            transport.Open();
+
+            client = new OrderService.Client(new TCompactProtocol(transport));
         }
 
         public void Add(Order item)
         {
-            using (var transport = new TSocket(serviceUri.Host, serviceUri.Port))
-            {
-                var protocol = new TBinaryProtocol(transport);
-                var client = new OrderService.Client(protocol);
-
-                transport.Open();
-
-                client.Add(OrderMapper.MapOrder(item));
-            }
+            client.Add(OrderMapper.MapOrder(item));
         }
 
         public Order Get(Guid guid)
         {
-            using (var transport = new TSocket(serviceUri.Host, serviceUri.Port))
-            {
-                var protocol = new TBinaryProtocol(transport);
-                var client = new OrderService.Client(protocol);
-
-                transport.Open();
-
-                return OrderMapper.MapOrder(client.Get(guid.ToString()));
-            }
+            return OrderMapper.MapOrder(client.Get(guid.ToString()));
         }
 
         public bool Remove(Guid guid)
         {
-            using (var transport = new TSocket(serviceUri.Host, serviceUri.Port))
-            {
-                var protocol = new TBinaryProtocol(transport);
-                var client = new OrderService.Client(protocol);
+            return client.Remove(guid.ToString());
+        }
 
-                transport.Open();
-
-                return client.Remove(guid.ToString());
-            }
+        public void Dispose()
+        {
+            transport.Close();
+            socket.Close();
         }
     }
 }

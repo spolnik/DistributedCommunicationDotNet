@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using NProg.Distributed.Service;
+using Thrift.Protocol;
 using Thrift.Server;
 using Thrift.Transport;
 
@@ -24,7 +25,7 @@ namespace NProg.Distributed.Thrift
             {
                 var processor = new OrderService.Processor(handler);
                 var serverTransport = new TServerSocket(port);
-                server = new TThreadPoolServer(processor, serverTransport);
+                server = new TThreadPoolServer(processor, serverTransport, new TTransportFactory(), new TCompactProtocol.Factory());
 
                 Task.Factory.StartNew(() => server.Serve());
             }
