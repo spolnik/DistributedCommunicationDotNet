@@ -1,5 +1,5 @@
 ﻿using System;
-using NProg.Distributed.Domain;
+using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
@@ -44,7 +44,7 @@ namespace NProg.Distributed.Server
             }
         }
 
-        private static IServiceFactory<Order> GetOrderServiceFactory(string framework)
+        private static IServiceFactory<Domain.Order> GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {
@@ -60,6 +60,8 @@ namespace NProg.Distributed.Server
                     return new RemotingOrderServiceFactory();
                 case "zyan":
                     return new ZyanOrderServiceFactory();
+                case "ice":
+                    return new IceOrderServiceFactory();
                 default:
                     throw new InvalidOperationException();
             }

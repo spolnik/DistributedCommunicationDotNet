@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Server</RootNamespace>
-    <AssemblyName>NProg.Distributed.Server</AssemblyName>
+    <RootNamespace>NProg.Distributed.Ice</RootNamespace>
+    <AssemblyName>NProg.Distributed.Ice</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ice, Version=3.5.1.0, Culture=neutral, PublicKeyToken=cdd571ade22f2f16, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Ice.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,49 +43,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="generated\order.cs" />
+    <Compile Include="IceOrderClient.cs" />
+    <Compile Include="IceOrderHandler.cs" />
+    <Compile Include="IceOrderServer.cs" />
+    <Compile Include="IceOrderServiceFactory.cs" />
+    <Compile Include="OrderMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
-      <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
+      <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
       <Name>NProg.Distributed.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Ice\NProg.Distributed.Ice.csproj">
-      <Project>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</Project>
-      <Name>NProg.Distributed.Ice</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.NetMQ\NProg.Distributed.NetMQ.csproj">
-      <Project>{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}</Project>
-      <Name>NProg.Distributed.NetMQ</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Remoting\NProg.Distributed.Remoting.csproj">
-      <Project>{077DB902-1745-4CEF-9714-E0F3AC17B452}</Project>
-      <Name>NProg.Distributed.Remoting</Name>
+    <ProjectReference Include="..\NProg.Distributed.NDatabase\NProg.Distributed.NDatabase.csproj">
+      <Project>{D0D3D474-E9B1-442D-939C-FD582020475F}</Project>
+      <Name>NProg.Distributed.NDatabase</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
       <Name>NProg.Distributed.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj">
-      <Project>{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}</Project>
-      <Name>NProg.Distributed.Thrift</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.WCF\NProg.Distributed.WCF.csproj">
-      <Project>{F84A2E32-9931-4C98-AA25-CE481CB89C0E}</Project>
-      <Name>NProg.Distributed.WCF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj">
-      <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
-      <Name>NProg.Distributed.ZeroMQ</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Zyan\NProg.Distributed.Zyan.csproj">
-      <Project>{36EE5322-A915-44F7-B096-BE2901F1D9D1}</Project>
-      <Name>NProg.Distributed.Zyan</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="order.ice" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

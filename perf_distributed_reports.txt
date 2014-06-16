@@ -3,29 +3,34 @@ client - 3-7% cpu, 7 mb
 server - 26-36% cpu, 9 mb
 time - 291 sec
 
-2. zeromq (6 clients, 150k messages):
+2. ice (6 clients, 150k messages):
+client - 1-5% cpu, 19.5 mb
+server - 7-14% cpu, 26 mb
+time - 377 sec
+
+3. zeromq (6 clients, 150k messages):
 client - 3-7% cpu, 9 mb
 server - 18-22% cpu, 9 mb
 time - 440 sec
 
-3. thrift (6 clients, 150k messages):
+4. thrift (6 clients, 150k messages):
 client - 2-5% cpu, 6 mb
 server - 17-32% cpu, 6 mb
 time - 441 sec
 
-4. netmq (6 clients, 150k messages):
+5. netmq (6 clients, 150k messages):
 client - 3-8% cpu, 11 mb
 server - 19-24% cpu, 11 mb
 time - 474 sec
 
-5. zyan (6 clients, 150k messages):
+6. zyan (6 clients, 150k messages):
 client - 4-8% cpu, 7.5 mb
 server - 30-42% cpu, 9 mb
 time - 635 sec
 
-6. wcf (6 clients, 150k messages):
+7. wcf (6 clients, 150k messages):
 client - 4-9% cpu, 11 mb
 server - 20-30% cpu, 15 mb
 time - 2615 sec
 
-7. msmq (too slow for simple cases - 10k messages in one client) - creating temporary queues is very expensive - finally removed
+8. msmq (too slow for simple cases - 10k messages in one client) - creating temporary queues is very expensive - finally removed

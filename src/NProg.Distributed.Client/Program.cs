@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using log4net;
+using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
@@ -8,7 +9,6 @@ using NProg.Distributed.Thrift;
 using NProg.Distributed.WCF;
 using NProg.Distributed.ZeroMQ;
 using NProg.Distributed.Zyan;
-using Order = NProg.Distributed.Domain.Order;
 
 namespace NProg.Distributed.Client
 {
@@ -38,7 +38,7 @@ namespace NProg.Distributed.Client
 
                 for (var i = 0; i < count; i++)
                 {
-                    var order = new Order
+                    var order = new Domain.Order
                     {
                         Count = 3,
                         OrderDate = DateTime.Now,
@@ -56,7 +56,7 @@ namespace NProg.Distributed.Client
                     Debug.Assert(removed);
 
                     var removedOrder = client.Get(order.OrderId);
-                    Debug.Assert(removedOrder.Equals(new Order()));
+                    Debug.Assert(removedOrder.Equals(new Domain.Order{UserName = ""}));
 
                     Log.WriteLine("Order {0}", i);
                 }
@@ -72,7 +72,7 @@ namespace NProg.Distributed.Client
             Console.ReadLine();
         }
 
-        private static IServiceFactory<Order> GetOrderServiceFactory(string framework)
+        private static IServiceFactory<Domain.Order> GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {
@@ -88,6 +88,8 @@ namespace NProg.Distributed.Client
                     return new RemotingOrderServiceFactory();
                 case "zyan":
                     return new ZyanOrderServiceFactory();
+                case "ice":
+                    return new IceOrderServiceFactory();
                 default:
                     throw new InvalidOperationException();
             }

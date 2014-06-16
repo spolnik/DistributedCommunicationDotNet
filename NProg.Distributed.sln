@@ -70,6 +70,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Zyan", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.NetMQ", "src\NProg.Distributed.NetMQ\NProg.Distributed.NetMQ.csproj", "{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Ice", "src\NProg.Distributed.Ice\NProg.Distributed.Ice.csproj", "{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -136,6 +138,10 @@ Global
 		{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,5 +166,6 @@ Global
 		{077DB902-1745-4CEF-9714-E0F3AC17B452} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{36EE5322-A915-44F7-B096-BE2901F1D9D1} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
+		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 	EndGlobalSection
 EndGlobal
