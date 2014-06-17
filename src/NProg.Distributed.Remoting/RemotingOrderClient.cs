@@ -6,7 +6,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingOrderClient : IHandler<Order>
+    public class RemotingOrderClient : IHandler<Guid, Order>
     {
         private readonly RemotingOrderHandler orderHandler;
 
@@ -19,9 +19,9 @@ namespace NProg.Distributed.Remoting
             orderHandler = (RemotingOrderHandler)Activator.GetObject(typeof(RemotingOrderHandler), address);
         }
 
-        public void Add(Order item)
+        public void Add(Guid key, Order item)
         {
-            orderHandler.Add(item);
+            orderHandler.Add(key, item);
         }
 
         public Order Get(Guid guid)

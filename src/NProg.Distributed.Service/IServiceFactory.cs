@@ -2,13 +2,12 @@
 
 namespace NProg.Distributed.Service
 {
-    public interface IServiceFactory<TItem> where TItem : class
+    public interface IServiceFactory<TKey, TValue> where TValue : class
     {
-        IHandler<TItem> GetHandler();
+        IHandler<TKey, TValue> GetHandler();
 
-        IServer GetServer(IHandler<TItem> handler, int port = -1);
+        IServer GetServer(IHandler<TKey, TValue> handler, int port = -1);
 
-        IHandler<TItem> GetClient(Uri serviceUri);
+        IHandler<TKey, TValue> GetClient(Uri serviceUri);
     }
-
 }

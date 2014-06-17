@@ -14,12 +14,12 @@ namespace NProg.Distributed.ZeroMQ
     {
         private readonly int port;
 
-        private readonly IHandler<Order> handler;
+        private readonly IHandler<Guid, Order> handler;
         private readonly ZmqContext context;
         private readonly ZmqResponseQueue responseQueue;
         private readonly CancellationTokenSource token;
 
-        public ZmqOrderServer(IHandler<Order> handler, int port)
+        public ZmqOrderServer(IHandler<Guid, Order> handler, int port)
         {
             token = new CancellationTokenSource();
 
@@ -62,7 +62,8 @@ namespace NProg.Distributed.ZeroMQ
 
         private void AddOrder(Message message)
         {
-            handler.Add(message.BodyAs<AddOrderRequest>().Order);
+            var order = message.BodyAs<AddOrderRequest>().Order;
+            handler.Add(order.OrderId, order);
 
             responseQueue.Send(new Message
             {

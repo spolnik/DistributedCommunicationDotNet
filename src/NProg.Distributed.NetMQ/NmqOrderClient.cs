@@ -9,7 +9,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.NetMQ
 {
-    public class NmqOrderClient : IHandler<Order>
+    public class NmqOrderClient : IHandler<Guid, Order>
     {
         private readonly NetMQContext context;
         private readonly NmqRequestQueue requestQueue;
@@ -20,7 +20,7 @@ namespace NProg.Distributed.NetMQ
             requestQueue = new NmqRequestQueue(context, serviceUri);
         }
 
-        public void Add(Order item)
+        public void Add(Guid key, Order item)
         {
             requestQueue.Send(new Message
             {

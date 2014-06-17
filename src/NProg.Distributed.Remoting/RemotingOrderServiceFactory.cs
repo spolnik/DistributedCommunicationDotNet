@@ -4,20 +4,19 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingOrderServiceFactory : IServiceFactory<Order>
+    public class RemotingOrderServiceFactory : IServiceFactory<Guid, Order>
     {
-
-        public IHandler<Order> GetHandler()
+        public IHandler<Guid, Order> GetHandler()
         {
             return new RemotingOrderHandler();
         }
 
-        public IServer GetServer(IHandler<Order> handler, int port = -1)
+        public IServer GetServer(IHandler<Guid, Order> handler, int port = -1)
         {
             return new RemotingOrderServer(port);
         }
 
-        public IHandler<Order> GetClient(Uri serviceUri)
+        public IHandler<Guid, Order> GetClient(Uri serviceUri)
         {
             return new RemotingOrderClient(serviceUri);
         }

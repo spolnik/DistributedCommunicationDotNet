@@ -6,7 +6,7 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderClient : IHandler<Order>, IDisposable
+    public class ThriftOrderClient : IHandler<Guid, Order>, IDisposable
     {
         private readonly TBufferedTransport transport;
         private readonly OrderService.Client client;
@@ -21,9 +21,10 @@ namespace NProg.Distributed.Thrift
             client = new OrderService.Client(new TCompactProtocol(transport));
         }
 
-        public void Add(Order item)
+        public void Add(Guid key, Order item)
         {
-            client.Add(OrderMapper.MapOrder(item));
+            var thriftOrder = OrderMapper.MapOrder(item);
+            client.Add(thriftOrder.OrderId, thriftOrder);
         }
 
         public Order Get(Guid guid)

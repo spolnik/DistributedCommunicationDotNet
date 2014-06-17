@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Ice;
 using NProg.Distributed.Service;
 
@@ -10,7 +11,7 @@ namespace NProg.Distributed.Ice
         private readonly int port;
         private readonly Communicator communicator;
 
-        public IceOrderServer(IHandler<Domain.Order> handler, int port)
+        public IceOrderServer(IHandler<Guid, Domain.Order> handler, int port)
         {
             this.handler = (IceOrderHandler) handler;
             this.port = port;

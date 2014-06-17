@@ -9,7 +9,7 @@ struct ThriftOrder {
 }
 
 service OrderService {   
-   void Add(1:ThriftOrder order)
+   void Add(1:string orderId, 2:ThriftOrder order)
    ThriftOrder Get(1:string orderId)
    bool Remove(1:string orderId)
 }

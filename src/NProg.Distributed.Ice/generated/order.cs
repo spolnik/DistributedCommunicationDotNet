@@ -205,14 +205,14 @@ namespace Order
     [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
     public interface OrderServicePrx : Ice.ObjectPrx
     {
-        void Add(Order.OrderDto order);
-        void Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__);
+        void Add(string orderId, Order.OrderDto order);
+        void Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__);
 
-        Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(Order.OrderDto order);
-        Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__);
+        Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(string orderId, Order.OrderDto order);
+        Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__);
 
-        Ice.AsyncResult begin_Add(Order.OrderDto order, Ice.AsyncCallback cb__, object cookie__);
-        Ice.AsyncResult begin_Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__, Ice.AsyncCallback cb__, object cookie__);
+        Ice.AsyncResult begin_Add(string orderId, Order.OrderDto order, Ice.AsyncCallback cb__, object cookie__);
+        Ice.AsyncResult begin_Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__, Ice.AsyncCallback cb__, object cookie__);
 
         void end_Add(Ice.AsyncResult r__);
 
@@ -245,7 +245,7 @@ namespace Order
     [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
     public interface OrderServiceOperations_
     {
-        void Add(Order.OrderDto order, Ice.Current current__);
+        void Add(string orderId, Order.OrderDto order, Ice.Current current__);
 
         Order.OrderDto Get(string orderId, Ice.Current current__);
 
@@ -255,7 +255,7 @@ namespace Order
     [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
     public interface OrderServiceOperationsNC_
     {
-        void Add(Order.OrderDto order);
+        void Add(string orderId, Order.OrderDto order);
 
         Order.OrderDto Get(string orderId);
 
@@ -430,17 +430,17 @@ namespace Order
     {
         #region Synchronous operations
 
-        public void Add(Order.OrderDto order)
+        public void Add(string orderId, Order.OrderDto order)
         {
-            Add(order, null, false);
+            Add(orderId, order, null, false);
         }
 
-        public void Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__)
+        public void Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__)
         {
-            Add(order, context__, true);
+            Add(orderId, order, context__, true);
         }
 
-        private void Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__, bool explicitContext__)
+        private void Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__, bool explicitContext__)
         {
             if(explicitContext__ && context__ == null)
             {
@@ -457,7 +457,7 @@ namespace Order
                     {
                         delBase__ = getDelegate__(false);
                         OrderServiceDel_ del__ = (OrderServiceDel_)delBase__;
-                        del__.Add(order, context__, observer__);
+                        del__.Add(orderId, order, context__, observer__);
                         return;
                     }
                     catch(IceInternal.LocalExceptionWrapper ex__)
@@ -581,24 +581,24 @@ namespace Order
 
         #region Asynchronous operations
 
-        public Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(Order.OrderDto order)
+        public Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(string orderId, Order.OrderDto order)
         {
-            return begin_Add(order, null, false, null, null);
+            return begin_Add(orderId, order, null, false, null, null);
         }
 
-        public Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__)
+        public Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__)
         {
-            return begin_Add(order, ctx__, true, null, null);
+            return begin_Add(orderId, order, ctx__, true, null, null);
         }
 
-        public Ice.AsyncResult begin_Add(Order.OrderDto order, Ice.AsyncCallback cb__, object cookie__)
+        public Ice.AsyncResult begin_Add(string orderId, Order.OrderDto order, Ice.AsyncCallback cb__, object cookie__)
         {
-            return begin_Add(order, null, false, cb__, cookie__);
+            return begin_Add(orderId, order, null, false, cb__, cookie__);
         }
 
-        public Ice.AsyncResult begin_Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__, Ice.AsyncCallback cb__, object cookie__)
+        public Ice.AsyncResult begin_Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__, Ice.AsyncCallback cb__, object cookie__)
         {
-            return begin_Add(order, ctx__, true, cb__, cookie__);
+            return begin_Add(orderId, order, ctx__, true, cb__, cookie__);
         }
 
         private const string __Add_name = "Add";
@@ -608,7 +608,7 @@ namespace Order
             end__(r__, __Add_name);
         }
 
-        private Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__, bool explicitContext__, Ice.AsyncCallback cb__, object cookie__)
+        private Ice.AsyncResult<Order.Callback_OrderService_Add> begin_Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> ctx__, bool explicitContext__, Ice.AsyncCallback cb__, object cookie__)
         {
             IceInternal.OnewayOutgoingAsync<Order.Callback_OrderService_Add> result__ = new IceInternal.OnewayOutgoingAsync<Order.Callback_OrderService_Add>(this, __Add_name, Add_completed__, cookie__);
             if(cb__ != null)
@@ -619,6 +619,7 @@ namespace Order
             {
                 result__.prepare__(__Add_name, Ice.OperationMode.Normal, ctx__, explicitContext__);
                 IceInternal.BasicStream os__ = result__.startWriteParams__(Ice.FormatType.DefaultFormat);
+                os__.writeString(orderId);
                 os__.writeObject(order);
                 os__.writePendingObjects();
                 result__.endWriteParams__();
@@ -1008,7 +1009,7 @@ namespace Order
     [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
     public interface OrderServiceDel_ : Ice.ObjectDel_
     {
-        void Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__);
+        void Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__);
 
         Order.OrderDto Get(string orderId, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__);
 
@@ -1028,7 +1029,7 @@ namespace Order
     [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
     public sealed class OrderServiceDelM_ : Ice.ObjectDelM_, OrderServiceDel_
     {
-        public void Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__)
+        public void Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__)
         {
             IceInternal.Outgoing og__ = handler__.getOutgoing("Add", Ice.OperationMode.Normal, context__, observer__);
             try
@@ -1036,6 +1037,7 @@ namespace Order
                 try
                 {
                     IceInternal.BasicStream os__ = og__.startWriteParams(Ice.FormatType.DefaultFormat);
+                    os__.writeString(orderId);
                     os__.writeObject(order);
                     os__.writePendingObjects();
                     og__.endWriteParams();
@@ -1184,7 +1186,7 @@ namespace Order
     public sealed class OrderServiceDelD_ : Ice.ObjectDelD_, OrderServiceDel_
     {
         [_System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031")]
-        public void Add(Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__)
+        public void Add(string orderId, Order.OrderDto order, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__)
         {
             Ice.Current current__ = new Ice.Current();
             initCurrent__(ref current__, "Add", Ice.OperationMode.Normal, context__);
@@ -1199,7 +1201,7 @@ namespace Order
                 {
                     throw new Ice.OperationNotExistException(current__.id, current__.facet, current__.operation);
                 }
-                servant__.Add(order, current__);
+                servant__.Add(orderId, order, current__);
                 return Ice.DispatchStatus.DispatchOK;
             };
             IceInternal.Direct direct__ = null;
@@ -1326,12 +1328,12 @@ namespace Order
     {
         #region Slice operations
 
-        public void Add(Order.OrderDto order)
+        public void Add(string orderId, Order.OrderDto order)
         {
-            Add(order, Ice.ObjectImpl.defaultCurrent);
+            Add(orderId, order, Ice.ObjectImpl.defaultCurrent);
         }
 
-        public abstract void Add(Order.OrderDto order, Ice.Current current__);
+        public abstract void Add(string orderId, Order.OrderDto order, Ice.Current current__);
 
         public Order.OrderDto Get(string orderId)
         {
@@ -1401,11 +1403,13 @@ namespace Order
         {
             checkMode__(Ice.OperationMode.Normal, current__.mode);
             IceInternal.BasicStream is__ = inS__.startReadParams();
+            string orderId;
+            orderId = is__.readString();
             IceInternal.ParamPatcher<Order.OrderDto> order__PP = new IceInternal.ParamPatcher<Order.OrderDto>(Order.OrderDto.ice_staticId());
             is__.readObject(order__PP);
             is__.readPendingObjects();
             inS__.endReadParams();
-            obj__.Add(order__PP.value, current__);
+            obj__.Add(orderId, order__PP.value, current__);
             inS__.writeEmptyParams__();
             return Ice.DispatchStatus.DispatchOK;
         }

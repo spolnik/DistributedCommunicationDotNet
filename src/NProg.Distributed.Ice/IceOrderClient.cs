@@ -5,7 +5,7 @@ using Order;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceOrderClient : IHandler<Domain.Order>, IDisposable
+    public class IceOrderClient : IHandler<Guid, Domain.Order>, IDisposable
     {
         private readonly Communicator communicator;
         private readonly OrderServicePrx proxy;
@@ -18,9 +18,10 @@ namespace NProg.Distributed.Ice
             proxy = OrderServicePrxHelper.checkedCast(communicator.stringToProxy(address));
         }
 
-        public void Add(Domain.Order item)
+        public void Add(Guid key, Domain.Order item)
         {
-            proxy.Add(OrderMapper.MapOrder(item));
+            var orderDto = OrderMapper.MapOrder(item);
+            proxy.Add(orderDto.orderId, orderDto);
         }
 
         public Domain.Order Get(Guid guid)

@@ -19,9 +19,9 @@ namespace NProg.Distributed.Thrift
 {
   public partial class OrderService {
     public interface Iface {
-      void Add(ThriftOrder order);
+      void Add(string orderId, ThriftOrder order);
       #if SILVERLIGHT
-      IAsyncResult Begin_Add(AsyncCallback callback, object state, ThriftOrder order);
+      IAsyncResult Begin_Add(AsyncCallback callback, object state, string orderId, ThriftOrder order);
       void End_Add(IAsyncResult asyncResult);
       #endif
       ThriftOrder Get(string orderId);
@@ -94,9 +94,9 @@ namespace NProg.Distributed.Thrift
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_Add(AsyncCallback callback, object state, ThriftOrder order)
+      public IAsyncResult Begin_Add(AsyncCallback callback, object state, string orderId, ThriftOrder order)
       {
-        return send_Add(callback, state, order);
+        return send_Add(callback, state, orderId, order);
       }
 
       public void End_Add(IAsyncResult asyncResult)
@@ -107,26 +107,27 @@ namespace NProg.Distributed.Thrift
 
       #endif
 
-      public void Add(ThriftOrder order)
+      public void Add(string orderId, ThriftOrder order)
       {
         #if !SILVERLIGHT
-        send_Add(order);
+        send_Add(orderId, order);
         recv_Add();
 
         #else
-        var asyncResult = Begin_Add(null, null, order);
+        var asyncResult = Begin_Add(null, null, orderId, order);
         End_Add(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_Add(AsyncCallback callback, object state, ThriftOrder order)
+      public IAsyncResult send_Add(AsyncCallback callback, object state, string orderId, ThriftOrder order)
       #else
-      public void send_Add(ThriftOrder order)
+      public void send_Add(string orderId, ThriftOrder order)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("Add", TMessageType.Call, seqid_));
         Add_args args = new Add_args();
+        args.OrderId = orderId;
         args.Order = order;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
@@ -321,7 +322,7 @@ namespace NProg.Distributed.Thrift
         args.Read(iprot);
         iprot.ReadMessageEnd();
         Add_result result = new Add_result();
-        iface_.Add(args.Order);
+        iface_.Add(args.OrderId, args.Order);
         oprot.WriteMessageBegin(new TMessage("Add", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
@@ -362,7 +363,21 @@ namespace NProg.Distributed.Thrift
     #endif
     public partial class Add_args : TBase
     {
+      private string _orderId;
       private ThriftOrder _order;
+
+      public string OrderId
+      {
+        get
+        {
+          return _orderId;
+        }
+        set
+        {
+          __isset.orderId = true;
+          this._orderId = value;
+        }
+      }
 
       public ThriftOrder Order
       {
@@ -383,6 +398,7 @@ namespace NProg.Distributed.Thrift
       [Serializable]
       #endif
       public struct Isset {
+        public bool orderId;
         public bool order;
       }
 
@@ -402,6 +418,13 @@ namespace NProg.Distributed.Thrift
           switch (field.ID)
           {
             case 1:
+              if (field.Type == TType.String) {
+                OrderId = iprot.ReadString();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
               if (field.Type == TType.Struct) {
                 Order = new ThriftOrder();
                 Order.Read(iprot);
@@ -422,10 +445,18 @@ namespace NProg.Distributed.Thrift
         TStruct struc = new TStruct("Add_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
+        if (OrderId != null && __isset.orderId) {
+          field.Name = "orderId";
+          field.Type = TType.String;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteString(OrderId);
+          oprot.WriteFieldEnd();
+        }
         if (Order != null && __isset.order) {
           field.Name = "order";
           field.Type = TType.Struct;
-          field.ID = 1;
+          field.ID = 2;
           oprot.WriteFieldBegin(field);
           Order.Write(oprot);
           oprot.WriteFieldEnd();
@@ -436,7 +467,9 @@ namespace NProg.Distributed.Thrift
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("Add_args(");
-        sb.Append("Order: ");
+        sb.Append("OrderId: ");
+        sb.Append(OrderId);
+        sb.Append(",Order: ");
         sb.Append(Order== null ? "<null>" : Order.ToString());
         sb.Append(")");
         return sb.ToString();

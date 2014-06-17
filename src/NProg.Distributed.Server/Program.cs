@@ -44,7 +44,7 @@ namespace NProg.Distributed.Server
             }
         }
 
-        private static IServiceFactory<Domain.Order> GetOrderServiceFactory(string framework)
+        private static IServiceFactory<Guid, Domain.Order> GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {

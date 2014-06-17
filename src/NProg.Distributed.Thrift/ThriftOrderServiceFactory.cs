@@ -4,19 +4,19 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderServiceFactory : IServiceFactory<Domain.Order>
+    public class ThriftOrderServiceFactory : IServiceFactory<Guid, Domain.Order>
     {
-        public IHandler<Domain.Order> GetHandler()
+        public IHandler<Guid, Domain.Order> GetHandler()
         {
             return new ThriftOrderHandler(new OrderDaoFactory(), "order_thrift.ndb");
         }
 
-        public IServer GetServer(IHandler<Domain.Order> handler, int port)
+        public IServer GetServer(IHandler<Guid, Domain.Order> handler, int port)
         {
             return new ThriftOrderServer(handler, port);
         }
 
-        public IHandler<Domain.Order> GetClient(Uri serviceUri)
+        public IHandler<Guid, Domain.Order> GetClient(Uri serviceUri)
         {
             return new ThriftOrderClient(serviceUri);
         }

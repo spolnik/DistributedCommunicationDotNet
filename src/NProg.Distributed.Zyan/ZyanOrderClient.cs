@@ -5,20 +5,20 @@ using Zyan.Communication;
 
 namespace NProg.Distributed.Zyan
 {
-    public class ZyanOrderClient : IHandler<Order>
+    public class ZyanOrderClient : IHandler<Guid, Order>
     {
-        private readonly IHandler<Order> proxy;
+        private readonly IHandler<Guid, Order> proxy;
 
         public ZyanOrderClient(Uri serviceUri)
         {
             var serverUrl = string.Format("tcp://{0}:{1}/OrderService", serviceUri.Host, serviceUri.Port);
             var connection = new ZyanConnection(serverUrl);
-            proxy = connection.CreateProxy<IHandler<Order>>();
+            proxy = connection.CreateProxy<IHandler<Guid, Order>>();
         }
 
-        public void Add(Order item)
+        public void Add(Guid key, Order item)
         {
-            proxy.Add(item);
+            proxy.Add(key, item);
         }
 
         public Order Get(Guid guid)

@@ -1,4 +1,5 @@
-﻿using NProg.Distributed.Domain;
+﻿using System;
+using NProg.Distributed.Domain;
 using NProg.Distributed.Service;
 using Zyan.Communication;
 
@@ -15,7 +16,7 @@ namespace NProg.Distributed.Zyan
 
         public void Start()
         {
-            host.RegisterComponent<IHandler<Order>, ZyanOrderHandler>(ActivationType.Singleton);
+            host.RegisterComponent<IHandler<Guid, Order>, ZyanOrderHandler>(ActivationType.Singleton);
         }
 
         public void Stop()

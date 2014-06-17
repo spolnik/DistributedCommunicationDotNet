@@ -8,12 +8,12 @@ namespace NProg.Distributed.WCF.Service
     public interface IOrderService
     {
         [OperationContract]
-        void Add(Order item);
+        void Add(Guid key, Order item);
 
         [OperationContract]
-        Order Get(Guid guid);
+        Order Get(Guid key);
 
         [OperationContract]
-        bool Remove(Guid guid);
+        bool Remove(Guid key);
     }
 }

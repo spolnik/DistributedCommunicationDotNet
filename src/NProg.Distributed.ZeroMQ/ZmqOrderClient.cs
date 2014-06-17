@@ -9,7 +9,7 @@ using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqOrderClient : IHandler<Order>, IDisposable
+    public class ZmqOrderClient : IHandler<Guid, Order>, IDisposable
     {
         private readonly ZmqContext context;
         private readonly ZmqRequestQueue requestQueue;
@@ -20,7 +20,7 @@ namespace NProg.Distributed.ZeroMQ
             requestQueue = new ZmqRequestQueue(context, serviceUri);
         }
 
-        public void Add(Order item)
+        public void Add(Guid key, Order item)
         {
             requestQueue.Send(new Message
             {

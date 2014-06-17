@@ -5,18 +5,18 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingOrderHandler : MarshalByRefObject, IHandler<Order>
+    public class RemotingOrderHandler : MarshalByRefObject, IHandler<Guid, Order>
     {
-        private readonly IHandler<Order> ndbOrderDao;
+        private readonly IHandler<Guid, Order> ndbOrderDao;
 
         public RemotingOrderHandler()
         {
             ndbOrderDao = new OrderDaoFactory().CreateDao("order_remoting.ndb");
         }
 
-        public void Add(Order item)
+        public void Add(Guid key, Order item)
         {
-            ndbOrderDao.Add(item);
+            ndbOrderDao.Add(key, item);
         }
 
         public Order Get(Guid guid)

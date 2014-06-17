@@ -1,19 +1,20 @@
 ﻿using System;
 using NProg.Distributed.Domain;
-using NProg.Distributed.NDatabase;
+using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderHandler : SimpleOrderHandler, OrderService.Iface
+    public class ThriftOrderHandler : SimpleHandler<Guid, Order>, OrderService.Iface
     {
-        public ThriftOrderHandler(IDaoFactory<Order> orderDaoFactory, string dbName)
+        public ThriftOrderHandler(IDaoFactory<Guid, Order> orderDaoFactory, string dbName)
             : base(orderDaoFactory, dbName)
         {
         }
 
-        public void Add(ThriftOrder order)
+        public void Add(string key, ThriftOrder thriftOrder)
         {
-            Add(OrderMapper.MapOrder(order));
+            var order = OrderMapper.MapOrder(thriftOrder);
+            Add(order.OrderId, order);
         }
 
         public ThriftOrder Get(string orderId)

@@ -6,7 +6,7 @@ using NProg.Distributed.WCF.Service;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfOrderClient : IHandler<Order>
+    public class WcfOrderClient : IHandler<Guid, Order>
     {
         private readonly NetTcpBinding tcpBinding;
         private readonly EndpointAddress endpoint;
@@ -17,12 +17,12 @@ namespace NProg.Distributed.WCF
             endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}/OrderService", serviceUri.Host, serviceUri.Port));
         }
 
-        public void Add(Order item)
+        public void Add(Guid key, Order item)
         {
             using (var channelFactory = new ChannelFactory<IOrderService>(tcpBinding, endpoint))
             {
                 var orderService = channelFactory.CreateChannel();
-                orderService.Add(item);
+                orderService.Add(key, item);
             }
         }
 

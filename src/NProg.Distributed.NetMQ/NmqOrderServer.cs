@@ -14,12 +14,12 @@ namespace NProg.Distributed.NetMQ
     {
         private readonly int port;
 
-        private readonly IHandler<Order> handler;
+        private readonly IHandler<Guid, Order> handler;
         private readonly NetMQContext context;
         private readonly NmqResponseQueue responseQueue;
         private readonly CancellationTokenSource token;
 
-        public NmqOrderServer(IHandler<Order> handler, int port)
+        public NmqOrderServer(IHandler<Guid, Order> handler, int port)
         {
             token = new CancellationTokenSource();
 
@@ -63,7 +63,7 @@ namespace NProg.Distributed.NetMQ
         private void AddOrder(Message message)
         {
             var order = message.BodyAs<AddOrderRequest>().Order;
-            handler.Add(order);
+            handler.Add(order.OrderId, order);
 
             responseQueue.Send(new Message
             {

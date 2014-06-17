@@ -1,23 +1,22 @@
 ﻿using System;
 using Ice;
-using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 using Order;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceOrderHandler : OrderServiceDisp_, IHandler<Domain.Order>
+    public class IceOrderHandler : OrderServiceDisp_, IHandler<Guid, Domain.Order>
     {
-        private readonly IHandler<Domain.Order> orderDao;
+        private readonly IHandler<Guid, Domain.Order> orderDao;
 
-        public IceOrderHandler(IDaoFactory<Domain.Order> orderDaoFactory, string dbName)
+        public IceOrderHandler(IDaoFactory<Guid, Domain.Order> orderDaoFactory, string dbName)
         {
             orderDao = orderDaoFactory.CreateDao(dbName);
         }
 
-        public void Add(Domain.Order item)
+        public void Add(Guid key, Domain.Order item)
         {
-            orderDao.Add(item);
+            orderDao.Add(key, item);
         }
 
         public Domain.Order Get(Guid guid)
@@ -30,17 +29,18 @@ namespace NProg.Distributed.Ice
             return orderDao.Remove(guid);
         }
 
-        public override void Add(OrderDto order, Current current__)
+        public override void Add(string orderId, OrderDto orderDto, Current current)
         {
-            Add(OrderMapper.MapOrder(order));
+            var order = OrderMapper.MapOrder(orderDto);
+            Add(order.OrderId, order);
         }
 
-        public override OrderDto Get(string orderId, Current current__)
+        public override OrderDto Get(string orderId, Current current)
         {
             return OrderMapper.MapOrder(Get(Guid.Parse(orderId)));
         }
 
-        public override bool Remove(string orderId, Current current__)
+        public override bool Remove(string orderId, Current current)
         {
             return Remove(Guid.Parse(orderId));
         }

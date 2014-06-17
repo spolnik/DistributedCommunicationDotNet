@@ -13,7 +13,7 @@ namespace NProg.Distributed.Thrift
         private readonly OrderService.Iface handler;
         private TThreadPoolServer server;
 
-        public ThriftOrderServer(IHandler<Domain.Order> handler, int port)
+        public ThriftOrderServer(IHandler<Guid, Domain.Order> handler, int port)
         {
             this.port = port;
             this.handler = (OrderService.Iface)handler;

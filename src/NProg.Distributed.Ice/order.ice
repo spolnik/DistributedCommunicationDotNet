@@ -9,7 +9,7 @@ module Order
 	};
 
 	interface OrderService {   
-		void Add(OrderDto order);
+		void Add(string orderId, OrderDto order);
 		OrderDto Get(string orderId);
 		bool Remove(string orderId);
 	};	

@@ -47,7 +47,7 @@ namespace NProg.Distributed.Client
                         UserName = "Mikolaj"
                     };
 
-                    client.Add(order);
+                    client.Add(order.OrderId, order);
                     
                     var orderFromDb = client.Get(order.OrderId);
                     Debug.Assert(orderFromDb.Equals(order));
@@ -72,7 +72,7 @@ namespace NProg.Distributed.Client
             Console.ReadLine();
         }
 
-        private static IServiceFactory<Domain.Order> GetOrderServiceFactory(string framework)
+        private static IServiceFactory<Guid, Domain.Order> GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {

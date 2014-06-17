@@ -5,20 +5,20 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.NetMQ
 {
-    public class NmqOrderServiceFactory : IServiceFactory<Order>
+    public class NmqOrderServiceFactory : IServiceFactory<Guid, Order>
     {
 
-        public IHandler<Order> GetHandler()
+        public IHandler<Guid, Order> GetHandler()
         {
-            return new SimpleOrderHandler(new OrderDaoFactory(), "order_netmq.ndb");
+            return new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_netmq.ndb");
         }
 
-        public IServer GetServer(IHandler<Order> handler, int port = -1)
+        public IServer GetServer(IHandler<Guid, Order> handler, int port = -1)
         {
             return new NmqOrderServer(handler, port);
         }
 
-        public IHandler<Order> GetClient(Uri serviceUri)
+        public IHandler<Guid, Order> GetClient(Uri serviceUri)
         {
             return new NmqOrderClient(serviceUri);
         }

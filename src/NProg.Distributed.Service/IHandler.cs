@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace NProg.Distributed.Service
+﻿namespace NProg.Distributed.Service
 {
-    public interface IHandler<TItem> where TItem : class 
+    public interface IHandler<in TKey, TValue> where TValue : class 
     {
-        void Add(TItem item);
+        void Add(TKey key, TValue value);
 
-        TItem Get(Guid guid);
+        TValue Get(TKey key);
 
-        bool Remove(Guid guid);
+        bool Remove(TKey key);
     }
 }
