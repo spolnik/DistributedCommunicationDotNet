@@ -43,29 +43,6 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             }
         }
 
-        public void Receive(Action<Message> onMessageReceived)
-        {
-            string inbound;
-
-            try
-            {
-                inbound = socket.Receive(Encoding.UTF8);
-            }
-            catch (System.Runtime.InteropServices.SEHException)
-            {
-                Dispose(true);
-                return;
-            }
-            catch (Exception)
-            {
-                Dispose(true);
-                return;
-            }
-
-            var message = Message.FromJson(inbound);
-            onMessageReceived(message);
-        }
-
         protected void Dispose(bool disposing)
         {
             if (disposing && socket != null)

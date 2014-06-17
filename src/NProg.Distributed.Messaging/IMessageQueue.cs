@@ -15,8 +15,5 @@ namespace NProg.Distributed.Messaging
         void Send(Message message);
 
         void Listen(Action<Message> onMessageReceived, CancellationTokenSource token);
-
-        void Receive(Action<Message> onMessageReceived);
     }
-
 }

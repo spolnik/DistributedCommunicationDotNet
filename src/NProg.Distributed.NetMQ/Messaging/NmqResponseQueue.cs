@@ -39,24 +39,6 @@ namespace NProg.Distributed.NetMQ.Messaging
             }
         }
 
-        public void Receive(Action<Message> onMessageReceived)
-        {
-            string inbound;
-
-            try
-            {
-                inbound = socket.ReceiveString();
-            }
-            catch (NetMQException)
-            {
-                Dispose(true);
-                return;
-            }
-
-            var message = Message.FromJson(inbound);
-            onMessageReceived(message);
-        }
-
         protected void Dispose(bool disposing)
         {
             if (disposing && socket != null)
