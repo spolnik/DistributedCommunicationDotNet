@@ -68,6 +68,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="message.thrift" />
     <None Include="order.thrift" />
     <None Include="packages.config" />
   </ItemGroup>

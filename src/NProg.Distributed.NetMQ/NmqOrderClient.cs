@@ -12,60 +12,48 @@ namespace NProg.Distributed.NetMQ
     public class NmqOrderClient : IHandler<Guid, Order>
     {
         private readonly NetMQContext context;
-        private readonly NmqRequestQueue requestQueue;
+        private readonly NmqMessageRequest messageRequest;
 
         public NmqOrderClient(Uri serviceUri)
         {
             context = NetMQContext.Create();
-            requestQueue = new NmqRequestQueue(context, serviceUri);
+            messageRequest = new NmqMessageRequest(context, serviceUri);
         }
 
         public void Add(Guid key, Order item)
         {
-            requestQueue.Send(new Message
+            var response = messageRequest.Send(new Message
             {
                 Body = new AddOrderRequest { Order = item }
             });
 
-            requestQueue.Receive(x => Debug.Assert(x.BodyAs<StatusResponse>().Status));
+            Debug.Assert(response.BodyAs<StatusResponse>().Status);
         }
 
         public Order Get(Guid guid)
         {
-            requestQueue.Send(new Message
+            var response = messageRequest.Send(new Message
             {
                 Body = new GetOrderRequest { OrderId = guid }
             });
 
-            Order order = null;
-            requestQueue.Receive(x =>
-            {
-                order = x.BodyAs<GetOrderResponse>().Order;
-            });
-
-            return order;
+            return response.BodyAs<GetOrderResponse>().Order;
         }
 
         public bool Remove(Guid guid)
         {
-            requestQueue.Send(new Message
+            var response = messageRequest.Send(new Message
             {
                 Body = new RemoveOrderRequest { OrderId = guid }
             });
 
-            var status = false;
-            requestQueue.Receive(x =>
-            {
-                status = x.BodyAs<StatusResponse>().Status;
-            });
-
-            return status;
+            return response.BodyAs<StatusResponse>().Status;
         }
 
         protected void Dispose(bool disposing)
         {
-            if (disposing && requestQueue != null)
-                requestQueue.Dispose();
+            if (disposing && messageRequest != null)
+                messageRequest.Dispose();
 
             if (disposing && context != null)
                 context.Dispose();

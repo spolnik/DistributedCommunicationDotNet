@@ -65,7 +65,7 @@ namespace NProg.Distributed.ZeroMQ
             var order = message.BodyAs<AddOrderRequest>().Order;
             handler.Add(order.OrderId, order);
 
-            responseQueue.Send(new Message
+            responseQueue.Response(new Message
             {
                 Body = new StatusResponse {Status = true}
             });
@@ -75,7 +75,7 @@ namespace NProg.Distributed.ZeroMQ
         {
             var order = handler.Get(orderId);
 
-            responseQueue.Send(new Message
+            responseQueue.Response(new Message
             {
                 Body = new GetOrderResponse {Order = order}
             });
@@ -85,7 +85,7 @@ namespace NProg.Distributed.ZeroMQ
         {
             var status = handler.Remove(orderId);
             
-            responseQueue.Send(new Message
+            responseQueue.Response(new Message
             {
                 Body = new StatusResponse { Status = status }
             });

@@ -1,57 +1,36 @@
 ﻿using System;
 using NetMQ;
 using NProg.Distributed.Messaging;
-using NProg.Distributed.Messaging.Extensions;
 
 namespace NProg.Distributed.NetMQ.Messaging
 {
-    public class NmqRequestQueue : IRequestQueue
+    public class NmqMessageRequest : MessageRequest
     {
         private readonly NetMQSocket socket;
 
-        public NmqRequestQueue(NetMQContext context, Uri serviceUri)
+        public NmqMessageRequest(NetMQContext context, Uri serviceUri)
         {
             socket = context.CreateRequestSocket();
             var address = string.Format("tcp://{0}:{1}", serviceUri.Host, serviceUri.Port);
             socket.Connect(address);
         }
 
-        public void Send(Message message)
+        protected override void Request(string message)
         {
-            var json = message.ToJsonString();
-            socket.Send(json);
+            socket.Send(message);
         }
 
-        public void Receive(Action<Message> onMessageReceived)
+        protected override string Response()
         {
-            string inbound;
-
-            try
-            {
-                inbound = socket.ReceiveString();
-            }
-            catch (NetMQException)
-            {
-                Dispose(true);
-                return;
-            }
-
-            var message = Message.FromJson(inbound);
-            onMessageReceived(message);
+            return socket.ReceiveString();
         }
 
-        protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing && socket != null)
             {
                 socket.Dispose();
             }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

@@ -21,12 +21,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Thrift", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AB3E64C8-1914-4741-8D26-CE354A70FFCB}"
 	ProjectSection(SolutionItems) = preProject
+		StartClient.Ice.cmd = StartClient.Ice.cmd
 		StartClient.NetMQ.cmd = StartClient.NetMQ.cmd
 		StartClient.Remoting.cmd = StartClient.Remoting.cmd
 		StartClient.Thrift.cmd = StartClient.Thrift.cmd
 		StartClient.Wcf.cmd = StartClient.Wcf.cmd
 		StartClient.ZeroMQ.cmd = StartClient.ZeroMQ.cmd
 		StartClient.Zyan.cmd = StartClient.Zyan.cmd
+		StartServer.Ice.cmd = StartServer.Ice.cmd
 		StartServer.NetMQ.cmd = StartServer.NetMQ.cmd
 		StartServer.Remoting.cmd = StartServer.Remoting.cmd
 		StartServer.Thrift.cmd = StartServer.Thrift.cmd

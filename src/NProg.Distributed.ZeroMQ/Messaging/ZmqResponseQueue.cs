@@ -19,7 +19,7 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             socket.Bind(address);
         }
 
-        public void Send(Message message)
+        public void Response(Message message)
         {
             var json = message.ToJsonString();
             socket.Send(json, Encoding.UTF8);

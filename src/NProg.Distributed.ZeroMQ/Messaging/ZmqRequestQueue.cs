@@ -1,59 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using NProg.Distributed.Messaging;
-using NProg.Distributed.Messaging.Extensions;
 using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ.Messaging
 {
-    public class ZmqRequestQueue : IRequestQueue
+    public class ZmqMessageRequest : MessageRequest
     {
         private readonly ZmqSocket socket;
-        
-        public ZmqRequestQueue(ZmqContext context, Uri serviceUri)
+
+        public ZmqMessageRequest(ZmqContext context, Uri serviceUri)
         {
             socket = context.CreateSocket(SocketType.REQ);
             var address = string.Format("tcp://{0}:{1}", serviceUri.Host, serviceUri.Port);
             socket.Connect(address);
         }
 
-        public void Send(Message message)
+        protected override void Request(string message)
         {
-            var json = message.ToJsonString();
-            socket.Send(json, Encoding.UTF8);
+            socket.Send(message, Encoding.UTF8);
         }
 
-        public void Receive(Action<Message> onMessageReceived)
+        protected override string Response()
         {
-            string inbound;
-
-            try
-            {
-                inbound = socket.Receive(Encoding.UTF8);
-            }
-            catch (Exception)
-            {
-                Dispose(true);
-                return;
-            }
-
-            var message = Message.FromJson(inbound);
-            onMessageReceived(message);
+            return socket.Receive(Encoding.UTF8);
         }
 
-       protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing && socket != null)
             {
                 socket.Dispose();
             }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

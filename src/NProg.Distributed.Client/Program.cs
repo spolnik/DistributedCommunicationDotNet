@@ -56,6 +56,7 @@ namespace NProg.Distributed.Client
                     Debug.Assert(removed);
 
                     var removedOrder = client.Get(order.OrderId);
+                    removedOrder.UserName = "";
                     Debug.Assert(removedOrder.Equals(new Domain.Order{UserName = ""}));
 
                     Log.WriteLine("Order {0}", i);
