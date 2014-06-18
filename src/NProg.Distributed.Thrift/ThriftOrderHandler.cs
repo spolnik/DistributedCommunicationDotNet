@@ -4,7 +4,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderHandler : SimpleHandler<Guid, Order>, OrderService.Iface
+    public class ThriftOrderHandler : SimpleHandler<Guid, Order>, MessageService.Iface
     {
         public ThriftOrderHandler(IDaoFactory<Guid, Order> orderDaoFactory, string dbName)
             : base(orderDaoFactory, dbName)
@@ -25,6 +25,11 @@ namespace NProg.Distributed.Thrift
         public bool Remove(string orderId)
         {
             return Remove(Guid.Parse(orderId));
+        }
+
+        public ThriftMessage Send(ThriftMessage message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

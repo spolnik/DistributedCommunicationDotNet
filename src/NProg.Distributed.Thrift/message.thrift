@@ -1,10 +1,10 @@
 namespace csharp NProg.Distributed.Thrift
 
-struct Message {
+struct ThriftMessage {
   1: string messageType,
   2: string body,
 }
 
 service MessageService {   
-  Message Send(1:Message message)
+  ThriftMessage Send(1:ThriftMessage message)
 }

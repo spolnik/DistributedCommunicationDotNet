@@ -27,7 +27,7 @@ namespace NProg.Distributed.ZeroMQ
                 Body = new AddOrderRequest {Order = item}
             });
 
-            Debug.Assert(response.BodyAs<StatusResponse>().Status);
+            Debug.Assert(response.Receive<StatusResponse>().Status);
         }
 
         public Order Get(Guid guid)
@@ -37,7 +37,7 @@ namespace NProg.Distributed.ZeroMQ
                 Body = new GetOrderRequest{ OrderId = guid }
             });
 
-            return response.BodyAs<GetOrderResponse>().Order;
+            return response.Receive<GetOrderResponse>().Order;
         }
 
         public bool Remove(Guid guid)
@@ -47,7 +47,7 @@ namespace NProg.Distributed.ZeroMQ
                 Body = new RemoveOrderRequest {OrderId = guid}
             });
 
-            return response.BodyAs<StatusResponse>().Status;
+            return response.Receive<StatusResponse>().Status;
         }
 
         protected void Dispose(bool disposing)

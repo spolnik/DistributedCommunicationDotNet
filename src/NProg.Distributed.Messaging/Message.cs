@@ -24,7 +24,7 @@ namespace NProg.Distributed.Messaging
 
         public string MessageType { get; set; }
 
-        public TBody BodyAs<TBody>()
+        public TBody Receive<TBody>()
         {
             return (TBody) Body;
         }
