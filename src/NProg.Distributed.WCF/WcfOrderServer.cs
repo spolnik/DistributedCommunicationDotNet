@@ -19,7 +19,7 @@ namespace NProg.Distributed.WCF
         {
             var serverUri = new Uri(string.Format("net.tcp://localhost:{0}/OrderService", port));
             host = new ServiceHost(typeof(WcfOrderHandler), serverUri);
-            host.AddServiceEndpoint(typeof (IOrderService), new NetTcpBinding(), "");
+            host.AddServiceEndpoint(typeof (IMessageService), new NetTcpBinding(), "");
             host.Open();
         }
 

@@ -1,46 +1,57 @@
 ﻿using System;
 using System.ServiceModel;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Requests;
+using NProg.Distributed.Domain.Responses;
+using NProg.Distributed.Messaging;
 using NProg.Distributed.Service;
 using NProg.Distributed.WCF.Service;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfOrderClient : IHandler<Guid, Order>
+    public class WcfOrderClient : IHandler<Guid, Order>, IDisposable
     {
-        private readonly NetTcpBinding tcpBinding;
-        private readonly EndpointAddress endpoint;
+        private ChannelFactory<IMessageService> channelFactory;
+        private readonly IMessageService proxy;
 
         public WcfOrderClient(Uri serviceUri)
         {
-            tcpBinding = new NetTcpBinding();
-            endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}/OrderService", serviceUri.Host, serviceUri.Port));
+            var tcpBinding = new NetTcpBinding();
+            var endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}/OrderService", serviceUri.Host, serviceUri.Port));
+            channelFactory = new ChannelFactory<IMessageService>(tcpBinding, endpoint);
+            proxy = channelFactory.CreateChannel();
         }
 
         public void Add(Guid key, Order item)
         {
-            using (var channelFactory = new ChannelFactory<IOrderService>(tcpBinding, endpoint))
-            {
-                var orderService = channelFactory.CreateChannel();
-                orderService.Add(key, item);
-            }
+            var message = Message.From(new AddOrderRequest { Order = item });
+            proxy.Send(message);
         }
 
         public Order Get(Guid guid)
         {
-            using (var channelFactory = new ChannelFactory<IOrderService>(tcpBinding, endpoint))
-            {
-                var orderService = channelFactory.CreateChannel();
-                return orderService.Get(guid);
-            }
+            var message = Message.From(new GetOrderRequest { OrderId = guid });
+            return proxy.Send(message).Receive<GetOrderResponse>().Order;
         }
 
         public bool Remove(Guid guid)
         {
-            using (var channelFactory = new ChannelFactory<IOrderService>(tcpBinding, endpoint))
+            var message = Message.From(new RemoveOrderRequest() { OrderId = guid });
+            return proxy.Send(message).Receive<StatusResponse>().Status;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing && proxy != null)
             {
-                var orderService = channelFactory.CreateChannel();
-                return orderService.Remove(guid);
+                channelFactory.Close();
+                channelFactory = null;
             }
         }
     }

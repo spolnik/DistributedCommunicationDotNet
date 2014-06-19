@@ -11,7 +11,7 @@ namespace NProg.Distributed.Remoting
 {
     public class RemotingOrderClient : IHandler<Guid, Order>
     {
-        private readonly RemotingOrderHandler remotingOrderHandler;
+        private readonly RemotingOrderHandler proxy;
 
         public RemotingOrderClient(Uri serviceUri)
         {
@@ -19,25 +19,25 @@ namespace NProg.Distributed.Remoting
             ChannelServices.RegisterChannel(tcpChannel, false);
             
             var address = string.Format("tcp://{0}:{1}/OrderHandler", serviceUri.Host, serviceUri.Port);
-            remotingOrderHandler = (RemotingOrderHandler)Activator.GetObject(typeof(RemotingOrderHandler), address);
+            proxy = (RemotingOrderHandler)Activator.GetObject(typeof(RemotingOrderHandler), address);
         }
 
         public void Add(Guid key, Order item)
         {
             var message = Message.From(new AddOrderRequest {Order = item});
-            remotingOrderHandler.Send(message);
+            proxy.Send(message);
         }
 
         public Order Get(Guid guid)
         {
             var message = Message.From(new GetOrderRequest { OrderId = guid });
-            return remotingOrderHandler.Send(message).Receive<GetOrderResponse>().Order;
+            return proxy.Send(message).Receive<GetOrderResponse>().Order;
         }
 
         public bool Remove(Guid guid)
         {
             var message = Message.From(new RemoveOrderRequest() { OrderId = guid });
-            return remotingOrderHandler.Send(message).Receive<StatusResponse>().Status;
+            return proxy.Send(message).Receive<StatusResponse>().Status;
         }
     }
 }

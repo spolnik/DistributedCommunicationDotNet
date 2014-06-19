@@ -8,7 +8,7 @@ namespace NProg.Distributed.WCF
     {
         public IHandler<Guid, Order> GetHandler()
         {
-            return new WcfOrderHandler();
+            return null;
         }
 
         public IServer GetServer(IHandler<Guid, Order> handler, int port = -1)
