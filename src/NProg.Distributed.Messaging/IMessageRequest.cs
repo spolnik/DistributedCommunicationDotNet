@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace NProg.Distributed.Messaging
+﻿namespace NProg.Distributed.Messaging
 {
-    public interface IMessageRequest : IDisposable
+    public interface IMessageRequest
     {
         Message Send(Message message);
     }

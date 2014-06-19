@@ -1,7 +1,8 @@
 ﻿using System;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Requests;
+using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.Messaging;
-using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Thrift

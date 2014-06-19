@@ -3,6 +3,7 @@ using NProg.Distributed.Messaging.Extensions;
 
 namespace NProg.Distributed.Messaging
 {
+    [Serializable]
     public class Message
     {
         private object body;

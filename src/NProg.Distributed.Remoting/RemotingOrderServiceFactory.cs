@@ -8,7 +8,7 @@ namespace NProg.Distributed.Remoting
     {
         public IHandler<Guid, Order> GetHandler()
         {
-            return new RemotingOrderHandler();
+            return null;
         }
 
         public IServer GetServer(IHandler<Guid, Order> handler, int port = -1)

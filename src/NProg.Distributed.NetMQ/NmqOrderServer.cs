@@ -3,8 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using NetMQ;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Requests;
+using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.Messaging;
-using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.NetMQ.Messaging;
 using NProg.Distributed.Service;
 

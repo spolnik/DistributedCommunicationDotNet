@@ -58,10 +58,6 @@
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
       <Name>NProg.Distributed.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Messaging.Queries\NProg.Distributed.Messaging.Queries.csproj">
-      <Project>{3B8F3264-20CB-4B28-8923-895B7E399FBA}</Project>
-      <Name>NProg.Distributed.Messaging.Queries</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Messaging\NProg.Distributed.Messaging.csproj">
       <Project>{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B}</Project>
       <Name>NProg.Distributed.Messaging</Name>

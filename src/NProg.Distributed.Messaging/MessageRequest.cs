@@ -2,7 +2,7 @@
 
 namespace NProg.Distributed.Messaging
 {
-    public abstract class MessageRequest : IMessageRequest
+    public abstract class MessageRequest : IMessageRequest, IDisposable
     {
         protected abstract Message SendInternal(Message message);
 

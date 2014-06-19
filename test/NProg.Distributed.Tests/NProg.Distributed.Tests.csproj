@@ -70,10 +70,6 @@
       <Project>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</Project>
       <Name>NProg.Distributed.Ice</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Messaging.Queries\NProg.Distributed.Messaging.Queries.csproj">
-      <Project>{3b8f3264-20cb-4b28-8923-895b7e399fba}</Project>
-      <Name>NProg.Distributed.Messaging.Queries</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\NProg.Distributed.Messaging\NProg.Distributed.Messaging.csproj">
       <Project>{8fa0b9db-feca-4f4b-8a0b-963bdd2e437b}</Project>
       <Name>NProg.Distributed.Messaging</Name>

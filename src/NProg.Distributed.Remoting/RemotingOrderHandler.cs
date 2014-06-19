@@ -1,32 +1,64 @@
 ﻿using System;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Requests;
+using NProg.Distributed.Domain.Responses;
+using NProg.Distributed.Messaging;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingOrderHandler : MarshalByRefObject, IHandler<Guid, Order>
+    public class RemotingOrderHandler : MarshalByRefObject, IMessageRequest
     {
-        private readonly IHandler<Guid, Order> ndbOrderDao;
+        private readonly IHandler<Guid, Order> orderHandler;
 
         public RemotingOrderHandler()
         {
-            ndbOrderDao = new OrderDaoFactory().CreateDao("order_remoting.ndb");
+            orderHandler = new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_remoting.ndb");
         }
 
-        public void Add(Guid key, Order item)
+        public Message Send(Message message)
         {
-            ndbOrderDao.Add(key, item);
+            var response = new Message();
+
+            if (message.BodyType == typeof(AddOrderRequest))
+            {
+                response = AddOrder(message);
+            }
+            else if (message.BodyType == typeof(GetOrderRequest))
+            {
+                response = GetOrder(message);
+            }
+            else if (message.BodyType == typeof(RemoveOrderRequest))
+            {
+                response = RemoveOrder(message);
+            }
+
+            return response;
         }
 
-        public Order Get(Guid guid)
+        private Message AddOrder(Message message)
         {
-            return ndbOrderDao.Get(guid);
+            var order = message.Receive<AddOrderRequest>().Order;
+
+            orderHandler.Add(order.OrderId, order);
+            return Message.From(new StatusResponse { Status = true });
         }
 
-        public bool Remove(Guid guid)
+        private Message GetOrder(Message message)
         {
-            return ndbOrderDao.Remove(guid);
+            var orderId = message.Receive<GetOrderRequest>().OrderId;
+
+            var order = orderHandler.Get(orderId);
+            return Message.From(new GetOrderResponse { Order = order });
+        }
+
+        private Message RemoveOrder(Message message)
+        {
+            var orderId = message.Receive<RemoveOrderRequest>().OrderId;
+
+            var status = orderHandler.Remove(orderId);
+            return Message.From(new StatusResponse { Status = status });
         }
     }
 }

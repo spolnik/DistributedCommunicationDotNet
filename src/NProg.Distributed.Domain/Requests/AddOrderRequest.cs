@@ -1,5 +1,8 @@
-﻿namespace NProg.Distributed.Messaging.Queries
+﻿using System;
+
+namespace NProg.Distributed.Domain.Requests
 {
+    [Serializable]
     public class AddOrderRequest
     {
         public Domain.Order Order { get; set; }
