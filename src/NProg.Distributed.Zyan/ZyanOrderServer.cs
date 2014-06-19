@@ -19,7 +19,7 @@ namespace NProg.Distributed.Zyan
 
         public void Start()
         {
-            host.RegisterComponent<IMessageRequest, ZyanOrderHandler>(handler);
+            host.RegisterComponent<IMessageHandler, ZyanOrderHandler>(handler);
         }
 
         public void Stop()

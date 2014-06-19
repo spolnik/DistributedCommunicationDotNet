@@ -1,6 +1,6 @@
 ﻿namespace NProg.Distributed.Service.Messaging
 {
-    public interface IMessageRequest
+    public interface IMessageHandler
     {
         Message Send(Message message);
     }

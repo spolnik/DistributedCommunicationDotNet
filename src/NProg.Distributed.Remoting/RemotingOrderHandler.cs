@@ -8,7 +8,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingOrderHandler : MarshalByRefObject, IMessageRequest
+    public class RemotingOrderHandler : MarshalByRefObject
     {
         private readonly IHandler<Guid, Order> orderHandler;
 

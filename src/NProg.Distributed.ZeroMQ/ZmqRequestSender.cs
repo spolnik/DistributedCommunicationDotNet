@@ -4,14 +4,16 @@ using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 using ZeroMQ;
 
-namespace NProg.Distributed.ZeroMQ.Messaging
+namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqMessageRequest : MessageRequest
+    public class ZmqRequestSender : RequestSender
     {
-        private readonly ZmqSocket socket;
+        private ZmqSocket socket;
+        private ZmqContext context;
 
-        public ZmqMessageRequest(ZmqContext context, Uri serviceUri)
+        public ZmqRequestSender(Uri serviceUri)
         {
+            context = ZmqContext.Create();
             socket = context.CreateSocket(SocketType.REQ);
             var address = string.Format("tcp://{0}:{1}", serviceUri.Host, serviceUri.Port);
             socket.Connect(address);
@@ -31,6 +33,13 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             if (disposing && socket != null)
             {
                 socket.Dispose();
+                socket = null;
+            }
+
+            if (disposing && context != null)
+            {
+                context.Dispose();
+                context = null;
             }
         }
     }

@@ -6,7 +6,5 @@ namespace NProg.Distributed.Domain.Requests
     public class GetOrderRequest
     {
         public Guid OrderId { get; set; }
-
-        public const string Name = "get-order";
     }
 }

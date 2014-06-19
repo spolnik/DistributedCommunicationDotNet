@@ -1,6 +1,5 @@
 ﻿using System;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Domain.Api;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
@@ -19,15 +18,16 @@ namespace NProg.Distributed.Zyan
             return new ZyanOrderServer(handler, port);
         }
 
-        public IOrderApi GetClient(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new ZyanOrderClient(serviceUri);
-        }
-
         public IMessageMapper GetMessageMapper()
         {
             return null;
         }
+
+        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
+        {
+            return new ZyanRequestSender(serviceUri);
+        }
+
     }
 
 }

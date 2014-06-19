@@ -1,6 +1,5 @@
 ﻿using System;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Domain.Api;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
@@ -19,14 +18,14 @@ namespace NProg.Distributed.Ice
             return new IceOrderServer(handler, port);
         }
 
-        public IOrderApi GetClient(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new IceOrderClient(serviceUri, messageMapper);
-        }
-
         public IMessageMapper GetMessageMapper()
         {
             return new IceMessageMapper();
+        }
+
+        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
+        {
+            return new IceRequestSender(serviceUri, messageMapper);
         }
     }
 

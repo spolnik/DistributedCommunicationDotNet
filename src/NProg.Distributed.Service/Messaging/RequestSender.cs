@@ -2,12 +2,17 @@
 
 namespace NProg.Distributed.Service.Messaging
 {
-    public abstract class MessageRequest : IMessageRequest, IDisposable
+    public abstract class RequestSender : IRequestSender
     {
         protected abstract Message SendInternal(Message message);
 
-        public Message Send(Message message)
+        public Message Send<TRequest>(TRequest request) where TRequest : class 
         {
+            if (request is Message)
+                throw new ArgumentException("Request cannot be Message instance", "request");
+
+            var message = Message.From(request);
+
             try
             {
                 return SendInternal(message);

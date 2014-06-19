@@ -7,7 +7,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Zyan
 {
-    public class ZyanOrderHandler : SimpleHandler<Guid, Order>, IMessageRequest
+    public class ZyanOrderHandler : SimpleHandler<Guid, Order>, IMessageHandler
     {
         public ZyanOrderHandler(IDaoFactory<Guid, Order> orderDaoFactory, string dbName)
             : base(orderDaoFactory, dbName, null)

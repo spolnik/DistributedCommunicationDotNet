@@ -38,11 +38,11 @@ namespace NProg.Distributed.Service.Messaging
             return message;
         }
 
-        public static Message From<TObject>(TObject @object)
+        public static Message From<TRequest>(TRequest request) where TRequest : class 
         {
             return new Message
             {
-                Body = @object
+                Body = request
             };
         }
     }

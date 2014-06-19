@@ -35,9 +35,10 @@ namespace NProg.Distributed.Client
 
                 var orderServiceFactory = GetOrderServiceFactory(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
-                var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port), messageMapper);
-
-                try
+                var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port),
+                    messageMapper);
+                
+                using (var client = new OrderClient(requestSender))
                 {
                     for (var i = 0; i < count; i++)
                     {
@@ -51,26 +52,19 @@ namespace NProg.Distributed.Client
                         };
 
                         client.Add(order.OrderId, order);
-                    
+
                         var orderFromDb = client.Get(order.OrderId);
                         Debug.Assert(orderFromDb.Equals(order));
-                    
+
                         var removed = client.Remove(order.OrderId);
                         Debug.Assert(removed);
 
                         var removedOrder = client.Get(order.OrderId);
                         removedOrder.UserName = "";
-                        Debug.Assert(removedOrder.Equals(new Order{UserName = ""}));
+                        Debug.Assert(removedOrder.Equals(new Order {UserName = ""}));
 
                         Log.WriteLine("Order {0}", i);
                     }
-                }
-                finally
-                {
-                    var disposable = client as IDisposable;
-
-                    if (disposable != null)
-                        disposable.Dispose();
                 }
             }
             catch (Exception exception)

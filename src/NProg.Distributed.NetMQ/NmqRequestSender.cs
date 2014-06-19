@@ -3,14 +3,16 @@ using NetMQ;
 using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 
-namespace NProg.Distributed.NetMQ.Messaging
+namespace NProg.Distributed.NetMQ
 {
-    public class NmqMessageRequest : MessageRequest
+    public class NmqRequestSender : RequestSender
     {
-        private readonly NetMQSocket socket;
+        private NetMQSocket socket;
+        private NetMQContext context;
 
-        public NmqMessageRequest(NetMQContext context, Uri serviceUri)
+        public NmqRequestSender(Uri serviceUri)
         {
+            context = NetMQContext.Create();
             socket = context.CreateRequestSocket();
             var address = string.Format("tcp://{0}:{1}", serviceUri.Host, serviceUri.Port);
             socket.Connect(address);
@@ -30,6 +32,13 @@ namespace NProg.Distributed.NetMQ.Messaging
             if (disposing && socket != null)
             {
                 socket.Dispose();
+                socket = null;
+            }
+
+            if (disposing && context != null)
+            {
+                context.Dispose();
+                context = null;
             }
         }
     }

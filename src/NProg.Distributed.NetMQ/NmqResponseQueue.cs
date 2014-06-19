@@ -1,20 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading;
+using NetMQ;
 using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
-using ZeroMQ;
 
-namespace NProg.Distributed.ZeroMQ.Messaging
+namespace NProg.Distributed.NetMQ
 {
-    public class ZmqResponseQueue : IResponseQueue
+    public class NmqResponseQueue : IResponseQueue
     {
-        private readonly ZmqSocket socket;
+        private readonly NetMQSocket socket;
 
-        public ZmqResponseQueue(ZmqContext context, int port)
+        public NmqResponseQueue(NetMQContext context, int port)
         {
-            socket = context.CreateSocket(SocketType.REP);
+            socket = context.CreateResponseSocket();
             var address = string.Format("tcp://127.0.0.1:{0}", port);
             socket.Bind(address);
         }
@@ -22,24 +20,22 @@ namespace NProg.Distributed.ZeroMQ.Messaging
         public void Response(Message message)
         {
             var json = message.ToJsonString();
-            socket.Send(json, Encoding.UTF8);
+            socket.Send(json);
         }
 
         public void Listen(Action<Message> onMessageReceived, CancellationTokenSource token)
         {
             socket.ReceiveReady += (sender, args) =>
             {
-                var inbound = socket.Receive(Encoding.UTF8);
+                var inbound = socket.ReceiveString();
 
                 var message = Message.FromJson(inbound);
                 onMessageReceived(message);
             };
 
-            var poller = new Poller(new List<ZmqSocket> { socket });
-
             while (!token.IsCancellationRequested)
             {
-                poller.Poll();
+                socket.Poll();
             }
         }
 

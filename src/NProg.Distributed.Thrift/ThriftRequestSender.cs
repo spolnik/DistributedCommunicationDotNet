@@ -1,8 +1,4 @@
 ﻿using System;
-using NProg.Distributed.Domain;
-using NProg.Distributed.Domain.Api;
-using NProg.Distributed.Domain.Requests;
-using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 using Thrift.Protocol;
@@ -10,14 +6,14 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderClient : MessageRequest, IOrderApi
+    public class ThriftRequestSender : RequestSender
     {
         private readonly IMessageMapper messageMapper;
         private TBufferedTransport transport;
         private readonly MessageService.Client client;
         private TSocket socket;
 
-        public ThriftOrderClient(Uri serviceUri, IMessageMapper messageMapper)
+        public ThriftRequestSender(Uri serviceUri, IMessageMapper messageMapper)
         {
             this.messageMapper = messageMapper;
             socket = new TSocket(serviceUri.Host, serviceUri.Port);
@@ -25,36 +21,6 @@ namespace NProg.Distributed.Thrift
             transport.Open();
 
             client = new MessageService.Client(new TCompactProtocol(transport));
-        }
-
-        public void Add(Guid key, Order item)
-        {
-            var message = new Message
-            {
-                Body = new AddOrderRequest {Order = item}
-            };
-
-            Send(message);
-        }
-
-        public Order Get(Guid guid)
-        {
-            var message = new Message
-            {
-                Body = new GetOrderRequest {OrderId = guid}
-            };
-
-            return Send(message).Receive<GetOrderResponse>().Order;
-        }
-
-        public bool Remove(Guid guid)
-        {
-            var message = new Message
-            {
-                Body = new RemoveOrderRequest {OrderId = guid}
-            };
-
-            return Send(message).Receive<StatusResponse>().Status;
         }
 
         protected override Message SendInternal(Message message)

@@ -85,32 +85,34 @@ namespace NProg.Distributed.Tests
 
             var orderServiceFactory = GetOrderServiceFactory(framework);
             var messageMapper = orderServiceFactory.GetMessageMapper();
-            var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port), messageMapper);
-
-            for (var i = 0; i < count; i++)
+            var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port), messageMapper);
+            using (var client = new OrderClient(requestSender))
             {
-                var order = new Domain.Order
+                for (var i = 0; i < count; i++)
                 {
-                    Count = 3,
-                    OrderDate = DateTime.Now,
-                    OrderId = Guid.NewGuid(),
-                    UnitPrice = 12.23m,
-                    UserName = "Mikolaj"
-                };
+                    var order = new Domain.Order
+                    {
+                        Count = 3,
+                        OrderDate = DateTime.Now,
+                        OrderId = Guid.NewGuid(),
+                        UnitPrice = 12.23m,
+                        UserName = "Mikolaj"
+                    };
 
-                client.Add(order.OrderId, order);
+                    client.Add(order.OrderId, order);
 
-                var orderFromDb = client.Get(order.OrderId);
-                Debug.Assert(orderFromDb.Equals(order));
+                    var orderFromDb = client.Get(order.OrderId);
+                    Debug.Assert(orderFromDb.Equals(order));
 
-                var removed = client.Remove(order.OrderId);
-                Debug.Assert(removed);
+                    var removed = client.Remove(order.OrderId);
+                    Debug.Assert(removed);
 
-                var removedOrder = client.Get(order.OrderId);
-                removedOrder.UserName = "";
-                Debug.Assert(removedOrder.Equals(new Domain.Order { UserName = "" }));
+                    var removedOrder = client.Get(order.OrderId);
+                    removedOrder.UserName = "";
+                    Debug.Assert(removedOrder.Equals(new Domain.Order { UserName = "" }));
 
-                Log.WriteLine("Order {0}", i);
+                    Log.WriteLine("Order {0}", i);
+                }
             }
 
             stopwatch.Stop();

@@ -1,6 +1,5 @@
 ﻿using System;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Domain.Api;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
@@ -18,14 +17,14 @@ namespace NProg.Distributed.Remoting
             return new RemotingOrderServer(port);
         }
 
-        public IOrderApi GetClient(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new RemotingOrderClient(serviceUri);
-        }
-
         public IMessageMapper GetMessageMapper()
         {
             return new SimpleMessageMapper();
+        }
+
+        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
+        {
+            return new RemotingRequestSender(serviceUri);
         }
     }
 

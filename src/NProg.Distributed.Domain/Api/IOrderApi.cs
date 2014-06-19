@@ -2,9 +2,9 @@
 
 namespace NProg.Distributed.Domain.Api
 {
-    public interface IOrderApi
+    public interface IOrderApi : IDisposable
     {
-        void Add(Guid key, Order value);
+        bool Add(Guid key, Order order);
 
         Order Get(Guid key);
 

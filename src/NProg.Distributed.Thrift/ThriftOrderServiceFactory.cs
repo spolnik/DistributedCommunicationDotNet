@@ -1,6 +1,5 @@
 ﻿using System;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Domain.Api;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
@@ -19,14 +18,14 @@ namespace NProg.Distributed.Thrift
             return new ThriftOrderServer(handler, port);
         }
 
-        public IOrderApi GetClient(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new ThriftOrderClient(serviceUri, messageMapper);
-        }
-
         public IMessageMapper GetMessageMapper()
         {
             return new ThriftMessageMapper();
+        }
+
+        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
+        {
+            return new ThriftRequestSender(serviceUri, messageMapper);
         }
     }
 }

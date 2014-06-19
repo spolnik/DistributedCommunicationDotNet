@@ -6,7 +6,6 @@ using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
-using NProg.Distributed.ZeroMQ.Messaging;
 using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ

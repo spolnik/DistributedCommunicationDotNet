@@ -5,7 +5,6 @@ using NetMQ;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
-using NProg.Distributed.NetMQ.Messaging;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 

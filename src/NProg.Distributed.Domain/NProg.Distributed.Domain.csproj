@@ -48,6 +48,7 @@
     <Compile Include="Requests\RemoveOrderRequest.cs" />
     <Compile Include="Responses\GetOrderResponse.cs" />
     <Compile Include="Responses\StatusResponse.cs" />
+    <Compile Include="OrderClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
