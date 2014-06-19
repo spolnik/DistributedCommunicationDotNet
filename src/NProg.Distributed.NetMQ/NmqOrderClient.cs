@@ -10,7 +10,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.NetMQ
 {
-    public class NmqOrderClient : IHandler<Guid, Order>
+    public class NmqOrderClient : IHandler<Guid, Order>, IDisposable
     {
         private readonly NetMQContext context;
         private readonly NmqMessageRequest messageRequest;

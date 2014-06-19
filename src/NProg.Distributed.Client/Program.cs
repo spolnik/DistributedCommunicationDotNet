@@ -36,30 +36,40 @@ namespace NProg.Distributed.Client
                 var orderServiceFactory = GetOrderServiceFactory(framework);
                 var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port));
 
-                for (var i = 0; i < count; i++)
+                try
                 {
-                    var order = new Domain.Order
+                    for (var i = 0; i < count; i++)
                     {
-                        Count = 3,
-                        OrderDate = DateTime.Now,
-                        OrderId = Guid.NewGuid(),
-                        UnitPrice = 12.23m,
-                        UserName = "Mikolaj"
-                    };
+                        var order = new Domain.Order
+                        {
+                            Count = 3,
+                            OrderDate = DateTime.Now,
+                            OrderId = Guid.NewGuid(),
+                            UnitPrice = 12.23m,
+                            UserName = "Mikolaj"
+                        };
 
-                    client.Add(order.OrderId, order);
+                        client.Add(order.OrderId, order);
                     
-                    var orderFromDb = client.Get(order.OrderId);
-                    Debug.Assert(orderFromDb.Equals(order));
+                        var orderFromDb = client.Get(order.OrderId);
+                        Debug.Assert(orderFromDb.Equals(order));
                     
-                    var removed = client.Remove(order.OrderId);
-                    Debug.Assert(removed);
+                        var removed = client.Remove(order.OrderId);
+                        Debug.Assert(removed);
 
-                    var removedOrder = client.Get(order.OrderId);
-                    removedOrder.UserName = "";
-                    Debug.Assert(removedOrder.Equals(new Domain.Order{UserName = ""}));
+                        var removedOrder = client.Get(order.OrderId);
+                        removedOrder.UserName = "";
+                        Debug.Assert(removedOrder.Equals(new Domain.Order{UserName = ""}));
 
-                    Log.WriteLine("Order {0}", i);
+                        Log.WriteLine("Order {0}", i);
+                    }
+                }
+                finally
+                {
+                    var disposable = client as IDisposable;
+
+                    if (disposable != null)
+                        disposable.Dispose();
                 }
             }
             catch (Exception exception)

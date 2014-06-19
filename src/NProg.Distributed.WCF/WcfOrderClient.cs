@@ -36,7 +36,7 @@ namespace NProg.Distributed.WCF
 
         public bool Remove(Guid guid)
         {
-            var message = Message.From(new RemoveOrderRequest() { OrderId = guid });
+            var message = Message.From(new RemoveOrderRequest { OrderId = guid });
             return proxy.Send(message).Receive<StatusResponse>().Status;
         }
 
