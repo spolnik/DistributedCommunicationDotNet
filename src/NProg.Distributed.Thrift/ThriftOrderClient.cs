@@ -40,7 +40,7 @@ namespace NProg.Distributed.Thrift
                 Body = new GetOrderRequest {OrderId = guid}
             };
 
-            return Send(message).Receive<Order>();
+            return Send(message).Receive<GetOrderResponse>().Order;
         }
 
         public bool Remove(Guid guid)

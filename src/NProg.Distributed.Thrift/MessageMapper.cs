@@ -9,7 +9,7 @@ namespace NProg.Distributed.Thrift
         {
             return new Message
             {
-                Body = message.Body.ToString().ReadFromJson(message.MessageType)
+                Body = message.Body.ReadFromJson(message.MessageType)
             };
         }
 
@@ -17,7 +17,8 @@ namespace NProg.Distributed.Thrift
         {
             return new ThriftMessage
             {
-                Body = order.Body.ToJsonString()
+                Body = order.Body.ToJsonString(),
+                MessageType = order.MessageType
             };
         }
     }
