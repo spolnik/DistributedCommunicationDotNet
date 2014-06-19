@@ -106,10 +106,6 @@
       <Project>{36EE5322-A915-44F7-B096-BE2901F1D9D1}</Project>
       <Name>NProg.Distributed.Zyan</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\tools\NProg.Distributed.Msmq.CreateQueues\NProg.Distributed.Msmq.CreateQueues.csproj">
-      <Project>{e5b3cd17-e7f0-4045-a9c2-2f0f9164ab22}</Project>
-      <Name>NProg.Distributed.Msmq.CreateQueues</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

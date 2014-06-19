@@ -22,20 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AB3E64C8-1914-4741-8D26-CE354A70FFCB}"
 	ProjectSection(SolutionItems) = preProject
 		perf_distributed_reports.txt = perf_distributed_reports.txt
-		StartClient.Ice.cmd = StartClient.Ice.cmd
-		StartClient.NetMQ.cmd = StartClient.NetMQ.cmd
-		StartClient.Remoting.cmd = StartClient.Remoting.cmd
-		StartClient.Thrift.cmd = StartClient.Thrift.cmd
-		StartClient.Wcf.cmd = StartClient.Wcf.cmd
-		StartClient.ZeroMQ.cmd = StartClient.ZeroMQ.cmd
-		StartClient.Zyan.cmd = StartClient.Zyan.cmd
-		StartServer.Ice.cmd = StartServer.Ice.cmd
-		StartServer.NetMQ.cmd = StartServer.NetMQ.cmd
-		StartServer.Remoting.cmd = StartServer.Remoting.cmd
-		StartServer.Thrift.cmd = StartServer.Thrift.cmd
-		StartServer.Wcf.cmd = StartServer.Wcf.cmd
-		StartServer.ZeroMQ.cmd = StartServer.ZeroMQ.cmd
-		StartServer.Zyan.cmd = StartServer.Zyan.cmd
 		Thrift.GenerateCode.cmd = Thrift.GenerateCode.cmd
 	EndProjectSection
 EndProject
@@ -60,10 +46,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{26446979-8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Tests", "test\NProg.Distributed.Tests\NProg.Distributed.Tests.csproj", "{7FD0600F-A707-4883-9182-1229C102DB7E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{111C8F14-7439-4463-98C2-CAFE71DF2703}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Msmq.CreateQueues", "tools\NProg.Distributed.Msmq.CreateQueues\NProg.Distributed.Msmq.CreateQueues.csproj", "{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.WCF", "src\NProg.Distributed.WCF\NProg.Distributed.WCF.csproj", "{F84A2E32-9931-4C98-AA25-CE481CB89C0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Remoting", "src\NProg.Distributed.Remoting\NProg.Distributed.Remoting.csproj", "{077DB902-1745-4CEF-9714-E0F3AC17B452}"
@@ -73,6 +55,25 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.NetMQ", "src\NProg.Distributed.NetMQ\NProg.Distributed.NetMQ.csproj", "{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Ice", "src\NProg.Distributed.Ice\NProg.Distributed.Ice.csproj", "{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{020167E8-2831-4C25-BD8F-E6E965D1F534}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\StartClient.Ice.cmd = scripts\StartClient.Ice.cmd
+		scripts\StartClient.NetMQ.cmd = scripts\StartClient.NetMQ.cmd
+		scripts\StartClient.Remoting.100.cmd = scripts\StartClient.Remoting.100.cmd
+		scripts\StartClient.Remoting.cmd = scripts\StartClient.Remoting.cmd
+		scripts\StartClient.Thrift.cmd = scripts\StartClient.Thrift.cmd
+		scripts\StartClient.Wcf.cmd = scripts\StartClient.Wcf.cmd
+		scripts\StartClient.ZeroMQ.cmd = scripts\StartClient.ZeroMQ.cmd
+		scripts\StartClient.Zyan.cmd = scripts\StartClient.Zyan.cmd
+		scripts\StartServer.Ice.cmd = scripts\StartServer.Ice.cmd
+		scripts\StartServer.NetMQ.cmd = scripts\StartServer.NetMQ.cmd
+		scripts\StartServer.Remoting.cmd = scripts\StartServer.Remoting.cmd
+		scripts\StartServer.Thrift.cmd = scripts\StartServer.Thrift.cmd
+		scripts\StartServer.Wcf.cmd = scripts\StartServer.Wcf.cmd
+		scripts\StartServer.ZeroMQ.cmd = scripts\StartServer.ZeroMQ.cmd
+		scripts\StartServer.Zyan.cmd = scripts\StartServer.Zyan.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,10 +117,6 @@ Global
 		{7FD0600F-A707-4883-9182-1229C102DB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FD0600F-A707-4883-9182-1229C102DB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FD0600F-A707-4883-9182-1229C102DB7E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -158,11 +155,11 @@ Global
 		{1355E9DA-7326-4A28-A117-6333ADC5FF99} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{8FA0B9DB-FECA-4F4B-8A0B-963BDD2E437B} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
 		{7FD0600F-A707-4883-9182-1229C102DB7E} = {26446979-8C4E-4935-85A8-54FADC0FAFC4}
-		{E5B3CD17-E7F0-4045-A9C2-2F0F9164AB22} = {111C8F14-7439-4463-98C2-CAFE71DF2703}
 		{F84A2E32-9931-4C98-AA25-CE481CB89C0E} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{077DB902-1745-4CEF-9714-E0F3AC17B452} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{36EE5322-A915-44F7-B096-BE2901F1D9D1} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
+		{020167E8-2831-4C25-BD8F-E6E965D1F534} = {AB3E64C8-1914-4741-8D26-CE354A70FFCB}
 	EndGlobalSection
 EndGlobal
