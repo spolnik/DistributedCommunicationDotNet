@@ -3,8 +3,8 @@ using Ice;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
-using NProg.Distributed.Messaging;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Ice

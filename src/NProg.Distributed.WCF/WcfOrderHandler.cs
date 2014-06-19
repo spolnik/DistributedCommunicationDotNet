@@ -2,9 +2,9 @@
 using NProg.Distributed.Domain;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
-using NProg.Distributed.Messaging;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 using NProg.Distributed.WCF.Service;
 
 namespace NProg.Distributed.WCF

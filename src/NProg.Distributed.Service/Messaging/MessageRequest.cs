@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NProg.Distributed.Messaging
+namespace NProg.Distributed.Service.Messaging
 {
     public abstract class MessageRequest : IMessageRequest, IDisposable
     {

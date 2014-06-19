@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using NProg.Distributed.Messaging;
-using NProg.Distributed.Messaging.Extensions;
+using NProg.Distributed.Service.Extensions;
+using NProg.Distributed.Service.Messaging;
 using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ.Messaging

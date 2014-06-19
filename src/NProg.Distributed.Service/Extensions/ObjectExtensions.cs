@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace NProg.Distributed.Messaging.Extensions
+namespace NProg.Distributed.Service.Extensions
 {
     public static class ObjectExtensions
     {

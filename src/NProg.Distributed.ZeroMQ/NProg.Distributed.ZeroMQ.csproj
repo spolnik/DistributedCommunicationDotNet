@@ -66,10 +66,6 @@
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
       <Name>NProg.Distributed.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Messaging\NProg.Distributed.Messaging.csproj">
-      <Project>{8fa0b9db-feca-4f4b-8a0b-963bdd2e437b}</Project>
-      <Name>NProg.Distributed.Messaging</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.NDatabase\NProg.Distributed.NDatabase.csproj">
       <Project>{D0D3D474-E9B1-442D-939C-FD582020475F}</Project>
       <Name>NProg.Distributed.NDatabase</Name>

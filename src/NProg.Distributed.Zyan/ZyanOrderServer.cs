@@ -1,7 +1,7 @@
 ﻿using System;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Messaging;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 using Zyan.Communication;
 
 namespace NProg.Distributed.Zyan

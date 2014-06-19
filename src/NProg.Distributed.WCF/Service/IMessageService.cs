@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Xml;
-using Message = NProg.Distributed.Messaging.Message;
+using Message = NProg.Distributed.Service.Messaging.Message;
 
 namespace NProg.Distributed.WCF.Service
 {

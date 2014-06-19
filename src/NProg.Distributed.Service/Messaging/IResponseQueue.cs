@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace NProg.Distributed.Messaging
+namespace NProg.Distributed.Service.Messaging
 {
     public interface IResponseQueue : IDisposable
     {

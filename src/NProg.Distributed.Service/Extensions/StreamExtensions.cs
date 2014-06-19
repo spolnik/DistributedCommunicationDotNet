@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-namespace NProg.Distributed.Messaging.Extensions
+namespace NProg.Distributed.Service.Extensions
 {
     internal static class StreamExtensions
     {

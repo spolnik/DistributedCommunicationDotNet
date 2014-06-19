@@ -1,7 +1,7 @@
 ﻿using System;
-using NProg.Distributed.Messaging.Extensions;
+using NProg.Distributed.Service.Extensions;
 
-namespace NProg.Distributed.Messaging
+namespace NProg.Distributed.Service.Messaging
 {
     [Serializable]
     public class Message
