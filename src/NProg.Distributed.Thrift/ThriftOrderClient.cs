@@ -1,16 +1,18 @@
 ﻿using System;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Messaging;
+using NProg.Distributed.Messaging.Queries;
 using NProg.Distributed.Service;
 using Thrift.Protocol;
 using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderClient : IHandler<Guid, Order>, IDisposable
+    public class ThriftOrderClient : MessageRequest, IHandler<Guid, Order>
     {
-        private readonly TBufferedTransport transport;
-        private readonly OrderService.Client client;
-        private readonly TSocket socket;
+        private TBufferedTransport transport;
+        private readonly MessageService.Client client;
+        private TSocket socket;
 
         public ThriftOrderClient(Uri serviceUri)
         {
@@ -18,29 +20,57 @@ namespace NProg.Distributed.Thrift
             transport = new TBufferedTransport(socket);
             transport.Open();
 
-            client = new OrderService.Client(new TCompactProtocol(transport));
+            client = new MessageService.Client(new TCompactProtocol(transport));
         }
 
         public void Add(Guid key, Order item)
         {
-            var thriftOrder = OrderMapper.MapOrder(item);
-            client.Add(thriftOrder.OrderId, thriftOrder);
+            var message = new Message
+            {
+                Body = new AddOrderRequest {Order = item}
+            };
+
+            Send(message);
         }
 
         public Order Get(Guid guid)
         {
-            return OrderMapper.MapOrder(client.Get(guid.ToString()));
+            var message = new Message
+            {
+                Body = new GetOrderRequest {OrderId = guid}
+            };
+
+            return Send(message).Receive<GetOrderResponse>().Order;
         }
 
         public bool Remove(Guid guid)
         {
-            return client.Remove(guid.ToString());
+            var message = new Message
+            {
+                Body = new RemoveOrderRequest {OrderId = guid}
+            };
+
+            return Send(message).Receive<StatusResponse>().Status;
         }
 
-        public void Dispose()
+        protected override Message SendInternal(Message message)
         {
-            transport.Close();
-            socket.Close();
+            return MessageMapper.Map(client.Send(MessageMapper.Map(message)));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && transport != null)
+            {
+                transport.Close();
+                transport = null;
+            }
+
+            if (disposing && socket != null)
+            {
+                socket.Close();
+                socket = null;
+            }
         }
     }
 }

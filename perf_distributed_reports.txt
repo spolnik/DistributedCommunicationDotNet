@@ -2,6 +2,7 @@
 client - 3-7% cpu, 7 mb
 server - 26-36% cpu, 9 mb
 time - 291 sec
+- hard to write end to end tests
 
 2. ice (6 clients, 150k messages):
 client - 1-5% cpu, 19.5 mb
@@ -9,9 +10,9 @@ server - 7-14% cpu, 26 mb
 time - 377 sec
 
 3. zeromq (6 clients, 150k messages):
-client - 3-7% cpu, 9 mb
-server - 18-22% cpu, 9 mb
-time - 440 sec
+client - 3-7% cpu, 9 mb, 10 threads -> 7 threads -> 6 threads
+server - 18-22% cpu, 9 mb, 12 threads -> 10 threads
+time - 440 sec, 496 sec
 
 4. thrift (6 clients, 150k messages):
 client - 2-5% cpu, 6 mb

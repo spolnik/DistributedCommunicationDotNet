@@ -24,7 +24,7 @@ namespace NProg.Distributed.Messaging
 
         public string MessageType { get; set; }
 
-        public TBody BodyAs<TBody>()
+        public TBody Receive<TBody>()
         {
             return (TBody) Body;
         }
@@ -35,6 +35,14 @@ namespace NProg.Distributed.Messaging
             //the body is a JObject at this point - deserialize to the real message type:
             message.Body = message.Body.ToString().ReadFromJson(message.MessageType);
             return message;
+        }
+
+        public static Message From<TObject>(TObject @object)
+        {
+            return new Message
+            {
+                Body = @object
+            };
         }
     }
 }

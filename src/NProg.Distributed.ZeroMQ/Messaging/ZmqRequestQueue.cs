@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using NProg.Distributed.Messaging;
+using NProg.Distributed.Messaging.Extensions;
 using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ.Messaging
@@ -16,14 +17,13 @@ namespace NProg.Distributed.ZeroMQ.Messaging
             socket.Connect(address);
         }
 
-        protected override void Request(string message)
+        protected override Message SendInternal(Message message)
         {
-            socket.Send(message, Encoding.UTF8);
-        }
+            var json = message.ToJsonString();
+            socket.Send(json, Encoding.UTF8);
 
-        protected override string Response()
-        {
-            return socket.Receive(Encoding.UTF8);
+            var response = socket.Receive(Encoding.UTF8);
+            return Message.FromJson(response);
         }
 
         protected override void Dispose(bool disposing)

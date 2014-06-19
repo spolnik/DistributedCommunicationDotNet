@@ -51,18 +51,18 @@ namespace NProg.Distributed.NetMQ
                 }
                 else if (x.BodyType == typeof(GetOrderRequest))
                 {
-                    GetOrder(x.BodyAs<GetOrderRequest>().OrderId);
+                    GetOrder(x.Receive<GetOrderRequest>().OrderId);
                 }
                 else if (x.BodyType == typeof(RemoveOrderRequest))
                 {
-                    RemoveOrder(x.BodyAs<RemoveOrderRequest>().OrderId);
+                    RemoveOrder(x.Receive<RemoveOrderRequest>().OrderId);
                 }
             }, token);
         }
 
         private void AddOrder(Message message)
         {
-            var order = message.BodyAs<AddOrderRequest>().Order;
+            var order = message.Receive<AddOrderRequest>().Order;
             handler.Add(order.OrderId, order);
 
             responseQueue.Response(new Message

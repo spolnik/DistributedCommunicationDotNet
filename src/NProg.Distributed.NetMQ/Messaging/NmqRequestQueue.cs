@@ -1,6 +1,7 @@
 ﻿using System;
 using NetMQ;
 using NProg.Distributed.Messaging;
+using NProg.Distributed.Messaging.Extensions;
 
 namespace NProg.Distributed.NetMQ.Messaging
 {
@@ -15,14 +16,13 @@ namespace NProg.Distributed.NetMQ.Messaging
             socket.Connect(address);
         }
 
-        protected override void Request(string message)
+        protected override Message SendInternal(Message message)
         {
-            socket.Send(message);
-        }
+            var json = message.ToJsonString();
+            socket.Send(json);
 
-        protected override string Response()
-        {
-            return socket.ReceiveString();
+            var response = socket.ReceiveString();
+            return Message.FromJson(response);
         }
 
         protected override void Dispose(bool disposing)
