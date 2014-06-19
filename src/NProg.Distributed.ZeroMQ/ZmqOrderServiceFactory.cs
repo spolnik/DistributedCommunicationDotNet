@@ -2,14 +2,15 @@
 using NProg.Distributed.Domain;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.ZeroMQ
 {
     public class ZmqOrderServiceFactory : IServiceFactory<Guid, Order>
     {
-        public IHandler<Guid, Order> GetHandler()
+        public IHandler<Guid, Order> GetHandler(IMessageMapper messageMapper)
         {
-            return new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_zeromq.ndb");
+            return new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_zeromq.ndb", messageMapper);
         }
 
         public IServer GetServer(IHandler<Guid, Order> handler, int port = -1)
@@ -17,9 +18,14 @@ namespace NProg.Distributed.ZeroMQ
             return new ZmqOrderServer(handler, port);
         }
 
-        public IHandler<Guid, Order> GetClient(Uri serviceUri)
+        public IHandler<Guid, Order> GetClient(Uri serviceUri, IMessageMapper messageMapper)
         {
             return new ZmqOrderClient(serviceUri);
+        }
+
+        public IMessageMapper GetMessageMapper()
+        {
+            return null;
         }
     }
 }

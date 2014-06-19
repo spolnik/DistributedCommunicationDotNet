@@ -48,7 +48,7 @@
     <Compile Include="IceOrderHandler.cs" />
     <Compile Include="IceOrderServer.cs" />
     <Compile Include="IceOrderServiceFactory.cs" />
-    <Compile Include="MessageMapper.cs" />
+    <Compile Include="IceMessageMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

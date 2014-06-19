@@ -3,17 +3,19 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Thrift
 {
-    internal static class MessageMapper
+    public class ThriftMessageMapper : IMessageMapper
     {
-        internal static Message Map(ThriftMessage message)
+        public Message Map(object message)
         {
+            var thriftMessage = message.As<ThriftMessage>();
+
             return new Message
             {
-                Body = message.Body.ReadFromJson(message.MessageType)
+                Body = thriftMessage.Body.ReadFromJson(thriftMessage.MessageType)
             };
         }
 
-        internal static ThriftMessage Map(Message order)
+        public object Map(Message order)
         {
             return new ThriftMessage
             {

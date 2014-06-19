@@ -3,6 +3,7 @@ using Ice;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 using NProgDistributed.TheIce;
 
@@ -10,10 +11,12 @@ namespace NProg.Distributed.Ice
 {
     public class IceOrderHandler : MessageServiceDisp_, IHandler<Guid, Domain.Order>
     {
+        private readonly IMessageMapper messageMapper;
         private readonly IHandler<Guid, Domain.Order> orderDao;
 
-        public IceOrderHandler(IDaoFactory<Guid, Domain.Order> orderDaoFactory, string dbName)
+        public IceOrderHandler(IDaoFactory<Guid, Domain.Order> orderDaoFactory, string dbName, IMessageMapper messageMapper)
         {
+            this.messageMapper = messageMapper;
             orderDao = orderDaoFactory.CreateDao(dbName);
         }
 
@@ -32,9 +35,9 @@ namespace NProg.Distributed.Ice
             return orderDao.Remove(guid);
         }
 
-        public override MessageDto Send(MessageDto messageDto, Current current__)
+        public override MessageDto Send(MessageDto messageDto, Current current)
         {
-            var message = MessageMapper.Map(messageDto);
+            var message = messageMapper.Map(messageDto);
             var response = new Message();
 
             if (message.BodyType == typeof(AddOrderRequest))
@@ -50,7 +53,7 @@ namespace NProg.Distributed.Ice
                 response = RemoveOrder(message);
             }
 
-            return MessageMapper.Map(response);
+            return messageMapper.Map(response).As<MessageDto>();
         }
 
         private Message AddOrder(Message message)

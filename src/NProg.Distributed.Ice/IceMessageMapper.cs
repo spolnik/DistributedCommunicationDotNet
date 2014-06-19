@@ -4,17 +4,19 @@ using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Ice
 {
-    internal static class MessageMapper
+    public class IceMessageMapper : IMessageMapper
     {
-        internal static Message Map(MessageDto message)
+        public Message Map(object message)
         {
+            var messageDto = message.As<MessageDto>();
+
             return new Message
             {
-                Body = message.body.ReadFromJson(message.messageType)
+                Body = messageDto.body.ReadFromJson(messageDto.messageType)
             };
         }
 
-        internal static MessageDto Map(Message order)
+        public object Map(Message order)
         {
             return new MessageDto
             {

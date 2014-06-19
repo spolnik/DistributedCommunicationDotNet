@@ -3,6 +3,7 @@ using NProg.Distributed.Domain;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 using Thrift.Protocol;
 using Thrift.Transport;
@@ -11,12 +12,14 @@ namespace NProg.Distributed.Thrift
 {
     public class ThriftOrderClient : MessageRequest, IHandler<Guid, Order>
     {
+        private readonly IMessageMapper messageMapper;
         private TBufferedTransport transport;
         private readonly MessageService.Client client;
         private TSocket socket;
 
-        public ThriftOrderClient(Uri serviceUri)
+        public ThriftOrderClient(Uri serviceUri, IMessageMapper messageMapper)
         {
+            this.messageMapper = messageMapper;
             socket = new TSocket(serviceUri.Host, serviceUri.Port);
             transport = new TBufferedTransport(socket);
             transport.Open();
@@ -56,7 +59,7 @@ namespace NProg.Distributed.Thrift
 
         protected override Message SendInternal(Message message)
         {
-            return MessageMapper.Map(client.Send(MessageMapper.Map(message)));
+            return messageMapper.Map(client.Send(messageMapper.Map(message).As<ThriftMessage>()));
         }
 
         protected override void Dispose(bool disposing)

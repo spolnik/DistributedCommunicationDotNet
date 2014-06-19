@@ -3,20 +3,21 @@ using NProg.Distributed.Domain;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Thrift
 {
     public class ThriftOrderHandler : SimpleHandler<Guid, Order>, MessageService.Iface
     {
-        public ThriftOrderHandler(IDaoFactory<Guid, Order> orderDaoFactory, string dbName)
-            : base(orderDaoFactory, dbName)
+        public ThriftOrderHandler(IDaoFactory<Guid, Order> orderDaoFactory, string dbName, IMessageMapper messageMapper)
+            : base(orderDaoFactory, dbName, messageMapper)
         {
         }
 
         public ThriftMessage Send(ThriftMessage thriftMessage)
         {
-            var message = MessageMapper.Map(thriftMessage);
+            var message = messageMapper.Map(thriftMessage);
             var response = new Message();
 
             if (message.BodyType == typeof(AddOrderRequest))
@@ -32,7 +33,7 @@ namespace NProg.Distributed.Thrift
                 response = RemoveOrder(message);
             }
 
-            return MessageMapper.Map(response);
+            return messageMapper.Map(response).As<ThriftMessage>();
         }
 
         private Message AddOrder(Message message)

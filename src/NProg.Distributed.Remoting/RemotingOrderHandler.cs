@@ -14,7 +14,8 @@ namespace NProg.Distributed.Remoting
 
         public RemotingOrderHandler()
         {
-            orderHandler = new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_remoting.ndb");
+            orderHandler = new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_remoting.ndb",
+                new SimpleMessageMapper());
         }
 
         public Message Send(Message message)

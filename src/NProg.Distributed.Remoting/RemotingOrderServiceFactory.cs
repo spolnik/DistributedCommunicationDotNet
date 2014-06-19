@@ -1,12 +1,13 @@
 ﻿using System;
 using NProg.Distributed.Domain;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {
     public class RemotingOrderServiceFactory : IServiceFactory<Guid, Order>
     {
-        public IHandler<Guid, Order> GetHandler()
+        public IHandler<Guid, Order> GetHandler(IMessageMapper messageMapper)
         {
             return null;
         }
@@ -16,9 +17,14 @@ namespace NProg.Distributed.Remoting
             return new RemotingOrderServer(port);
         }
 
-        public IHandler<Guid, Order> GetClient(Uri serviceUri)
+        public IHandler<Guid, Order> GetClient(Uri serviceUri, IMessageMapper messageMapper)
         {
             return new RemotingOrderClient(serviceUri);
+        }
+
+        public IMessageMapper GetMessageMapper()
+        {
+            return new SimpleMessageMapper();
         }
     }
 

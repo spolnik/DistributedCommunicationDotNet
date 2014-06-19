@@ -13,5 +13,10 @@ namespace NProg.Distributed.Service.Extensions
         {
             return JsonConvert.SerializeObject(obj);
         }
+
+        public static TType As<TType>(this object obj) where TType : class
+        {
+            return obj as TType;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace NProg.Distributed.WCF
 
         public WcfOrderHandler()
         {
-            orderHandler = new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_wcf.ndb");
+            orderHandler = new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_wcf.ndb", null);
         }
 
         public Message Send(Message message)

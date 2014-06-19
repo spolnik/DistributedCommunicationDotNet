@@ -10,7 +10,7 @@ namespace NProg.Distributed.Zyan
     public class ZyanOrderHandler : SimpleHandler<Guid, Order>, IMessageRequest
     {
         public ZyanOrderHandler(IDaoFactory<Guid, Order> orderDaoFactory, string dbName)
-            : base(orderDaoFactory, dbName)
+            : base(orderDaoFactory, dbName, null)
         {
         }
 

@@ -4,6 +4,7 @@ using NProg.Distributed.Domain;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 using NProgDistributed.TheIce;
 
@@ -11,11 +12,13 @@ namespace NProg.Distributed.Ice
 {
     public class IceOrderClient : MessageRequest, IHandler<Guid, Order>
     {
-        private readonly Communicator communicator;
+        private readonly IMessageMapper messageMapper;
+        private Communicator communicator;
         private readonly MessageServicePrx proxy;
 
-        public IceOrderClient(Uri serviceUri)
+        public IceOrderClient(Uri serviceUri, IMessageMapper messageMapper)
         {
+            this.messageMapper = messageMapper;
             var address = string.Format("OrderService:tcp -p {1} -h {0}", serviceUri.Host, serviceUri.Port);
 
             communicator = Util.initialize();
@@ -54,13 +57,16 @@ namespace NProg.Distributed.Ice
 
         protected override Message SendInternal(Message message)
         {
-            return MessageMapper.Map(proxy.Send(MessageMapper.Map(message)));
+            return messageMapper.Map(proxy.Send(messageMapper.Map(message).As<MessageDto>()));
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing && communicator != null)
+            {
                 communicator.destroy();
+                communicator = null;
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace NProg.Distributed.Tests
             new object[] {"zmq", 35001, 100},
             new object[] {"nmq", 36001, 100},
             new object[] {"zyan", 38001, 100},
-            new object[] {"ice", 39001, 100},
+            new object[] {"ice", 39001, 100}
 //            new object[] {"remoting", 37001, 100},
         };
 
@@ -47,7 +47,8 @@ namespace NProg.Distributed.Tests
             try
             {
                 var orderServiceFactory = GetOrderServiceFactory(framework);
-                var ordersHandler = orderServiceFactory.GetHandler();
+                var messageMapper = orderServiceFactory.GetMessageMapper();
+                var ordersHandler = orderServiceFactory.GetHandler(messageMapper);
 
                 server = orderServiceFactory.GetServer(ordersHandler, port);
 
@@ -82,7 +83,8 @@ namespace NProg.Distributed.Tests
             stopwatch.Start();
 
             var orderServiceFactory = GetOrderServiceFactory(framework);
-            var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port));
+            var messageMapper = orderServiceFactory.GetMessageMapper();
+            var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port), messageMapper);
 
             for (var i = 0; i < count; i++)
             {

@@ -2,12 +2,13 @@
 using NProg.Distributed.Domain;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Zyan
 {
     public class ZyanOrderServiceFactory : IServiceFactory<Guid, Order>
     {
-        public IHandler<Guid, Order> GetHandler()
+        public IHandler<Guid, Order> GetHandler(IMessageMapper messageMapper)
         {
             return new ZyanOrderHandler(new OrderDaoFactory(), "order_zyan.ndb");
         }
@@ -17,9 +18,14 @@ namespace NProg.Distributed.Zyan
             return new ZyanOrderServer(handler, port);
         }
 
-        public IHandler<Guid, Order> GetClient(Uri serviceUri)
+        public IHandler<Guid, Order> GetClient(Uri serviceUri, IMessageMapper messageMapper)
         {
             return new ZyanOrderClient(serviceUri);
+        }
+
+        public IMessageMapper GetMessageMapper()
+        {
+            return null;
         }
     }
 

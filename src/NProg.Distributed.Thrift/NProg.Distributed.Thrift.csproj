@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="generated\NProg\Distributed\Thrift\MessageService.cs" />
     <Compile Include="generated\NProg\Distributed\Thrift\ThriftMessage.cs" />
-    <Compile Include="MessageMapper.cs" />
+    <Compile Include="ThriftMessageMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThriftOrderClient.cs" />
     <Compile Include="ThriftOrderHandler.cs" />

@@ -1,24 +1,31 @@
 ﻿using System;
+using NProg.Distributed.Domain;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderServiceFactory : IServiceFactory<Guid, Domain.Order>
+    public class ThriftOrderServiceFactory : IServiceFactory<Guid, Order>
     {
-        public IHandler<Guid, Domain.Order> GetHandler()
+        public IHandler<Guid, Order> GetHandler(IMessageMapper messageMapper)
         {
-            return new ThriftOrderHandler(new OrderDaoFactory(), "order_thrift.ndb");
+            return new ThriftOrderHandler(new OrderDaoFactory(), "order_thrift.ndb", messageMapper);
         }
 
-        public IServer GetServer(IHandler<Guid, Domain.Order> handler, int port)
+        public IServer GetServer(IHandler<Guid, Order> handler, int port)
         {
             return new ThriftOrderServer(handler, port);
         }
 
-        public IHandler<Guid, Domain.Order> GetClient(Uri serviceUri)
+        public IHandler<Guid, Order> GetClient(Uri serviceUri, IMessageMapper messageMapper)
         {
-            return new ThriftOrderClient(serviceUri);
+            return new ThriftOrderClient(serviceUri, messageMapper);
+        }
+
+        public IMessageMapper GetMessageMapper()
+        {
+            return new ThriftMessageMapper();
         }
     }
 }

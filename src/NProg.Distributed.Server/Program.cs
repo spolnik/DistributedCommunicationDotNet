@@ -26,7 +26,8 @@ namespace NProg.Distributed.Server
             try
             {
                 var orderServiceFactory = GetOrderServiceFactory(framework);
-                var ordersHandler = orderServiceFactory.GetHandler();
+                var messageMapper = orderServiceFactory.GetMessageMapper();
+                var ordersHandler = orderServiceFactory.GetHandler(messageMapper);
 
                 server = orderServiceFactory.GetServer(ordersHandler, port);
                 

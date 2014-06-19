@@ -34,7 +34,8 @@ namespace NProg.Distributed.Client
                 stopwatch.Start();
 
                 var orderServiceFactory = GetOrderServiceFactory(framework);
-                var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port));
+                var messageMapper = orderServiceFactory.GetMessageMapper();
+                var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port), messageMapper);
 
                 try
                 {
