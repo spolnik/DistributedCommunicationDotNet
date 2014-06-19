@@ -1,11 +1,14 @@
 ﻿using System;
 using Ice;
+using NProg.Distributed.Domain.Requests;
+using NProg.Distributed.Domain.Responses;
+using NProg.Distributed.Messaging;
 using NProg.Distributed.Service;
-using Order;
+using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceOrderHandler : OrderServiceDisp_, IHandler<Guid, Domain.Order>
+    public class IceOrderHandler : MessageServiceDisp_, IHandler<Guid, Domain.Order>
     {
         private readonly IHandler<Guid, Domain.Order> orderDao;
 
@@ -29,20 +32,49 @@ namespace NProg.Distributed.Ice
             return orderDao.Remove(guid);
         }
 
-        public override void Add(string orderId, OrderDto orderDto, Current current)
+        public override MessageDto Send(MessageDto messageDto, Current current__)
         {
-            var order = OrderMapper.MapOrder(orderDto);
+            var message = MessageMapper.Map(messageDto);
+            var response = new Message();
+
+            if (message.BodyType == typeof(AddOrderRequest))
+            {
+                response = AddOrder(message);
+            }
+            else if (message.BodyType == typeof(GetOrderRequest))
+            {
+                response = GetOrder(message);
+            }
+            else if (message.BodyType == typeof(RemoveOrderRequest))
+            {
+                response = RemoveOrder(message);
+            }
+
+            return MessageMapper.Map(response);
+        }
+
+        private Message AddOrder(Message message)
+        {
+            var order = message.Receive<AddOrderRequest>().Order;
+
             Add(order.OrderId, order);
+            return Message.From(new StatusResponse { Status = true });
         }
 
-        public override OrderDto Get(string orderId, Current current)
+        private Message GetOrder(Message message)
         {
-            return OrderMapper.MapOrder(Get(Guid.Parse(orderId)));
+            var orderId = message.Receive<GetOrderRequest>().OrderId;
+
+            var order = Get(orderId);
+            return Message.From(new GetOrderResponse { Order = order });
         }
 
-        public override bool Remove(string orderId, Current current)
+        private Message RemoveOrder(Message message)
         {
-            return Remove(Guid.Parse(orderId));
+            var orderId = message.Receive<RemoveOrderRequest>().OrderId;
+
+            var status = Remove(orderId);
+            return Message.From(new StatusResponse { Status = status });
         }
     }
 }
