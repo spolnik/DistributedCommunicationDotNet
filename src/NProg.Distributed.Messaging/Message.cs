@@ -36,5 +36,13 @@ namespace NProg.Distributed.Messaging
             message.Body = message.Body.ToString().ReadFromJson(message.MessageType);
             return message;
         }
+
+        public static Message From<TObject>(TObject @object)
+        {
+            return new Message
+            {
+                Body = @object
+            };
+        }
     }
 }

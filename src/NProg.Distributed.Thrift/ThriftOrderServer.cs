@@ -10,20 +10,20 @@ namespace NProg.Distributed.Thrift
     public class ThriftOrderServer : IServer
     {
         private readonly int port;
-        private readonly OrderService.Iface handler;
+        private readonly MessageService.Iface handler;
         private TThreadPoolServer server;
 
         public ThriftOrderServer(IHandler<Guid, Domain.Order> handler, int port)
         {
             this.port = port;
-            this.handler = (OrderService.Iface)handler;
+            this.handler = (MessageService.Iface)handler;
         }
 
         public void Start()
         {
             try
             {
-                var processor = new OrderService.Processor(handler);
+                var processor = new MessageService.Processor(handler);
                 var serverTransport = new TServerSocket(port);
                 server = new TThreadPoolServer(processor, serverTransport, new TTransportFactory(), new TCompactProtocol.Factory());
 
