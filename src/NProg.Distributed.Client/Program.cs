@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using log4net;
+using NProg.Distributed.Domain;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
-using NProg.Distributed.Service;
 using NProg.Distributed.Thrift;
 using NProg.Distributed.WCF;
 using NProg.Distributed.ZeroMQ;
@@ -41,7 +41,7 @@ namespace NProg.Distributed.Client
                 {
                     for (var i = 0; i < count; i++)
                     {
-                        var order = new Domain.Order
+                        var order = new Order
                         {
                             Count = 3,
                             OrderDate = DateTime.Now,
@@ -60,7 +60,7 @@ namespace NProg.Distributed.Client
 
                         var removedOrder = client.Get(order.OrderId);
                         removedOrder.UserName = "";
-                        Debug.Assert(removedOrder.Equals(new Domain.Order{UserName = ""}));
+                        Debug.Assert(removedOrder.Equals(new Order{UserName = ""}));
 
                         Log.WriteLine("Order {0}", i);
                     }
@@ -84,7 +84,7 @@ namespace NProg.Distributed.Client
             Console.ReadLine();
         }
 
-        private static IServiceFactory<Guid, Domain.Order> GetOrderServiceFactory(string framework)
+        private static IOrderServiceFactory<Guid, Order> GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {

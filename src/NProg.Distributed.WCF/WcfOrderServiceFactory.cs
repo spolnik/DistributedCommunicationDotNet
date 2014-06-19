@@ -1,11 +1,12 @@
 ﻿using System;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfOrderServiceFactory : IServiceFactory<Guid, Order>
+    public class WcfOrderServiceFactory : IOrderServiceFactory<Guid, Order>
     {
         public IHandler<Guid, Order> GetHandler(IMessageMapper messageMapper)
         {
@@ -17,7 +18,7 @@ namespace NProg.Distributed.WCF
             return new WcfOrderServer(port);
         }
 
-        public IHandler<Guid, Order> GetClient(Uri serviceUri, IMessageMapper messageMapper)
+        public IOrderApi GetClient(Uri serviceUri, IMessageMapper messageMapper)
         {
             return new WcfOrderClient(serviceUri);
         }

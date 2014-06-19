@@ -49,7 +49,6 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="IDaoFactory.cs" />
     <Compile Include="IHandler.cs" />
-    <Compile Include="IServiceFactory.cs" />
     <Compile Include="Messaging\IMessageMapper.cs" />
     <Compile Include="Messaging\IMessageRequest.cs" />
     <Compile Include="Messaging\IResponseQueue.cs" />

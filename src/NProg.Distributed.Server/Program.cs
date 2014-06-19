@@ -1,4 +1,5 @@
 ﻿using System;
+using NProg.Distributed.Domain;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
@@ -45,7 +46,7 @@ namespace NProg.Distributed.Server
             }
         }
 
-        private static IServiceFactory<Guid, Domain.Order> GetOrderServiceFactory(string framework)
+        private static IOrderServiceFactory<Guid, Order> GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {

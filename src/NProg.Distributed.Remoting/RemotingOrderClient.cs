@@ -2,14 +2,14 @@
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
-using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingOrderClient : IHandler<Guid, Order>
+    public class RemotingOrderClient : IOrderApi
     {
         private readonly RemotingOrderHandler proxy;
 

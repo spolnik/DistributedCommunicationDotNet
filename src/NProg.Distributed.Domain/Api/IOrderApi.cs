@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace NProg.Distributed.Domain
+namespace NProg.Distributed.Domain.Api
 {
-    public interface IOrderService
+    public interface IOrderApi
     {
         void Add(Guid key, Order value);
 

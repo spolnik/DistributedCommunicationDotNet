@@ -1,14 +1,14 @@
 ﻿using System;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
-using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 using Zyan.Communication;
 
 namespace NProg.Distributed.Zyan
 {
-    public class ZyanOrderClient : IHandler<Guid, Order>, IDisposable
+    public class ZyanOrderClient : IOrderApi, IDisposable
     {
         private readonly IMessageRequest proxy;
         private ZyanConnection connection;

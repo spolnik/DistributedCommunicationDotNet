@@ -1,8 +1,8 @@
 ﻿using System;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
-using NProg.Distributed.Service;
 using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 using Thrift.Protocol;
@@ -10,7 +10,7 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftOrderClient : MessageRequest, IHandler<Guid, Order>
+    public class ThriftOrderClient : MessageRequest, IOrderApi
     {
         private readonly IMessageMapper messageMapper;
         private TBufferedTransport transport;

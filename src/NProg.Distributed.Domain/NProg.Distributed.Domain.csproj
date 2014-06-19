@@ -39,7 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IOrderService.cs" />
+    <Compile Include="Api\IOrderApi.cs" />
+    <Compile Include="IOrderServiceFactory.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\AddOrderRequest.cs" />
@@ -47,6 +48,12 @@
     <Compile Include="Requests\RemoveOrderRequest.cs" />
     <Compile Include="Responses\GetOrderResponse.cs" />
     <Compile Include="Responses\StatusResponse.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
+      <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
+      <Name>NProg.Distributed.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

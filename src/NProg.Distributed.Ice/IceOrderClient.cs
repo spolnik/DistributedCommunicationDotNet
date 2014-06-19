@@ -1,16 +1,16 @@
 ﻿using System;
 using Ice;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
-using NProg.Distributed.Service;
 using NProg.Distributed.Service.Extensions;
 using NProg.Distributed.Service.Messaging;
 using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceOrderClient : MessageRequest, IHandler<Guid, Order>
+    public class IceOrderClient : MessageRequest, IOrderApi
     {
         private readonly IMessageMapper messageMapper;
         private Communicator communicator;

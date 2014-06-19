@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
+using NProg.Distributed.Domain;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
@@ -118,7 +119,7 @@ namespace NProg.Distributed.Tests
                 stopwatch.ElapsedMilliseconds);
         }
 
-        private static IServiceFactory<Guid, Domain.Order> GetOrderServiceFactory(string framework)
+        private static IOrderServiceFactory<Guid, Domain.Order> GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {

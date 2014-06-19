@@ -2,15 +2,15 @@
 using System.Diagnostics;
 using NetMQ;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
 using NProg.Distributed.NetMQ.Messaging;
-using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.NetMQ
 {
-    public class NmqOrderClient : IHandler<Guid, Order>, IDisposable
+    public class NmqOrderClient : IOrderApi, IDisposable
     {
         private readonly NetMQContext context;
         private readonly NmqMessageRequest messageRequest;

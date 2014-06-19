@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 using NProg.Distributed.Domain.Requests;
 using NProg.Distributed.Domain.Responses;
-using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 using NProg.Distributed.ZeroMQ.Messaging;
 using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqOrderClient : IHandler<Guid, Order>, IDisposable
+    public class ZmqOrderClient : IOrderApi, IDisposable
     {
         private readonly ZmqContext context;
         private readonly ZmqMessageRequest messageRequest;
