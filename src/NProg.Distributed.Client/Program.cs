@@ -5,6 +5,7 @@ using NProg.Distributed.Domain;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
+using NProg.Distributed.Service;
 using NProg.Distributed.Thrift;
 using NProg.Distributed.WCF;
 using NProg.Distributed.ZeroMQ;
@@ -78,24 +79,24 @@ namespace NProg.Distributed.Client
             Console.ReadLine();
         }
 
-        private static IOrderServiceFactory<Guid, Order> GetOrderServiceFactory(string framework)
+        private static IServiceFactory GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {
                 case "wcf":
-                    return new WcfOrderServiceFactory();
+                    return new WcfServiceFactory();
                 case "thrift":
-                    return new ThriftOrderServiceFactory();
+                    return new ThriftServiceFactory();
                 case "zmq":
-                    return new ZmqOrderServiceFactory();
+                    return new ZmqServiceFactory();
                 case "nmq":
-                    return new NmqOrderServiceFactory();
+                    return new NmqServiceFactory();
                 case "remoting":
-                    return new RemotingOrderServiceFactory();
+                    return new RemotingServiceFactory();
                 case "zyan":
-                    return new ZyanOrderServiceFactory();
+                    return new ZyanServiceFactory();
                 case "ice":
-                    return new IceOrderServiceFactory();
+                    return new IceServiceFactory();
                 default:
                     throw new InvalidOperationException();
             }

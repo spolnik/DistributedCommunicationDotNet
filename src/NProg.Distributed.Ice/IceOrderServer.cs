@@ -2,18 +2,19 @@
 using System.Threading.Tasks;
 using Ice;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Ice
 {
     public class IceOrderServer : IServer
     {
-        private readonly IceOrderHandler handler;
+        private readonly IceMessageDispatcher handler;
         private readonly int port;
         private readonly Communicator communicator;
 
-        public IceOrderServer(IHandler<Guid, Domain.Order> handler, int port)
+        public IceOrderServer(IMessageReceiver messagerReceiver, IMessageMapper messageMapper, int port)
         {
-            this.handler = (IceOrderHandler) handler;
+            this.handler = new IceMessageDispatcher(messagerReceiver, messageMapper);
             this.port = port;
             communicator = Util.initialize();
         }

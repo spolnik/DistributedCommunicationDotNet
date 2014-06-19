@@ -6,7 +6,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Domain
 {
-    public class OrderClient : IOrderApi
+    public class OrderClient : IOrderApi, IDisposable
     {
         private readonly IRequestSender requestSender;
 

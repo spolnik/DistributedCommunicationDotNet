@@ -1,21 +1,14 @@
 ﻿using System;
-using NProg.Distributed.Domain;
-using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.NetMQ
 {
-    public class NmqOrderServiceFactory : IOrderServiceFactory<Guid, Order>
+    public class NmqServiceFactory : IServiceFactory
     {
-        public IHandler<Guid, Order> GetHandler(IMessageMapper messageMapper)
+        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {
-            return new SimpleHandler<Guid, Order>(new OrderDaoFactory(), "order_netmq.ndb", messageMapper);
-        }
-
-        public IServer GetServer(IHandler<Guid, Order> handler, int port = -1)
-        {
-            return new NmqOrderServer(handler, port);
+            return new NmqOrderServer(messageReceiver, port);
         }
 
         public IMessageMapper GetMessageMapper()

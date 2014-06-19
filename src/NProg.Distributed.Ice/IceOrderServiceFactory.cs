@@ -1,21 +1,14 @@
 ﻿using System;
-using NProg.Distributed.Domain;
-using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceOrderServiceFactory : IOrderServiceFactory<Guid, Order>
+    public class IceServiceFactory : IServiceFactory
     {
-        public IHandler<Guid, Order> GetHandler(IMessageMapper messageMapper)
+        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {
-            return new IceOrderHandler(new OrderDaoFactory(), "order_ice.ndb", messageMapper);
-        }
-
-        public IServer GetServer(IHandler<Guid, Order> handler, int port = -1)
-        {
-            return new IceOrderServer(handler, port);
+            return new IceOrderServer(messageReceiver, messageMapper, port);
         }
 
         public IMessageMapper GetMessageMapper()

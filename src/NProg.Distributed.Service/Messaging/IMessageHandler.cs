@@ -2,6 +2,8 @@
 {
     public interface IMessageHandler
     {
-        Message Send(Message message);
+        bool CanHandle(Message message);
+
+        Message Handle(Message message);
     }
 }

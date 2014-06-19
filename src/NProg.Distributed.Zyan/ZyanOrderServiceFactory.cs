@@ -1,21 +1,19 @@
 ﻿using System;
-using NProg.Distributed.Domain;
-using NProg.Distributed.NDatabase;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Zyan
 {
-    public class ZyanOrderServiceFactory : IOrderServiceFactory<Guid, Order>
+    public class ZyanServiceFactory : IServiceFactory
     {
-        public IHandler<Guid, Order> GetHandler(IMessageMapper messageMapper)
+        public IMessageReceiver GetMessageReceiver(IHandlerRegister handlerRegister)
         {
-            return new ZyanOrderHandler(new OrderDaoFactory(), "order_zyan.ndb");
+            return new MessageReceiver(handlerRegister);
         }
 
-        public IServer GetServer(IHandler<Guid, Order> handler, int port = -1)
+        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {
-            return new ZyanOrderServer(handler, port);
+            return new ZyanOrderServer(messageReceiver, port);
         }
 
         public IMessageMapper GetMessageMapper()

@@ -6,14 +6,14 @@ namespace NProg.Distributed.Zyan
 {
     public class ZyanRequestSender : RequestSender
     {
-        private readonly IMessageHandler proxy;
+        private readonly IMessageReceiver proxy;
         private ZyanConnection connection;
 
         public ZyanRequestSender(Uri serviceUri)
         {
             var serverUrl = string.Format("tcp://{0}:{1}/OrderService", serviceUri.Host, serviceUri.Port);
             connection = new ZyanConnection(serverUrl);
-            proxy = connection.CreateProxy<IMessageHandler>();
+            proxy = connection.CreateProxy<IMessageReceiver>();
         }
 
         protected override Message SendInternal(Message message)

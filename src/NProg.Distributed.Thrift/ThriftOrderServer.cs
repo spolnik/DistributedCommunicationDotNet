@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 using Thrift.Protocol;
 using Thrift.Server;
 using Thrift.Transport;
@@ -13,7 +14,7 @@ namespace NProg.Distributed.Thrift
         private readonly MessageService.Iface handler;
         private TThreadPoolServer server;
 
-        public ThriftOrderServer(IHandler<Guid, Domain.Order> handler, int port)
+        public ThriftOrderServer(IMessageReceiver handler, int port)
         {
             this.port = port;
             this.handler = (MessageService.Iface)handler;

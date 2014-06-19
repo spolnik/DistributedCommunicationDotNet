@@ -1,6 +1,4 @@
-﻿using System;
-using NProg.Distributed.Domain;
-using NProg.Distributed.Service;
+﻿using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 using Zyan.Communication;
 
@@ -8,18 +6,18 @@ namespace NProg.Distributed.Zyan
 {
     public class ZyanOrderServer : IServer
     {
-        private readonly ZyanOrderHandler handler;
+        private readonly MessageReceiver receiver;
         private readonly ZyanComponentHost host;
 
-        public ZyanOrderServer(IHandler<Guid, Order> handler, int port)
+        public ZyanOrderServer(IMessageReceiver messageReceiver, int port)
         {
-            this.handler = (ZyanOrderHandler)handler;
+            receiver = (MessageReceiver)messageReceiver;
             host = new ZyanComponentHost("OrderService", port);
         }
 
         public void Start()
         {
-            host.RegisterComponent<IMessageHandler, ZyanOrderHandler>(handler);
+            host.RegisterComponent<IMessageReceiver, MessageReceiver>(receiver);
         }
 
         public void Stop()
