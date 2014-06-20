@@ -10,9 +10,9 @@ namespace NProg.Distributed.OrderService.Handlers
     {
         private readonly IOrderApi dao;
 
-        public GetOrderHandler(IOrderDaoFactory daoFactory, string dbName = null)
+        public GetOrderHandler(IOrderDaoFactory daoFactory)
         {
-            this.dao = daoFactory.CreateDao(dbName);
+            dao = daoFactory.CreateDao();
         }
 
         public bool CanHandle(Message message)

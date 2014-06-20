@@ -4,6 +4,6 @@ namespace NProg.Distributed.OrderService.Database
 {
     public interface IOrderDaoFactory
     {
-        IOrderApi CreateDao(string dbName);
+        IOrderApi CreateDao();
     }
 }

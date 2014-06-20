@@ -55,7 +55,7 @@ namespace NProg.Distributed.Tests
                 var orderServiceFactory = GetOrderServiceFactory(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
 
-                var orderDaoFactory = new OrderDaoFactory();
+                var orderDaoFactory = new InMemoryOrderDaoFactory();
                 var register = new List<IMessageHandler>
                 {
                     new AddOrderHandler(orderDaoFactory),

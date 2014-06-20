@@ -12,7 +12,7 @@ namespace NProg.Distributed.Remoting
 
         public RemotingOrderHandler()
         {
-            var orderDaoFactory = new OrderDaoFactory();
+            var orderDaoFactory = new InMemoryOrderDaoFactory();
             var register = new List<IMessageHandler>
             {
                 new AddOrderHandler(orderDaoFactory),
