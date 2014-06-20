@@ -4,7 +4,7 @@ using NDatabase;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Domain;
 
-namespace NProg.Distributed.NDatabase
+namespace NProg.Distributed.OrderService.Database
 {
     internal sealed class NdbOdbDao : IOrderApi
     {

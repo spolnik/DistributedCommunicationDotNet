@@ -57,10 +57,6 @@
       <Project>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</Project>
       <Name>NProg.Distributed.Ice</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.NDatabase\NProg.Distributed.NDatabase.csproj">
-      <Project>{D0D3D474-E9B1-442D-939C-FD582020475F}</Project>
-      <Name>NProg.Distributed.NDatabase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.NetMQ\NProg.Distributed.NetMQ.csproj">
       <Project>{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}</Project>
       <Name>NProg.Distributed.NetMQ</Name>

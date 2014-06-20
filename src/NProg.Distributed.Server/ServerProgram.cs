@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
-using NProg.Distributed.NDatabase;
 using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Composition;
@@ -38,13 +37,11 @@ namespace NProg.Distributed.Server
 
         private static MessageReceiver GetMessageReceiver()
         {
-            var orderDaoFactory = new InMemoryOrderDaoFactory();
-
             var register = new List<IMessageHandler>
             {
-                new AddOrderHandler(orderDaoFactory),
-                new GetOrderHandler(orderDaoFactory),
-                new RemoveOrderHandler(orderDaoFactory)
+                new AddOrderHandler(),
+                new GetOrderHandler(),
+                new RemoveOrderHandler()
             };
 
             var handlerRegister = new HandlerRegister(register);

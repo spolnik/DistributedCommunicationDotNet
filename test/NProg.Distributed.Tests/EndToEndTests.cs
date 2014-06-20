@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
-using NProg.Distributed.NDatabase;
 using NProg.Distributed.OrderService;
 using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Handlers;
@@ -50,12 +49,11 @@ namespace NProg.Distributed.Tests
                 var orderServiceFactory = GetServiceFactory(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
 
-                var orderDaoFactory = new InMemoryOrderDaoFactory();
                 var register = new List<IMessageHandler>
                 {
-                    new AddOrderHandler(orderDaoFactory),
-                    new GetOrderHandler(orderDaoFactory),
-                    new RemoveOrderHandler(orderDaoFactory)
+                    new AddOrderHandler(),
+                    new GetOrderHandler(),
+                    new RemoveOrderHandler()
                 };
 
                 var handlerRegister = new HandlerRegister(register);
