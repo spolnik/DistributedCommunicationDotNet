@@ -6,7 +6,7 @@ using NProg.Distributed.OrderService.Domain;
 
 namespace NProg.Distributed.NDatabase
 {
-    public sealed class NdbOdbDao : IOrderApi
+    internal sealed class NdbOdbDao : IOrderApi
     {
         private readonly string dbName;
 

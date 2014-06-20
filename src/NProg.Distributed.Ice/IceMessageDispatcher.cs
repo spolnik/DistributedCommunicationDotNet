@@ -5,12 +5,12 @@ using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Ice
 {
-    public sealed class IceMessageDispatcher : IMessageServiceDisp_
+    internal sealed class IceMessageDispatcher : IMessageServiceDisp_
     {
         private readonly IMessageReceiver messageReceiver;
         private readonly IMessageMapper messageMapper;
 
-        public IceMessageDispatcher(IMessageReceiver messageReceiver, IMessageMapper messageMapper)
+        internal IceMessageDispatcher(IMessageReceiver messageReceiver, IMessageMapper messageMapper)
         {
             this.messageReceiver = messageReceiver;
             this.messageMapper = messageMapper;

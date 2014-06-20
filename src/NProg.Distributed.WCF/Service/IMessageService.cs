@@ -4,7 +4,7 @@ using Message = NProg.Distributed.Service.Messaging.Message;
 namespace NProg.Distributed.WCF.Service
 {
     [ServiceContract]
-    public interface IMessageService
+    internal interface IMessageService
     {
         [OperationContract]
         [UseNetDataContractSerializer]

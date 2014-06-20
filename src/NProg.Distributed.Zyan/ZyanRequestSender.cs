@@ -4,12 +4,12 @@ using Zyan.Communication;
 
 namespace NProg.Distributed.Zyan
 {
-    public sealed class ZyanRequestSender : RequestSender
+    internal sealed class ZyanRequestSender : RequestSenderBase
     {
         private readonly IMessageReceiver proxy;
         private ZyanConnection connection;
 
-        public ZyanRequestSender(Uri serviceUri)
+        internal ZyanRequestSender(Uri serviceUri)
         {
             var serverUrl = string.Format("tcp://{0}:{1}/OrderService", serviceUri.Host, serviceUri.Port);
             connection = new ZyanConnection(serverUrl);

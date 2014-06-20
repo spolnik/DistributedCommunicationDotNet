@@ -4,7 +4,7 @@ using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Ice
 {
-    public sealed class IceMessageMapper : IMessageMapper
+    internal sealed class IceMessageMapper : IMessageMapper
     {
         public Message Map(object message)
         {

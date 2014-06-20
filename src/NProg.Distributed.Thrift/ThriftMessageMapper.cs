@@ -3,7 +3,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Thrift
 {
-    public sealed class ThriftMessageMapper : IMessageMapper
+    internal sealed class ThriftMessageMapper : IMessageMapper
     {
         public Message Map(object message)
         {

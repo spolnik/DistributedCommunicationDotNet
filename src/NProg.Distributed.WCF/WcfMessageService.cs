@@ -5,11 +5,11 @@ using NProg.Distributed.WCF.Service;
 namespace NProg.Distributed.WCF
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
-    public sealed class WcfMessageService : IMessageService
+    internal sealed class WcfMessageService : IMessageService
     {
         private readonly IMessageReceiver messageReceiver;
 
-        public WcfMessageService(IMessageReceiver receiver)
+        internal WcfMessageService(IMessageReceiver receiver)
         {
             messageReceiver = receiver;
         }

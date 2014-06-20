@@ -5,15 +5,15 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Ice
 {
-    public sealed class IceMessageServer : IRunnable
+    internal sealed class IceMessageServer : IRunnable
     {
         private readonly IceMessageDispatcher receiver;
         private readonly int port;
         private Communicator communicator;
 
-        public IceMessageServer(IMessageReceiver messagerReceiver, IMessageMapper messageMapper, int port)
+        internal IceMessageServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {
-            receiver = new IceMessageDispatcher(messagerReceiver, messageMapper);
+            receiver = new IceMessageDispatcher(messageReceiver, messageMapper);
             this.port = port;
             communicator = Util.initialize();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using log4net;
+using log4net.Config;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.OrderService;
@@ -16,17 +17,19 @@ using NProg.Distributed.Zyan;
 
 namespace NProg.Distributed.Client
 {
-    public static class ClientProgram
+    internal static class ClientProgram
     {
         /// <summary>
         /// Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentException">Usage: NProg.Distributed.Client.exe framework port count</exception>
-        public static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             if (args.Length < 3)
+            {
                 throw new ArgumentException("Usage: NProg.Distributed.Client.exe <framework> <port> <count>");
+            }
 
             var framework = args[0];
             var port = Convert.ToInt32(args[1]);
@@ -35,7 +38,7 @@ namespace NProg.Distributed.Client
             SetLogProperties(framework, count);
 
             var stopwatch = new Stopwatch();
-            
+
             try
             {
                 Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
@@ -57,7 +60,8 @@ namespace NProg.Distributed.Client
             }
             stopwatch.Stop();
 
-            Log.WriteLine("===============\nCount: {0}, elapsed: {1} ms\n=============== ", count, stopwatch.ElapsedMilliseconds);
+            Log.WriteLine("===============\nCount: {0}, elapsed: {1} ms\n=============== ", count,
+                stopwatch.ElapsedMilliseconds);
             Console.WriteLine("Press <enter> to close client...");
             Console.ReadLine();
         }
@@ -81,13 +85,13 @@ namespace NProg.Distributed.Client
         private static void ProcessOrder(IOrderApi client, int i)
         {
             var order = new Order
-            {
-                Count = i,
-                OrderDate = DateTime.Now,
-                OrderId = Guid.NewGuid(),
-                UnitPrice = 12.23m,
-                UserName = "Mikolaj"
-            };
+                {
+                    Count = i,
+                    OrderDate = DateTime.Now,
+                    OrderId = Guid.NewGuid(),
+                    UnitPrice = 12.23m,
+                    UserName = "Mikolaj"
+                };
 
             client.Add(order.OrderId, order);
 
@@ -126,5 +130,30 @@ namespace NProg.Distributed.Client
                     throw new InvalidOperationException();
             }
         }
+
+        #region Nested type: Log
+
+        private static class Log
+        {
+            private static readonly ILog Logger;
+
+            static Log()
+            {
+                XmlConfigurator.Configure();
+                Logger = LogManager.GetLogger(typeof (ClientProgram));
+            }
+
+            internal static void WriteLine(string format, params object[] args)
+            {
+                Logger.Debug(string.Format(format, args));
+            }
+
+            internal static void Error(Exception exception)
+            {
+                Logger.Error(exception.Message, exception);
+            }
+        }
+
+        #endregion
     }
 }

@@ -11,36 +11,39 @@ namespace NProg.Distributed.NetMQ
     /// <summary>
     /// Class NmqMessageServer.
     /// </summary>
-    public sealed class NmqMessageServer : IRunnable
+    internal sealed class NmqMessageServer : IRunnable
     {
+        /// <summary>
+        /// The message receiver
+        /// </summary>
+        private readonly IMessageReceiver messageReceiver;
+
         /// <summary>
         /// The port
         /// </summary>
         private readonly int port;
 
         /// <summary>
-        /// The message receiver
+        /// The token
         /// </summary>
-        private readonly IMessageReceiver messageReceiver;
+        private readonly CancellationTokenSource token;
+
         /// <summary>
         /// The context
         /// </summary>
         private NetMQContext context;
+
         /// <summary>
         /// The response queue
         /// </summary>
         private NmqResponseQueue responseQueue;
-        /// <summary>
-        /// The token
-        /// </summary>
-        private readonly CancellationTokenSource token;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NmqMessageServer"/> class.
         /// </summary>
         /// <param name="messageReceiver">The message receiver.</param>
         /// <param name="port">The port.</param>
-        public NmqMessageServer(IMessageReceiver messageReceiver, int port)
+        internal NmqMessageServer(IMessageReceiver messageReceiver, int port)
         {
             token = new CancellationTokenSource();
 
@@ -49,6 +52,8 @@ namespace NProg.Distributed.NetMQ
             context = NetMQContext.Create();
             responseQueue = new NmqResponseQueue(context, port);
         }
+
+        #region IRunnable Members
 
         /// <summary>
         /// Runs this instance.
@@ -59,16 +64,27 @@ namespace NProg.Distributed.NetMQ
         }
 
         /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+
+        /// <summary>
         /// Starts the listening.
         /// </summary>
         private void StartListening()
         {
             Console.WriteLine("Listening on: tcp://127.0.0.1:{0}", port);
             responseQueue.Listen(x =>
-            {
-                var message = messageReceiver.Send(x);
-                responseQueue.Response(message);
-            }, token);
+                {
+                    var message = messageReceiver.Send(x);
+                    responseQueue.Response(message);
+                }, token);
         }
 
         /// <summary>
@@ -95,14 +111,7 @@ namespace NProg.Distributed.NetMQ
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        #region Nested type: NmqResponseQueue
 
         /// <summary>
         /// Class NmqResponseQueue.
@@ -119,18 +128,31 @@ namespace NProg.Distributed.NetMQ
             /// </summary>
             /// <param name="context">The context.</param>
             /// <param name="port">The port.</param>
-            public NmqResponseQueue(NetMQContext context, int port)
+            internal NmqResponseQueue(NetMQContext context, int port)
             {
                 socket = context.CreateResponseSocket();
                 var address = string.Format("tcp://127.0.0.1:{0}", port);
                 socket.Bind(address);
             }
 
+            #region IDisposable Members
+
+            /// <summary>
+            /// Disposes this instance.
+            /// </summary>
+            public void Dispose()
+            {
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
+
+            #endregion
+
             /// <summary>
             /// Responses the specified message.
             /// </summary>
             /// <param name="message">The message.</param>
-            public void Response(Message message)
+            internal void Response(Message message)
             {
                 var json = message.ToJsonString();
                 socket.Send(json);
@@ -141,15 +163,15 @@ namespace NProg.Distributed.NetMQ
             /// </summary>
             /// <param name="onMessageReceived">The on message received.</param>
             /// <param name="token">The token.</param>
-            public void Listen(Action<Message> onMessageReceived, CancellationTokenSource token)
+            internal void Listen(Action<Message> onMessageReceived, CancellationTokenSource token)
             {
                 socket.ReceiveReady += (sender, args) =>
-                {
-                    var inbound = socket.ReceiveString();
+                    {
+                        var inbound = socket.ReceiveString();
 
-                    var message = Message.FromJson(inbound);
-                    onMessageReceived(message);
-                };
+                        var message = Message.FromJson(inbound);
+                        onMessageReceived(message);
+                    };
 
                 while (!token.IsCancellationRequested)
                 {
@@ -170,14 +192,8 @@ namespace NProg.Distributed.NetMQ
                 }
             }
 
-            /// <summary>
-            /// Disposes this instance.
-            /// </summary>
-            public void Dispose()
-            {
-                Dispose(true);
-                GC.SuppressFinalize(this);
-            }
         }
+
+        #endregion
     }
 }

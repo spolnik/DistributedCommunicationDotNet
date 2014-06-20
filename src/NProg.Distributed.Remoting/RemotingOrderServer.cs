@@ -5,11 +5,11 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Remoting
 {
-    public sealed class RemotingOrderServer : IRunnable
+    internal sealed class RemotingOrderServer : IRunnable
     {
         private readonly int port;
 
-        public RemotingOrderServer(int port)
+        internal RemotingOrderServer(int port)
         {
             this.port = port;
         }

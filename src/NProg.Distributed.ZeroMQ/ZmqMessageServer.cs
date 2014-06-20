@@ -13,36 +13,40 @@ namespace NProg.Distributed.ZeroMQ
     /// <summary>
     /// Class ZmqMessageServer.
     /// </summary>
-    public sealed class ZmqMessageServer : IRunnable
+    internal sealed class ZmqMessageServer : IRunnable
     {
+
+        /// <summary>
+        /// The message receiver
+        /// </summary>
+        private readonly IMessageReceiver messageReceiver;
+
         /// <summary>
         /// The port
         /// </summary>
         private readonly int port;
 
         /// <summary>
-        /// The message receiver
+        /// The token
         /// </summary>
-        private readonly IMessageReceiver messageReceiver;
+        private readonly CancellationTokenSource token;
+
         /// <summary>
         /// The context
         /// </summary>
         private ZmqContext context;
+
         /// <summary>
         /// The response queue
         /// </summary>
         private ZmqResponseQueue responseQueue;
-        /// <summary>
-        /// The token
-        /// </summary>
-        private readonly CancellationTokenSource token;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZmqMessageServer"/> class.
         /// </summary>
         /// <param name="messageReceiver">The message receiver.</param>
         /// <param name="port">The port.</param>
-        public ZmqMessageServer(IMessageReceiver messageReceiver, int port)
+        internal ZmqMessageServer(IMessageReceiver messageReceiver, int port)
         {
             token = new CancellationTokenSource();
 
@@ -51,6 +55,8 @@ namespace NProg.Distributed.ZeroMQ
             context = ZmqContext.Create();
             responseQueue = new ZmqResponseQueue(context, port);
         }
+
+        #region IRunnable Members
 
         /// <summary>
         /// Runs this instance.
@@ -61,16 +67,27 @@ namespace NProg.Distributed.ZeroMQ
         }
 
         /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+
+        /// <summary>
         /// Starts the listening.
         /// </summary>
         private void StartListening()
         {
             Console.WriteLine("Listening on: tcp://127.0.0.1:{0}", port);
             responseQueue.Listen(x =>
-            {
-                var message = messageReceiver.Send(x);
-                responseQueue.Response(message);
-            }, token);
+                {
+                    var message = messageReceiver.Send(x);
+                    responseQueue.Response(message);
+                }, token);
         }
 
         /// <summary>
@@ -97,14 +114,7 @@ namespace NProg.Distributed.ZeroMQ
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        #region Nested type: ZmqResponseQueue
 
         /// <summary>
         /// Class ZmqResponseQueue.
@@ -121,18 +131,31 @@ namespace NProg.Distributed.ZeroMQ
             /// </summary>
             /// <param name="context">The context.</param>
             /// <param name="port">The port.</param>
-            public ZmqResponseQueue(ZmqContext context, int port)
+            internal ZmqResponseQueue(ZmqContext context, int port)
             {
                 socket = context.CreateSocket(SocketType.REP);
                 var address = string.Format("tcp://127.0.0.1:{0}", port);
                 socket.Bind(address);
             }
 
+            #region IDisposable Members
+
+            /// <summary>
+            /// Disposes this instance.
+            /// </summary>
+            public void Dispose()
+            {
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
+
+            #endregion
+
             /// <summary>
             /// Responses the specified message.
             /// </summary>
             /// <param name="message">The message.</param>
-            public void Response(Message message)
+            internal void Response(Message message)
             {
                 var json = message.ToJsonString();
                 socket.Send(json, Encoding.UTF8);
@@ -143,17 +166,17 @@ namespace NProg.Distributed.ZeroMQ
             /// </summary>
             /// <param name="onMessageReceived">The on message received.</param>
             /// <param name="token">The token.</param>
-            public void Listen(Action<Message> onMessageReceived, CancellationTokenSource token)
+            internal void Listen(Action<Message> onMessageReceived, CancellationTokenSource token)
             {
                 socket.ReceiveReady += (sender, args) =>
-                {
-                    var inbound = socket.Receive(Encoding.UTF8);
+                    {
+                        var inbound = socket.Receive(Encoding.UTF8);
 
-                    var message = Message.FromJson(inbound);
-                    onMessageReceived(message);
-                };
+                        var message = Message.FromJson(inbound);
+                        onMessageReceived(message);
+                    };
 
-                var poller = new Poller(new List<ZmqSocket> { socket });
+                var poller = new Poller(new List<ZmqSocket> {socket});
 
                 while (!token.IsCancellationRequested)
                 {
@@ -173,15 +196,8 @@ namespace NProg.Distributed.ZeroMQ
                 }
             }
 
-            /// <summary>
-            /// Disposes this instance.
-            /// </summary>
-            public void Dispose()
-            {
-                Dispose(true);
-                GC.SuppressFinalize(this);
-            }
         }
 
+        #endregion
     }
 }

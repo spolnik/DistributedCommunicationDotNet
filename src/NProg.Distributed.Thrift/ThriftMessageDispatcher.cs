@@ -3,12 +3,12 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Thrift
 {
-    public sealed class ThriftMessageDispatcher : MessageService.Iface
+    internal sealed class ThriftMessageDispatcher : MessageService.Iface
     {
         private readonly IMessageReceiver messageReceiver;
         private readonly IMessageMapper messageMapper;
 
-        public ThriftMessageDispatcher(IMessageReceiver messageReceiver, IMessageMapper messageMapper)
+        internal ThriftMessageDispatcher(IMessageReceiver messageReceiver, IMessageMapper messageMapper)
         {
             this.messageReceiver = messageReceiver;
             this.messageMapper = messageMapper;

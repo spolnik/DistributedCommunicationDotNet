@@ -55,7 +55,7 @@
     <Compile Include="Messaging\IRequestSender.cs" />
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Messaging\MessageReceiver.cs" />
-    <Compile Include="Messaging\RequestSender.cs" />
+    <Compile Include="Messaging\RequestSenderBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRunnable.cs" />
   </ItemGroup>

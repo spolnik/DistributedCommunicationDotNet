@@ -14,7 +14,7 @@ using NProg.Distributed.Zyan;
 
 namespace NProg.Distributed.Server
 {
-    public static class ServerProgram
+    internal static class ServerProgram
     {
         static void Main(string[] args)
         {

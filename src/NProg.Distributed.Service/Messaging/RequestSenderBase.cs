@@ -3,9 +3,9 @@
 namespace NProg.Distributed.Service.Messaging
 {
     /// <summary>
-    /// Class RequestSender.
+    /// Class RequestSenderBase.
     /// </summary>
-    public abstract class RequestSender : IRequestSender
+    public abstract class RequestSenderBase : IRequestSender
     {
         /// <summary>
         /// Sends the internal.

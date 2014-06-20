@@ -5,7 +5,7 @@ using NProg.Distributed.OrderService.Domain;
 
 namespace NProg.Distributed.NDatabase
 {
-    public sealed class InMemoryDao : IOrderApi
+    internal sealed class InMemoryDao : IOrderApi
     {
         private static readonly ConcurrentDictionary<Guid, Order> InMemoryDb = new ConcurrentDictionary<Guid, Order>();
 

@@ -6,12 +6,12 @@ using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public sealed class ZmqRequestSender : RequestSender
+    internal sealed class ZmqRequestSender : RequestSenderBase
     {
         private ZmqSocket socket;
         private ZmqContext context;
 
-        public ZmqRequestSender(Uri serviceUri)
+        internal ZmqRequestSender(Uri serviceUri)
         {
             context = ZmqContext.Create();
             socket = context.CreateSocket(SocketType.REQ);

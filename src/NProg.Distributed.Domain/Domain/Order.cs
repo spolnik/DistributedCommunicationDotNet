@@ -21,7 +21,7 @@ namespace NProg.Distributed.OrderService.Domain
                 Count, OrderDate, UnitPrice, UserName);
         }
 
-        protected bool Equals(Order other)
+        private bool Equals(Order other)
         {
             return OrderId.Equals(other.OrderId) && Count == other.Count && OrderDate.Equals(other.OrderDate) &&
                    UnitPrice == other.UnitPrice && string.Equals(UserName, other.UserName);

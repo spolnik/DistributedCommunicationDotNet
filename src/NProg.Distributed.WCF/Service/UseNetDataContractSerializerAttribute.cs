@@ -4,7 +4,8 @@ using System.ServiceModel.Description;
 
 namespace NProg.Distributed.WCF.Service
 {
-    public sealed class UseNetDataContractSerializerAttribute : Attribute, IOperationBehavior
+    [AttributeUsage(AttributeTargets.Method)]
+    internal sealed class UseNetDataContractSerializerAttribute : Attribute, IOperationBehavior
     {
         public void AddBindingParameters(OperationDescription description,
             BindingParameterCollection parameters)

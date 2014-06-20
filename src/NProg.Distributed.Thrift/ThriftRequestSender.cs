@@ -6,14 +6,14 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    public sealed class ThriftRequestSender : RequestSender
+    internal sealed class ThriftRequestSender : RequestSenderBase
     {
         private readonly IMessageMapper messageMapper;
         private TBufferedTransport transport;
         private readonly MessageService.Client client;
         private TSocket socket;
 
-        public ThriftRequestSender(Uri serviceUri, IMessageMapper messageMapper)
+        internal ThriftRequestSender(Uri serviceUri, IMessageMapper messageMapper)
         {
             this.messageMapper = messageMapper;
             socket = new TSocket(serviceUri.Host, serviceUri.Port);
