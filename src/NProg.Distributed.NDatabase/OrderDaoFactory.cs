@@ -1,14 +1,13 @@
-﻿using System;
-using NProg.Distributed.Domain;
-using NProg.Distributed.Service;
+﻿using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 
 namespace NProg.Distributed.NDatabase
 {
-    public class OrderDaoFactory : IDaoFactory<Guid, Order>
+    public class OrderDaoFactory : IOrderDaoFactory
     {
-        public IHandler<Guid, Order> CreateDao(string dbName)
+        public IOrderApi CreateDao(string dbName)
         {
-            return new InMemoryDao<Guid,Order>();
+            return new InMemoryDao();
 //            return new NdbOdbDao(dbName);
         }
     }

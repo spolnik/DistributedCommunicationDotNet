@@ -1,29 +1,32 @@
-﻿using System.Collections.Concurrent;
-using NProg.Distributed.Service;
+﻿using System;
+using System.Collections.Concurrent;
+using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Api;
 
 namespace NProg.Distributed.NDatabase
 {
-    public class InMemoryDao<TKey, TValue> : IHandler<TKey, TValue> where TValue 
-        : class, new()
+    public class InMemoryDao : IOrderApi
     {
-        private static readonly ConcurrentDictionary<TKey, TValue> InmemoryDb = new ConcurrentDictionary<TKey, TValue>();
+        private static readonly ConcurrentDictionary<Guid, Order> InmemoryDb = new ConcurrentDictionary<Guid, Order>();
 
-        public void Add(TKey key, TValue value)
+        public bool Add(Guid key, Order value)
         {
             InmemoryDb.AddOrUpdate(key, value, (guid, order) => order);
+
+            return true;
         }
 
-        public TValue Get(TKey key)
+        public Order Get(Guid key)
         {
-            TValue value;
+            Order value;
             InmemoryDb.TryGetValue(key, out value);
 
-            return value ?? new TValue();
+            return value ?? new Order();
         }
 
-        public bool Remove(TKey key)
+        public bool Remove(Guid key)
         {
-            TValue value;
+            Order value;
             return InmemoryDb.TryRemove(key, out value);
         }
     }

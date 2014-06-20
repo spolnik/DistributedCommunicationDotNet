@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using log4net;
+using NProg.Distributed.Domain;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
@@ -35,13 +36,14 @@ namespace NProg.Distributed.Client
 
                 var orderServiceFactory = GetOrderServiceFactory(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
-                var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port), messageMapper);
-
-                try
+                var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port),
+                    messageMapper);
+                
+                using (var client = new OrderClient(requestSender))
                 {
                     for (var i = 0; i < count; i++)
                     {
-                        var order = new Domain.Order
+                        var order = new Order
                         {
                             Count = 3,
                             OrderDate = DateTime.Now,
@@ -51,26 +53,19 @@ namespace NProg.Distributed.Client
                         };
 
                         client.Add(order.OrderId, order);
-                    
+
                         var orderFromDb = client.Get(order.OrderId);
                         Debug.Assert(orderFromDb.Equals(order));
-                    
+
                         var removed = client.Remove(order.OrderId);
                         Debug.Assert(removed);
 
                         var removedOrder = client.Get(order.OrderId);
                         removedOrder.UserName = "";
-                        Debug.Assert(removedOrder.Equals(new Domain.Order{UserName = ""}));
+                        Debug.Assert(removedOrder.Equals(new Order {UserName = ""}));
 
                         Log.WriteLine("Order {0}", i);
                     }
-                }
-                finally
-                {
-                    var disposable = client as IDisposable;
-
-                    if (disposable != null)
-                        disposable.Dispose();
                 }
             }
             catch (Exception exception)
@@ -84,24 +79,24 @@ namespace NProg.Distributed.Client
             Console.ReadLine();
         }
 
-        private static IServiceFactory<Guid, Domain.Order> GetOrderServiceFactory(string framework)
+        private static IServiceFactory GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {
                 case "wcf":
-                    return new WcfOrderServiceFactory();
+                    return new WcfServiceFactory();
                 case "thrift":
-                    return new ThriftOrderServiceFactory();
+                    return new ThriftServiceFactory();
                 case "zmq":
-                    return new ZmqOrderServiceFactory();
+                    return new ZmqServiceFactory();
                 case "nmq":
-                    return new NmqOrderServiceFactory();
+                    return new NmqServiceFactory();
                 case "remoting":
-                    return new RemotingOrderServiceFactory();
+                    return new RemotingServiceFactory();
                 case "zyan":
-                    return new ZyanOrderServiceFactory();
+                    return new ZyanServiceFactory();
                 case "ice":
-                    return new IceOrderServiceFactory();
+                    return new IceServiceFactory();
                 default:
                     throw new InvalidOperationException();
             }

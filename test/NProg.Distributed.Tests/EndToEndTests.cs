@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
+using NProg.Distributed.Domain;
+using NProg.Distributed.Domain.Handlers;
 using NProg.Distributed.Ice;
+using NProg.Distributed.NDatabase;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Messaging;
 using NProg.Distributed.Thrift;
 using NProg.Distributed.WCF;
 using NProg.Distributed.ZeroMQ;
@@ -48,9 +53,19 @@ namespace NProg.Distributed.Tests
             {
                 var orderServiceFactory = GetOrderServiceFactory(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
-                var ordersHandler = orderServiceFactory.GetHandler(messageMapper);
 
-                server = orderServiceFactory.GetServer(ordersHandler, port);
+                var inMemoryDao = new InMemoryDao();
+                var register = new List<IMessageHandler>
+                {
+                    new AddOrderHandler(inMemoryDao),
+                    new GetOrderHandler(inMemoryDao),
+                    new RemoveOrderHandler(inMemoryDao)
+                };
+
+                var handlerRegister = new HandlerRegister(register);
+                var messageReceiver = new MessageReceiver(handlerRegister);
+
+                server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port);
 
                 Log.WriteLine("Server running ...");
                 server.Start();
@@ -84,32 +99,34 @@ namespace NProg.Distributed.Tests
 
             var orderServiceFactory = GetOrderServiceFactory(framework);
             var messageMapper = orderServiceFactory.GetMessageMapper();
-            var client = orderServiceFactory.GetClient(new Uri("tcp://127.0.0.1:" + port), messageMapper);
-
-            for (var i = 0; i < count; i++)
+            var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port), messageMapper);
+            using (var client = new OrderClient(requestSender))
             {
-                var order = new Domain.Order
+                for (var i = 0; i < count; i++)
                 {
-                    Count = 3,
-                    OrderDate = DateTime.Now,
-                    OrderId = Guid.NewGuid(),
-                    UnitPrice = 12.23m,
-                    UserName = "Mikolaj"
-                };
+                    var order = new Order
+                    {
+                        Count = 3,
+                        OrderDate = DateTime.Now,
+                        OrderId = Guid.NewGuid(),
+                        UnitPrice = 12.23m,
+                        UserName = "Mikolaj"
+                    };
 
-                client.Add(order.OrderId, order);
+                    client.Add(order.OrderId, order);
 
-                var orderFromDb = client.Get(order.OrderId);
-                Debug.Assert(orderFromDb.Equals(order));
+                    var orderFromDb = client.Get(order.OrderId);
+                    Debug.Assert(orderFromDb.Equals(order));
 
-                var removed = client.Remove(order.OrderId);
-                Debug.Assert(removed);
+                    var removed = client.Remove(order.OrderId);
+                    Debug.Assert(removed);
 
-                var removedOrder = client.Get(order.OrderId);
-                removedOrder.UserName = "";
-                Debug.Assert(removedOrder.Equals(new Domain.Order { UserName = "" }));
+                    var removedOrder = client.Get(order.OrderId);
+                    removedOrder.UserName = "";
+                    Debug.Assert(removedOrder.Equals(new Order { UserName = "" }));
 
-                Log.WriteLine("Order {0}", i);
+                    Log.WriteLine("Order {0}", i);
+                }
             }
 
             stopwatch.Stop();
@@ -118,24 +135,24 @@ namespace NProg.Distributed.Tests
                 stopwatch.ElapsedMilliseconds);
         }
 
-        private static IServiceFactory<Guid, Domain.Order> GetOrderServiceFactory(string framework)
+        private static IServiceFactory GetOrderServiceFactory(string framework)
         {
             switch (framework)
             {
                 case "wcf":
-                    return new WcfOrderServiceFactory();
+                    return new WcfServiceFactory();
                 case "thrift":
-                    return new ThriftOrderServiceFactory();
+                    return new ThriftServiceFactory();
                 case "zmq":
-                    return new ZmqOrderServiceFactory();
+                    return new ZmqServiceFactory();
                 case "nmq":
-                    return new NmqOrderServiceFactory();
+                    return new NmqServiceFactory();
                 case "remoting":
-                    return new RemotingOrderServiceFactory();
+                    return new RemotingServiceFactory();
                 case "zyan":
-                    return new ZyanOrderServiceFactory();
+                    return new ZyanServiceFactory();
                 case "ice":
-                    return new IceOrderServiceFactory();
+                    return new IceServiceFactory();
                 default:
                     throw new InvalidOperationException();
             }

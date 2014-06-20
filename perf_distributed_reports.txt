@@ -37,6 +37,5 @@ server - 20-30% cpu, 15 mb
 time - 2615 sec
 - requires Serializable attribute
 - requires service attibutes
-- hard to make handler generic
 
 8. msmq (too slow for simple cases - 10k messages in one client) - creating temporary queues is very expensive - finally removed
