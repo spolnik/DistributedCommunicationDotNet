@@ -1,10 +1,11 @@
 ﻿using System;
+using NProg.Distributed.OrderService.Domain;
 
-namespace NProg.Distributed.Domain.Responses
+namespace NProg.Distributed.OrderService.Responses
 {
     [Serializable]
-    public class GetOrderResponse
+    public sealed class GetOrderResponse
     {
-        public Domain.Order Order { get; set; } 
+        public Order Order { get; set; } 
     }
 }

@@ -5,7 +5,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingOrderServer : IRunnable
+    public sealed class RemotingOrderServer : IRunnable
     {
         private readonly int port;
 

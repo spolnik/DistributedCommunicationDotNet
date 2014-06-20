@@ -41,16 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ServerProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
       <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
-      <Name>NProg.Distributed.Domain</Name>
+      <Name>NProg.Distributed.OrderService</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Ice\NProg.Distributed.Ice.csproj">
       <Project>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</Project>

@@ -1,17 +1,18 @@
-﻿using NProg.Distributed.Domain.Api;
-using NProg.Distributed.Domain.Requests;
-using NProg.Distributed.Domain.Responses;
+﻿using NProg.Distributed.OrderService.Api;
+using NProg.Distributed.OrderService.Database;
+using NProg.Distributed.OrderService.Requests;
+using NProg.Distributed.OrderService.Responses;
 using NProg.Distributed.Service.Messaging;
 
-namespace NProg.Distributed.Domain.Handlers
+namespace NProg.Distributed.OrderService.Handlers
 {
-    public class GetOrderHandler : IMessageHandler
+    public sealed class GetOrderHandler : IMessageHandler
     {
         private readonly IOrderApi dao;
 
-        public GetOrderHandler(IOrderApi dao)
+        public GetOrderHandler(IOrderDaoFactory daoFactory, string dbName = null)
         {
-            this.dao = dao;
+            this.dao = daoFactory.CreateDao(dbName);
         }
 
         public bool CanHandle(Message message)

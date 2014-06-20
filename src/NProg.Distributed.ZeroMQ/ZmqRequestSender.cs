@@ -6,7 +6,7 @@ using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqRequestSender : RequestSender
+    public sealed class ZmqRequestSender : RequestSender
     {
         private ZmqSocket socket;
         private ZmqContext context;

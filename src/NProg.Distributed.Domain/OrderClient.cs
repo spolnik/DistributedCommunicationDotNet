@@ -1,12 +1,13 @@
 ﻿using System;
-using NProg.Distributed.Domain.Api;
-using NProg.Distributed.Domain.Requests;
-using NProg.Distributed.Domain.Responses;
+using NProg.Distributed.OrderService.Api;
+using NProg.Distributed.OrderService.Domain;
+using NProg.Distributed.OrderService.Requests;
+using NProg.Distributed.OrderService.Responses;
 using NProg.Distributed.Service.Messaging;
 
-namespace NProg.Distributed.Domain
+namespace NProg.Distributed.OrderService
 {
-    public class OrderClient : IOrderApi, IDisposable
+    public sealed class OrderClient : IOrderApi, IDisposable
     {
         private readonly IRequestSender requestSender;
 

@@ -1,6 +1,7 @@
 ﻿using System;
+using NProg.Distributed.OrderService.Domain;
 
-namespace NProg.Distributed.Domain.Api
+namespace NProg.Distributed.OrderService.Api
 {
     public interface IOrderApi
     {

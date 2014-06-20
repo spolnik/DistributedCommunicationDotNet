@@ -3,7 +3,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftMessageDispatcher : MessageService.Iface
+    public sealed class ThriftMessageDispatcher : MessageService.Iface
     {
         private readonly IMessageReceiver messageReceiver;
         private readonly IMessageMapper messageMapper;

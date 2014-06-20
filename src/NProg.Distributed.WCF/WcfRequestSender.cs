@@ -5,7 +5,7 @@ using NProg.Distributed.WCF.Service;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfRequestSender : RequestSender
+    public sealed class WcfRequestSender : RequestSender
     {
         private ChannelFactory<IMessageService> channelFactory;
         private readonly IMessageService proxy;

@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace NProg.Distributed.Domain.Responses
+namespace NProg.Distributed.OrderService.Responses
 {
     [Serializable]
-    public class StatusResponse
+    public sealed class StatusResponse
     {
         public bool Status { get; set; }
     }

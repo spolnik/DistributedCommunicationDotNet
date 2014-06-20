@@ -4,7 +4,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftServiceFactory : IServiceFactory
+    public sealed class ThriftServiceFactory : IServiceFactory
     {
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {

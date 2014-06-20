@@ -4,7 +4,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfServiceFactory : IServiceFactory
+    public sealed class WcfServiceFactory : IServiceFactory
     {
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {

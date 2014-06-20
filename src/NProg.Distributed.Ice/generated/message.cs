@@ -162,7 +162,7 @@ namespace NProgDistributed
         [_System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720")]
         [_System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1722")]
         [_System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1724")]
-        public partial interface MessageService : Ice.Object, MessageServiceOperations_, MessageServiceOperationsNC_
+        public partial interface IMessageService : Ice.Object, IMessageServiceOperations_, IMessageServiceOperationsNC_
         {
         }
     }
@@ -173,7 +173,7 @@ namespace NProgDistributed
     namespace TheIce
     {
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public delegate void Callback_MessageService_Send(NProgDistributed.TheIce.MessageDto ret__);
+        public delegate void Callback_IMessageService_Send(NProgDistributed.TheIce.MessageDto ret__);
     }
 }
 
@@ -182,18 +182,18 @@ namespace NProgDistributed
     namespace TheIce
     {
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public interface MessageDtoPrx : Ice.ObjectPrx
+        public interface IMessageDtoPrx : Ice.ObjectPrx
         {
         }
 
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public interface MessageServicePrx : Ice.ObjectPrx
+        public interface IMessageServicePrx : Ice.ObjectPrx
         {
             NProgDistributed.TheIce.MessageDto Send(NProgDistributed.TheIce.MessageDto message);
             NProgDistributed.TheIce.MessageDto Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> context__);
 
-            Ice.AsyncResult<NProgDistributed.TheIce.Callback_MessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message);
-            Ice.AsyncResult<NProgDistributed.TheIce.Callback_MessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> ctx__);
+            Ice.AsyncResult<NProgDistributed.TheIce.Callback_IMessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message);
+            Ice.AsyncResult<NProgDistributed.TheIce.Callback_IMessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> ctx__);
 
             Ice.AsyncResult begin_Send(NProgDistributed.TheIce.MessageDto message, Ice.AsyncCallback cb__, object cookie__);
             Ice.AsyncResult begin_Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> ctx__, Ice.AsyncCallback cb__, object cookie__);
@@ -208,13 +208,13 @@ namespace NProgDistributed
     namespace TheIce
     {
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public interface MessageServiceOperations_
+        public interface IMessageServiceOperations_
         {
             NProgDistributed.TheIce.MessageDto Send(NProgDistributed.TheIce.MessageDto message, Ice.Current current__);
         }
 
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public interface MessageServiceOperationsNC_
+        public interface IMessageServiceOperationsNC_
         {
             NProgDistributed.TheIce.MessageDto Send(NProgDistributed.TheIce.MessageDto message);
         }
@@ -227,7 +227,7 @@ namespace NProgDistributed
     {
         [_System.Runtime.InteropServices.ComVisible(false)]
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public sealed class MessageDtoPrxHelper : Ice.ObjectPrxHelperBase, MessageDtoPrx
+        public sealed class MessageDtoPrxHelper : Ice.ObjectPrxHelperBase, IMessageDtoPrx
         {
             #region Asynchronous operations
 
@@ -235,13 +235,13 @@ namespace NProgDistributed
 
             #region Checked and unchecked cast operations
 
-            public static MessageDtoPrx checkedCast(Ice.ObjectPrx b)
+            public static IMessageDtoPrx checkedCast(Ice.ObjectPrx b)
             {
                 if(b == null)
                 {
                     return null;
                 }
-                MessageDtoPrx r = b as MessageDtoPrx;
+                IMessageDtoPrx r = b as IMessageDtoPrx;
                 if((r == null) && b.ice_isA(ice_staticId()))
                 {
                     MessageDtoPrxHelper h = new MessageDtoPrxHelper();
@@ -251,13 +251,13 @@ namespace NProgDistributed
                 return r;
             }
 
-            public static MessageDtoPrx checkedCast(Ice.ObjectPrx b, _System.Collections.Generic.Dictionary<string, string> ctx)
+            public static IMessageDtoPrx checkedCast(Ice.ObjectPrx b, _System.Collections.Generic.Dictionary<string, string> ctx)
             {
                 if(b == null)
                 {
                     return null;
                 }
-                MessageDtoPrx r = b as MessageDtoPrx;
+                IMessageDtoPrx r = b as IMessageDtoPrx;
                 if((r == null) && b.ice_isA(ice_staticId(), ctx))
                 {
                     MessageDtoPrxHelper h = new MessageDtoPrxHelper();
@@ -267,7 +267,7 @@ namespace NProgDistributed
                 return r;
             }
 
-            public static MessageDtoPrx checkedCast(Ice.ObjectPrx b, string f)
+            public static IMessageDtoPrx checkedCast(Ice.ObjectPrx b, string f)
             {
                 if(b == null)
                 {
@@ -289,7 +289,7 @@ namespace NProgDistributed
                 return null;
             }
 
-            public static MessageDtoPrx checkedCast(Ice.ObjectPrx b, string f, _System.Collections.Generic.Dictionary<string, string> ctx)
+            public static IMessageDtoPrx checkedCast(Ice.ObjectPrx b, string f, _System.Collections.Generic.Dictionary<string, string> ctx)
             {
                 if(b == null)
                 {
@@ -311,13 +311,13 @@ namespace NProgDistributed
                 return null;
             }
 
-            public static MessageDtoPrx uncheckedCast(Ice.ObjectPrx b)
+            public static IMessageDtoPrx uncheckedCast(Ice.ObjectPrx b)
             {
                 if(b == null)
                 {
                     return null;
                 }
-                MessageDtoPrx r = b as MessageDtoPrx;
+                IMessageDtoPrx r = b as IMessageDtoPrx;
                 if(r == null)
                 {
                     MessageDtoPrxHelper h = new MessageDtoPrxHelper();
@@ -327,7 +327,7 @@ namespace NProgDistributed
                 return r;
             }
 
-            public static MessageDtoPrx uncheckedCast(Ice.ObjectPrx b, string f)
+            public static IMessageDtoPrx uncheckedCast(Ice.ObjectPrx b, string f)
             {
                 if(b == null)
                 {
@@ -364,12 +364,12 @@ namespace NProgDistributed
                 return new MessageDtoDelD_();
             }
 
-            public static void write__(IceInternal.BasicStream os__, MessageDtoPrx v__)
+            public static void write__(IceInternal.BasicStream os__, IMessageDtoPrx v__)
             {
                 os__.writeProxy(v__);
             }
 
-            public static MessageDtoPrx read__(IceInternal.BasicStream is__)
+            public static IMessageDtoPrx read__(IceInternal.BasicStream is__)
             {
                 Ice.ObjectPrx proxy = is__.readProxy();
                 if(proxy != null)
@@ -386,7 +386,7 @@ namespace NProgDistributed
 
         [_System.Runtime.InteropServices.ComVisible(false)]
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public sealed class MessageServicePrxHelper : Ice.ObjectPrxHelperBase, MessageServicePrx
+        public sealed class IMessageServicePrxHelper : Ice.ObjectPrxHelperBase, IMessageServicePrx
         {
             #region Synchronous operations
 
@@ -417,7 +417,7 @@ namespace NProgDistributed
                         {
                             checkTwowayOnly__(__Send_name);
                             delBase__ = getDelegate__(false);
-                            MessageServiceDel_ del__ = (MessageServiceDel_)delBase__;
+                            IMessageServiceDel_ del__ = (IMessageServiceDel_)delBase__;
                             return del__.Send(message, context__, observer__);
                         }
                         catch(IceInternal.LocalExceptionWrapper ex__)
@@ -443,12 +443,12 @@ namespace NProgDistributed
 
             #region Asynchronous operations
 
-            public Ice.AsyncResult<NProgDistributed.TheIce.Callback_MessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message)
+            public Ice.AsyncResult<NProgDistributed.TheIce.Callback_IMessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message)
             {
                 return begin_Send(message, null, false, null, null);
             }
 
-            public Ice.AsyncResult<NProgDistributed.TheIce.Callback_MessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> ctx__)
+            public Ice.AsyncResult<NProgDistributed.TheIce.Callback_IMessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> ctx__)
             {
                 return begin_Send(message, ctx__, true, null, null);
             }
@@ -503,10 +503,10 @@ namespace NProgDistributed
                 }
             }
 
-            private Ice.AsyncResult<NProgDistributed.TheIce.Callback_MessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> ctx__, bool explicitContext__, Ice.AsyncCallback cb__, object cookie__)
+            private Ice.AsyncResult<NProgDistributed.TheIce.Callback_IMessageService_Send> begin_Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> ctx__, bool explicitContext__, Ice.AsyncCallback cb__, object cookie__)
             {
                 checkAsyncTwowayOnly__(__Send_name);
-                IceInternal.TwowayOutgoingAsync<NProgDistributed.TheIce.Callback_MessageService_Send> result__ =  new IceInternal.TwowayOutgoingAsync<NProgDistributed.TheIce.Callback_MessageService_Send>(this, __Send_name, Send_completed__, cookie__);
+                IceInternal.TwowayOutgoingAsync<NProgDistributed.TheIce.Callback_IMessageService_Send> result__ =  new IceInternal.TwowayOutgoingAsync<NProgDistributed.TheIce.Callback_IMessageService_Send>(this, __Send_name, Send_completed__, cookie__);
                 if(cb__ != null)
                 {
                     result__.whenCompletedWithAsyncCallback(cb__);
@@ -527,7 +527,7 @@ namespace NProgDistributed
                 return result__;
             }
 
-            private void Send_completed__(Ice.AsyncResult r__, NProgDistributed.TheIce.Callback_MessageService_Send cb__, Ice.ExceptionCallback excb__)
+            private void Send_completed__(Ice.AsyncResult r__, NProgDistributed.TheIce.Callback_IMessageService_Send cb__, Ice.ExceptionCallback excb__)
             {
                 NProgDistributed.TheIce.MessageDto ret__;
                 try
@@ -552,39 +552,39 @@ namespace NProgDistributed
 
             #region Checked and unchecked cast operations
 
-            public static MessageServicePrx checkedCast(Ice.ObjectPrx b)
+            public static IMessageServicePrx checkedCast(Ice.ObjectPrx b)
             {
                 if(b == null)
                 {
                     return null;
                 }
-                MessageServicePrx r = b as MessageServicePrx;
+                IMessageServicePrx r = b as IMessageServicePrx;
                 if((r == null) && b.ice_isA(ice_staticId()))
                 {
-                    MessageServicePrxHelper h = new MessageServicePrxHelper();
+                    IMessageServicePrxHelper h = new IMessageServicePrxHelper();
                     h.copyFrom__(b);
                     r = h;
                 }
                 return r;
             }
 
-            public static MessageServicePrx checkedCast(Ice.ObjectPrx b, _System.Collections.Generic.Dictionary<string, string> ctx)
+            public static IMessageServicePrx checkedCast(Ice.ObjectPrx b, _System.Collections.Generic.Dictionary<string, string> ctx)
             {
                 if(b == null)
                 {
                     return null;
                 }
-                MessageServicePrx r = b as MessageServicePrx;
+                IMessageServicePrx r = b as IMessageServicePrx;
                 if((r == null) && b.ice_isA(ice_staticId(), ctx))
                 {
-                    MessageServicePrxHelper h = new MessageServicePrxHelper();
+                    IMessageServicePrxHelper h = new IMessageServicePrxHelper();
                     h.copyFrom__(b);
                     r = h;
                 }
                 return r;
             }
 
-            public static MessageServicePrx checkedCast(Ice.ObjectPrx b, string f)
+            public static IMessageServicePrx checkedCast(Ice.ObjectPrx b, string f)
             {
                 if(b == null)
                 {
@@ -595,7 +595,7 @@ namespace NProgDistributed
                 {
                     if(bb.ice_isA(ice_staticId()))
                     {
-                        MessageServicePrxHelper h = new MessageServicePrxHelper();
+                        IMessageServicePrxHelper h = new IMessageServicePrxHelper();
                         h.copyFrom__(bb);
                         return h;
                     }
@@ -606,7 +606,7 @@ namespace NProgDistributed
                 return null;
             }
 
-            public static MessageServicePrx checkedCast(Ice.ObjectPrx b, string f, _System.Collections.Generic.Dictionary<string, string> ctx)
+            public static IMessageServicePrx checkedCast(Ice.ObjectPrx b, string f, _System.Collections.Generic.Dictionary<string, string> ctx)
             {
                 if(b == null)
                 {
@@ -617,7 +617,7 @@ namespace NProgDistributed
                 {
                     if(bb.ice_isA(ice_staticId(), ctx))
                     {
-                        MessageServicePrxHelper h = new MessageServicePrxHelper();
+                        IMessageServicePrxHelper h = new IMessageServicePrxHelper();
                         h.copyFrom__(bb);
                         return h;
                     }
@@ -628,30 +628,30 @@ namespace NProgDistributed
                 return null;
             }
 
-            public static MessageServicePrx uncheckedCast(Ice.ObjectPrx b)
+            public static IMessageServicePrx uncheckedCast(Ice.ObjectPrx b)
             {
                 if(b == null)
                 {
                     return null;
                 }
-                MessageServicePrx r = b as MessageServicePrx;
+                IMessageServicePrx r = b as IMessageServicePrx;
                 if(r == null)
                 {
-                    MessageServicePrxHelper h = new MessageServicePrxHelper();
+                    IMessageServicePrxHelper h = new IMessageServicePrxHelper();
                     h.copyFrom__(b);
                     r = h;
                 }
                 return r;
             }
 
-            public static MessageServicePrx uncheckedCast(Ice.ObjectPrx b, string f)
+            public static IMessageServicePrx uncheckedCast(Ice.ObjectPrx b, string f)
             {
                 if(b == null)
                 {
                     return null;
                 }
                 Ice.ObjectPrx bb = b.ice_facet(f);
-                MessageServicePrxHelper h = new MessageServicePrxHelper();
+                IMessageServicePrxHelper h = new IMessageServicePrxHelper();
                 h.copyFrom__(bb);
                 return h;
             }
@@ -659,7 +659,7 @@ namespace NProgDistributed
             public static readonly string[] ids__ =
             {
                 "::Ice::Object",
-                "::NProgDistributed::TheIce::MessageService"
+                "::NProgDistributed::TheIce::IMessageService"
             };
 
             public static string ice_staticId()
@@ -673,25 +673,25 @@ namespace NProgDistributed
 
             protected override Ice.ObjectDelM_ createDelegateM__()
             {
-                return new MessageServiceDelM_();
+                return new IMessageServiceDelM_();
             }
 
             protected override Ice.ObjectDelD_ createDelegateD__()
             {
-                return new MessageServiceDelD_();
+                return new IMessageServiceDelD_();
             }
 
-            public static void write__(IceInternal.BasicStream os__, MessageServicePrx v__)
+            public static void write__(IceInternal.BasicStream os__, IMessageServicePrx v__)
             {
                 os__.writeProxy(v__);
             }
 
-            public static MessageServicePrx read__(IceInternal.BasicStream is__)
+            public static IMessageServicePrx read__(IceInternal.BasicStream is__)
             {
                 Ice.ObjectPrx proxy = is__.readProxy();
                 if(proxy != null)
                 {
-                    MessageServicePrxHelper result = new MessageServicePrxHelper();
+                    IMessageServicePrxHelper result = new IMessageServicePrxHelper();
                     result.copyFrom__(proxy);
                     return result;
                 }
@@ -708,12 +708,12 @@ namespace NProgDistributed
     namespace TheIce
     {
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public interface MessageDtoDel_ : Ice.ObjectDel_
+        public interface IMessageDtoDel : Ice.ObjectDel_
         {
         }
 
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public interface MessageServiceDel_ : Ice.ObjectDel_
+        public interface IMessageServiceDel_ : Ice.ObjectDel_
         {
             NProgDistributed.TheIce.MessageDto Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__);
         }
@@ -726,13 +726,13 @@ namespace NProgDistributed
     {
         [_System.Runtime.InteropServices.ComVisible(false)]
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public sealed class MessageDtoDelM_ : Ice.ObjectDelM_, MessageDtoDel_
+        public sealed class MessageDtoDelM_ : Ice.ObjectDelM_, IMessageDtoDel
         {
         }
 
         [_System.Runtime.InteropServices.ComVisible(false)]
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public sealed class MessageServiceDelM_ : Ice.ObjectDelM_, MessageServiceDel_
+        public sealed class IMessageServiceDelM_ : Ice.ObjectDelM_, IMessageServiceDel_
         {
             public NProgDistributed.TheIce.MessageDto Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__)
             {
@@ -793,13 +793,13 @@ namespace NProgDistributed
     {
         [_System.Runtime.InteropServices.ComVisible(false)]
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public sealed class MessageDtoDelD_ : Ice.ObjectDelD_, MessageDtoDel_
+        public sealed class MessageDtoDelD_ : Ice.ObjectDelD_, IMessageDtoDel
         {
         }
 
         [_System.Runtime.InteropServices.ComVisible(false)]
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public sealed class MessageServiceDelD_ : Ice.ObjectDelD_, MessageServiceDel_
+        public sealed class IMessageServiceDelD_ : Ice.ObjectDelD_, IMessageServiceDel_
         {
             [_System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031")]
             public NProgDistributed.TheIce.MessageDto Send(NProgDistributed.TheIce.MessageDto message, _System.Collections.Generic.Dictionary<string, string> context__, Ice.Instrumentation.InvocationObserver observer__)
@@ -809,10 +809,10 @@ namespace NProgDistributed
                 NProgDistributed.TheIce.MessageDto result__ = null;
                 IceInternal.Direct.RunDelegate run__ = delegate(Ice.Object obj__)
                 {
-                    MessageService servant__ = null;
+                    IMessageService servant__ = null;
                     try
                     {
-                        servant__ = (MessageService)obj__;
+                        servant__ = (IMessageService)obj__;
                     }
                     catch(_System.InvalidCastException)
                     {
@@ -855,7 +855,7 @@ namespace NProgDistributed
     {
         [_System.Runtime.InteropServices.ComVisible(false)]
         [_System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.5.1")]
-        public abstract class MessageServiceDisp_ : Ice.ObjectImpl, MessageService
+        public abstract class IMessageServiceDisp_ : Ice.ObjectImpl, IMessageService
         {
             #region Slice operations
 
@@ -873,7 +873,7 @@ namespace NProgDistributed
             public static new readonly string[] ids__ = 
             {
                 "::Ice::Object",
-                "::NProgDistributed::TheIce::MessageService"
+                "::NProgDistributed::TheIce::IMessageService"
             };
 
             public override bool ice_isA(string s)
@@ -916,7 +916,7 @@ namespace NProgDistributed
             #region Operation dispatch
 
             [_System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
-            public static Ice.DispatchStatus Send___(MessageService obj__, IceInternal.Incoming inS__, Ice.Current current__)
+            public static Ice.DispatchStatus Send___(IMessageService obj__, IceInternal.Incoming inS__, Ice.Current current__)
             {
                 checkMode__(Ice.OperationMode.Normal, current__.mode);
                 IceInternal.BasicStream is__ = inS__.startReadParams();

@@ -26,7 +26,7 @@ namespace NProg.Distributed.Service.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="json">The json.</param>
         /// <returns>T.</returns>
-        public static T ReadFromJson<T>(this string json)
+        internal static T ReadFromJson<T>(this string json)
         {
             return JsonConvert.DeserializeObject<T>(json);
         }

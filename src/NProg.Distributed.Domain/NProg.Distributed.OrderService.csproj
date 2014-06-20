@@ -7,8 +7,8 @@
     <ProjectGuid>{1487C697-4873-4265-B346-8782DA31B3AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Domain</RootNamespace>
-    <AssemblyName>NProg.Distributed.Domain</AssemblyName>
+    <RootNamespace>NProg.Distributed.OrderService</RootNamespace>
+    <AssemblyName>NProg.Distributed.OrderService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,8 +43,8 @@
     <Compile Include="Handlers\AddOrderHandler.cs" />
     <Compile Include="Handlers\GetOrderHandler.cs" />
     <Compile Include="Handlers\RemoveOrderHandler.cs" />
-    <Compile Include="IOrderDaoFactory.cs" />
-    <Compile Include="Order.cs" />
+    <Compile Include="Database\IOrderDaoFactory.cs" />
+    <Compile Include="Domain\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\AddOrderRequest.cs" />
     <Compile Include="Requests\GetOrderRequest.cs" />

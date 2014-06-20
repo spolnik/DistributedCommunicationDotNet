@@ -6,7 +6,7 @@ using NProg.Distributed.WCF.Service;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfMessageServer : IRunnable
+    public sealed class WcfMessageServer : IRunnable
     {
         private readonly IMessageReceiver messageReceiver;
         private readonly int port;

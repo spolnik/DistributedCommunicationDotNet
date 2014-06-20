@@ -5,7 +5,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.NetMQ
 {
-    public class NmqRequestSender : RequestSender
+    public sealed class NmqRequestSender : RequestSender
     {
         private NetMQSocket socket;
         private NetMQContext context;

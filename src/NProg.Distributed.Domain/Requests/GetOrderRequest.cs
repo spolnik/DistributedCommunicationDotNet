@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace NProg.Distributed.Domain.Requests
+namespace NProg.Distributed.OrderService.Requests
 {
     [Serializable]
-    public class GetOrderRequest
+    public sealed class GetOrderRequest
     {
         public Guid OrderId { get; set; }
     }

@@ -4,7 +4,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.NetMQ
 {
-    public class NmqServiceFactory : IServiceFactory
+    public sealed class NmqServiceFactory : IServiceFactory
     {
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {

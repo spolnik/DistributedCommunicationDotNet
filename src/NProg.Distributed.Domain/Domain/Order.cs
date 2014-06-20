@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace NProg.Distributed.Domain
+namespace NProg.Distributed.OrderService.Domain
 {
     [Serializable]
-    public class Order
+    public sealed class Order
     {
         public Guid OrderId { get; set; }
 
@@ -31,7 +31,7 @@ namespace NProg.Distributed.Domain
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Order) obj);
         }
 

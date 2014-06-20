@@ -13,7 +13,7 @@ namespace NProg.Distributed.ZeroMQ
     /// <summary>
     /// Class ZmqMessageServer.
     /// </summary>
-    public class ZmqMessageServer : IRunnable
+    public sealed class ZmqMessageServer : IRunnable
     {
         /// <summary>
         /// The port
@@ -77,7 +77,7 @@ namespace NProg.Distributed.ZeroMQ
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing && !token.IsCancellationRequested)
             {
@@ -109,7 +109,7 @@ namespace NProg.Distributed.ZeroMQ
         /// <summary>
         /// Class ZmqResponseQueue.
         /// </summary>
-        private class ZmqResponseQueue
+        private sealed class ZmqResponseQueue : IDisposable
         {
             /// <summary>
             /// The socket
@@ -165,7 +165,7 @@ namespace NProg.Distributed.ZeroMQ
             /// Releases unmanaged and - optionally - managed resources.
             /// </summary>
             /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-            protected void Dispose(bool disposing)
+            private void Dispose(bool disposing)
             {
                 if (disposing && socket != null)
                 {

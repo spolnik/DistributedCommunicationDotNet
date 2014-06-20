@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Service\IMessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\NetDataContractOperationBehavior.cs" />
+    <Compile Include="Service\UseNetDataContractSerializerAttribute.cs" />
     <Compile Include="WcfRequestSender.cs" />
     <Compile Include="WcfMessageService.cs" />
     <Compile Include="WcfMessageServer.cs" />

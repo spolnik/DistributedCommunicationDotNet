@@ -5,7 +5,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceMessageServer : IRunnable
+    public sealed class IceMessageServer : IRunnable
     {
         private readonly IceMessageDispatcher receiver;
         private readonly int port;

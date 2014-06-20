@@ -3,7 +3,7 @@
     /// <summary>
     /// Class MessageReceiver.
     /// </summary>
-    public class MessageReceiver : IMessageReceiver
+    public sealed class MessageReceiver : IMessageReceiver
     {
         /// <summary>
         /// The handler register

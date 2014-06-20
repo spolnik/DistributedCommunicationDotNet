@@ -6,11 +6,11 @@ using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceRequestSender : RequestSender
+    public sealed class IceRequestSender : RequestSender
     {
         private readonly IMessageMapper messageMapper;
         private Communicator communicator;
-        private readonly MessageServicePrx proxy;
+        private readonly IMessageServicePrx proxy;
 
         public IceRequestSender(Uri serviceUri, IMessageMapper messageMapper)
         {
@@ -18,7 +18,7 @@ namespace NProg.Distributed.Ice
             var address = string.Format("OrderService:tcp -p {1} -h {0}", serviceUri.Host, serviceUri.Port);
 
             communicator = Util.initialize();
-            proxy = MessageServicePrxHelper.checkedCast(communicator.stringToProxy(address));
+            proxy = IMessageServicePrxHelper.checkedCast(communicator.stringToProxy(address));
         }
 
         protected override Message SendInternal(Message message)

@@ -7,7 +7,7 @@ module NProgDistributed
 			string messageType;
 		};
 
-		interface MessageService {   
+		interface IMessageService {   
 			MessageDto Send(MessageDto message);
 		};
 	};

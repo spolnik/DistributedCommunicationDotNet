@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NProg.Distributed.Domain.Handlers;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.NetMQ;
+using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
@@ -14,52 +14,50 @@ using NProg.Distributed.Zyan;
 
 namespace NProg.Distributed.Server
 {
-    public static class Program
+    public static class ServerProgram
     {
         static void Main(string[] args)
         {
             if (args.Length < 2)
-                throw new ArgumentException("Usage: NProg.Distributed.Client.exe <framework> <port>");
+                throw new ArgumentException("Usage: NProg.Distributed.Server.exe <framework> <port>");
 
             var framework = args[0];
             var port = Convert.ToInt32(args[1]);
             Console.WriteLine("Running for framework: {0}, port: {1}", framework, port);
 
-            IRunnable server = null;
-            
-            try
+            var orderServiceFactory = GetMessageServiceFactory(framework);
+            var messageMapper = orderServiceFactory.GetMessageMapper();
+
+            var messageReceiver = GetMessageReceiver();
+
+            using (var server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port))
             {
-                var orderServiceFactory = GetOrderServiceFactory(framework);
-                var messageMapper = orderServiceFactory.GetMessageMapper();
-
-                var inMemoryDao = new InMemoryDao();
-                var register = new List<IMessageHandler>
-                {
-                    new AddOrderHandler(inMemoryDao),
-                    new GetOrderHandler(inMemoryDao),
-                    new RemoveOrderHandler(inMemoryDao)
-                };
-
-                var handlerRegister = new HandlerRegister(register);
-                var messageReceiver = new MessageReceiver(handlerRegister);
-
-                server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port);
-                
                 Console.WriteLine("Server running ...");
                 server.Run();
                 Console.WriteLine("Press <enter> to stop server...");
                 Console.ReadLine();
             }
-            finally
-            {
-                if (server != null)
-                    server.Dispose();
 
-                Console.WriteLine("Server stopped.");    
-            }
+            Console.WriteLine("Server stopped.");    
         }
 
-        private static IServiceFactory GetOrderServiceFactory(string framework)
+        private static MessageReceiver GetMessageReceiver()
+        {
+            var orderDaoFactory = new OrderDaoFactory();
+
+            var register = new List<IMessageHandler>
+            {
+                new AddOrderHandler(orderDaoFactory),
+                new GetOrderHandler(orderDaoFactory),
+                new RemoveOrderHandler(orderDaoFactory)
+            };
+
+            var handlerRegister = new HandlerRegister(register);
+            var messageReceiver = new MessageReceiver(handlerRegister);
+            return messageReceiver;
+        }
+
+        private static IServiceFactory GetMessageServiceFactory(string framework)
         {
             switch (framework)
             {

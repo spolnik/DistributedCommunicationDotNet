@@ -50,9 +50,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
-      <Name>NProg.Distributed.Domain</Name>
+      <Name>NProg.Distributed.OrderService</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>

@@ -4,11 +4,12 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
-using NProg.Distributed.Domain;
-using NProg.Distributed.Domain.Handlers;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NDatabase;
 using NProg.Distributed.NetMQ;
+using NProg.Distributed.OrderService;
+using NProg.Distributed.OrderService.Domain;
+using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
@@ -54,12 +55,12 @@ namespace NProg.Distributed.Tests
                 var orderServiceFactory = GetOrderServiceFactory(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
 
-                var inMemoryDao = new InMemoryDao();
+                var orderDaoFactory = new OrderDaoFactory();
                 var register = new List<IMessageHandler>
                 {
-                    new AddOrderHandler(inMemoryDao),
-                    new GetOrderHandler(inMemoryDao),
-                    new RemoveOrderHandler(inMemoryDao)
+                    new AddOrderHandler(orderDaoFactory),
+                    new GetOrderHandler(orderDaoFactory),
+                    new RemoveOrderHandler(orderDaoFactory)
                 };
 
                 var handlerRegister = new HandlerRegister(register);

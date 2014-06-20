@@ -6,7 +6,7 @@ namespace NProg.Distributed.Service.Messaging
     /// <summary>
     /// Class HandlerRegister.
     /// </summary>
-    public class HandlerRegister : IHandlerRegister
+    public sealed class HandlerRegister : IHandlerRegister
     {
         /// <summary>
         /// The register

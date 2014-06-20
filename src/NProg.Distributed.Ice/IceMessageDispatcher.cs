@@ -5,7 +5,7 @@ using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceMessageDispatcher : MessageServiceDisp_
+    public sealed class IceMessageDispatcher : IMessageServiceDisp_
     {
         private readonly IMessageReceiver messageReceiver;
         private readonly IMessageMapper messageMapper;

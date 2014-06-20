@@ -6,7 +6,7 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftRequestSender : RequestSender
+    public sealed class ThriftRequestSender : RequestSender
     {
         private readonly IMessageMapper messageMapper;
         private TBufferedTransport transport;

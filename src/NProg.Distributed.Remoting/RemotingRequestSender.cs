@@ -5,7 +5,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingRequestSender : RequestSender
+    public sealed class RemotingRequestSender : RequestSender
     {
         private readonly RemotingOrderHandler proxy;
 

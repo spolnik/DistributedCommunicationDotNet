@@ -4,13 +4,8 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Zyan
 {
-    public class ZyanServiceFactory : IServiceFactory
+    public sealed class ZyanServiceFactory : IServiceFactory
     {
-        public IMessageReceiver GetMessageReceiver(IHandlerRegister handlerRegister)
-        {
-            return new MessageReceiver(handlerRegister);
-        }
-
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {
             return new ZyanMessageServer(messageReceiver, port);
@@ -25,7 +20,5 @@ namespace NProg.Distributed.Zyan
         {
             return new ZyanRequestSender(serviceUri);
         }
-
     }
-
 }

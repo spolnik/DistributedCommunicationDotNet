@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using NProg.Distributed.Domain;
-using NProg.Distributed.Domain.Api;
+using NProg.Distributed.OrderService.Api;
+using NProg.Distributed.OrderService.Domain;
 
 namespace NProg.Distributed.NDatabase
 {
-    public class InMemoryDao : IOrderApi
+    public sealed class InMemoryDao : IOrderApi
     {
-        private static readonly ConcurrentDictionary<Guid, Order> InmemoryDb = new ConcurrentDictionary<Guid, Order>();
+        private static readonly ConcurrentDictionary<Guid, Order> InMemoryDb = new ConcurrentDictionary<Guid, Order>();
 
         public bool Add(Guid key, Order value)
         {
-            InmemoryDb.AddOrUpdate(key, value, (guid, order) => order);
+            InMemoryDb.AddOrUpdate(key, value, (guid, order) => order);
 
             return true;
         }
@@ -19,7 +19,7 @@ namespace NProg.Distributed.NDatabase
         public Order Get(Guid key)
         {
             Order value;
-            InmemoryDb.TryGetValue(key, out value);
+            InMemoryDb.TryGetValue(key, out value);
 
             return value ?? new Order();
         }
@@ -27,7 +27,7 @@ namespace NProg.Distributed.NDatabase
         public bool Remove(Guid key)
         {
             Order value;
-            return InmemoryDb.TryRemove(key, out value);
+            return InMemoryDb.TryRemove(key, out value);
         }
     }
 }

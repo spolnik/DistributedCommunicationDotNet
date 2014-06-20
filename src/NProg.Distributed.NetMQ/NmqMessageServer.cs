@@ -11,7 +11,7 @@ namespace NProg.Distributed.NetMQ
     /// <summary>
     /// Class NmqMessageServer.
     /// </summary>
-    public class NmqMessageServer : IRunnable
+    public sealed class NmqMessageServer : IRunnable
     {
         /// <summary>
         /// The port
@@ -107,7 +107,7 @@ namespace NProg.Distributed.NetMQ
         /// <summary>
         /// Class NmqResponseQueue.
         /// </summary>
-        private class NmqResponseQueue
+        private sealed class NmqResponseQueue : IDisposable
         {
             /// <summary>
             /// The socket

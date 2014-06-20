@@ -1,9 +1,10 @@
 ﻿using System;
+using NProg.Distributed.OrderService.Domain;
 
-namespace NProg.Distributed.Domain.Requests
+namespace NProg.Distributed.OrderService.Requests
 {
     [Serializable]
-    public class AddOrderRequest
+    public sealed class AddOrderRequest
     {
         public Order Order { get; set; }
     }

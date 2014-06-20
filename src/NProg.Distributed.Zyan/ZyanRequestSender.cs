@@ -4,7 +4,7 @@ using Zyan.Communication;
 
 namespace NProg.Distributed.Zyan
 {
-    public class ZyanRequestSender : RequestSender
+    public sealed class ZyanRequestSender : RequestSender
     {
         private readonly IMessageReceiver proxy;
         private ZyanConnection connection;

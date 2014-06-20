@@ -4,7 +4,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceServiceFactory : IServiceFactory
+    public sealed class IceServiceFactory : IServiceFactory
     {
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {

@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C63D0373-27C0-4C1C-AEB6-935FBF0465B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Domain", "src\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj", "{1487C697-4873-4265-B346-8782DA31B3AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService", "src\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj", "{1487C697-4873-4265-B346-8782DA31B3AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{842095DB-A845-4F4F-B00C-B1EA348DB446}"
 EndProject
@@ -74,6 +74,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0201
 		scripts\StartServer.Zyan.cmd = scripts\StartServer.Zyan.cmd
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{DC560D10-161C-48AC-9910-116DBD826E37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,7 +139,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1487C697-4873-4265-B346-8782DA31B3AF} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
+		{1487C697-4873-4265-B346-8782DA31B3AF} = {DC560D10-161C-48AC-9910-116DBD826E37}
 		{842095DB-A845-4F4F-B00C-B1EA348DB446} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
 		{7FED1E69-8B86-4936-93EA-910BCE279F53} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
 		{04832DD2-FE42-4845-B39A-5F4B356C74C9} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
@@ -155,8 +157,9 @@ Global
 		{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{020167E8-2831-4C25-BD8F-E6E965D1F534} = {AB3E64C8-1914-4741-8D26-CE354A70FFCB}
+		{DC560D10-161C-48AC-9910-116DBD826E37} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
 	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
-		Project = ".\NProg.Distributed.ndproj"
+		Project = ""
 	EndGlobalSection
 EndGlobal

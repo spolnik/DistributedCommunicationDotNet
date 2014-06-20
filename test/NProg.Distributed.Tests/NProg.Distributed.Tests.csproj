@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">
+    <ProjectReference Include="..\..\src\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
       <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
-      <Name>NProg.Distributed.Domain</Name>
+      <Name>NProg.Distributed.OrderService</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\NProg.Distributed.Ice\NProg.Distributed.Ice.csproj">
       <Project>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</Project>

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using NDatabase;
-using NProg.Distributed.Domain;
-using NProg.Distributed.Domain.Api;
+using NProg.Distributed.OrderService.Api;
+using NProg.Distributed.OrderService.Domain;
 
 namespace NProg.Distributed.NDatabase
 {
-    public class NdbOdbDao : IOrderApi
+    public sealed class NdbOdbDao : IOrderApi
     {
         private readonly string dbName;
 

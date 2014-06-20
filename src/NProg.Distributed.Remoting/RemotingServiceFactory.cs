@@ -4,7 +4,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingServiceFactory : IServiceFactory
+    public sealed class RemotingServiceFactory : IServiceFactory
     {
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {

@@ -1,6 +1,6 @@
-﻿using NProg.Distributed.Domain.Api;
+﻿using NProg.Distributed.OrderService.Api;
 
-namespace NProg.Distributed.Domain
+namespace NProg.Distributed.OrderService.Database
 {
     public interface IOrderDaoFactory
     {

@@ -12,7 +12,7 @@ namespace NProg.Distributed.Client
         static Log()
         {
             XmlConfigurator.Configure();
-            Logger = LogManager.GetLogger(typeof(Program));
+            Logger = LogManager.GetLogger(typeof(ClientProgram));
         }
 
         internal static void WriteLine(string format, params object[] args)

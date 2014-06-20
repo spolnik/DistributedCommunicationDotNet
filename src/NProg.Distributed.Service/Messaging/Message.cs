@@ -7,7 +7,7 @@ namespace NProg.Distributed.Service.Messaging
     /// Class Message.
     /// </summary>
     [Serializable]
-    public class Message
+    public sealed class Message
     {
         /// <summary>
         /// The body

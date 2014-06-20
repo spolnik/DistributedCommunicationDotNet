@@ -12,7 +12,7 @@ namespace NProg.Distributed.Service.Extensions
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>System.String.</returns>
-        public static string GetMessageType(this object obj)
+        internal static string GetMessageType(this object obj)
         {
             return obj.GetType().AssemblyQualifiedName;
         }
