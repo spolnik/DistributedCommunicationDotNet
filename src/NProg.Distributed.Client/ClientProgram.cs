@@ -1,19 +1,14 @@
 ﻿using System;
+using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using log4net;
 using log4net.Config;
-using NProg.Distributed.Ice;
-using NProg.Distributed.NetMQ;
 using NProg.Distributed.OrderService;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Domain;
-using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Composition;
 using NProg.Distributed.Service.Messaging;
-using NProg.Distributed.Thrift;
-using NProg.Distributed.WCF;
-using NProg.Distributed.ZeroMQ;
-using NProg.Distributed.Zyan;
 
 namespace NProg.Distributed.Client
 {
@@ -68,7 +63,7 @@ namespace NProg.Distributed.Client
 
         private static IRequestSender GetRequestSender(string framework, int port)
         {
-            var orderServiceFactory = GetOrderServiceFactory(framework);
+            var orderServiceFactory = GetServiceFactory(framework);
             var messageMapper = orderServiceFactory.GetMessageMapper();
             var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port),
                 messageMapper);
@@ -108,27 +103,19 @@ namespace NProg.Distributed.Client
             Log.WriteLine("Order {0}", i);
         }
 
-        private static IServiceFactory GetOrderServiceFactory(string framework)
+        private static IServiceFactory GetServiceFactory(string framework)
         {
-            switch (framework)
+            var mainDirectoryCatalog = new DirectoryCatalog(".");
+            var compositionContainer = new CompositionContainer(mainDirectoryCatalog);
+            var export = compositionContainer.GetExport<ServiceComposer>();
+
+            if (export == null)
             {
-                case "wcf":
-                    return new WcfServiceFactory();
-                case "thrift":
-                    return new ThriftServiceFactory();
-                case "zmq":
-                    return new ZmqServiceFactory();
-                case "nmq":
-                    return new NmqServiceFactory();
-                case "remoting":
-                    return new RemotingServiceFactory();
-                case "zyan":
-                    return new ZyanServiceFactory();
-                case "ice":
-                    return new IceServiceFactory();
-                default:
-                    throw new InvalidOperationException();
+                return null;
             }
+
+            var serviceComposer = export.Value;
+            return serviceComposer.GetFactory(framework);
         }
 
         #region Nested type: Log

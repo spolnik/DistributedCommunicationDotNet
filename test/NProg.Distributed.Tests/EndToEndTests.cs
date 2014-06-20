@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
-using NProg.Distributed.Ice;
 using NProg.Distributed.NDatabase;
-using NProg.Distributed.NetMQ;
 using NProg.Distributed.OrderService;
 using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Handlers;
-using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Composition;
 using NProg.Distributed.Service.Messaging;
-using NProg.Distributed.Thrift;
-using NProg.Distributed.WCF;
-using NProg.Distributed.ZeroMQ;
-using NProg.Distributed.Zyan;
 using NUnit.Framework;
 
 namespace NProg.Distributed.Tests
@@ -52,7 +47,7 @@ namespace NProg.Distributed.Tests
 
             try
             {
-                var orderServiceFactory = GetOrderServiceFactory(framework);
+                var orderServiceFactory = GetServiceFactory(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
 
                 var orderDaoFactory = new InMemoryOrderDaoFactory();
@@ -98,7 +93,7 @@ namespace NProg.Distributed.Tests
             Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
             stopwatch.Start();
 
-            var orderServiceFactory = GetOrderServiceFactory(framework);
+            var orderServiceFactory = GetServiceFactory(framework);
             var messageMapper = orderServiceFactory.GetMessageMapper();
             var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port), messageMapper);
             using (var client = new OrderClient(requestSender))
@@ -136,27 +131,19 @@ namespace NProg.Distributed.Tests
                 stopwatch.ElapsedMilliseconds);
         }
 
-        private static IServiceFactory GetOrderServiceFactory(string framework)
+        private static IServiceFactory GetServiceFactory(string framework)
         {
-            switch (framework)
+            var mainDirectoryCatalog = new DirectoryCatalog(".");
+            var compositionContainer = new CompositionContainer(mainDirectoryCatalog);
+            var export = compositionContainer.GetExport<ServiceComposer>();
+
+            if (export == null)
             {
-                case "wcf":
-                    return new WcfServiceFactory();
-                case "thrift":
-                    return new ThriftServiceFactory();
-                case "zmq":
-                    return new ZmqServiceFactory();
-                case "nmq":
-                    return new NmqServiceFactory();
-                case "remoting":
-                    return new RemotingServiceFactory();
-                case "zyan":
-                    return new ZyanServiceFactory();
-                case "ice":
-                    return new IceServiceFactory();
-                default:
-                    throw new InvalidOperationException();
+                return null;
             }
+
+            var serviceComposer = export.Value;
+            return serviceComposer.GetFactory(framework);
         }
     }
 }

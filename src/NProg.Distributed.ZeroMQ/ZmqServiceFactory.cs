@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.ZeroMQ
 {
+    [Export(typeof(IServiceFactory)), ExportMetadata("Name", "zmq")]
     public sealed class ZmqServiceFactory : IServiceFactory
     {
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)

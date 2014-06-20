@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using NProg.Distributed.Ice;
+using System.ComponentModel.Composition.Hosting;
 using NProg.Distributed.NDatabase;
-using NProg.Distributed.NetMQ;
 using NProg.Distributed.OrderService.Handlers;
-using NProg.Distributed.Remoting;
 using NProg.Distributed.Service;
+using NProg.Distributed.Service.Composition;
 using NProg.Distributed.Service.Messaging;
-using NProg.Distributed.Thrift;
-using NProg.Distributed.WCF;
-using NProg.Distributed.ZeroMQ;
-using NProg.Distributed.Zyan;
 
 namespace NProg.Distributed.Server
 {
@@ -59,25 +54,17 @@ namespace NProg.Distributed.Server
 
         private static IServiceFactory GetMessageServiceFactory(string framework)
         {
-            switch (framework)
+            var mainDirectoryCatalog = new DirectoryCatalog(".");
+            var compositionContainer = new CompositionContainer(mainDirectoryCatalog);
+            var export = compositionContainer.GetExport<ServiceComposer>();
+
+            if (export == null)
             {
-                case "wcf":
-                    return new WcfServiceFactory();
-                case "thrift":
-                    return new ThriftServiceFactory();
-                case "zmq":
-                    return new ZmqServiceFactory();
-                case "nmq":
-                    return new NmqServiceFactory();
-                case "remoting":
-                    return new RemotingServiceFactory();
-                case "zyan":
-                    return new ZyanServiceFactory();
-                case "ice":
-                    return new IceServiceFactory();
-                default:
-                    throw new InvalidOperationException();
+                return null;
             }
+
+            var serviceComposer = export.Value;
+            return serviceComposer.GetFactory(framework);
         }
     }
 }
