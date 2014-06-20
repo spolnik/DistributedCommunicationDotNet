@@ -2,11 +2,11 @@
 using System.Linq;
 using NDatabase;
 using NProg.Distributed.Domain;
-using NProg.Distributed.Service;
+using NProg.Distributed.Domain.Api;
 
 namespace NProg.Distributed.NDatabase
 {
-    public class NdbOdbDao : IHandler<Guid, Order>
+    public class NdbOdbDao : IOrderApi
     {
         private readonly string dbName;
 
@@ -15,12 +15,14 @@ namespace NProg.Distributed.NDatabase
             this.dbName = dbName;
         }
 
-        public void Add(Guid key, Order value)
+        public bool Add(Guid key, Order value)
         {
             using (var odb = OdbFactory.Open(dbName))
             {
                 odb.Store(value);
             }
+
+            return true;
         }
 
         public Order Get(Guid key)

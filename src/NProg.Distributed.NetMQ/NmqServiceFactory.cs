@@ -6,7 +6,7 @@ namespace NProg.Distributed.NetMQ
 {
     public class NmqServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
+        public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {
             return new NmqMessageServer(messageReceiver, port);
         }

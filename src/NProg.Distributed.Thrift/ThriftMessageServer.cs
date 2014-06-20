@@ -8,7 +8,7 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    public class ThriftMessageServer : IServer
+    public class ThriftMessageServer : IRunnable
     {
         private readonly int port;
         private readonly MessageService.Iface receiver;
@@ -20,7 +20,7 @@ namespace NProg.Distributed.Thrift
             receiver = new ThriftMessageDispatcher(messageReceiver, messageMapper);
         }
 
-        public void Start()
+        public void Run()
         {
             try
             {
@@ -36,9 +36,18 @@ namespace NProg.Distributed.Thrift
             }
         }
 
-        public void Stop()
+        public void Dispose()
         {
-            server.Stop();
+            Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing && server != null)
+            {
+                server.Stop();
+                server = null;
+            }
         }
     }
 }

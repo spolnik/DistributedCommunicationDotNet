@@ -4,10 +4,10 @@ using Zyan.Communication;
 
 namespace NProg.Distributed.Zyan
 {
-    public class ZyanMessageServer : IServer
+    public class ZyanMessageServer : IRunnable
     {
         private readonly MessageReceiver receiver;
-        private readonly ZyanComponentHost host;
+        private ZyanComponentHost host;
 
         public ZyanMessageServer(IMessageReceiver messageReceiver, int port)
         {
@@ -15,14 +15,23 @@ namespace NProg.Distributed.Zyan
             host = new ZyanComponentHost("OrderService", port);
         }
 
-        public void Start()
+        public void Run()
         {
             host.RegisterComponent<IMessageReceiver, MessageReceiver>(receiver);
         }
 
-        public void Stop()
+        public void Dispose()
         {
-            host.Dispose();
+            Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing && host != null)
+            {
+                host.Dispose();
+                host = null;
+            }
         }
     }
 }

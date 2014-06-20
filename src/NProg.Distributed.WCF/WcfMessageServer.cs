@@ -6,7 +6,7 @@ using NProg.Distributed.WCF.Service;
 
 namespace NProg.Distributed.WCF
 {
-    public class WcfMessageServer : IServer
+    public class WcfMessageServer : IRunnable
     {
         private readonly IMessageReceiver messageReceiver;
         private readonly int port;
@@ -18,7 +18,7 @@ namespace NProg.Distributed.WCF
             this.port = port;
         }
 
-        public void Start()
+        public void Run()
         {
             var serverUri = new Uri(string.Format("net.tcp://localhost:{0}/OrderService", port));
             var wcfMessageService = new WcfMessageService(messageReceiver);
@@ -28,9 +28,18 @@ namespace NProg.Distributed.WCF
             host.Open();
         }
 
-        public void Stop()
+        public void Dispose()
         {
-            host.Close();
+            Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing && host != null)
+            {
+                host.Close();
+                host = null;
+            }
         }
     }
 }

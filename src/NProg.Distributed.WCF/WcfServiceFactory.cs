@@ -6,7 +6,7 @@ namespace NProg.Distributed.WCF
 {
     public class WcfServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {
             return new WcfMessageServer(messageReceiver, port);
         }

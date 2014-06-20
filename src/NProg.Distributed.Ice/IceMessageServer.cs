@@ -1,35 +1,43 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Ice;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceMessageServer : IServer
+    public class IceMessageServer : IRunnable
     {
-        private readonly IceMessageDispatcher handler;
+        private readonly IceMessageDispatcher receiver;
         private readonly int port;
-        private readonly Communicator communicator;
+        private Communicator communicator;
 
         public IceMessageServer(IMessageReceiver messagerReceiver, IMessageMapper messageMapper, int port)
         {
-            this.handler = new IceMessageDispatcher(messagerReceiver, messageMapper);
+            receiver = new IceMessageDispatcher(messagerReceiver, messageMapper);
             this.port = port;
             communicator = Util.initialize();
         }
 
-        public void Start()
+        public void Run()
         {
             var adapter = communicator.createObjectAdapterWithEndpoints("OrderService", "tcp -p " + port);
-            adapter.add(handler, communicator.stringToIdentity("OrderService"));
+            adapter.add(receiver, communicator.stringToIdentity("OrderService"));
             adapter.activate();
             Task.Factory.StartNew(() => communicator.waitForShutdown());
         }
 
-        public void Stop()
+        public void Dispose()
         {
-            communicator.destroy();
+            Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing && communicator!= null)
+            {
+                communicator.destroy();
+                communicator = null;
+            }
         }
     }
 }

@@ -47,7 +47,7 @@ namespace NProg.Distributed.Tests
         {
             Log.WriteLine("Running for framework: {0}, port: {1}", framework, port);
 
-            IServer server = null;
+            IRunnable server = null;
 
             try
             {
@@ -68,7 +68,7 @@ namespace NProg.Distributed.Tests
                 server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port);
 
                 Log.WriteLine("Server running ...");
-                server.Start();
+                server.Run();
 
                 var delay = Task.Delay(TimeSpan.FromMinutes(5));
                 delay.Wait(source.Token);
@@ -80,7 +80,7 @@ namespace NProg.Distributed.Tests
             finally
             {
                 if (server != null)
-                    server.Stop();
+                    server.Dispose();
 
                 Log.WriteLine("Server stopped.");
             }

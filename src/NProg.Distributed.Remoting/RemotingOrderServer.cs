@@ -5,7 +5,7 @@ using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Remoting
 {
-    public class RemotingOrderServer : IServer
+    public class RemotingOrderServer : IRunnable
     {
         private readonly int port;
 
@@ -14,14 +14,14 @@ namespace NProg.Distributed.Remoting
             this.port = port;
         }
 
-        public void Start()
+        public void Run()
         {
             var channel = new TcpChannel(port);
             ChannelServices.RegisterChannel(channel, false);
             RemotingConfiguration.RegisterWellKnownServiceType(typeof(RemotingOrderHandler), "OrderHandler", WellKnownObjectMode.Singleton);
         }
 
-        public void Stop()
+        public void Dispose()
         {
         }
     }

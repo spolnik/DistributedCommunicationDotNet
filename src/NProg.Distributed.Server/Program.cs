@@ -25,7 +25,7 @@ namespace NProg.Distributed.Server
             var port = Convert.ToInt32(args[1]);
             Console.WriteLine("Running for framework: {0}, port: {1}", framework, port);
 
-            IServer server = null;
+            IRunnable server = null;
             
             try
             {
@@ -46,14 +46,14 @@ namespace NProg.Distributed.Server
                 server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port);
                 
                 Console.WriteLine("Server running ...");
-                server.Start();
+                server.Run();
                 Console.WriteLine("Press <enter> to stop server...");
                 Console.ReadLine();
             }
             finally
             {
                 if (server != null)
-                    server.Stop();
+                    server.Dispose();
 
                 Console.WriteLine("Server stopped.");    
             }

@@ -6,7 +6,7 @@ namespace NProg.Distributed.Thrift
 {
     public class ThriftServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {
             return new ThriftMessageServer(messageReceiver, messageMapper, port);
         }

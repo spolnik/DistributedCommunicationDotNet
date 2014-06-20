@@ -156,4 +156,7 @@ Global
 		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{020167E8-2831-4C25-BD8F-E6E965D1F534} = {AB3E64C8-1914-4741-8D26-CE354A70FFCB}
 	EndGlobalSection
+	GlobalSection(NDepend) = preSolution
+		Project = ".\NProg.Distributed.ndproj"
+	EndGlobalSection
 EndGlobal

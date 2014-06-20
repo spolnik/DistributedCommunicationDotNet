@@ -3,16 +3,30 @@ using NProg.Distributed.Service.Extensions;
 
 namespace NProg.Distributed.Service.Messaging
 {
+    /// <summary>
+    /// Class Message.
+    /// </summary>
     [Serializable]
     public class Message
     {
+        /// <summary>
+        /// The body
+        /// </summary>
         private object body;
 
+        /// <summary>
+        /// Gets the type of the body.
+        /// </summary>
+        /// <value>The type of the body.</value>
         public Type BodyType
         {
             get { return Body.GetType(); }
         }
 
+        /// <summary>
+        /// Gets or sets the body.
+        /// </summary>
+        /// <value>The body.</value>
         public object Body
         {
             get { return body; }
@@ -23,13 +37,27 @@ namespace NProg.Distributed.Service.Messaging
             }
         }
 
+        /// <summary>
+        /// Gets or sets the type of the message.
+        /// </summary>
+        /// <value>The type of the message.</value>
         public string MessageType { get; set; }
 
+        /// <summary>
+        /// Receives this instance.
+        /// </summary>
+        /// <typeparam name="TBody">The type of the t body.</typeparam>
+        /// <returns>TBody.</returns>
         public TBody Receive<TBody>()
         {
             return (TBody) Body;
         }
 
+        /// <summary>
+        /// Froms the json.
+        /// </summary>
+        /// <param name="json">The json.</param>
+        /// <returns>Message.</returns>
         public static Message FromJson(string json)
         {
             var message = json.ReadFromJson<Message>();
@@ -38,6 +66,12 @@ namespace NProg.Distributed.Service.Messaging
             return message;
         }
 
+        /// <summary>
+        /// Froms the specified request.
+        /// </summary>
+        /// <typeparam name="TRequest">The type of the t request.</typeparam>
+        /// <param name="request">The request.</param>
+        /// <returns>Message.</returns>
         public static Message From<TRequest>(TRequest request) where TRequest : class 
         {
             return new Message
