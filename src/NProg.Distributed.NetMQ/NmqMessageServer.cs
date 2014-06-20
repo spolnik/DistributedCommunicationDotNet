@@ -7,7 +7,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.NetMQ
 {
-    public class NmqOrderServer : IServer, IDisposable
+    public class NmqMessageServer : IServer, IDisposable
     {
         private readonly int port;
 
@@ -16,7 +16,7 @@ namespace NProg.Distributed.NetMQ
         private NmqResponseQueue responseQueue;
         private readonly CancellationTokenSource token;
 
-        public NmqOrderServer(IMessageReceiver messageReceiver, int port)
+        public NmqMessageServer(IMessageReceiver messageReceiver, int port)
         {
             token = new CancellationTokenSource();
 

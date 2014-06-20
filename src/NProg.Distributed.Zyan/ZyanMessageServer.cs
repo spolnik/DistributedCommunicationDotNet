@@ -4,12 +4,12 @@ using Zyan.Communication;
 
 namespace NProg.Distributed.Zyan
 {
-    public class ZyanOrderServer : IServer
+    public class ZyanMessageServer : IServer
     {
         private readonly MessageReceiver receiver;
         private readonly ZyanComponentHost host;
 
-        public ZyanOrderServer(IMessageReceiver messageReceiver, int port)
+        public ZyanMessageServer(IMessageReceiver messageReceiver, int port)
         {
             receiver = (MessageReceiver)messageReceiver;
             host = new ZyanComponentHost("OrderService", port);

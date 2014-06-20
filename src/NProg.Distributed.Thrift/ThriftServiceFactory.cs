@@ -8,7 +8,7 @@ namespace NProg.Distributed.Thrift
     {
         public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {
-            return new ThriftOrderServer(messageReceiver, port);
+            return new ThriftMessageServer(messageReceiver, messageMapper, port);
         }
 
         public IMessageMapper GetMessageMapper()

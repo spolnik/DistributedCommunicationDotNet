@@ -5,16 +5,11 @@ namespace NProg.Distributed.Service.Messaging
 {
     public class HandlerRegister : IHandlerRegister
     {
-        private readonly List<IMessageHandler> register;
+        private readonly IList<IMessageHandler> register;
 
-        public HandlerRegister()
+        public HandlerRegister(IList<IMessageHandler> register)
         {
-            register = new List<IMessageHandler>();
-        }
-
-        public void Register(IMessageHandler messageHandler)
-        {
-            register.Add(messageHandler);
+            this.register = register;
         }
 
         public IMessageHandler GetHandler(Message message)

@@ -53,8 +53,8 @@
     <Compile Include="ZmqRequestSender.cs" />
     <Compile Include="ZmqResponseQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ZmqOrderServer.cs" />
-    <Compile Include="ZmqOrderServiceFactory.cs" />
+    <Compile Include="ZmqMessageServer.cs" />
+    <Compile Include="ZmqServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

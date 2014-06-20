@@ -7,7 +7,7 @@ using ZeroMQ;
 
 namespace NProg.Distributed.ZeroMQ
 {
-    public class ZmqOrderServer : IServer, IDisposable
+    public class ZmqMessageServer : IServer, IDisposable
     {
         private readonly int port;
 
@@ -16,7 +16,7 @@ namespace NProg.Distributed.ZeroMQ
         private ZmqResponseQueue responseQueue;
         private readonly CancellationTokenSource token;
 
-        public ZmqOrderServer(IMessageReceiver messageReceiver, int port)
+        public ZmqMessageServer(IMessageReceiver messageReceiver, int port)
         {
             token = new CancellationTokenSource();
 

@@ -8,7 +8,7 @@ namespace NProg.Distributed.NetMQ
     {
         public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {
-            return new NmqOrderServer(messageReceiver, port);
+            return new NmqMessageServer(messageReceiver, port);
         }
 
         public IMessageMapper GetMessageMapper()

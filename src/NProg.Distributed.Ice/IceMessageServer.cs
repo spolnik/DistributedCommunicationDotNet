@@ -6,13 +6,13 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Ice
 {
-    public class IceOrderServer : IServer
+    public class IceMessageServer : IServer
     {
         private readonly IceMessageDispatcher handler;
         private readonly int port;
         private readonly Communicator communicator;
 
-        public IceOrderServer(IMessageReceiver messagerReceiver, IMessageMapper messageMapper, int port)
+        public IceMessageServer(IMessageReceiver messagerReceiver, IMessageMapper messageMapper, int port)
         {
             this.handler = new IceMessageDispatcher(messagerReceiver, messageMapper);
             this.port = port;

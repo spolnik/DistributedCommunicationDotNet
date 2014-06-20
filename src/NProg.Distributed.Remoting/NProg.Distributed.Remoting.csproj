@@ -44,7 +44,7 @@
     <Compile Include="RemotingRequestSender.cs" />
     <Compile Include="RemotingOrderHandler.cs" />
     <Compile Include="RemotingOrderServer.cs" />
-    <Compile Include="RemotingOrderServiceFactory.cs" />
+    <Compile Include="RemotingServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.Domain.csproj">

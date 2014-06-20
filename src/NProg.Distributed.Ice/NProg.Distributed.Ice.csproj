@@ -45,8 +45,8 @@
   <ItemGroup>
     <Compile Include="generated\message.cs" />
     <Compile Include="IceMessageDispatcher.cs" />
-    <Compile Include="IceOrderServer.cs" />
-    <Compile Include="IceOrderServiceFactory.cs" />
+    <Compile Include="IceMessageServer.cs" />
+    <Compile Include="IceServiceFactory.cs" />
     <Compile Include="IceMessageMapper.cs" />
     <Compile Include="IceRequestSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

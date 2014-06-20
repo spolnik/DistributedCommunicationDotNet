@@ -50,8 +50,8 @@
     <Compile Include="ThriftMessageMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThriftMessageDispatcher.cs" />
-    <Compile Include="ThriftOrderServer.cs" />
-    <Compile Include="ThriftOrderServiceFactory.cs" />
+    <Compile Include="ThriftMessageServer.cs" />
+    <Compile Include="ThriftServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">

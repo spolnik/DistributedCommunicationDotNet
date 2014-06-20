@@ -13,7 +13,7 @@ namespace NProg.Distributed.ZeroMQ
 
         public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {
-            return new ZmqOrderServer(messageReceiver, port);
+            return new ZmqMessageServer(messageReceiver, port);
         }
 
         public IMessageMapper GetMessageMapper()

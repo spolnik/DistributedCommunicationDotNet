@@ -2,23 +2,24 @@
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
-namespace NProg.Distributed.WCF
+namespace NProg.Distributed.Ice
 {
-    public class WcfServiceFactory : IServiceFactory
+    public class IceServiceFactory : IServiceFactory
     {
         public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {
-            return new WcfOrderServer(port);
+            return new IceMessageServer(messageReceiver, messageMapper, port);
         }
 
         public IMessageMapper GetMessageMapper()
         {
-            return null;
+            return new IceMessageMapper();
         }
 
         public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
         {
-            return new WcfRequestSender(serviceUri);
+            return new IceRequestSender(serviceUri, messageMapper);
         }
     }
+
 }

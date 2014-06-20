@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NProg.Distributed.Domain.Handlers;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NDatabase;
@@ -31,10 +32,15 @@ namespace NProg.Distributed.Server
                 var orderServiceFactory = GetOrderServiceFactory(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
 
-                var handlerRegister = new HandlerRegister();
-                handlerRegister.Register(new AddOrderHandler(new InMemoryDao()));
-                handlerRegister.Register(new GetOrderHandler(new InMemoryDao()));
-                handlerRegister.Register(new RemoveOrderHandler(new InMemoryDao()));
+                var inMemoryDao = new InMemoryDao();
+                var register = new List<IMessageHandler>
+                {
+                    new AddOrderHandler(inMemoryDao),
+                    new GetOrderHandler(inMemoryDao),
+                    new RemoveOrderHandler(inMemoryDao)
+                };
+
+                var handlerRegister = new HandlerRegister(register);
                 var messageReceiver = new MessageReceiver(handlerRegister);
 
                 server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port);
