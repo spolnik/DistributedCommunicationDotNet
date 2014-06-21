@@ -1,9 +1,10 @@
 using System;
+using NProg.Distributed.Core.Data;
 
 namespace NProg.Distributed.CarRental.Domain
 {
     [Serializable]
-    public class Rental
+    public class Rental : IIdentifiableEntity<int>
     {
         public int RentalId { get; set; }
 
@@ -16,5 +17,15 @@ namespace NProg.Distributed.CarRental.Domain
         public DateTime DateDue { get; set; }
 
         public DateTime? DateReturned { get; set; }
+
+        #region Implementation of IIdentifiableEntity<int>
+
+        public int EntityId
+        {
+            get { return RentalId; }
+            set { RentalId = value; }
+        }
+
+        #endregion
     }
 }
