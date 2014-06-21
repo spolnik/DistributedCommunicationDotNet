@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace NProg.Distributed.Common.Service.Extensions
+namespace NProg.Distributed.Core.Service.Extensions
 {
     /// <summary>
     /// Class ObjectExtensions.

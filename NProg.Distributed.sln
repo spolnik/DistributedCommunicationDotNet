@@ -9,13 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderServ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{842095DB-A845-4F4F-B00C-B1EA348DB446}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{7FED1E69-8B86-4936-93EA-910BCE279F53}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{7FED1E69-8B86-4936-93EA-910BCE279F53}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "transport", "transport", "{04832DD2-FE42-4845-B39A-5F4B356C74C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService.Client", "src\NProg.Distributed.Client\NProg.Distributed.OrderService.Client.csproj", "{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Common.Service", "src\NProg.Distributed.Service\NProg.Distributed.Common.Service.csproj", "{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Core.Service", "src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj", "{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Transport.Thrift", "src\NProg.Distributed.Thrift\NProg.Distributed.Transport.Thrift.csproj", "{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}"
 EndProject

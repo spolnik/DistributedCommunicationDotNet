@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
-using NProg.Distributed.Common.Service;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.Transport.WCF.Service;
 
 namespace NProg.Distributed.Transport.WCF

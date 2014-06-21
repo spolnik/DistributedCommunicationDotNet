@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.Database;
 using NProg.Distributed.OrderService.Handlers;
 

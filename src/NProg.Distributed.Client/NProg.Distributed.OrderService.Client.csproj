@@ -65,9 +65,9 @@
       <Project>{D83DDB04-654C-48B7-B68C-38E3101FF584}</Project>
       <Name>NProg.Distributed.OrderService.Config</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Common.Service.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
       <Project>{3ab7dccb-b549-4f9f-b54d-c8025a139a8c}</Project>
-      <Name>NProg.Distributed.Common.Service</Name>
+      <Name>NProg.Distributed.Core.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

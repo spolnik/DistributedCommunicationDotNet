@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 using Ninject;
-using NProg.Distributed.Common.Service;
+using NProg.Distributed.Core.Service;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Config;
 using NProg.Distributed.OrderService.Domain;

@@ -7,8 +7,8 @@
     <ProjectGuid>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Common.Service</RootNamespace>
-    <AssemblyName>NProg.Distributed.Common.Service</AssemblyName>
+    <RootNamespace>NProg.Distributed.Core.Service</RootNamespace>
+    <AssemblyName>NProg.Distributed.Core.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>

@@ -1,5 +1,5 @@
 ﻿using System;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service.Messaging;
 using Zyan.Communication;
 
 namespace NProg.Distributed.Transport.Zyan

@@ -1,14 +1,12 @@
 ﻿using System;
 using Ninject;
 using Ninject.Modules;
-using NProg.Distributed.Common;
-using NProg.Distributed.Common.Service;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.Database;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Remoting;
-using NProg.Distributed.Thrift;
 using NProg.Distributed.Transport.Ice;
 using NProg.Distributed.Transport.NetMQ;
 using NProg.Distributed.Transport.Thrift;

@@ -71,9 +71,9 @@
       <Project>{077DB902-1745-4CEF-9714-E0F3AC17B452}</Project>
       <Name>NProg.Distributed.OrderRemoting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Common.Service.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
-      <Name>NProg.Distributed.Common.Service</Name>
+      <Name>NProg.Distributed.Core.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Thrift\NProg.Distributed.Transport.Thrift.csproj">
       <Project>{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}</Project>

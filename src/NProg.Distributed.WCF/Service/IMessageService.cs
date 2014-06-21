@@ -1,5 +1,5 @@
 ﻿using System.ServiceModel;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.Transport.WCF.Service
 {

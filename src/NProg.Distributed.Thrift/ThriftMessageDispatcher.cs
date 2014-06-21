@@ -1,5 +1,5 @@
-﻿using NProg.Distributed.Common.Service.Extensions;
-using NProg.Distributed.Common.Service.Messaging;
+﻿using NProg.Distributed.Core.Service.Extensions;
+using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.Thrift;
 
 namespace NProg.Distributed.Transport.Thrift

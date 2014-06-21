@@ -1,4 +1,4 @@
-﻿using NProg.Distributed.Common.Service.Messaging;
+﻿using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Requests;
 using NProg.Distributed.OrderService.Responses;

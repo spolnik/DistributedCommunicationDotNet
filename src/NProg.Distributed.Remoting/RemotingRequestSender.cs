@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {

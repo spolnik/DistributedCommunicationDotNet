@@ -1,6 +1,6 @@
 ﻿using Ice;
-using NProg.Distributed.Common.Service.Extensions;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service.Extensions;
+using NProg.Distributed.Core.Service.Messaging;
 using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Transport.Ice

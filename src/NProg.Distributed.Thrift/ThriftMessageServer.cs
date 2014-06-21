@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using NProg.Distributed.Common.Service;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.Thrift;
 using Thrift.Protocol;
 using Thrift.Server;

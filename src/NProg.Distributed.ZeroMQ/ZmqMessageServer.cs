@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NProg.Distributed.Common.Service;
-using NProg.Distributed.Common.Service.Extensions;
-using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Extensions;
+using NProg.Distributed.Core.Service.Messaging;
 using ZeroMQ;
 
 namespace NProg.Distributed.Transport.ZeroMQ
