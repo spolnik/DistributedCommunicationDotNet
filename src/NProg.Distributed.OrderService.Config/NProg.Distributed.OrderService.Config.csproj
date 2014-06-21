@@ -67,9 +67,9 @@
       <Project>{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}</Project>
       <Name>NProg.Distributed.NetMQ</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Remoting\NProg.Distributed.Remoting.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Remoting\NProg.Distributed.OrderRemoting.csproj">
       <Project>{077DB902-1745-4CEF-9714-E0F3AC17B452}</Project>
-      <Name>NProg.Distributed.Remoting</Name>
+      <Name>NProg.Distributed.OrderRemoting</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
