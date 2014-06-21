@@ -49,7 +49,6 @@
     <Compile Include="IServiceFactory.cs" />
     <Compile Include="Messaging\IMessageHandler.cs" />
     <Compile Include="Messaging\IMessageReceiver.cs" />
-    <Compile Include="Messaging\IMessageMapper.cs" />
     <Compile Include="Messaging\IRequestSender.cs" />
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Messaging\MessageReceiver.cs" />

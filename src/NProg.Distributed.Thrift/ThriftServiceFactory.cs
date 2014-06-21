@@ -6,19 +6,14 @@ namespace NProg.Distributed.Transport.Thrift
 {
     public sealed class ThriftServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port)
         {
-            return new ThriftMessageServer(messageReceiver, messageMapper, port);
+            return new ThriftMessageServer(messageReceiver, port);
         }
 
-        public IMessageMapper GetMessageMapper()
+        public IRequestSender GetRequestSender(Uri serviceUri)
         {
-            return new ThriftMessageMapper();
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new ThriftRequestSender(serviceUri, messageMapper);
+            return new ThriftRequestSender(serviceUri);
         }
     }
 }

@@ -44,8 +44,7 @@ namespace NProg.Distributed.OrderService.Config
                     var serviceUri = Kernel.Settings.Get("serviceUri", default(Uri));
 
                     var orderServiceFactory = Kernel.Get<IServiceFactory>(framework);
-                    var messageMapper = orderServiceFactory.GetMessageMapper();
-                    var requestSender = orderServiceFactory.GetRequestSender(serviceUri, messageMapper);
+                    var requestSender = orderServiceFactory.GetRequestSender(serviceUri);
 
                     return new OrderClient(requestSender);
                 });
@@ -62,9 +61,8 @@ namespace NProg.Distributed.OrderService.Config
 
                     var serviceFactory = Kernel.Get<IServiceFactory>(framework);
                     var messageReceiver = Kernel.Get<IMessageReceiver>();
-                    var messageMapper = serviceFactory.GetMessageMapper();
-
-                    return serviceFactory.GetServer(messageReceiver, messageMapper, port);
+                    
+                    return serviceFactory.GetServer(messageReceiver, port);
                 });
         }
 

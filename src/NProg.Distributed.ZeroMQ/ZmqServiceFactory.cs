@@ -6,17 +6,12 @@ namespace NProg.Distributed.Transport.ZeroMQ
 {
     public sealed class ZmqServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port = -1)
         {
             return new ZmqMessageServer(messageReceiver, port);
         }
 
-        public IMessageMapper GetMessageMapper()
-        {
-            return null;
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
+        public IRequestSender GetRequestSender(Uri serviceUri)
         {
             return new ZmqRequestSender(serviceUri);
         }

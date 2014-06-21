@@ -11,9 +11,9 @@ namespace NProg.Distributed.Transport.Ice
         private readonly int port;
         private Communicator communicator;
 
-        internal IceMessageServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        internal IceMessageServer(IMessageReceiver messageReceiver, int port)
         {
-            receiver = new IceMessageDispatcher(messageReceiver, messageMapper);
+            receiver = new IceMessageDispatcher(messageReceiver);
             this.port = port;
             communicator = Util.initialize();
         }

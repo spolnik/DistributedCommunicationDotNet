@@ -7,20 +7,18 @@ namespace NProg.Distributed.Transport.Thrift
     internal sealed class ThriftMessageDispatcher : MessageService.Iface
     {
         private readonly IMessageReceiver messageReceiver;
-        private readonly IMessageMapper messageMapper;
 
-        internal ThriftMessageDispatcher(IMessageReceiver messageReceiver, IMessageMapper messageMapper)
+        internal ThriftMessageDispatcher(IMessageReceiver messageReceiver)
         {
             this.messageReceiver = messageReceiver;
-            this.messageMapper = messageMapper;
         }
 
         public ThriftMessage Send(ThriftMessage thriftMessage)
         {
-            var message = messageMapper.Map(thriftMessage);
+            var message = MessageMapper.Map(thriftMessage);
             var response = messageReceiver.Send(message);
 
-            return messageMapper.Map(response).As<ThriftMessage>();
+            return MessageMapper.Map(response).As<ThriftMessage>();
         }
     }
 }

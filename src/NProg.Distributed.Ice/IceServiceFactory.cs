@@ -6,19 +6,14 @@ namespace NProg.Distributed.Transport.Ice
 {
     public sealed class IceServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port)
         {
-            return new IceMessageServer(messageReceiver, messageMapper, port);
+            return new IceMessageServer(messageReceiver, port);
         }
 
-        public IMessageMapper GetMessageMapper()
+        public IRequestSender GetRequestSender(Uri serviceUri)
         {
-            return new IceMessageMapper();
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new IceRequestSender(serviceUri, messageMapper);
+            return new IceRequestSender(serviceUri);
         }
     }
 

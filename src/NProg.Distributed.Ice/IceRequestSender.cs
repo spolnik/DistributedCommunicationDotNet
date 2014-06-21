@@ -8,13 +8,11 @@ namespace NProg.Distributed.Transport.Ice
 {
     internal sealed class IceRequestSender : RequestSenderBase
     {
-        private readonly IMessageMapper messageMapper;
         private Communicator communicator;
         private readonly IMessageServicePrx proxy;
 
-        internal IceRequestSender(Uri serviceUri, IMessageMapper messageMapper)
+        internal IceRequestSender(Uri serviceUri)
         {
-            this.messageMapper = messageMapper;
             var address = string.Format("OrderService:tcp -p {1} -h {0}", serviceUri.Host, serviceUri.Port);
 
             communicator = Util.initialize();
@@ -23,8 +21,8 @@ namespace NProg.Distributed.Transport.Ice
 
         protected override Message SendInternal(Message message)
         {
-            var response = proxy.Send(messageMapper.Map(message).As<MessageDto>());
-            return messageMapper.Map(response);
+            var response = proxy.Send(MessageMapper.Map(message).As<MessageDto>());
+            return MessageMapper.Map(response);
         }
 
         protected override void Dispose(bool disposing)

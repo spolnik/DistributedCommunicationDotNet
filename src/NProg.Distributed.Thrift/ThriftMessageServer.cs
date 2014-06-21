@@ -15,10 +15,10 @@ namespace NProg.Distributed.Transport.Thrift
         private readonly MessageService.Iface receiver;
         private TThreadPoolServer server;
 
-        internal ThriftMessageServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        internal ThriftMessageServer(IMessageReceiver messageReceiver, int port)
         {
             this.port = port;
-            receiver = new ThriftMessageDispatcher(messageReceiver, messageMapper);
+            receiver = new ThriftMessageDispatcher(messageReceiver);
         }
 
         public void Run()
@@ -40,6 +40,7 @@ namespace NProg.Distributed.Transport.Thrift
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)

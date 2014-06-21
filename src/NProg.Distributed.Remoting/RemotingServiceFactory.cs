@@ -6,20 +6,14 @@ namespace NProg.Distributed.Remoting
 {
     public sealed class RemotingServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port)
         {
             return new RemotingOrderServer(port);
         }
 
-        public IMessageMapper GetMessageMapper()
-        {
-            return null;
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
+        public IRequestSender GetRequestSender(Uri serviceUri)
         {
             return new RemotingRequestSender(serviceUri);
         }
     }
-
 }
