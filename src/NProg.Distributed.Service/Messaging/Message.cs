@@ -1,7 +1,7 @@
 ﻿using System;
-using NProg.Distributed.Service.Extensions;
+using NProg.Distributed.Common.Service.Extensions;
 
-namespace NProg.Distributed.Service.Messaging
+namespace NProg.Distributed.Common.Service.Messaging
 {
     /// <summary>
     /// Class Message.

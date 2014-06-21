@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
-using NProg.Distributed.Service.Extensions;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service.Extensions;
+using NProg.Distributed.Common.Service.Messaging;
 using ZeroMQ;
 
-namespace NProg.Distributed.ZeroMQ
+namespace NProg.Distributed.Transport.ZeroMQ
 {
     internal sealed class ZmqRequestSender : RequestSenderBase
     {

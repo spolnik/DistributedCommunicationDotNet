@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0E311590-8292-44F0-AD4D-D0EC39341241}</ProjectGuid>
+    <ProjectGuid>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Database</RootNamespace>
-    <AssemblyName>NProg.Distributed.Database</AssemblyName>
+    <RootNamespace>NProg.Distributed.Common.Service</RootNamespace>
+    <AssemblyName>NProg.Distributed.Common.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NDatabase3">
-      <HintPath>..\..\packages\NDatabase.3.8.0\lib\net45\NDatabase3.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,15 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InMemoryDao.cs" />
-    <Compile Include="NdbOrderDao.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="IServiceFactory.cs" />
+    <Compile Include="Messaging\IMessageHandler.cs" />
+    <Compile Include="Messaging\IMessageReceiver.cs" />
+    <Compile Include="Messaging\IMessageMapper.cs" />
+    <Compile Include="Messaging\IRequestSender.cs" />
+    <Compile Include="Messaging\Message.cs" />
+    <Compile Include="Messaging\MessageReceiver.cs" />
+    <Compile Include="Messaging\RequestSenderBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
-      <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
-      <Name>NProg.Distributed.OrderService</Name>
-    </ProjectReference>
+    <Compile Include="IServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

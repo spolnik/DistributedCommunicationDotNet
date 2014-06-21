@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
-using Message = NProg.Distributed.Service.Messaging.Message;
+using NProg.Distributed.Common.Service.Messaging;
 
-namespace NProg.Distributed.WCF.Service
+namespace NProg.Distributed.Transport.WCF.Service
 {
     [ServiceContract]
     internal interface IMessageService

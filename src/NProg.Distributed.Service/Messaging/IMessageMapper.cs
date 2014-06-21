@@ -1,4 +1,4 @@
-﻿namespace NProg.Distributed.Service.Messaging
+﻿namespace NProg.Distributed.Common.Service.Messaging
 {
     /// <summary>
     /// Interface IMessageMapper

@@ -1,9 +1,9 @@
 ﻿using Ice;
-using NProg.Distributed.Service.Extensions;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service.Extensions;
+using NProg.Distributed.Common.Service.Messaging;
 using NProgDistributed.TheIce;
 
-namespace NProg.Distributed.Ice
+namespace NProg.Distributed.Transport.Ice
 {
     internal sealed class IceMessageDispatcher : IMessageServiceDisp_
     {

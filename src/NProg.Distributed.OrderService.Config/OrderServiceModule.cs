@@ -1,18 +1,20 @@
 ﻿using System;
 using Ninject;
 using Ninject.Modules;
+using NProg.Distributed.Common;
+using NProg.Distributed.Common.Service;
+using NProg.Distributed.Common.Service.Messaging;
 using NProg.Distributed.Database;
-using NProg.Distributed.Ice;
-using NProg.Distributed.NetMQ;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Remoting;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
 using NProg.Distributed.Thrift;
-using NProg.Distributed.WCF;
-using NProg.Distributed.ZeroMQ;
-using NProg.Distributed.Zyan;
+using NProg.Distributed.Transport.Ice;
+using NProg.Distributed.Transport.NetMQ;
+using NProg.Distributed.Transport.Thrift;
+using NProg.Distributed.Transport.WCF;
+using NProg.Distributed.Transport.ZeroMQ;
+using NProg.Distributed.Transport.Zyan;
 
 namespace NProg.Distributed.OrderService.Config
 {

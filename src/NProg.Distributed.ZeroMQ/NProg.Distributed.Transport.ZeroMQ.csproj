@@ -4,17 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7FD0600F-A707-4883-9182-1229C102DB7E}</ProjectGuid>
+    <ProjectGuid>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Tests</RootNamespace>
-    <AssemblyName>NProg.Distributed.Tests</AssemblyName>
+    <RootNamespace>NProg.Distributed.Transport.ZeroMQ</RootNamespace>
+    <AssemblyName>NProg.Distributed.Transport.ZeroMQ</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,23 +33,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+    <Reference Include="clrzmq, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ef95cdc29d237b0d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\packages\clrzmq.3.0.0-rc1\lib\net40\clrzmq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,27 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EndToEndTests.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="TestJsonSerialization.cs" />
+    <Compile Include="ZmqRequestSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZmqMessageServer.cs" />
+    <Compile Include="ZmqServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
-      <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
-      <Name>NProg.Distributed.OrderService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\NProg.Distributed.OrderService.Config\NProg.Distributed.OrderService.Config.csproj">
-      <Project>{D83DDB04-654C-48B7-B68C-38E3101FF584}</Project>
-      <Name>NProg.Distributed.OrderService.Config</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Common.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
-      <Name>NProg.Distributed.Service</Name>
+      <Name>NProg.Distributed.Common.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

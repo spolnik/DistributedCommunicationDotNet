@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace NProg.Distributed.Tests
+namespace NProg.Distributed.Transport.Tests
 {
     public class TestJsonSerialization
     {

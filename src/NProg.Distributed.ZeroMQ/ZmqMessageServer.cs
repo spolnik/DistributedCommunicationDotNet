@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Extensions;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service;
+using NProg.Distributed.Common.Service.Extensions;
+using NProg.Distributed.Common.Service.Messaging;
 using ZeroMQ;
 
-namespace NProg.Distributed.ZeroMQ
+namespace NProg.Distributed.Transport.ZeroMQ
 {
     /// <summary>
     /// Class ZmqMessageServer.

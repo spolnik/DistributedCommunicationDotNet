@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Ice;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service;
+using NProg.Distributed.Common.Service.Messaging;
 
-namespace NProg.Distributed.Ice
+namespace NProg.Distributed.Transport.Ice
 {
     internal sealed class IceMessageServer : IServer
     {

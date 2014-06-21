@@ -49,17 +49,17 @@
     <Compile Include="RemotingServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Database\NProg.Distributed.Database.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Database\NProg.Distributed.OrderService.Database.csproj">
       <Project>{0E311590-8292-44F0-AD4D-D0EC39341241}</Project>
-      <Name>NProg.Distributed.Database</Name>
+      <Name>NProg.Distributed.OrderService.Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.Domain.csproj">
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
-      <Name>NProg.Distributed.OrderService</Name>
+      <Name>NProg.Distributed.OrderService.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Common.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
-      <Name>NProg.Distributed.Service</Name>
+      <Name>NProg.Distributed.Common.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

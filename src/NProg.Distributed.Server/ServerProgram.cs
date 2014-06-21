@@ -1,7 +1,8 @@
 ﻿using System;
 using Ninject;
+using NProg.Distributed.Common;
+using NProg.Distributed.Common.Service;
 using NProg.Distributed.OrderService.Config;
-using NProg.Distributed.Service;
 
 namespace NProg.Distributed.Server
 {

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1487C697-4873-4265-B346-8782DA31B3AF}</ProjectGuid>
+    <ProjectGuid>{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.OrderService</RootNamespace>
-    <AssemblyName>NProg.Distributed.OrderService</AssemblyName>
+    <RootNamespace>NProg.Distributed.Transport.Thrift</RootNamespace>
+    <AssemblyName>NProg.Distributed.Transport.Thrift</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -39,28 +39,31 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Thrift">
+      <HintPath>..\..\packages\Thrift.0.9.1.3\lib\net35\Thrift.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\IOrderApi.cs" />
-    <Compile Include="Api\IOrderClient.cs" />
-    <Compile Include="Handlers\AddOrderHandler.cs" />
-    <Compile Include="Handlers\GetOrderHandler.cs" />
-    <Compile Include="Handlers\RemoveOrderHandler.cs" />
-    <Compile Include="Domain\Order.cs" />
+    <Compile Include="generated\NProg\Distributed\Thrift\MessageService.cs" />
+    <Compile Include="generated\NProg\Distributed\Thrift\ThriftMessage.cs" />
+    <Compile Include="ThriftRequestSender.cs" />
+    <Compile Include="ThriftMessageMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\AddOrderRequest.cs" />
-    <Compile Include="Requests\GetOrderRequest.cs" />
-    <Compile Include="Requests\RemoveOrderRequest.cs" />
-    <Compile Include="Responses\GetOrderResponse.cs" />
-    <Compile Include="Responses\StatusResponse.cs" />
-    <Compile Include="OrderClient.cs" />
+    <Compile Include="ThriftMessageDispatcher.cs" />
+    <Compile Include="ThriftMessageServer.cs" />
+    <Compile Include="ThriftServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Common.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
-      <Name>NProg.Distributed.Service</Name>
+      <Name>NProg.Distributed.Common.Service</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="message.thrift" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

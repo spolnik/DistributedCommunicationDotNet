@@ -1,7 +1,7 @@
 ﻿using System;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service.Messaging;
 
-namespace NProg.Distributed.Service
+namespace NProg.Distributed.Common.Service
 {
     /// <summary>
     /// Interface IServiceFactory

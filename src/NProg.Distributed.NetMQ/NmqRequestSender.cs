@@ -1,9 +1,9 @@
 ﻿using System;
 using NetMQ;
-using NProg.Distributed.Service.Extensions;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service.Extensions;
+using NProg.Distributed.Common.Service.Messaging;
 
-namespace NProg.Distributed.NetMQ
+namespace NProg.Distributed.Transport.NetMQ
 {
     internal sealed class NmqRequestSender : RequestSenderBase
     {

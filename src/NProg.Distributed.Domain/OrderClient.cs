@@ -1,9 +1,9 @@
 ﻿using System;
+using NProg.Distributed.Common.Service.Messaging;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Requests;
 using NProg.Distributed.OrderService.Responses;
-using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.OrderService
 {

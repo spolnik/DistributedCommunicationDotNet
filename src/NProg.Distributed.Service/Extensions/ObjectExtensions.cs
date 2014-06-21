@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace NProg.Distributed.Service.Extensions
+namespace NProg.Distributed.Common.Service.Extensions
 {
     /// <summary>
     /// Class ObjectExtensions.
@@ -28,7 +28,7 @@ namespace NProg.Distributed.Service.Extensions
         }
 
         /// <summary>
-        /// Ases the specified object.
+        /// Cast the specified object to declared generic type.
         /// </summary>
         /// <typeparam name="TType">The type of the t type.</typeparam>
         /// <param name="obj">The object.</param>

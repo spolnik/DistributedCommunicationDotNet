@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service;
+using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Thrift;
 using Thrift.Protocol;
 using Thrift.Server;
 using Thrift.Transport;
 
-namespace NProg.Distributed.Thrift
+namespace NProg.Distributed.Transport.Thrift
 {
     internal sealed class ThriftMessageServer : IServer
     {

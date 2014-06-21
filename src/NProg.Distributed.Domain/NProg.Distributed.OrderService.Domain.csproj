@@ -4,18 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{1487C697-4873-4265-B346-8782DA31B3AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Server</RootNamespace>
-    <AssemblyName>NProg.Distributed.Server</AssemblyName>
+    <RootNamespace>NProg.Distributed.OrderService</RootNamespace>
+    <AssemblyName>NProg.Distributed.OrderService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +24,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject">
-      <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,21 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ServerProgram.cs" />
+    <Compile Include="Api\IOrderApi.cs" />
+    <Compile Include="Api\IOrderClient.cs" />
+    <Compile Include="Handlers\AddOrderHandler.cs" />
+    <Compile Include="Handlers\GetOrderHandler.cs" />
+    <Compile Include="Handlers\RemoveOrderHandler.cs" />
+    <Compile Include="Domain\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\AddOrderRequest.cs" />
+    <Compile Include="Requests\GetOrderRequest.cs" />
+    <Compile Include="Requests\RemoveOrderRequest.cs" />
+    <Compile Include="Responses\GetOrderResponse.cs" />
+    <Compile Include="Responses\StatusResponse.cs" />
+    <Compile Include="OrderClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.OrderService.Config\NProg.Distributed.OrderService.Config.csproj">
-      <Project>{D83DDB04-654C-48B7-B68C-38E3101FF584}</Project>
-      <Name>NProg.Distributed.OrderService.Config</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
-      <Project>{3ab7dccb-b549-4f9f-b54d-c8025a139a8c}</Project>
-      <Name>NProg.Distributed.Service</Name>
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Common.Service.csproj">
+      <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
+      <Name>NProg.Distributed.Common.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

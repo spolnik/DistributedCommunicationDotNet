@@ -1,8 +1,8 @@
 ﻿using System;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service;
+using NProg.Distributed.Common.Service.Messaging;
 
-namespace NProg.Distributed.ZeroMQ
+namespace NProg.Distributed.Transport.ZeroMQ
 {
     public sealed class ZmqServiceFactory : IServiceFactory
     {

@@ -51,45 +51,45 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Database\NProg.Distributed.Database.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Database\NProg.Distributed.OrderService.Database.csproj">
       <Project>{0E311590-8292-44F0-AD4D-D0EC39341241}</Project>
-      <Name>NProg.Distributed.Database</Name>
+      <Name>NProg.Distributed.OrderService.Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.Domain.csproj">
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
-      <Name>NProg.Distributed.OrderService</Name>
+      <Name>NProg.Distributed.OrderService.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Ice\NProg.Distributed.Ice.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Ice\NProg.Distributed.Transport.Ice.csproj">
       <Project>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</Project>
-      <Name>NProg.Distributed.Ice</Name>
+      <Name>NProg.Distributed.Transport.Ice</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.NetMQ\NProg.Distributed.NetMQ.csproj">
+    <ProjectReference Include="..\NProg.Distributed.NetMQ\NProg.Distributed.Transport.NetMQ.csproj">
       <Project>{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}</Project>
-      <Name>NProg.Distributed.NetMQ</Name>
+      <Name>NProg.Distributed.Transport.NetMQ</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Remoting\NProg.Distributed.OrderRemoting.csproj">
       <Project>{077DB902-1745-4CEF-9714-E0F3AC17B452}</Project>
       <Name>NProg.Distributed.OrderRemoting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Common.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
-      <Name>NProg.Distributed.Service</Name>
+      <Name>NProg.Distributed.Common.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Thrift\NProg.Distributed.Transport.Thrift.csproj">
       <Project>{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}</Project>
-      <Name>NProg.Distributed.Thrift</Name>
+      <Name>NProg.Distributed.Transport.Thrift</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.WCF\NProg.Distributed.WCF.csproj">
+    <ProjectReference Include="..\NProg.Distributed.WCF\NProg.Distributed.Transport.WCF.csproj">
       <Project>{F84A2E32-9931-4C98-AA25-CE481CB89C0E}</Project>
-      <Name>NProg.Distributed.WCF</Name>
+      <Name>NProg.Distributed.Transport.WCF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj">
+    <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.Transport.ZeroMQ.csproj">
       <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
-      <Name>NProg.Distributed.ZeroMQ</Name>
+      <Name>NProg.Distributed.Transport.ZeroMQ</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Zyan\NProg.Distributed.Zyan.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Zyan\NProg.Distributed.Transport.Zyan.csproj">
       <Project>{36EE5322-A915-44F7-B096-BE2901F1D9D1}</Project>
-      <Name>NProg.Distributed.Zyan</Name>
+      <Name>NProg.Distributed.Transport.Zyan</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

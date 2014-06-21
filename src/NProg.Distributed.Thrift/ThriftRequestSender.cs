@@ -1,10 +1,11 @@
 ﻿using System;
-using NProg.Distributed.Service.Extensions;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Common.Service.Extensions;
+using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Thrift;
 using Thrift.Protocol;
 using Thrift.Transport;
 
-namespace NProg.Distributed.Thrift
+namespace NProg.Distributed.Transport.Thrift
 {
     internal sealed class ThriftRequestSender : RequestSenderBase
     {

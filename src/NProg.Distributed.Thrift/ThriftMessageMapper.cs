@@ -1,7 +1,8 @@
-﻿using NProg.Distributed.Service.Extensions;
-using NProg.Distributed.Service.Messaging;
+﻿using NProg.Distributed.Common.Service.Extensions;
+using NProg.Distributed.Common.Service.Messaging;
+using NProg.Distributed.Thrift;
 
-namespace NProg.Distributed.Thrift
+namespace NProg.Distributed.Transport.Thrift
 {
     internal sealed class ThriftMessageMapper : IMessageMapper
     {
