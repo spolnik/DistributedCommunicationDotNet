@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NProg.Distributed.Thrift")]
+[assembly: AssemblyTitle("NProg.Distributed.Core.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NProg.Distributed.Thrift")]
+[assembly: AssemblyProduct("NProg.Distributed.Core.Data")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3f2535af-6d3c-4a7e-b3a2-68f2addeb65b")]
+[assembly: Guid("0d2e4ee4-c8ad-4078-90ba-34ff16d1ff6f")]
 
 // Version information for an assembly consists of the following four values:
 //

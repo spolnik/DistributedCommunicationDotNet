@@ -83,7 +83,7 @@ namespace NProg.Distributed.Transport.Tests
             kernel.Settings.Set("framework", framework);
             kernel.Settings.Set("serviceUri", new Uri("tcp://127.0.0.1:" + port));
 
-            using (var client = kernel.Get<IOrderClient>())
+            using (var client = kernel.Get<IOrderApi>())
             {
                 for (var i = 0; i < count; i++)
                 {

@@ -49,9 +49,13 @@
     <Compile Include="RemotingServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Database\NProg.Distributed.OrderService.Database.csproj">
-      <Project>{0E311590-8292-44F0-AD4D-D0EC39341241}</Project>
-      <Name>NProg.Distributed.OrderService.Database</Name>
+    <ProjectReference Include="..\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
+      <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
+      <Name>NProg.Distributed.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.Database.InMemory\NProg.Distributed.Database.InMemory.csproj">
+      <Project>{A66F2DBE-0756-495C-9EA3-BD06447A1AC1}</Project>
+      <Name>NProg.Distributed.Database.InMemory</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.Domain.csproj">
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>

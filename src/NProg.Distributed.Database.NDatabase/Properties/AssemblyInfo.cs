@@ -1,17 +1,15 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
-[assembly: CLSCompliant(true)]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NProg.Distributed.Database")]
+[assembly: AssemblyTitle("NProg.Distributed.Database.NDatabase")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NProg.Distributed.Database")]
+[assembly: AssemblyProduct("NProg.Distributed.Database.NDatabase")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -22,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0c7c3b41-cc9e-4f06-8672-90f20f9169a3")]
+[assembly: Guid("ef4211d0-6200-4ec9-8742-04914789779a")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,5 +1,7 @@
-﻿using NProg.Distributed.Core.Service.Messaging;
-using NProg.Distributed.OrderService.Api;
+﻿using System;
+using NProg.Distributed.Core.Data;
+using NProg.Distributed.Core.Service.Messaging;
+using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Requests;
 using NProg.Distributed.OrderService.Responses;
 
@@ -7,11 +9,11 @@ namespace NProg.Distributed.OrderService.Handlers
 {
     public sealed class AddOrderHandler : IMessageHandler
     {
-        private readonly IOrderApi dao;
+        private readonly IDataRepository<Guid, Order> repository;
 
-        public AddOrderHandler(IOrderApi orderDao)
+        public AddOrderHandler(IDataRepository<Guid, Order> orderRepository)
         {
-            dao = orderDao;
+            repository = orderRepository;
         }
 
         public bool CanHandle(Message message)
@@ -23,8 +25,8 @@ namespace NProg.Distributed.OrderService.Handlers
         {
             var order = message.Receive<AddOrderRequest>().Order;
 
-            dao.Add(order.OrderId, order);
-            return Message.From(new StatusResponse { Status = true });
+            var addedOrder = repository.Add(order);
+            return Message.From(new StatusResponse { Status = addedOrder != null });
         }
     }
 }

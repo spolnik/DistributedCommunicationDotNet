@@ -10,7 +10,7 @@ namespace NProg.Distributed.OrderService
     /// <summary>
     /// Class OrderClient. This class cannot be inherited.
     /// </summary>
-    public sealed class OrderClient : IOrderClient
+    public sealed class OrderClient : IOrderApi
     {
         /// <summary>
         /// The request sender

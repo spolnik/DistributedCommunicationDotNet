@@ -1,10 +1,12 @@
 ﻿using System;
 using Ninject;
 using Ninject.Modules;
+using NProg.Distributed.Core.Data;
 using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
-using NProg.Distributed.Database;
+using NProg.Distributed.Database.InMemory;
 using NProg.Distributed.OrderService.Api;
+using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Remoting;
 using NProg.Distributed.Transport.Ice;
@@ -38,7 +40,7 @@ namespace NProg.Distributed.OrderService.Config
 
         private void Client()
         {
-            Bind<IOrderClient>().ToMethod<IOrderClient>(x =>
+            Bind<IOrderApi>().ToMethod<IOrderApi>(x =>
                 {
                     var framework = Kernel.Settings.Get("framework", string.Empty);
                     var serviceUri = Kernel.Settings.Get("serviceUri", default(Uri));
@@ -75,8 +77,8 @@ namespace NProg.Distributed.OrderService.Config
 
         private void DbLayer()
         {
-            Bind<IOrderApi>().To<InMemoryDao>();
-//            Bind<IOrderApi>().To<NdbOrderDao>();
+            Bind<IDataRepository<Guid, Order>>().To<InMemoryRepository<Guid, Order>>();
+//            Bind<IDataRepository<Guid, Order>>().To<NDatabaseRepository<Guid, Order>>();
         }
 
         private void TransportLayer()
