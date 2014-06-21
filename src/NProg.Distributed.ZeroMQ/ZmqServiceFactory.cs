@@ -6,7 +6,7 @@ namespace NProg.Distributed.ZeroMQ
 {
     public sealed class ZmqServiceFactory : IServiceFactory
     {
-        public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
+        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {
             return new ZmqMessageServer(messageReceiver, port);
         }

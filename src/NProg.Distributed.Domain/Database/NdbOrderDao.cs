@@ -6,11 +6,11 @@ using NProg.Distributed.OrderService.Domain;
 
 namespace NProg.Distributed.OrderService.Database
 {
-    public sealed class NdbOdbDao : IOrderApi
+    public sealed class NdbOrderDao : IOrderApi
     {
         private readonly string dbName;
 
-        public NdbOdbDao()
+        public NdbOrderDao()
         {
             dbName = "OrderDb.ndb";
         }

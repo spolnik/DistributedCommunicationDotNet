@@ -45,8 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\IOrderApi.cs" />
+    <Compile Include="Api\IOrderClient.cs" />
     <Compile Include="Database\InMemoryDao.cs" />
-    <Compile Include="Database\NdbOdbDao.cs" />
+    <Compile Include="Database\NdbOrderDao.cs" />
     <Compile Include="Handlers\AddOrderHandler.cs" />
     <Compile Include="Handlers\GetOrderHandler.cs" />
     <Compile Include="Handlers\RemoveOrderHandler.cs" />

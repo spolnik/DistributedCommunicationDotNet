@@ -3,12 +3,9 @@ using System.Diagnostics;
 using log4net;
 using log4net.Config;
 using Ninject;
-using NProg.Distributed.OrderService;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Config;
 using NProg.Distributed.OrderService.Domain;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Client
 {
@@ -39,9 +36,11 @@ namespace NProg.Distributed.Client
                 Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
                 stopwatch.Start();
 
-                var requestSender = GetRequestSender(framework, port);
+                var kernel = new StandardKernel(new OrderServiceModule());
+                kernel.Settings.Set("framework", framework);
+                kernel.Settings.Set("serviceUri", new Uri("tcp://127.0.0.1:" + port));
 
-                using (var client = new OrderClient(requestSender))
+                using (var client = kernel.Get<IOrderClient>())
                 {
                     for (var i = 0; i < count; i++)
                     {
@@ -59,19 +58,6 @@ namespace NProg.Distributed.Client
                 stopwatch.ElapsedMilliseconds);
             Console.WriteLine("Press <enter> to close client...");
             Console.ReadLine();
-        }
-
-        private static IRequestSender GetRequestSender(string framework, int port)
-        {
-            var kernel = new StandardKernel(new OrderServiceModule());
-            
-            var orderServiceFactory = kernel.Get<IServiceFactory>(framework);
-
-            var messageMapper = orderServiceFactory.GetMessageMapper();
-            var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port),
-                messageMapper);
-
-            return requestSender;
         }
 
         private static void SetLogProperties(string framework, int count)

@@ -11,7 +11,7 @@ namespace NProg.Distributed.NetMQ
     /// <summary>
     /// Class NmqMessageServer.
     /// </summary>
-    internal sealed class NmqMessageServer : IRunnable
+    internal sealed class NmqMessageServer : IServer
     {
         /// <summary>
         /// The message receiver
@@ -53,7 +53,7 @@ namespace NProg.Distributed.NetMQ
             responseQueue = new NmqResponseQueue(context, port);
         }
 
-        #region IRunnable Members
+        #region IServer Members
 
         /// <summary>
         /// Runs this instance.

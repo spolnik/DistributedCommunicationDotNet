@@ -6,7 +6,7 @@ namespace NProg.Distributed.Ice
 {
     public sealed class IceServiceFactory : IServiceFactory
     {
-        public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {
             return new IceMessageServer(messageReceiver, messageMapper, port);
         }

@@ -3,9 +3,9 @@
 namespace NProg.Distributed.Service
 {
     /// <summary>
-    /// Interface IRunnable
+    /// Interface IServer
     /// </summary>
-    public interface IRunnable : IDisposable
+    public interface IServer : IDisposable
     {
         /// <summary>
         /// Runs this instance.

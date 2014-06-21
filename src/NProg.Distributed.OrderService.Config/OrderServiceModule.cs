@@ -1,4 +1,6 @@
-﻿using Ninject.Modules;
+﻿using System;
+using Ninject;
+using Ninject.Modules;
 using NProg.Distributed.Ice;
 using NProg.Distributed.NetMQ;
 using NProg.Distributed.OrderService.Api;
@@ -34,7 +36,7 @@ namespace NProg.Distributed.OrderService.Config
 
             // DB Layer
             Bind<IOrderApi>().To<InMemoryDao>();
-//            Bind<IOrderApi>().To<NdbOdbDao>();
+//            Bind<IOrderApi>().To<NdbOrderDao>();
 
             // Message handers
             Bind<IMessageHandler>().To<AddOrderHandler>();
@@ -43,6 +45,32 @@ namespace NProg.Distributed.OrderService.Config
 
             // Message layer integration
             Bind<IMessageReceiver>().To<MessageReceiver>();
+
+            // Set up server
+            Bind<IServer>().ToMethod<IServer>(x =>
+                {
+                    var framework = Kernel.Settings.Get("framework", string.Empty);
+                    var port = Kernel.Settings.Get("port", -1);
+
+                    var serviceFactory = Kernel.Get<IServiceFactory>(framework);
+                    var messageReceiver = Kernel.Get<IMessageReceiver>();
+                    var messageMapper = serviceFactory.GetMessageMapper();
+
+                    return serviceFactory.GetServer(messageReceiver, messageMapper, port);
+                });
+
+            // Set up client
+            Bind<IOrderClient>().ToMethod<IOrderClient>(x =>
+                {
+                    var framework = Kernel.Settings.Get("framework", string.Empty);
+                    var serviceUri = Kernel.Settings.Get("serviceUri", default(Uri));
+
+                    var orderServiceFactory = Kernel.Get<IServiceFactory>(framework);
+                    var messageMapper = orderServiceFactory.GetMessageMapper();
+                    var requestSender = orderServiceFactory.GetRequestSender(serviceUri, messageMapper);
+
+                    return new OrderClient(requestSender);
+                });
         }
 
         #endregion

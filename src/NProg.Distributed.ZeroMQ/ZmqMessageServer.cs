@@ -13,7 +13,7 @@ namespace NProg.Distributed.ZeroMQ
     /// <summary>
     /// Class ZmqMessageServer.
     /// </summary>
-    internal sealed class ZmqMessageServer : IRunnable
+    internal sealed class ZmqMessageServer : IServer
     {
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace NProg.Distributed.ZeroMQ
             responseQueue = new ZmqResponseQueue(context, port);
         }
 
-        #region IRunnable Members
+        #region IServer Members
 
         /// <summary>
         /// Runs this instance.

@@ -4,11 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 using Ninject;
-using NProg.Distributed.OrderService;
+using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Config;
 using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
 using NUnit.Framework;
 
 namespace NProg.Distributed.Tests
@@ -30,27 +29,25 @@ namespace NProg.Distributed.Tests
         [Test, TestCaseSource("ServicesCases")]
         public void RunServiceTestCase(string framework, int port, int count)
         {
+            var kernel = new StandardKernel(new OrderServiceModule());
+            kernel.Settings.Set("framework", framework);
+            kernel.Settings.Set("port", port);
+
             var cancellationTokenSource = new CancellationTokenSource();
-            Task.Factory.StartNew(() => RunServer(framework, port, cancellationTokenSource), cancellationTokenSource.Token);
+            Task.Factory.StartNew(() => RunServer(kernel, port, cancellationTokenSource), cancellationTokenSource.Token);
             RunClient(framework, port, count);
             cancellationTokenSource.Cancel(false);
         }
 
-        private static void RunServer(string framework, int port, CancellationTokenSource source)
+        private static void RunServer(IKernel kernel, int port, CancellationTokenSource source)
         {
-            Log.WriteLine("Running for framework: {0}, port: {1}", framework, port);
+            Log.WriteLine("Running for framework: {0}, port: {1}", kernel.Settings.Get("framework", string.Empty), port);
 
-            IRunnable server = null;
+            IServer server = null;
 
             try
             {
-                var kernel = new StandardKernel(new OrderServiceModule());
-
-                var orderServiceFactory = kernel.Get<IServiceFactory>(framework);
-                var messageMapper = orderServiceFactory.GetMessageMapper();
-                var messageReceiver = kernel.Get<IMessageReceiver>();
-
-                server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port);
+                server = kernel.Get<IServer>();
 
                 Log.WriteLine("Server running ...");
                 server.Run();
@@ -83,11 +80,10 @@ namespace NProg.Distributed.Tests
             stopwatch.Start();
 
             var kernel = new StandardKernel(new OrderServiceModule());
-            var orderServiceFactory = kernel.Get<IServiceFactory>(framework);
-            var messageMapper = orderServiceFactory.GetMessageMapper();
-            var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port), messageMapper);
+            kernel.Settings.Set("framework", framework);
+            kernel.Settings.Set("serviceUri", new Uri("tcp://127.0.0.1:" + port));
 
-            using (var client = new OrderClient(requestSender))
+            using (var client = kernel.Get<IOrderClient>())
             {
                 for (var i = 0; i < count; i++)
                 {

@@ -8,7 +8,7 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Thrift
 {
-    internal sealed class ThriftMessageServer : IRunnable
+    internal sealed class ThriftMessageServer : IServer
     {
         private readonly int port;
         private readonly MessageService.Iface receiver;

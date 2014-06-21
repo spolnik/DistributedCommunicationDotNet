@@ -54,10 +54,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
-      <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
-      <Name>NProg.Distributed.OrderService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.OrderService.Config\NProg.Distributed.OrderService.Config.csproj">
       <Project>{D83DDB04-654C-48B7-B68C-38E3101FF584}</Project>
       <Name>NProg.Distributed.OrderService.Config</Name>

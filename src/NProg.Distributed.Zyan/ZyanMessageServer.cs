@@ -4,7 +4,7 @@ using Zyan.Communication;
 
 namespace NProg.Distributed.Zyan
 {
-    internal sealed class ZyanMessageServer : IRunnable
+    internal sealed class ZyanMessageServer : IServer
     {
         private readonly MessageReceiver receiver;
         private ZyanComponentHost host;

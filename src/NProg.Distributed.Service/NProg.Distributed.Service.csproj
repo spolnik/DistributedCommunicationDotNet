@@ -55,7 +55,7 @@
     <Compile Include="Messaging\MessageReceiver.cs" />
     <Compile Include="Messaging\RequestSenderBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IRunnable.cs" />
+    <Compile Include="IServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

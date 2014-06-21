@@ -2,7 +2,6 @@
 using Ninject;
 using NProg.Distributed.OrderService.Config;
 using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Server
 {
@@ -18,12 +17,10 @@ namespace NProg.Distributed.Server
             Console.WriteLine("Running for framework: {0}, port: {1}", framework, port);
 
             var kernel = new StandardKernel(new OrderServiceModule());
-            var orderServiceFactory = kernel.Get<IServiceFactory>(framework);
-            var messageMapper = orderServiceFactory.GetMessageMapper();
+            kernel.Settings.Set("framework", framework);
+            kernel.Settings.Set("port", port);
 
-            var messageReceiver = kernel.Get<IMessageReceiver>();
-
-            using (var server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port))
+            using (var server = kernel.Get<IServer>())
             {
                 Console.WriteLine("Server running ...");
                 server.Run();

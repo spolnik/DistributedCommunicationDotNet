@@ -7,7 +7,7 @@ using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.OrderService
 {
-    public sealed class OrderClient : IOrderApi, IDisposable
+    public sealed class OrderClient : IOrderClient
     {
         private readonly IRequestSender requestSender;
 

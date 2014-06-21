@@ -14,8 +14,8 @@ namespace NProg.Distributed.Service
         /// <param name="messageReceiver">The message receiver.</param>
         /// <param name="messageMapper">The message mapper.</param>
         /// <param name="port">The port.</param>
-        /// <returns>IRunnable.</returns>
-        IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port);
+        /// <returns>IServer.</returns>
+        IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port);
 
         /// <summary>
         /// Gets the message mapper.

@@ -11,4 +11,5 @@ namespace NProg.Distributed.OrderService.Api
 
         bool Remove(Guid key);
     }
+
 }

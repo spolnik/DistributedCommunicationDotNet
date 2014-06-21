@@ -6,7 +6,7 @@ namespace NProg.Distributed.Remoting
 {
     public sealed class RemotingServiceFactory : IServiceFactory
     {
-        public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
         {
             return new RemotingOrderServer(port);
         }

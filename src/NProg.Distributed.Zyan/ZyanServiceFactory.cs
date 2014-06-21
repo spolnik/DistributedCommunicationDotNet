@@ -6,7 +6,7 @@ namespace NProg.Distributed.Zyan
 {
     public sealed class ZyanServiceFactory : IServiceFactory
     {
-        public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
+        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
         {
             return new ZyanMessageServer(messageReceiver, port);
         }
