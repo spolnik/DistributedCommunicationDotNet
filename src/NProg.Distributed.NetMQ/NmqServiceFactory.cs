@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.NetMQ
 {
-    [Export(typeof(IServiceFactory)), ExportMetadata("Name", "nmq")]
     public sealed class NmqServiceFactory : IServiceFactory
     {
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)

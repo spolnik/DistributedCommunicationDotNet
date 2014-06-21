@@ -6,13 +6,13 @@ using NProg.Distributed.OrderService.Domain;
 
 namespace NProg.Distributed.OrderService.Database
 {
-    internal sealed class NdbOdbDao : IOrderApi
+    public sealed class NdbOdbDao : IOrderApi
     {
         private readonly string dbName;
 
-        internal NdbOdbDao(string dbName)
+        public NdbOdbDao()
         {
-            this.dbName = dbName;
+            dbName = "OrderDb.ndb";
         }
 
         public bool Add(Guid key, Order value)

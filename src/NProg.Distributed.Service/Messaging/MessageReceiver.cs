@@ -1,4 +1,7 @@
-﻿namespace NProg.Distributed.Service.Messaging
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace NProg.Distributed.Service.Messaging
 {
     /// <summary>
     /// Class MessageReceiver.
@@ -6,17 +9,13 @@
     public sealed class MessageReceiver : IMessageReceiver
     {
         /// <summary>
-        /// The handler register
+        /// The register
         /// </summary>
-        private readonly IHandlerRegister handlerRegister;
+        private readonly IEnumerable<IMessageHandler> messageHandlers;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MessageReceiver"/> class.
-        /// </summary>
-        /// <param name="handlerRegister">The handler register.</param>
-        public MessageReceiver(IHandlerRegister handlerRegister)
+        public MessageReceiver(IEnumerable<IMessageHandler> messageHandlers)
         {
-            this.handlerRegister = handlerRegister;
+            this.messageHandlers = messageHandlers;
         }
 
         /// <summary>
@@ -26,8 +25,13 @@
         /// <returns>Message.</returns>
         public Message Send(Message message)
         {
-            var messageHandler = handlerRegister.GetHandler(message);
+            var messageHandler = GetHandler(message);
             return messageHandler.Handle(message);
+        }
+
+        private IMessageHandler GetHandler(Message message)
+        {
+            return messageHandlers.First(x => x.CanHandle(message));
         }
     }
 }

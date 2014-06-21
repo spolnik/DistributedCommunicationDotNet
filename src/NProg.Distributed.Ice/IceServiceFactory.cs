@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using NProg.Distributed.Service;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Ice
 {
-    [Export(typeof(IServiceFactory)), ExportMetadata("Name", "ice")]
     public sealed class IceServiceFactory : IServiceFactory
     {
         public IRunnable GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NProg.Distributed.OrderService.Database;
 using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Service.Messaging;
 
@@ -11,15 +12,16 @@ namespace NProg.Distributed.Remoting
 
         public RemotingOrderHandler()
         {
-            var register = new List<IMessageHandler>
-            {
-                new AddOrderHandler(),
-                new GetOrderHandler(),
-                new RemoveOrderHandler()
-            };
+            var inMemoryDao = new InMemoryDao();
 
-            var handlerRegister = new HandlerRegister(register);
-            messageReceiver = new MessageReceiver(handlerRegister);
+            var messageHandlers = new List<IMessageHandler>
+                {
+                    new AddOrderHandler(inMemoryDao),
+                    new GetOrderHandler(inMemoryDao),
+                    new RemoveOrderHandler(inMemoryDao)
+                };
+
+            messageReceiver = new MessageReceiver(messageHandlers);
         }
 
         public Message Send(Message message)

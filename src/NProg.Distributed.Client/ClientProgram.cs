@@ -1,13 +1,13 @@
 ﻿using System;
-using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using log4net;
 using log4net.Config;
+using Ninject;
 using NProg.Distributed.OrderService;
 using NProg.Distributed.OrderService.Api;
+using NProg.Distributed.OrderService.Config;
 using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.Service;
-using NProg.Distributed.Service.Composition;
 using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Client
@@ -63,7 +63,10 @@ namespace NProg.Distributed.Client
 
         private static IRequestSender GetRequestSender(string framework, int port)
         {
-            var orderServiceFactory = GetServiceFactory(framework);
+            var kernel = new StandardKernel(new OrderServiceModule());
+            
+            var orderServiceFactory = kernel.Get<IServiceFactory>(framework);
+
             var messageMapper = orderServiceFactory.GetMessageMapper();
             var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port),
                 messageMapper);
@@ -101,21 +104,6 @@ namespace NProg.Distributed.Client
             Debug.Assert(removedOrder.Equals(new Order {UserName = ""}));
 
             Log.WriteLine("Order {0}", i);
-        }
-
-        private static IServiceFactory GetServiceFactory(string framework)
-        {
-            var mainDirectoryCatalog = new DirectoryCatalog(".");
-            var compositionContainer = new CompositionContainer(mainDirectoryCatalog);
-            var export = compositionContainer.GetExport<ServiceComposer>();
-
-            if (export == null)
-            {
-                return null;
-            }
-
-            var serviceComposer = export.Value;
-            return serviceComposer.GetFactory(framework);
         }
 
         #region Nested type: Log

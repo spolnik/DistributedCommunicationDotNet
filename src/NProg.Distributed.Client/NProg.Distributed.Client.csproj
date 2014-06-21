@@ -37,8 +37,10 @@
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,37 +61,13 @@
       <Project>{1487c697-4873-4265-b346-8782da31b3af}</Project>
       <Name>NProg.Distributed.OrderService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Ice\NProg.Distributed.Ice.csproj">
-      <Project>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</Project>
-      <Name>NProg.Distributed.Ice</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.NetMQ\NProg.Distributed.NetMQ.csproj">
-      <Project>{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}</Project>
-      <Name>NProg.Distributed.NetMQ</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Remoting\NProg.Distributed.Remoting.csproj">
-      <Project>{077DB902-1745-4CEF-9714-E0F3AC17B452}</Project>
-      <Name>NProg.Distributed.Remoting</Name>
+    <ProjectReference Include="..\NProg.Distributed.OrderService.Config\NProg.Distributed.OrderService.Config.csproj">
+      <Project>{D83DDB04-654C-48B7-B68C-38E3101FF584}</Project>
+      <Name>NProg.Distributed.OrderService.Config</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
       <Project>{3ab7dccb-b549-4f9f-b54d-c8025a139a8c}</Project>
       <Name>NProg.Distributed.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj">
-      <Project>{0ecfa0cf-d3c2-4dc4-a7f9-6b69f269ff08}</Project>
-      <Name>NProg.Distributed.Thrift</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.WCF\NProg.Distributed.WCF.csproj">
-      <Project>{F84A2E32-9931-4C98-AA25-CE481CB89C0E}</Project>
-      <Name>NProg.Distributed.WCF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj">
-      <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
-      <Name>NProg.Distributed.ZeroMQ</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Zyan\NProg.Distributed.Zyan.csproj">
-      <Project>{36EE5322-A915-44F7-B096-BE2901F1D9D1}</Project>
-      <Name>NProg.Distributed.Zyan</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

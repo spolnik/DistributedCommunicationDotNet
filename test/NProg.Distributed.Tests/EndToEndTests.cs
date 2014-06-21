@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
+using Ninject;
 using NProg.Distributed.OrderService;
+using NProg.Distributed.OrderService.Config;
 using NProg.Distributed.OrderService.Domain;
-using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Service;
-using NProg.Distributed.Service.Composition;
 using NProg.Distributed.Service.Messaging;
 using NUnit.Framework;
 
@@ -46,18 +44,11 @@ namespace NProg.Distributed.Tests
 
             try
             {
-                var orderServiceFactory = GetServiceFactory(framework);
+                var kernel = new StandardKernel(new OrderServiceModule());
+
+                var orderServiceFactory = kernel.Get<IServiceFactory>(framework);
                 var messageMapper = orderServiceFactory.GetMessageMapper();
-
-                var register = new List<IMessageHandler>
-                {
-                    new AddOrderHandler(),
-                    new GetOrderHandler(),
-                    new RemoveOrderHandler()
-                };
-
-                var handlerRegister = new HandlerRegister(register);
-                var messageReceiver = new MessageReceiver(handlerRegister);
+                var messageReceiver = kernel.Get<IMessageReceiver>();
 
                 server = orderServiceFactory.GetServer(messageReceiver, messageMapper, port);
 
@@ -91,9 +82,11 @@ namespace NProg.Distributed.Tests
             Log.WriteLine("Running for framework: {0}, request count: {1}, port: {2}", framework, count, port);
             stopwatch.Start();
 
-            var orderServiceFactory = GetServiceFactory(framework);
+            var kernel = new StandardKernel(new OrderServiceModule());
+            var orderServiceFactory = kernel.Get<IServiceFactory>(framework);
             var messageMapper = orderServiceFactory.GetMessageMapper();
             var requestSender = orderServiceFactory.GetRequestSender(new Uri("tcp://127.0.0.1:" + port), messageMapper);
+
             using (var client = new OrderClient(requestSender))
             {
                 for (var i = 0; i < count; i++)
@@ -127,21 +120,6 @@ namespace NProg.Distributed.Tests
 
             Log.WriteLine("===============\nCount: {0}, ellapsed: {1} ms\n=============== ", count,
                 stopwatch.ElapsedMilliseconds);
-        }
-
-        private static IServiceFactory GetServiceFactory(string framework)
-        {
-            var mainDirectoryCatalog = new DirectoryCatalog(".");
-            var compositionContainer = new CompositionContainer(mainDirectoryCatalog);
-            var export = compositionContainer.GetExport<ServiceComposer>();
-
-            if (export == null)
-            {
-                return null;
-            }
-
-            var serviceComposer = export.Value;
-            return serviceComposer.GetFactory(framework);
         }
     }
 }

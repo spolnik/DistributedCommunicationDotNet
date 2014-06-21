@@ -72,6 +72,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0201
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{DC560D10-161C-48AC-9910-116DBD826E37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService.Config", "src\NProg.Distributed.OrderService.Config\NProg.Distributed.OrderService.Config.csproj", "{D83DDB04-654C-48B7-B68C-38E3101FF584}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,6 +128,10 @@ Global
 		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{40EFD682-85BD-48B3-8C88-1A9ADF4878E3} = {04832DD2-FE42-4845-B39A-5F4B356C74C9}
 		{020167E8-2831-4C25-BD8F-E6E965D1F534} = {AB3E64C8-1914-4741-8D26-CE354A70FFCB}
 		{DC560D10-161C-48AC-9910-116DBD826E37} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
+		{D83DDB04-654C-48B7-B68C-38E3101FF584} = {DC560D10-161C-48AC-9910-116DBD826E37}
 	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
 		Project = ""

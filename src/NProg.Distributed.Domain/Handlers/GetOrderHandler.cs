@@ -1,5 +1,4 @@
 ﻿using NProg.Distributed.OrderService.Api;
-using NProg.Distributed.OrderService.Database;
 using NProg.Distributed.OrderService.Requests;
 using NProg.Distributed.OrderService.Responses;
 using NProg.Distributed.Service.Messaging;
@@ -10,9 +9,9 @@ namespace NProg.Distributed.OrderService.Handlers
     {
         private readonly IOrderApi dao;
 
-        public GetOrderHandler()
+        public GetOrderHandler(IOrderApi orderDao)
         {
-            dao = new InMemoryDao();
+            dao = orderDao;
         }
 
         public bool CanHandle(Message message)
