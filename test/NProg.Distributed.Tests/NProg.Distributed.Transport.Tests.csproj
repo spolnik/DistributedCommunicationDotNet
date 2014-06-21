@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="EndToEndTests.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="TestJsonSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

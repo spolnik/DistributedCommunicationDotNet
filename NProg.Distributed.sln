@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".Solution
 		Ice.GenerateCode.cmd = Ice.GenerateCode.cmd
 		perf_distributed_reports.txt = perf_distributed_reports.txt
 		Thrift.GenerateCode.cmd = Thrift.GenerateCode.cmd
+		todo.txt = todo.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6E46352C-AA16-4CA2-AE23-73ECA2BFE980}"
@@ -90,6 +91,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "transport", "transport", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "carrental", "carrental", "{093CC501-4799-4E6B-B1D0-A5B3EAC182F5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{1F6773B2-5F1B-4F6A-9B6B-B4ED7DE9BD06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Domain", "samples\NProg.Distributed.CarRental.Domain\NProg.Distributed.CarRental.Domain.csproj", "{D2D3A11C-D368-449E-BCB6-34210A7F2712}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +157,10 @@ Global
 		{0E311590-8292-44F0-AD4D-D0EC39341241}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E311590-8292-44F0-AD4D-D0EC39341241}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E311590-8292-44F0-AD4D-D0EC39341241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,6 +191,8 @@ Global
 		{2622E376-F63E-453A-B4EB-BF7B5D381C99} = {C00F3E68-89CB-476C-ABAC-23159CD0F411}
 		{BF5AA8AB-CA49-4D00-B660-49CA4EF50B38} = {26446979-8C4E-4935-85A8-54FADC0FAFC4}
 		{093CC501-4799-4E6B-B1D0-A5B3EAC182F5} = {38BF824B-3987-4B06-8FA6-FD7FC5213E8C}
+		{1F6773B2-5F1B-4F6A-9B6B-B4ED7DE9BD06} = {093CC501-4799-4E6B-B1D0-A5B3EAC182F5}
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712} = {1F6773B2-5F1B-4F6A-9B6B-B4ED7DE9BD06}
 	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
 		Project = ""
