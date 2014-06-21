@@ -7,7 +7,7 @@ namespace NProg.Distributed.Server
 {
     internal static class ServerProgram
     {
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             if (args.Length < 2)
                 throw new ArgumentException("Usage: NProg.Distributed.Server.exe <framework> <port>");

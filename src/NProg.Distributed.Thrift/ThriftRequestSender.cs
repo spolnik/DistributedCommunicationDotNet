@@ -9,9 +9,9 @@ namespace NProg.Distributed.Thrift
     internal sealed class ThriftRequestSender : RequestSenderBase
     {
         private readonly IMessageMapper messageMapper;
-        private TBufferedTransport transport;
+        private readonly TBufferedTransport transport;
         private readonly MessageService.Client client;
-        private TSocket socket;
+        private readonly TSocket socket;
 
         internal ThriftRequestSender(Uri serviceUri, IMessageMapper messageMapper)
         {
@@ -30,17 +30,24 @@ namespace NProg.Distributed.Thrift
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && transport != null)
+            if (!disposing)
             {
-                transport.Close();
-                transport = null;
+                return;
             }
 
-            if (disposing && socket != null)
+            if (client != null)
             {
-                socket.Close();
-                socket = null;
+                client.Dispose();
             }
+
+            if (transport != null)
+            {
+                transport.Close();
+            }
+
+            if (socket != null)
+            {
+                socket.Close();}
         }
     }
 }

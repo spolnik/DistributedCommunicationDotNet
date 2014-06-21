@@ -27,9 +27,9 @@ namespace NProg.Distributed.ZeroMQ
         private readonly int port;
 
         /// <summary>
-        /// The token
+        /// The tokenSource
         /// </summary>
-        private readonly CancellationTokenSource token;
+        private readonly CancellationTokenSource tokenSource;
 
         /// <summary>
         /// The context
@@ -48,7 +48,7 @@ namespace NProg.Distributed.ZeroMQ
         /// <param name="port">The port.</param>
         internal ZmqMessageServer(IMessageReceiver messageReceiver, int port)
         {
-            token = new CancellationTokenSource();
+            tokenSource = new CancellationTokenSource();
 
             this.port = port;
             this.messageReceiver = messageReceiver;
@@ -87,7 +87,7 @@ namespace NProg.Distributed.ZeroMQ
                 {
                     var message = messageReceiver.Send(x);
                     responseQueue.Response(message);
-                }, token);
+                }, tokenSource);
         }
 
         /// <summary>
@@ -96,9 +96,10 @@ namespace NProg.Distributed.ZeroMQ
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         private void Dispose(bool disposing)
         {
-            if (disposing && !token.IsCancellationRequested)
+            if (disposing && !tokenSource.IsCancellationRequested)
             {
-                token.Cancel();
+                tokenSource.Cancel();
+                tokenSource.Dispose();
             }
 
             if (disposing && responseQueue != null)
@@ -165,7 +166,7 @@ namespace NProg.Distributed.ZeroMQ
             /// Listens the specified on message received.
             /// </summary>
             /// <param name="onMessageReceived">The on message received.</param>
-            /// <param name="token">The token.</param>
+            /// <param name="token">The tokenSource.</param>
             internal void Listen(Action<Message> onMessageReceived, CancellationTokenSource token)
             {
                 socket.ReceiveReady += (sender, args) =>

@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Domain;
 
-namespace NProg.Distributed.OrderService.Database
+namespace NProg.Distributed.Database
 {
     public sealed class InMemoryDao : IOrderApi
     {

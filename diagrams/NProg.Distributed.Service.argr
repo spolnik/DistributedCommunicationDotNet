@@ -1,0 +1,45 @@
+<ArchitectureGraph>
+  <Module Identifier="1487C697-4873-4265-B346-8782DA31B3AF" Name="NProg.Distributed.OrderService" />
+  <Module Identifier="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" Name="NProg.Distributed.Service" />
+  <Module Identifier="DC404E5D-4316-4A82-9F17-2B7F1FE6B209" Name="NProg.Distributed.Client" />
+  <Module Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.OrderService.Config" />
+  <Module Identifier="40EFD682-85BD-48B3-8C88-1A9ADF4878E3" Name="NProg.Distributed.Ice" />
+  <Module Identifier="F84A2E32-9931-4C98-AA25-CE481CB89C0E" Name="NProg.Distributed.WCF" />
+  <Module Identifier="077DB902-1745-4CEF-9714-E0F3AC17B452" Name="NProg.Distributed.Remoting" />
+  <Module Identifier="1355E9DA-7326-4A28-A117-6333ADC5FF99" Name="NProg.Distributed.ZeroMQ" />
+  <Module Identifier="AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1" Name="NProg.Distributed.NetMQ" />
+  <Module Identifier="36EE5322-A915-44F7-B096-BE2901F1D9D1" Name="NProg.Distributed.Zyan" />
+  <Module Identifier="0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08" Name="NProg.Distributed.Thrift" />
+  <Module Identifier="FBC30C00-9FEC-4D25-B706-B49E354ACB3F" Name="NProg.Distributed.Server" />
+  <Module Identifier="7FD0600F-A707-4883-9182-1229C102DB7E" Name="NProg.Distributed.Tests" />
+  <Module Identifier="0E311590-8292-44F0-AD4D-D0EC39341241" Name="NProg.Distributed.Database" />
+  <Reference Identifier="1487C697-4873-4265-B346-8782DA31B3AF/r:NProg.Distributed.Service" SourceId="1487C697-4873-4265-B346-8782DA31B3AF" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="DC404E5D-4316-4A82-9F17-2B7F1FE6B209/r:NProg.Distributed.OrderService" SourceId="DC404E5D-4316-4A82-9F17-2B7F1FE6B209" Name="NProg.Distributed.OrderService" TargetId="1487C697-4873-4265-B346-8782DA31B3AF" />
+  <Reference Identifier="DC404E5D-4316-4A82-9F17-2B7F1FE6B209/r:NProg.Distributed.Service" SourceId="DC404E5D-4316-4A82-9F17-2B7F1FE6B209" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.Service" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="40EFD682-85BD-48B3-8C88-1A9ADF4878E3/r:NProg.Distributed.Service" SourceId="40EFD682-85BD-48B3-8C88-1A9ADF4878E3" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.Ice" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.Ice" TargetId="40EFD682-85BD-48B3-8C88-1A9ADF4878E3" />
+  <Reference Identifier="F84A2E32-9931-4C98-AA25-CE481CB89C0E/r:NProg.Distributed.Service" SourceId="F84A2E32-9931-4C98-AA25-CE481CB89C0E" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.WCF" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.WCF" TargetId="F84A2E32-9931-4C98-AA25-CE481CB89C0E" />
+  <Reference Identifier="077DB902-1745-4CEF-9714-E0F3AC17B452/r:NProg.Distributed.OrderService" SourceId="077DB902-1745-4CEF-9714-E0F3AC17B452" Name="NProg.Distributed.OrderService" TargetId="1487C697-4873-4265-B346-8782DA31B3AF" />
+  <Reference Identifier="077DB902-1745-4CEF-9714-E0F3AC17B452/r:NProg.Distributed.Service" SourceId="077DB902-1745-4CEF-9714-E0F3AC17B452" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.Remoting" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.Remoting" TargetId="077DB902-1745-4CEF-9714-E0F3AC17B452" />
+  <Reference Identifier="1355E9DA-7326-4A28-A117-6333ADC5FF99/r:NProg.Distributed.Service" SourceId="1355E9DA-7326-4A28-A117-6333ADC5FF99" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.ZeroMQ" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.ZeroMQ" TargetId="1355E9DA-7326-4A28-A117-6333ADC5FF99" />
+  <Reference Identifier="AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1/r:NProg.Distributed.Service" SourceId="AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.NetMQ" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.NetMQ" TargetId="AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1" />
+  <Reference Identifier="36EE5322-A915-44F7-B096-BE2901F1D9D1/r:NProg.Distributed.Service" SourceId="36EE5322-A915-44F7-B096-BE2901F1D9D1" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.Zyan" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.Zyan" TargetId="36EE5322-A915-44F7-B096-BE2901F1D9D1" />
+  <Reference Identifier="0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08/r:NProg.Distributed.Service" SourceId="0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.Thrift" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.Thrift" TargetId="0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.OrderService" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.OrderService" TargetId="1487C697-4873-4265-B346-8782DA31B3AF" />
+  <Reference Identifier="DC404E5D-4316-4A82-9F17-2B7F1FE6B209/r:NProg.Distributed.OrderService.Config" SourceId="DC404E5D-4316-4A82-9F17-2B7F1FE6B209" Name="NProg.Distributed.OrderService.Config" TargetId="D83DDB04-654C-48B7-B68C-38E3101FF584" />
+  <Reference Identifier="FBC30C00-9FEC-4D25-B706-B49E354ACB3F/r:NProg.Distributed.Service" SourceId="FBC30C00-9FEC-4D25-B706-B49E354ACB3F" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="FBC30C00-9FEC-4D25-B706-B49E354ACB3F/r:NProg.Distributed.OrderService.Config" SourceId="FBC30C00-9FEC-4D25-B706-B49E354ACB3F" Name="NProg.Distributed.OrderService.Config" TargetId="D83DDB04-654C-48B7-B68C-38E3101FF584" />
+  <Reference Identifier="7FD0600F-A707-4883-9182-1229C102DB7E/r:NProg.Distributed.OrderService" SourceId="7FD0600F-A707-4883-9182-1229C102DB7E" Name="NProg.Distributed.OrderService" TargetId="1487C697-4873-4265-B346-8782DA31B3AF" />
+  <Reference Identifier="7FD0600F-A707-4883-9182-1229C102DB7E/r:NProg.Distributed.Service" SourceId="7FD0600F-A707-4883-9182-1229C102DB7E" Name="NProg.Distributed.Service" TargetId="3AB7DCCB-B549-4F9F-B54D-C8025A139A8C" />
+  <Reference Identifier="7FD0600F-A707-4883-9182-1229C102DB7E/r:NProg.Distributed.OrderService.Config" SourceId="7FD0600F-A707-4883-9182-1229C102DB7E" Name="NProg.Distributed.OrderService.Config" TargetId="D83DDB04-654C-48B7-B68C-38E3101FF584" />
+  <Reference Identifier="0E311590-8292-44F0-AD4D-D0EC39341241/r:NProg.Distributed.OrderService" SourceId="0E311590-8292-44F0-AD4D-D0EC39341241" Name="NProg.Distributed.OrderService" TargetId="1487C697-4873-4265-B346-8782DA31B3AF" />
+  <Reference Identifier="077DB902-1745-4CEF-9714-E0F3AC17B452/r:NProg.Distributed.Database" SourceId="077DB902-1745-4CEF-9714-E0F3AC17B452" Name="NProg.Distributed.Database" TargetId="0E311590-8292-44F0-AD4D-D0EC39341241" />
+  <Reference Identifier="D83DDB04-654C-48B7-B68C-38E3101FF584/r:NProg.Distributed.Database" SourceId="D83DDB04-654C-48B7-B68C-38E3101FF584" Name="NProg.Distributed.Database" TargetId="0E311590-8292-44F0-AD4D-D0EC39341241" />
+</ArchitectureGraph>

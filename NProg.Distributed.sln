@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{842095DB-A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{7FED1E69-8B86-4936-93EA-910BCE279F53}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "framework", "framework", "{04832DD2-FE42-4845-B39A-5F4B356C74C9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "transport", "transport", "{04832DD2-FE42-4845-B39A-5F4B356C74C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Client", "src\NProg.Distributed.Client\NProg.Distributed.Client.csproj", "{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}"
 EndProject
@@ -74,6 +74,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{DC560D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService.Config", "src\NProg.Distributed.OrderService.Config\NProg.Distributed.OrderService.Config.csproj", "{D83DDB04-654C-48B7-B68C-38E3101FF584}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{35D8774F-09C5-49A4-A434-2175A38C2CCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Database", "src\NProg.Distributed.Database\NProg.Distributed.Database.csproj", "{0E311590-8292-44F0-AD4D-D0EC39341241}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +136,10 @@ Global
 		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E311590-8292-44F0-AD4D-D0EC39341241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E311590-8292-44F0-AD4D-D0EC39341241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E311590-8292-44F0-AD4D-D0EC39341241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E311590-8292-44F0-AD4D-D0EC39341241}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,6 +163,8 @@ Global
 		{020167E8-2831-4C25-BD8F-E6E965D1F534} = {AB3E64C8-1914-4741-8D26-CE354A70FFCB}
 		{DC560D10-161C-48AC-9910-116DBD826E37} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
 		{D83DDB04-654C-48B7-B68C-38E3101FF584} = {DC560D10-161C-48AC-9910-116DBD826E37}
+		{35D8774F-09C5-49A4-A434-2175A38C2CCA} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
+		{0E311590-8292-44F0-AD4D-D0EC39341241} = {35D8774F-09C5-49A4-A434-2175A38C2CCA}
 	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
 		Project = ""

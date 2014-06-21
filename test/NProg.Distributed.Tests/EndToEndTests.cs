@@ -114,7 +114,7 @@ namespace NProg.Distributed.Tests
 
             stopwatch.Stop();
 
-            Log.WriteLine("===============\nCount: {0}, ellapsed: {1} ms\n=============== ", count,
+            Log.WriteLine("===============\nCount: {0}, elapsed: {1} ms\n=============== ", count,
                 stopwatch.ElapsedMilliseconds);
         }
     }
