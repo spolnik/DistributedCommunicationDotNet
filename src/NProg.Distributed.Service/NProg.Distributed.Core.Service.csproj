@@ -53,6 +53,7 @@
     <Compile Include="Messaging\IRequestResponse.cs" />
     <Compile Include="Messaging\IRequestSender.cs" />
     <Compile Include="Messaging\Message.cs" />
+    <Compile Include="Messaging\MessageClientBase.cs" />
     <Compile Include="Messaging\MessageException.cs" />
     <Compile Include="Messaging\MessageHandlerBase.cs" />
     <Compile Include="Messaging\MessageReceiver.cs" />

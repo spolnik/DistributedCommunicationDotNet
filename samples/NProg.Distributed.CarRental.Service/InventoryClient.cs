@@ -7,22 +7,15 @@ using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service
 {
-    public class InventoryClient : IInventoryApi
+    public class InventoryClient : MessageClientBase, IInventoryApi
     {
-        /// <summary>
-        /// The request sender
-        /// </summary>
-        private readonly IRequestSender requestSender;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public InventoryClient(IRequestSender requestSender)
-        {
-            this.requestSender = requestSender;
-        }
+        public InventoryClient(IRequestSender requestSender) : base(requestSender)
+        {}
 
-        #region Implementation of IInventoryApi
+        #region IInventoryApi Members
 
         public Car UpdateCar(Car car)
         {
@@ -52,29 +45,6 @@ namespace NProg.Distributed.CarRental.Service
         {
             return requestSender.Send(new GetAvailableCarsRequest {PickupDate = pickupDate, ReturnDate = returnDate})
                 .Receive<GetCarsResponse>().Cars;
-        }
-
-        #endregion
-
-        #region Implementation of IDisposable
-
-        /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
-        /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        private void Dispose(bool disposing)
-        {
-            if (disposing && requestSender != null)
-                requestSender.Dispose();
-        }
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         #endregion

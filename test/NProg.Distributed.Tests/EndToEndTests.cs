@@ -14,7 +14,6 @@ namespace NProg.Distributed.Transport.Tests
 {
     public class EndToEndTests
     {
-
         private static readonly object[] ServicesCases =
         {
             new object[] {"wcf", 33001, 100},
@@ -23,7 +22,6 @@ namespace NProg.Distributed.Transport.Tests
             new object[] {"nmq", 36001, 100},
             new object[] {"zyan", 38001, 100},
             new object[] {"ice", 39001, 100}
-//            new object[] {"remoting", 37001, 100},
         };
 
         [Test, TestCaseSource("ServicesCases")]
