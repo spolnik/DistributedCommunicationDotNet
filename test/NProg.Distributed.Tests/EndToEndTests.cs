@@ -36,7 +36,7 @@ namespace NProg.Distributed.Transport.Tests
             var cancellationTokenSource = new CancellationTokenSource();
             Task.Factory.StartNew(() => RunServer(kernel, port, cancellationTokenSource), cancellationTokenSource.Token);
             RunClient(framework, port, count);
-            cancellationTokenSource.Cancel(false);
+            cancellationTokenSource.Cancel(true);
         }
 
         private static void RunServer(IKernel kernel, int port, CancellationTokenSource source)
