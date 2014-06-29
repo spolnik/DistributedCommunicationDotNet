@@ -12,38 +12,38 @@ namespace NProg.Distributed.CarRental.Service
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public InventoryClient(IRequestSender requestSender) : base(requestSender)
+        public InventoryClient(IMessageSender messageSender) : base(messageSender)
         {}
 
         #region IInventoryApi Members
 
         public Car UpdateCar(Car car)
         {
-            return requestSender.Send(new AddOrUpdateCarRequest {Car = car})
+            return messageSender.Send(new AddOrUpdateCarRequest {Car = car})
                 .Receive<GetCarResponse>().Car;
         }
 
         public bool DeleteCar(int carId)
         {
-            return requestSender.Send(new DeleteCarRequest {CarId = carId})
+            return messageSender.Send(new DeleteCarRequest {CarId = carId})
                 .Receive<StatusResponse>().Status;
         }
 
         public Car GetCar(int carId)
         {
-            return requestSender.Send(new GetCarRequest {CarId = carId})
+            return messageSender.Send(new GetCarRequest {CarId = carId})
                 .Receive<GetCarResponse>().Car;
         }
 
         public Car[] GetAllCars()
         {
-            return requestSender.Send(new GetAllCarsRequest())
+            return messageSender.Send(new GetAllCarsRequest())
                 .Receive<GetCarsResponse>().Cars;
         }
 
         public Car[] GetAvailableCars(DateTime pickupDate, DateTime returnDate)
         {
-            return requestSender.Send(new GetAvailableCarsRequest {PickupDate = pickupDate, ReturnDate = returnDate})
+            return messageSender.Send(new GetAvailableCarsRequest {PickupDate = pickupDate, ReturnDate = returnDate})
                 .Receive<GetCarsResponse>().Cars;
         }
 

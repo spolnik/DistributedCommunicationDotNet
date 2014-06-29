@@ -1,5 +1,6 @@
 ﻿using System;
 using NProg.Distributed.Core.Data;
+using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Requests;
@@ -17,6 +18,12 @@ namespace NProg.Distributed.OrderService.Handlers
         protected override IRequestResponse Process(GetOrderRequest request)
         {
             var order = repository.Get(request.OrderId);
+
+            if (order == null)
+            {
+                throw new NotFoundException(string.Format("Order not found for id: {0}", request.OrderId));
+            }
+
             return new GetOrderResponse {Order = order};
         }
     }

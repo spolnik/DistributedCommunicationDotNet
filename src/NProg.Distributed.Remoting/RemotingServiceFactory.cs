@@ -11,9 +11,9 @@ namespace NProg.Distributed.Remoting
             return new RemotingOrderServer(port);
         }
 
-        public IRequestSender GetRequestSender(Uri serviceUri)
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return new RemotingRequestSender(serviceUri);
+            return new RemotingMessageSender(serviceUri);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
-using NProg.Distributed.CarRental.Domain;
 using NProg.Distributed.CarRental.Service.Requests;
 using NProg.Distributed.CarRental.Service.Responses;
+using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
@@ -22,9 +22,12 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         {
             var carEntity = repository.Get(request.CarId);
 
-            return carEntity == null
-                ? new GetCarResponse {Car = new Car()}
-                : new GetCarResponse {Car = carEntity};
+            if (carEntity == null)
+            {
+                throw new NotFoundException(string.Format("Car with ID of {0} is not in database", request.CarId));
+            }
+
+            return new GetCarResponse {Car = carEntity};
         }
 
         #endregion

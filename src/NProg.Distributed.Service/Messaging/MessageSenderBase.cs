@@ -3,9 +3,9 @@
 namespace NProg.Distributed.Core.Service.Messaging
 {
     /// <summary>
-    /// Class RequestSenderBase.
+    /// Class MessageSenderBase.
     /// </summary>
-    public abstract class RequestSenderBase : IRequestSender
+    public abstract class MessageSenderBase : IMessageSender
     {
         /// <summary>
         /// Sends the internal.
@@ -23,14 +23,15 @@ namespace NProg.Distributed.Core.Service.Messaging
         /// <exception cref="System.ArgumentException">Request cannot be Message instance;request</exception>
         public Message Send<TRequest>(TRequest request) where TRequest : IRequestResponse 
         {
-            if (request is Message)
-                throw new ArgumentException("Request cannot be Message instance", "request");
-
             var message = Message.From(request);
 
             try
             {
                 return SendInternal(message);
+            }
+            catch (MessageException)
+            {
+                throw;
             }
             catch (Exception)
             {

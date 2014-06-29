@@ -47,7 +47,7 @@
     <Compile Include="IceMessageDispatcher.cs" />
     <Compile Include="IceMessageServer.cs" />
     <Compile Include="IceServiceFactory.cs" />
-    <Compile Include="IceRequestSender.cs" />
+    <Compile Include="IceMessageSender.cs" />
     <Compile Include="MessageMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

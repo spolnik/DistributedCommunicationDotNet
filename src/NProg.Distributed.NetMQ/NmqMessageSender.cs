@@ -5,12 +5,12 @@ using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.Transport.NetMQ
 {
-    internal sealed class NmqRequestSender : RequestSenderBase
+    internal sealed class NmqMessageSender : MessageSenderBase
     {
         private NetMQSocket socket;
         private NetMQContext context;
 
-        internal NmqRequestSender(Uri serviceUri)
+        internal NmqMessageSender(Uri serviceUri)
         {
             context = NetMQContext.Create();
             socket = context.CreateRequestSocket();

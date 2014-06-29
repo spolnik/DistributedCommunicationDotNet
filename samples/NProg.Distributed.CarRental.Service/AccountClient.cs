@@ -10,7 +10,7 @@ namespace NProg.Distributed.CarRental.Service
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public AccountClient(IRequestSender requestSender) : base(requestSender)
+        public AccountClient(IMessageSender messageSender) : base(messageSender)
         {}
 
         #region IAccountApi Members

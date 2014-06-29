@@ -5,12 +5,12 @@ using NProg.Distributed.Transport.WCF.Service;
 
 namespace NProg.Distributed.Transport.WCF
 {
-    internal sealed class WcfRequestSender : RequestSenderBase
+    internal sealed class WcfMessageSender : MessageSenderBase
     {
         private ChannelFactory<IMessageService> channelFactory;
         private readonly IMessageService proxy;
 
-        internal WcfRequestSender(Uri serviceUri)
+        internal WcfMessageSender(Uri serviceUri)
         {
             var tcpBinding = new NetTcpBinding();
             var endpoint = new EndpointAddress(string.Format("net.tcp://{0}:{1}/OrderService", serviceUri.Host, serviceUri.Port));

@@ -11,9 +11,9 @@ namespace NProg.Distributed.Transport.Thrift
             return new ThriftMessageServer(messageReceiver, port);
         }
 
-        public IRequestSender GetRequestSender(Uri serviceUri)
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return new ThriftRequestSender(serviceUri);
+            return new ThriftMessageSender(serviceUri);
         }
     }
 }

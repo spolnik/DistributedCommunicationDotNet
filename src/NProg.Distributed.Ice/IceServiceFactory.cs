@@ -11,9 +11,9 @@ namespace NProg.Distributed.Transport.Ice
             return new IceMessageServer(messageReceiver, port);
         }
 
-        public IRequestSender GetRequestSender(Uri serviceUri)
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return new IceRequestSender(serviceUri);
+            return new IceMessageSender(serviceUri);
         }
     }
 

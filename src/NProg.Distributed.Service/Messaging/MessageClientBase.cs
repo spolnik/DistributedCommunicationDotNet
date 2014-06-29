@@ -7,14 +7,14 @@ namespace NProg.Distributed.Core.Service.Messaging
          /// <summary>
         /// The request sender
         /// </summary>
-         protected readonly IRequestSender requestSender;
+         protected readonly IMessageSender messageSender;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        protected MessageClientBase(IRequestSender requestSender)
+        protected MessageClientBase(IMessageSender messageSender)
         {
-            this.requestSender = requestSender;
+            this.messageSender = messageSender;
         }
 
         #region Implementation of IDisposable
@@ -34,9 +34,9 @@ namespace NProg.Distributed.Core.Service.Messaging
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         private void Dispose(bool disposing)
         {
-            if (disposing && requestSender != null)
+            if (disposing && messageSender != null)
             {
-                requestSender.Dispose();
+                messageSender.Dispose();
             }
         }
 

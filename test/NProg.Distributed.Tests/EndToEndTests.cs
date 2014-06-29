@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using log4net;
 using Ninject;
 using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Config;
 using NProg.Distributed.OrderService.Domain;
@@ -102,10 +103,15 @@ namespace NProg.Distributed.Transport.Tests
                     var removed = client.Remove(order.OrderId);
                     Debug.Assert(removed);
 
-                    var removedOrder = client.Get(order.OrderId);
-                    removedOrder.UserName = "";
-                    Debug.Assert(removedOrder.Equals(new Order { UserName = "" }));
-
+                    try
+                    {
+                        client.Get(order.OrderId);
+                    }
+                    catch (MessageException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    
                     Log.WriteLine("Order {0}", i);
                 }
             }

@@ -11,9 +11,9 @@ namespace NProg.Distributed.Transport.ZeroMQ
             return new ZmqMessageServer(messageReceiver, port);
         }
 
-        public IRequestSender GetRequestSender(Uri serviceUri)
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return new ZmqRequestSender(serviceUri);
+            return new ZmqMessageSender(serviceUri);
         }
     }
 }

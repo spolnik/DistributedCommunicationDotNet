@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ZyanRequestSender.cs" />
+    <Compile Include="ZyanMessageSender.cs" />
     <Compile Include="ZyanMessageServer.cs" />
     <Compile Include="ZyanServiceFactory.cs" />
   </ItemGroup>

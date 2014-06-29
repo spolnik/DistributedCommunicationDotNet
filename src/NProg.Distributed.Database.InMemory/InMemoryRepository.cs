@@ -43,7 +43,7 @@ namespace NProg.Distributed.Database.InMemory
             TEntity value;
             InMemoryDb.TryGetValue(id, out value);
 
-            return value ?? new TEntity();
+            return value;
         }
 
         #endregion

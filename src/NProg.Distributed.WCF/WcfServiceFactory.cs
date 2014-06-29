@@ -11,9 +11,9 @@ namespace NProg.Distributed.Transport.WCF
             return new WcfMessageServer(messageReceiver, port);
         }
 
-        public IRequestSender GetRequestSender(Uri serviceUri)
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return new WcfRequestSender(serviceUri);
+            return new WcfMessageSender(serviceUri);
         }
     }
 }

@@ -9,6 +9,7 @@ using NProg.Distributed.CarRental.Bootstrapper;
 using NProg.Distributed.CarRental.Domain;
 using NProg.Distributed.CarRental.Domain.Api;
 using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 using NUnit.Framework;
 
 namespace NProg.Distributed.CarRental.Tests
@@ -115,9 +116,15 @@ namespace NProg.Distributed.CarRental.Tests
 
             client.DeleteCar(carId);
 
-            var removedCar = client.GetCar(carId);
-            Debug.Assert(removedCar.Equals(new Car()));
-
+            try
+            {
+                client.GetCar(carId);
+            }
+            catch (MessageException messageException)
+            {
+                Console.WriteLine(messageException.Message);
+            }
+            
             Log.WriteLine("Car {0} with carId: {1}", i, carId);
         }
     }

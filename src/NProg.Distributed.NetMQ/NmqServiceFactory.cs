@@ -11,9 +11,9 @@ namespace NProg.Distributed.Transport.NetMQ
             return new NmqMessageServer(messageReceiver, port);
         }
 
-        public IRequestSender GetRequestSender(Uri serviceUri)
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return new NmqRequestSender(serviceUri);
+            return new NmqMessageSender(serviceUri);
         }
     }
 }

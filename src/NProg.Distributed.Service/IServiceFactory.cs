@@ -20,7 +20,7 @@ namespace NProg.Distributed.Core.Service
         /// Gets the request sender.
         /// </summary>
         /// <param name="serviceUri">The service URI.</param>
-        /// <returns>IRequestSender.</returns>
-        IRequestSender GetRequestSender(Uri serviceUri);
+        /// <returns>IMessageSender.</returns>
+        IMessageSender GetRequestSender(Uri serviceUri);
     }
 }

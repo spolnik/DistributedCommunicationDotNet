@@ -11,9 +11,9 @@ namespace NProg.Distributed.Transport.Zyan
             return new ZyanMessageServer(messageReceiver, port);
         }
 
-        public IRequestSender GetRequestSender(Uri serviceUri)
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return new ZyanRequestSender(serviceUri);
+            return new ZyanMessageSender(serviceUri);
         }
     }
 }

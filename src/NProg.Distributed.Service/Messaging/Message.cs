@@ -50,11 +50,12 @@ namespace NProg.Distributed.Core.Service.Messaging
         /// <returns>TBody.</returns>
         public TBody Receive<TBody>() where TBody : IRequestResponse
         {
+            ThrowIfError();
             return (TBody) Body;
         }
 
         /// <summary>
-        /// Froms the json.
+        /// Create message object from the json.
         /// </summary>
         /// <param name="json">The json.</param>
         /// <returns>Message.</returns>
@@ -67,7 +68,7 @@ namespace NProg.Distributed.Core.Service.Messaging
         }
 
         /// <summary>
-        /// Froms the specified request.
+        /// Create message from the specified request.
         /// </summary>
         /// <typeparam name="TRequest">The type of the t request.</typeparam>
         /// <param name="request">The request.</param>
@@ -80,12 +81,29 @@ namespace NProg.Distributed.Core.Service.Messaging
             };
         }
 
-        public static Message ErrorFrom(Exception exception)
+        /// <summary>
+        /// Create error message from exception.
+        /// </summary>
+        /// <param name="exception">The server exception.</param>
+        /// <returns>Message exception.</returns>
+        internal static Message ErrorFrom(Exception exception)
         {
+            var errorId = Guid.NewGuid();
+            Console.WriteLine("[Error id: " + errorId + "] " + exception);
+
             return new Message
                 {
-                    Body = exception
+                    Body = new MessageException("[Error id: " + errorId + "] " + exception.Message)
                 };
+        }
+
+        private void ThrowIfError()
+        {
+            var exception = Body as Exception;
+            if (exception != null)
+            {
+                throw exception;
+            }
         }
     }
 }

@@ -7,13 +7,13 @@ using Thrift.Transport;
 
 namespace NProg.Distributed.Transport.Thrift
 {
-    internal sealed class ThriftRequestSender : RequestSenderBase
+    internal sealed class ThriftMessageSender : MessageSenderBase
     {
         private readonly TBufferedTransport transport;
         private readonly MessageService.Client client;
         private readonly TSocket socket;
 
-        internal ThriftRequestSender(Uri serviceUri)
+        internal ThriftMessageSender(Uri serviceUri)
         {
             socket = new TSocket(serviceUri.Host, serviceUri.Port);
             transport = new TBufferedTransport(socket);

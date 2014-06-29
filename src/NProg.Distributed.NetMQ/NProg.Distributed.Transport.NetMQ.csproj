@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NmqRequestSender.cs" />
+    <Compile Include="NmqMessageSender.cs" />
     <Compile Include="NmqMessageServer.cs" />
     <Compile Include="NmqServiceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

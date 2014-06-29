@@ -5,11 +5,11 @@ using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {
-    internal sealed class RemotingRequestSender : RequestSenderBase
+    internal sealed class RemotingMessageSender : MessageSenderBase
     {
         private readonly RemotingOrderHandler proxy;
 
-        internal RemotingRequestSender(Uri serviceUri)
+        internal RemotingMessageSender(Uri serviceUri)
         {
             var tcpChannel = new TcpChannel();
             ChannelServices.RegisterChannel(tcpChannel, false);

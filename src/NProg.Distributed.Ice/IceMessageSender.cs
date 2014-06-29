@@ -6,12 +6,12 @@ using NProgDistributed.TheIce;
 
 namespace NProg.Distributed.Transport.Ice
 {
-    internal sealed class IceRequestSender : RequestSenderBase
+    internal sealed class IceMessageSender : MessageSenderBase
     {
         private Communicator communicator;
         private readonly IMessageServicePrx proxy;
 
-        internal IceRequestSender(Uri serviceUri)
+        internal IceMessageSender(Uri serviceUri)
         {
             var address = string.Format("OrderService:tcp -p {1} -h {0}", serviceUri.Host, serviceUri.Port);
 

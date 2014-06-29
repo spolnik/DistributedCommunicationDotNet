@@ -3,9 +3,9 @@
 namespace NProg.Distributed.Core.Service.Messaging
 {
     /// <summary>
-    /// Interface IRequestSender
+    /// Interface IMessageSender
     /// </summary>
-    public interface IRequestSender : IDisposable
+    public interface IMessageSender : IDisposable
     {
         /// <summary>
         /// Sends the specified message.

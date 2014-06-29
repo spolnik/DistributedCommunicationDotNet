@@ -51,13 +51,13 @@
     <Compile Include="Messaging\IMessageHandler.cs" />
     <Compile Include="Messaging\IMessageReceiver.cs" />
     <Compile Include="Messaging\IRequestResponse.cs" />
-    <Compile Include="Messaging\IRequestSender.cs" />
+    <Compile Include="Messaging\IMessageSender.cs" />
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Messaging\MessageClientBase.cs" />
     <Compile Include="Messaging\MessageException.cs" />
     <Compile Include="Messaging\MessageHandlerBase.cs" />
     <Compile Include="Messaging\MessageReceiver.cs" />
-    <Compile Include="Messaging\RequestSenderBase.cs" />
+    <Compile Include="Messaging\MessageSenderBase.cs" />
     <Compile Include="Messaging\StatusResponse.cs" />
     <Compile Include="NotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
