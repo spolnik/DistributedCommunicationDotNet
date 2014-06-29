@@ -1,24 +1,19 @@
 ﻿using System;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.WCF
+namespace NProg.Distributed.Transport.WCF
 {
     public sealed class WcfServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port)
         {
             return new WcfMessageServer(messageReceiver, port);
         }
 
-        public IMessageMapper GetMessageMapper()
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return null;
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new WcfRequestSender(serviceUri);
+            return new WcfMessageSender(serviceUri);
         }
     }
 }

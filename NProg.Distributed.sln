@@ -5,25 +5,26 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C63D0373-27C0-4C1C-AEB6-935FBF0465B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService", "src\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj", "{1487C697-4873-4265-B346-8782DA31B3AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService.Domain", "src\NProg.Distributed.Domain\NProg.Distributed.OrderService.Domain.csproj", "{1487C697-4873-4265-B346-8782DA31B3AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{842095DB-A845-4F4F-B00C-B1EA348DB446}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{7FED1E69-8B86-4936-93EA-910BCE279F53}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{7FED1E69-8B86-4936-93EA-910BCE279F53}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "transport", "transport", "{04832DD2-FE42-4845-B39A-5F4B356C74C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Client", "src\NProg.Distributed.Client\NProg.Distributed.Client.csproj", "{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService.Client", "src\NProg.Distributed.Client\NProg.Distributed.OrderService.Client.csproj", "{DC404E5D-4316-4A82-9F17-2B7F1FE6B209}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Service", "src\NProg.Distributed.Service\NProg.Distributed.Service.csproj", "{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Core.Service", "src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj", "{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Thrift", "src\NProg.Distributed.Thrift\NProg.Distributed.Thrift.csproj", "{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Transport.Thrift", "src\NProg.Distributed.Thrift\NProg.Distributed.Transport.Thrift.csproj", "{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AB3E64C8-1914-4741-8D26-CE354A70FFCB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".SolutionItems", "{AB3E64C8-1914-4741-8D26-CE354A70FFCB}"
 	ProjectSection(SolutionItems) = preProject
 		Ice.GenerateCode.cmd = Ice.GenerateCode.cmd
 		perf_distributed_reports.txt = perf_distributed_reports.txt
 		Thrift.GenerateCode.cmd = Thrift.GenerateCode.cmd
+		todo.txt = todo.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6E46352C-AA16-4CA2-AE23-73ECA2BFE980}"
@@ -33,23 +34,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6E4635
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Server", "src\NProg.Distributed.Server\NProg.Distributed.Server.csproj", "{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService.Server", "src\NProg.Distributed.Server\NProg.Distributed.OrderService.Server.csproj", "{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.ZeroMQ", "src\NProg.Distributed.ZeroMQ\NProg.Distributed.ZeroMQ.csproj", "{1355E9DA-7326-4A28-A117-6333ADC5FF99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Transport.ZeroMQ", "src\NProg.Distributed.ZeroMQ\NProg.Distributed.Transport.ZeroMQ.csproj", "{1355E9DA-7326-4A28-A117-6333ADC5FF99}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{26446979-8C4E-4935-85A8-54FADC0FAFC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Tests", "test\NProg.Distributed.Tests\NProg.Distributed.Tests.csproj", "{7FD0600F-A707-4883-9182-1229C102DB7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Transport.Tests", "test\NProg.Distributed.Tests\NProg.Distributed.Transport.Tests.csproj", "{7FD0600F-A707-4883-9182-1229C102DB7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.WCF", "src\NProg.Distributed.WCF\NProg.Distributed.WCF.csproj", "{F84A2E32-9931-4C98-AA25-CE481CB89C0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Transport.WCF", "src\NProg.Distributed.WCF\NProg.Distributed.Transport.WCF.csproj", "{F84A2E32-9931-4C98-AA25-CE481CB89C0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderRemoting", "src\NProg.Distributed.Remoting\NProg.Distributed.OrderRemoting.csproj", "{077DB902-1745-4CEF-9714-E0F3AC17B452}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Zyan", "src\NProg.Distributed.Zyan\NProg.Distributed.Zyan.csproj", "{36EE5322-A915-44F7-B096-BE2901F1D9D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Transport.Zyan", "src\NProg.Distributed.Zyan\NProg.Distributed.Transport.Zyan.csproj", "{36EE5322-A915-44F7-B096-BE2901F1D9D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.NetMQ", "src\NProg.Distributed.NetMQ\NProg.Distributed.NetMQ.csproj", "{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Transport.NetMQ", "src\NProg.Distributed.NetMQ\NProg.Distributed.Transport.NetMQ.csproj", "{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Ice", "src\NProg.Distributed.Ice\NProg.Distributed.Ice.csproj", "{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Transport.Ice", "src\NProg.Distributed.Ice\NProg.Distributed.Transport.Ice.csproj", "{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{020167E8-2831-4C25-BD8F-E6E965D1F534}"
 	ProjectSection(SolutionItems) = preProject
@@ -74,10 +75,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{DC560D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.OrderService.Config", "src\NProg.Distributed.OrderService.Config\NProg.Distributed.OrderService.Config.csproj", "{D83DDB04-654C-48B7-B68C-38E3101FF584}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{35D8774F-09C5-49A4-A434-2175A38C2CCA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Database", "src\NProg.Distributed.Database\NProg.Distributed.Database.csproj", "{0E311590-8292-44F0-AD4D-D0EC39341241}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{38BF824B-3987-4B06-8FA6-FD7FC5213E8C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "order", "order", "{C00F3E68-89CB-476C-ABAC-23159CD0F411}"
@@ -85,6 +82,38 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configuration", "configuration", "{ED56315B-3B1E-4945-9F38-59992F66778A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "transport", "transport", "{2622E376-F63E-453A-B4EB-BF7B5D381C99}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "carrental", "carrental", "{093CC501-4799-4E6B-B1D0-A5B3EAC182F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{1F6773B2-5F1B-4F6A-9B6B-B4ED7DE9BD06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Domain", "samples\NProg.Distributed.CarRental.Domain\NProg.Distributed.CarRental.Domain.csproj", "{D2D3A11C-D368-449E-BCB6-34210A7F2712}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Core.Data", "src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj", "{BEB9DF18-62D2-4384-9331-8F057F0030DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{E38BF625-E788-4121-A0A7-184D99BF8C2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Database.InMemory", "src\NProg.Distributed.Database.InMemory\NProg.Distributed.Database.InMemory.csproj", "{A66F2DBE-0756-495C-9EA3-BD06447A1AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.Database.NDatabase", "src\NProg.Distributed.Database.NDatabase\NProg.Distributed.Database.NDatabase.csproj", "{21B0AE14-0E50-49A8-860E-804B93922F8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{E890B2E1-3BFF-40B1-BF73-1CE488F81D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Data", "src\NProg.Distributed.CarRental.Data\NProg.Distributed.CarRental.Data.csproj", "{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Tests", "test\NProg.Distributed.CarRental.Tests\NProg.Distributed.CarRental.Tests.csproj", "{683C6F22-F485-43FF-BB8F-3D3A8081FECA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{D0D0033A-7BAD-4E7C-971E-BE60880A197C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Service", "samples\NProg.Distributed.CarRental.Service\NProg.Distributed.CarRental.Service.csproj", "{A2FB8DA1-4A8B-4CD7-8884-AEECB20AEC1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{9C4DE98A-F23D-4E65-8721-74987297E9E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Client", "samples\NProg.Distributed.CarRental.Client\NProg.Distributed.CarRental.Client.csproj", "{199FC54C-7F1C-4F21-B58C-16DA1C586F79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Server", "samples\NProg.Distributed.CarRental.Server\NProg.Distributed.CarRental.Server.csproj", "{AABCC111-6722-4B15-80AF-CA7833CAF4B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Bootstrapper", "samples\NProg.Distributed.CarRental.Bootstraper\NProg.Distributed.CarRental.Bootstrapper.csproj", "{D6913AE5-730D-4436-ADBA-70EE920CAD81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -144,10 +173,46 @@ Global
 		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D83DDB04-654C-48B7-B68C-38E3101FF584}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E311590-8292-44F0-AD4D-D0EC39341241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E311590-8292-44F0-AD4D-D0EC39341241}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E311590-8292-44F0-AD4D-D0EC39341241}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E311590-8292-44F0-AD4D-D0EC39341241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB9DF18-62D2-4384-9331-8F057F0030DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB9DF18-62D2-4384-9331-8F057F0030DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB9DF18-62D2-4384-9331-8F057F0030DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB9DF18-62D2-4384-9331-8F057F0030DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A66F2DBE-0756-495C-9EA3-BD06447A1AC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66F2DBE-0756-495C-9EA3-BD06447A1AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66F2DBE-0756-495C-9EA3-BD06447A1AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66F2DBE-0756-495C-9EA3-BD06447A1AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B0AE14-0E50-49A8-860E-804B93922F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B0AE14-0E50-49A8-860E-804B93922F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B0AE14-0E50-49A8-860E-804B93922F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B0AE14-0E50-49A8-860E-804B93922F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}.Release|Any CPU.Build.0 = Release|Any CPU
+		{683C6F22-F485-43FF-BB8F-3D3A8081FECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{683C6F22-F485-43FF-BB8F-3D3A8081FECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{683C6F22-F485-43FF-BB8F-3D3A8081FECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{683C6F22-F485-43FF-BB8F-3D3A8081FECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2FB8DA1-4A8B-4CD7-8884-AEECB20AEC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2FB8DA1-4A8B-4CD7-8884-AEECB20AEC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2FB8DA1-4A8B-4CD7-8884-AEECB20AEC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2FB8DA1-4A8B-4CD7-8884-AEECB20AEC1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{199FC54C-7F1C-4F21-B58C-16DA1C586F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{199FC54C-7F1C-4F21-B58C-16DA1C586F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{199FC54C-7F1C-4F21-B58C-16DA1C586F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{199FC54C-7F1C-4F21-B58C-16DA1C586F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AABCC111-6722-4B15-80AF-CA7833CAF4B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABCC111-6722-4B15-80AF-CA7833CAF4B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABCC111-6722-4B15-80AF-CA7833CAF4B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABCC111-6722-4B15-80AF-CA7833CAF4B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6913AE5-730D-4436-ADBA-70EE920CAD81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6913AE5-730D-4436-ADBA-70EE920CAD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6913AE5-730D-4436-ADBA-70EE920CAD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6913AE5-730D-4436-ADBA-70EE920CAD81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,11 +236,25 @@ Global
 		{020167E8-2831-4C25-BD8F-E6E965D1F534} = {AB3E64C8-1914-4741-8D26-CE354A70FFCB}
 		{DC560D10-161C-48AC-9910-116DBD826E37} = {C00F3E68-89CB-476C-ABAC-23159CD0F411}
 		{D83DDB04-654C-48B7-B68C-38E3101FF584} = {ED56315B-3B1E-4945-9F38-59992F66778A}
-		{35D8774F-09C5-49A4-A434-2175A38C2CCA} = {C00F3E68-89CB-476C-ABAC-23159CD0F411}
-		{0E311590-8292-44F0-AD4D-D0EC39341241} = {35D8774F-09C5-49A4-A434-2175A38C2CCA}
 		{C00F3E68-89CB-476C-ABAC-23159CD0F411} = {38BF824B-3987-4B06-8FA6-FD7FC5213E8C}
 		{ED56315B-3B1E-4945-9F38-59992F66778A} = {C00F3E68-89CB-476C-ABAC-23159CD0F411}
 		{2622E376-F63E-453A-B4EB-BF7B5D381C99} = {C00F3E68-89CB-476C-ABAC-23159CD0F411}
+		{093CC501-4799-4E6B-B1D0-A5B3EAC182F5} = {38BF824B-3987-4B06-8FA6-FD7FC5213E8C}
+		{1F6773B2-5F1B-4F6A-9B6B-B4ED7DE9BD06} = {093CC501-4799-4E6B-B1D0-A5B3EAC182F5}
+		{D2D3A11C-D368-449E-BCB6-34210A7F2712} = {1F6773B2-5F1B-4F6A-9B6B-B4ED7DE9BD06}
+		{BEB9DF18-62D2-4384-9331-8F057F0030DA} = {7FED1E69-8B86-4936-93EA-910BCE279F53}
+		{E38BF625-E788-4121-A0A7-184D99BF8C2D} = {C63D0373-27C0-4C1C-AEB6-935FBF0465B8}
+		{A66F2DBE-0756-495C-9EA3-BD06447A1AC1} = {E38BF625-E788-4121-A0A7-184D99BF8C2D}
+		{21B0AE14-0E50-49A8-860E-804B93922F8B} = {E38BF625-E788-4121-A0A7-184D99BF8C2D}
+		{E890B2E1-3BFF-40B1-BF73-1CE488F81D6A} = {093CC501-4799-4E6B-B1D0-A5B3EAC182F5}
+		{681FB3D2-3C5B-4FF6-8EE8-2D0184654156} = {E890B2E1-3BFF-40B1-BF73-1CE488F81D6A}
+		{683C6F22-F485-43FF-BB8F-3D3A8081FECA} = {26446979-8C4E-4935-85A8-54FADC0FAFC4}
+		{D0D0033A-7BAD-4E7C-971E-BE60880A197C} = {093CC501-4799-4E6B-B1D0-A5B3EAC182F5}
+		{A2FB8DA1-4A8B-4CD7-8884-AEECB20AEC1A} = {D0D0033A-7BAD-4E7C-971E-BE60880A197C}
+		{9C4DE98A-F23D-4E65-8721-74987297E9E0} = {093CC501-4799-4E6B-B1D0-A5B3EAC182F5}
+		{199FC54C-7F1C-4F21-B58C-16DA1C586F79} = {9C4DE98A-F23D-4E65-8721-74987297E9E0}
+		{AABCC111-6722-4B15-80AF-CA7833CAF4B9} = {9C4DE98A-F23D-4E65-8721-74987297E9E0}
+		{D6913AE5-730D-4436-ADBA-70EE920CAD81} = {D0D0033A-7BAD-4E7C-971E-BE60880A197C}
 	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
 		Project = ""

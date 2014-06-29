@@ -1,30 +1,23 @@
-﻿using NProg.Distributed.OrderService.Api;
+﻿using System;
+using NProg.Distributed.Core.Data;
+using NProg.Distributed.Core.Service.Messaging;
+using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Requests;
 using NProg.Distributed.OrderService.Responses;
-using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.OrderService.Handlers
 {
-    public sealed class AddOrderHandler : IMessageHandler
+    public sealed class AddOrderHandler : MessageHandlerBase<AddOrderRequest>
     {
-        private readonly IOrderApi dao;
-
-        public AddOrderHandler(IOrderApi orderDao)
+        public AddOrderHandler(IDataRepository<Guid, Order> orderRepository) 
+            : base(orderRepository)
         {
-            dao = orderDao;
         }
 
-        public bool CanHandle(Message message)
+        protected override IRequestResponse Process(AddOrderRequest request)
         {
-            return message.BodyType == typeof(AddOrderRequest);
-        }
-
-        public Message Handle(Message message)
-        {
-            var order = message.Receive<AddOrderRequest>().Order;
-
-            dao.Add(order.OrderId, order);
-            return Message.From(new StatusResponse { Status = true });
+            var addedOrder = repository.Add(request.Order);
+            return new StatusResponse {Status = addedOrder != null};
         }
     }
 }

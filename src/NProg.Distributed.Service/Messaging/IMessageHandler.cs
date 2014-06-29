@@ -1,4 +1,4 @@
-﻿namespace NProg.Distributed.Service.Messaging
+﻿namespace NProg.Distributed.Core.Service.Messaging
 {
     /// <summary>
     /// Interface IMessageHandler
@@ -19,4 +19,5 @@
         /// <returns>Message.</returns>
         Message Handle(Message message);
     }
+
 }

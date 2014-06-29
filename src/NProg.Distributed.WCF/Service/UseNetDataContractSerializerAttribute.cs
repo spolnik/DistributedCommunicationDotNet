@@ -2,7 +2,7 @@
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 
-namespace NProg.Distributed.WCF.Service
+namespace NProg.Distributed.Transport.WCF.Service
 {
     [AttributeUsage(AttributeTargets.Method)]
     internal sealed class UseNetDataContractSerializerAttribute : Attribute, IOperationBehavior

@@ -1,30 +1,22 @@
-﻿using NProg.Distributed.OrderService.Api;
+﻿using System;
+using NProg.Distributed.Core.Data;
+using NProg.Distributed.Core.Service.Messaging;
+using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Requests;
-using NProg.Distributed.OrderService.Responses;
-using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.OrderService.Handlers
 {
-    public sealed class RemoveOrderHandler : IMessageHandler
+    public sealed class RemoveOrderHandler : MessageHandlerBase<RemoveOrderRequest>
     {
-        private readonly IOrderApi dao;
-
-        public RemoveOrderHandler(IOrderApi orderDao)
+        public RemoveOrderHandler(IDataRepository<Guid, Order> orderRepository) 
+            : base(orderRepository)
         {
-            dao = orderDao;
         }
 
-        public bool CanHandle(Message message)
+        protected override IRequestResponse Process(RemoveOrderRequest request)
         {
-            return message.BodyType == typeof (RemoveOrderRequest);
-        }
-
-        public Message Handle(Message message)
-        {
-            var orderId = message.Receive<RemoveOrderRequest>().OrderId;
-
-            var status = dao.Remove(orderId);
-            return Message.From(new StatusResponse { Status = status });
+            var status = repository.Remove(request.OrderId);
+            return new StatusResponse { Status = status };
         }
     }
 }

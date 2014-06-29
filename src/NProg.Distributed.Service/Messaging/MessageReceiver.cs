@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace NProg.Distributed.Service.Messaging
+namespace NProg.Distributed.Core.Service.Messaging
 {
     /// <summary>
     /// Class MessageReceiver.

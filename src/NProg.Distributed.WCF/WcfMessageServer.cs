@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ServiceModel;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
-using NProg.Distributed.WCF.Service;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
+using NProg.Distributed.Transport.WCF.Service;
 
-namespace NProg.Distributed.WCF
+namespace NProg.Distributed.Transport.WCF
 {
     internal sealed class WcfMessageServer : IServer
     {

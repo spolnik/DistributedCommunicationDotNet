@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NProg.Distributed.Database;
+using NProg.Distributed.Core.Service.Messaging;
+using NProg.Distributed.Database.InMemory;
+using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Handlers;
-using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {
@@ -12,7 +13,7 @@ namespace NProg.Distributed.Remoting
 
         public RemotingOrderHandler()
         {
-            var inMemoryDao = new InMemoryDao();
+            var inMemoryDao = new InMemoryRepository<Guid, Order>();
 
             var messageHandlers = new List<IMessageHandler>
                 {

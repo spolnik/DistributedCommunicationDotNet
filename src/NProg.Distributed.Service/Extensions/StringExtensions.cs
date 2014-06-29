@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace NProg.Distributed.Service.Extensions
+namespace NProg.Distributed.Core.Service.Extensions
 {
     /// <summary>
     /// Class StringExtensions.

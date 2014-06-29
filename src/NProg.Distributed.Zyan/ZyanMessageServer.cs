@@ -1,8 +1,8 @@
-﻿using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+﻿using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 using Zyan.Communication;
 
-namespace NProg.Distributed.Zyan
+namespace NProg.Distributed.Transport.Zyan
 {
     internal sealed class ZyanMessageServer : IServer
     {

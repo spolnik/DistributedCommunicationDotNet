@@ -1,25 +1,19 @@
 ﻿using System;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.Remoting
 {
     public sealed class RemotingServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port)
         {
             return new RemotingOrderServer(port);
         }
 
-        public IMessageMapper GetMessageMapper()
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return null;
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new RemotingRequestSender(serviceUri);
+            return new RemotingMessageSender(serviceUri);
         }
     }
-
 }

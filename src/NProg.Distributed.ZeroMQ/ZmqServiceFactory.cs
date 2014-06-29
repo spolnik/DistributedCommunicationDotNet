@@ -1,24 +1,19 @@
 ﻿using System;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.ZeroMQ
+namespace NProg.Distributed.Transport.ZeroMQ
 {
     public sealed class ZmqServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port = -1)
         {
             return new ZmqMessageServer(messageReceiver, port);
         }
 
-        public IMessageMapper GetMessageMapper()
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return null;
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new ZmqRequestSender(serviceUri);
+            return new ZmqMessageSender(serviceUri);
         }
     }
 }

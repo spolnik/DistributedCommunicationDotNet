@@ -1,24 +1,19 @@
 ﻿using System;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.Thrift
+namespace NProg.Distributed.Transport.Thrift
 {
     public sealed class ThriftServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port)
         {
-            return new ThriftMessageServer(messageReceiver, messageMapper, port);
+            return new ThriftMessageServer(messageReceiver, port);
         }
 
-        public IMessageMapper GetMessageMapper()
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return new ThriftMessageMapper();
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new ThriftRequestSender(serviceUri, messageMapper);
+            return new ThriftMessageSender(serviceUri);
         }
     }
 }

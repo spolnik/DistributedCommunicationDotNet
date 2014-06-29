@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Ice;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.Ice
+namespace NProg.Distributed.Transport.Ice
 {
     internal sealed class IceMessageServer : IServer
     {
@@ -11,9 +11,9 @@ namespace NProg.Distributed.Ice
         private readonly int port;
         private Communicator communicator;
 
-        internal IceMessageServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        internal IceMessageServer(IMessageReceiver messageReceiver, int port)
         {
-            receiver = new IceMessageDispatcher(messageReceiver, messageMapper);
+            receiver = new IceMessageDispatcher(messageReceiver);
             this.port = port;
             communicator = Util.initialize();
         }

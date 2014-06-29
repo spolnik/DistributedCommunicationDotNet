@@ -43,23 +43,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemotingRequestSender.cs" />
+    <Compile Include="RemotingMessageSender.cs" />
     <Compile Include="RemotingOrderHandler.cs" />
     <Compile Include="RemotingOrderServer.cs" />
     <Compile Include="RemotingServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NProg.Distributed.Database\NProg.Distributed.Database.csproj">
-      <Project>{0E311590-8292-44F0-AD4D-D0EC39341241}</Project>
-      <Name>NProg.Distributed.Database</Name>
+    <ProjectReference Include="..\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
+      <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
+      <Name>NProg.Distributed.Core.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Database.InMemory\NProg.Distributed.Database.InMemory.csproj">
+      <Project>{A66F2DBE-0756-495C-9EA3-BD06447A1AC1}</Project>
+      <Name>NProg.Distributed.Database.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.Domain\NProg.Distributed.OrderService.Domain.csproj">
       <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
-      <Name>NProg.Distributed.OrderService</Name>
+      <Name>NProg.Distributed.OrderService.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Service.csproj">
+    <ProjectReference Include="..\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
-      <Name>NProg.Distributed.Service</Name>
+      <Name>NProg.Distributed.Core.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

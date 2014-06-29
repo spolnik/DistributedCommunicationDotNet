@@ -4,17 +4,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 using Ninject;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 using NProg.Distributed.OrderService.Api;
 using NProg.Distributed.OrderService.Config;
 using NProg.Distributed.OrderService.Domain;
-using NProg.Distributed.Service;
 using NUnit.Framework;
 
-namespace NProg.Distributed.Tests
+namespace NProg.Distributed.Transport.Tests
 {
     public class EndToEndTests
     {
-
         private static readonly object[] ServicesCases =
         {
             new object[] {"wcf", 33001, 100},
@@ -23,7 +23,6 @@ namespace NProg.Distributed.Tests
             new object[] {"nmq", 36001, 100},
             new object[] {"zyan", 38001, 100},
             new object[] {"ice", 39001, 100}
-//            new object[] {"remoting", 37001, 100},
         };
 
         [Test, TestCaseSource("ServicesCases")]
@@ -36,7 +35,7 @@ namespace NProg.Distributed.Tests
             var cancellationTokenSource = new CancellationTokenSource();
             Task.Factory.StartNew(() => RunServer(kernel, port, cancellationTokenSource), cancellationTokenSource.Token);
             RunClient(framework, port, count);
-            cancellationTokenSource.Cancel(false);
+            cancellationTokenSource.Cancel(true);
         }
 
         private static void RunServer(IKernel kernel, int port, CancellationTokenSource source)
@@ -83,7 +82,7 @@ namespace NProg.Distributed.Tests
             kernel.Settings.Set("framework", framework);
             kernel.Settings.Set("serviceUri", new Uri("tcp://127.0.0.1:" + port));
 
-            using (var client = kernel.Get<IOrderClient>())
+            using (var client = kernel.Get<IOrderApi>())
             {
                 for (var i = 0; i < count; i++)
                 {
@@ -104,10 +103,15 @@ namespace NProg.Distributed.Tests
                     var removed = client.Remove(order.OrderId);
                     Debug.Assert(removed);
 
-                    var removedOrder = client.Get(order.OrderId);
-                    removedOrder.UserName = "";
-                    Debug.Assert(removedOrder.Equals(new Order { UserName = "" }));
-
+                    try
+                    {
+                        client.Get(order.OrderId);
+                    }
+                    catch (MessageException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    
                     Log.WriteLine("Order {0}", i);
                 }
             }

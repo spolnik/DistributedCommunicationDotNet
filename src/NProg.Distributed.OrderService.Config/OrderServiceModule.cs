@@ -1,18 +1,20 @@
 ﻿using System;
 using Ninject;
 using Ninject.Modules;
-using NProg.Distributed.Database;
-using NProg.Distributed.Ice;
-using NProg.Distributed.NetMQ;
+using NProg.Distributed.Core.Data;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
+using NProg.Distributed.Database.InMemory;
 using NProg.Distributed.OrderService.Api;
+using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Handlers;
 using NProg.Distributed.Remoting;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
-using NProg.Distributed.Thrift;
-using NProg.Distributed.WCF;
-using NProg.Distributed.ZeroMQ;
-using NProg.Distributed.Zyan;
+using NProg.Distributed.Transport.Ice;
+using NProg.Distributed.Transport.NetMQ;
+using NProg.Distributed.Transport.Thrift;
+using NProg.Distributed.Transport.WCF;
+using NProg.Distributed.Transport.ZeroMQ;
+using NProg.Distributed.Transport.Zyan;
 
 namespace NProg.Distributed.OrderService.Config
 {
@@ -38,14 +40,13 @@ namespace NProg.Distributed.OrderService.Config
 
         private void Client()
         {
-            Bind<IOrderClient>().ToMethod<IOrderClient>(x =>
+            Bind<IOrderApi>().ToMethod<IOrderApi>(x =>
                 {
                     var framework = Kernel.Settings.Get("framework", string.Empty);
                     var serviceUri = Kernel.Settings.Get("serviceUri", default(Uri));
 
                     var orderServiceFactory = Kernel.Get<IServiceFactory>(framework);
-                    var messageMapper = orderServiceFactory.GetMessageMapper();
-                    var requestSender = orderServiceFactory.GetRequestSender(serviceUri, messageMapper);
+                    var requestSender = orderServiceFactory.GetRequestSender(serviceUri);
 
                     return new OrderClient(requestSender);
                 });
@@ -62,9 +63,8 @@ namespace NProg.Distributed.OrderService.Config
 
                     var serviceFactory = Kernel.Get<IServiceFactory>(framework);
                     var messageReceiver = Kernel.Get<IMessageReceiver>();
-                    var messageMapper = serviceFactory.GetMessageMapper();
-
-                    return serviceFactory.GetServer(messageReceiver, messageMapper, port);
+                    
+                    return serviceFactory.GetServer(messageReceiver, port);
                 });
         }
 
@@ -77,8 +77,8 @@ namespace NProg.Distributed.OrderService.Config
 
         private void DbLayer()
         {
-            Bind<IOrderApi>().To<InMemoryDao>();
-//            Bind<IOrderApi>().To<NdbOrderDao>();
+            Bind<IDataRepository<Guid, Order>>().To<InMemoryRepository<Guid, Order>>();
+//            Bind<IDataRepository<Guid, Order>>().To<NDatabaseRepository<Guid, Order>>();
         }
 
         private void TransportLayer()

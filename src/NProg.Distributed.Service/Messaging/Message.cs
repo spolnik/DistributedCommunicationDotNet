@@ -1,7 +1,7 @@
 ﻿using System;
-using NProg.Distributed.Service.Extensions;
+using NProg.Distributed.Core.Service.Extensions;
 
-namespace NProg.Distributed.Service.Messaging
+namespace NProg.Distributed.Core.Service.Messaging
 {
     /// <summary>
     /// Class Message.
@@ -48,13 +48,14 @@ namespace NProg.Distributed.Service.Messaging
         /// </summary>
         /// <typeparam name="TBody">The type of the t body.</typeparam>
         /// <returns>TBody.</returns>
-        public TBody Receive<TBody>()
+        public TBody Receive<TBody>() where TBody : IRequestResponse
         {
+            ThrowIfError();
             return (TBody) Body;
         }
 
         /// <summary>
-        /// Froms the json.
+        /// Create message object from the json.
         /// </summary>
         /// <param name="json">The json.</param>
         /// <returns>Message.</returns>
@@ -67,17 +68,42 @@ namespace NProg.Distributed.Service.Messaging
         }
 
         /// <summary>
-        /// Froms the specified request.
+        /// Create message from the specified request.
         /// </summary>
         /// <typeparam name="TRequest">The type of the t request.</typeparam>
         /// <param name="request">The request.</param>
         /// <returns>Message.</returns>
-        public static Message From<TRequest>(TRequest request) where TRequest : class 
+        public static Message From<TRequest>(TRequest request) where TRequest : IRequestResponse 
         {
             return new Message
             {
                 Body = request
             };
+        }
+
+        /// <summary>
+        /// Create error message from exception.
+        /// </summary>
+        /// <param name="exception">The server exception.</param>
+        /// <returns>Message exception.</returns>
+        internal static Message ErrorFrom(Exception exception)
+        {
+            var errorId = Guid.NewGuid();
+            Console.WriteLine("[Error id: " + errorId + "] " + exception);
+
+            return new Message
+                {
+                    Body = new MessageException("[Error id: " + errorId + "] " + exception.Message)
+                };
+        }
+
+        private void ThrowIfError()
+        {
+            var exception = Body as Exception;
+            if (exception != null)
+            {
+                throw exception;
+            }
         }
     }
 }

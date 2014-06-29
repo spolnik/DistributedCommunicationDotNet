@@ -1,4 +1,4 @@
-﻿namespace NProg.Distributed.Service.Messaging
+﻿namespace NProg.Distributed.Core.Service.Messaging
 {
     /// <summary>
     /// Interface IMessageReceiver

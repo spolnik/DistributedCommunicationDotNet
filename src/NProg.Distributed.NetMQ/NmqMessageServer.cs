@@ -2,11 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using NetMQ;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Extensions;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Extensions;
+using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.NetMQ
+namespace NProg.Distributed.Transport.NetMQ
 {
     /// <summary>
     /// Class NmqMessageServer.

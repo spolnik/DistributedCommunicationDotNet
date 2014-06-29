@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NProg.Distributed.Service
+namespace NProg.Distributed.Core.Service
 {
     /// <summary>
     /// Interface IServer

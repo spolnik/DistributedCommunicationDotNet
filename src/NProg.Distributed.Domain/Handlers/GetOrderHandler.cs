@@ -1,30 +1,30 @@
-﻿using NProg.Distributed.OrderService.Api;
+﻿using System;
+using NProg.Distributed.Core.Data;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
+using NProg.Distributed.OrderService.Domain;
 using NProg.Distributed.OrderService.Requests;
 using NProg.Distributed.OrderService.Responses;
-using NProg.Distributed.Service.Messaging;
 
 namespace NProg.Distributed.OrderService.Handlers
 {
-    public sealed class GetOrderHandler : IMessageHandler
+    public sealed class GetOrderHandler : MessageHandlerBase<GetOrderRequest>
     {
-        private readonly IOrderApi dao;
-
-        public GetOrderHandler(IOrderApi orderDao)
+        public GetOrderHandler(IDataRepository<Guid, Order> orderRepository) 
+            : base(orderRepository)
         {
-            dao = orderDao;
         }
 
-        public bool CanHandle(Message message)
+        protected override IRequestResponse Process(GetOrderRequest request)
         {
-            return message.BodyType == typeof (GetOrderRequest);
-        }
+            var order = repository.Get(request.OrderId);
 
-        public Message Handle(Message message)
-        {
-            var orderId = message.Receive<GetOrderRequest>().OrderId;
+            if (order == null)
+            {
+                throw new NotFoundException(string.Format("Order not found for id: {0}", request.OrderId));
+            }
 
-            var order = dao.Get(orderId);
-            return Message.From(new GetOrderResponse { Order = order });
+            return new GetOrderResponse {Order = order};
         }
     }
 }

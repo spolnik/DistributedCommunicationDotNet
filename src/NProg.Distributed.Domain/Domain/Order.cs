@@ -1,9 +1,10 @@
 ﻿using System;
+using NProg.Distributed.Core.Data;
 
 namespace NProg.Distributed.OrderService.Domain
 {
     [Serializable]
-    public sealed class Order
+    public sealed class Order : IIdentifiableEntity<Guid>
     {
         public Guid OrderId { get; set; }
 
@@ -47,5 +48,15 @@ namespace NProg.Distributed.OrderService.Domain
                 return hashCode;
             }
         }
+
+        #region Implementation of IIdentifiableEntity<Guid>
+
+        public Guid EntityId
+        {
+            get { return OrderId; }
+            set { OrderId = value; }
+        }
+
+        #endregion
     }
 }

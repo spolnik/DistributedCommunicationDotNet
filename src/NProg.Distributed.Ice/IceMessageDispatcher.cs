@@ -1,27 +1,26 @@
 ﻿using Ice;
-using NProg.Distributed.Service.Extensions;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service.Extensions;
+using NProg.Distributed.Core.Service.Messaging;
 using NProgDistributed.TheIce;
 
-namespace NProg.Distributed.Ice
+namespace NProg.Distributed.Transport.Ice
 {
     internal sealed class IceMessageDispatcher : IMessageServiceDisp_
     {
         private readonly IMessageReceiver messageReceiver;
-        private readonly IMessageMapper messageMapper;
 
-        internal IceMessageDispatcher(IMessageReceiver messageReceiver, IMessageMapper messageMapper)
+        internal IceMessageDispatcher(IMessageReceiver messageReceiver)
         {
             this.messageReceiver = messageReceiver;
-            this.messageMapper = messageMapper;
         }
 
         public override MessageDto Send(MessageDto messageDto, Current current)
         {
-            var message = messageMapper.Map(messageDto);
+            var message = MessageMapper.Map(messageDto);
             var response = messageReceiver.Send(message);
 
-            return messageMapper.Map(response).As<MessageDto>();
+            return MessageMapper.Map(response).As<MessageDto>();
         }
     }
+
 }

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel.Description;
 using System.Xml;
 
-namespace NProg.Distributed.WCF.Service
+namespace NProg.Distributed.Transport.WCF.Service
 {
     internal sealed class NetDataContractOperationBehavior : DataContractSerializerOperationBehavior
     {

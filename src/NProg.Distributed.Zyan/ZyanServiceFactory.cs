@@ -1,24 +1,19 @@
 ﻿using System;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.Zyan
+namespace NProg.Distributed.Transport.Zyan
 {
     public sealed class ZyanServiceFactory : IServiceFactory
     {
-        public IServer GetServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port = -1)
+        public IServer GetServer(IMessageReceiver messageReceiver, int port = -1)
         {
             return new ZyanMessageServer(messageReceiver, port);
         }
 
-        public IMessageMapper GetMessageMapper()
+        public IMessageSender GetRequestSender(Uri serviceUri)
         {
-            return null;
-        }
-
-        public IRequestSender GetRequestSender(Uri serviceUri, IMessageMapper messageMapper)
-        {
-            return new ZyanRequestSender(serviceUri);
+            return new ZyanMessageSender(serviceUri);
         }
     }
 }

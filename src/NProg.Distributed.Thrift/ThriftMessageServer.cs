@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using NProg.Distributed.Service;
-using NProg.Distributed.Service.Messaging;
+using NProg.Distributed.Core.Service;
+using NProg.Distributed.Core.Service.Messaging;
+using NProg.Distributed.Thrift;
 using Thrift.Protocol;
 using Thrift.Server;
 using Thrift.Transport;
 
-namespace NProg.Distributed.Thrift
+namespace NProg.Distributed.Transport.Thrift
 {
     internal sealed class ThriftMessageServer : IServer
     {
@@ -14,10 +15,10 @@ namespace NProg.Distributed.Thrift
         private readonly MessageService.Iface receiver;
         private TThreadPoolServer server;
 
-        internal ThriftMessageServer(IMessageReceiver messageReceiver, IMessageMapper messageMapper, int port)
+        internal ThriftMessageServer(IMessageReceiver messageReceiver, int port)
         {
             this.port = port;
-            receiver = new ThriftMessageDispatcher(messageReceiver, messageMapper);
+            receiver = new ThriftMessageDispatcher(messageReceiver);
         }
 
         public void Run()
@@ -39,6 +40,7 @@ namespace NProg.Distributed.Thrift
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)
