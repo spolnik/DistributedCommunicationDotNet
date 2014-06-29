@@ -48,7 +48,7 @@ namespace NProg.Distributed.Core.Service.Messaging
         /// </summary>
         /// <typeparam name="TBody">The type of the t body.</typeparam>
         /// <returns>TBody.</returns>
-        public TBody Receive<TBody>()
+        public TBody Receive<TBody>() where TBody : IRequestResponse
         {
             return (TBody) Body;
         }
@@ -72,7 +72,7 @@ namespace NProg.Distributed.Core.Service.Messaging
         /// <typeparam name="TRequest">The type of the t request.</typeparam>
         /// <param name="request">The request.</param>
         /// <returns>Message.</returns>
-        public static Message From<TRequest>(TRequest request) where TRequest : class 
+        public static Message From<TRequest>(TRequest request) where TRequest : IRequestResponse 
         {
             return new Message
             {

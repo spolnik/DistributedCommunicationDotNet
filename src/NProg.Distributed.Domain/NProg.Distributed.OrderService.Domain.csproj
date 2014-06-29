@@ -44,6 +44,7 @@
     <Compile Include="Api\IOrderApi.cs" />
     <Compile Include="Handlers\AddOrderHandler.cs" />
     <Compile Include="Handlers\GetOrderHandler.cs" />
+    <Compile Include="Handlers\MessageHandlerBase.cs" />
     <Compile Include="Handlers\RemoveOrderHandler.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

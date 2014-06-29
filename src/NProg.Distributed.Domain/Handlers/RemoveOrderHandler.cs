@@ -7,26 +7,17 @@ using NProg.Distributed.OrderService.Responses;
 
 namespace NProg.Distributed.OrderService.Handlers
 {
-    public sealed class RemoveOrderHandler : IMessageHandler
+    public sealed class RemoveOrderHandler : MessageHandlerBase<RemoveOrderRequest>
     {
-        private readonly IDataRepository<Guid, Order> repository;
-
-        public RemoveOrderHandler(IDataRepository<Guid, Order> orderRepository)
+        public RemoveOrderHandler(IDataRepository<Guid, Order> orderRepository) 
+            : base(orderRepository)
         {
-            repository = orderRepository;
         }
 
-        public bool CanHandle(Message message)
+        protected override IRequestResponse Process(RemoveOrderRequest request)
         {
-            return message.BodyType == typeof (RemoveOrderRequest);
-        }
-
-        public Message Handle(Message message)
-        {
-            var orderId = message.Receive<RemoveOrderRequest>().OrderId;
-
-            var status = repository.Remove(orderId);
-            return Message.From(new StatusResponse { Status = status });
+            var status = repository.Remove(request.OrderId);
+            return new StatusResponse { Status = status };
         }
     }
 }

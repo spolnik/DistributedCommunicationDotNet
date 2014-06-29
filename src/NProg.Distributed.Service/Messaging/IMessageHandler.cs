@@ -19,4 +19,5 @@
         /// <returns>Message.</returns>
         Message Handle(Message message);
     }
+
 }

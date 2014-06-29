@@ -7,26 +7,17 @@ using NProg.Distributed.OrderService.Responses;
 
 namespace NProg.Distributed.OrderService.Handlers
 {
-    public sealed class AddOrderHandler : IMessageHandler
+    public sealed class AddOrderHandler : MessageHandlerBase<AddOrderRequest>
     {
-        private readonly IDataRepository<Guid, Order> repository;
-
-        public AddOrderHandler(IDataRepository<Guid, Order> orderRepository)
+        public AddOrderHandler(IDataRepository<Guid, Order> orderRepository) 
+            : base(orderRepository)
         {
-            repository = orderRepository;
         }
 
-        public bool CanHandle(Message message)
+        protected override IRequestResponse Process(AddOrderRequest request)
         {
-            return message.BodyType == typeof(AddOrderRequest);
-        }
-
-        public Message Handle(Message message)
-        {
-            var order = message.Receive<AddOrderRequest>().Order;
-
-            var addedOrder = repository.Add(order);
-            return Message.From(new StatusResponse { Status = addedOrder != null });
+            var addedOrder = repository.Add(request.Order);
+            return new StatusResponse {Status = addedOrder != null};
         }
     }
 }
