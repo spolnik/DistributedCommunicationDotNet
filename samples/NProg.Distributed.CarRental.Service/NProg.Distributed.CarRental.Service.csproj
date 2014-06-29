@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A2FB8DA1-4A8B-4CD7-8884-AEECB20AEC1A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NProg.Distributed.CarRental.Service</RootNamespace>
+    <AssemblyName>NProg.Distributed.CarRental.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Handlers\GetCustomerAccountInfoHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\GetCustomerAccountInfoRequest.cs" />
+    <Compile Include="Responses\GetAccountResponse.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NProg.Distributed.CarRental.Data\NProg.Distributed.CarRental.Data.csproj">
+      <Project>{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}</Project>
+      <Name>NProg.Distributed.CarRental.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
+      <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
+      <Name>NProg.Distributed.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
+      <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
+      <Name>NProg.Distributed.Core.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.CarRental.Domain\NProg.Distributed.CarRental.Domain.csproj">
+      <Project>{d2d3a11c-d368-449e-bcb6-34210a7f2712}</Project>
+      <Name>NProg.Distributed.CarRental.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
