@@ -102,6 +102,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Data", "src\NProg.Distributed.CarRental.Data\NProg.Distributed.CarRental.Data.csproj", "{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Tests", "test\NProg.Distributed.CarRental.Tests\NProg.Distributed.CarRental.Tests.csproj", "{683C6F22-F485-43FF-BB8F-3D3A8081FECA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6913AE5-730D-4436-ADBA-70EE920CAD81} = {D6913AE5-730D-4436-ADBA-70EE920CAD81}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{D0D0033A-7BAD-4E7C-971E-BE60880A197C}"
 EndProject
@@ -110,8 +113,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{9C4DE98A-F23D-4E65-8721-74987297E9E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Client", "samples\NProg.Distributed.CarRental.Client\NProg.Distributed.CarRental.Client.csproj", "{199FC54C-7F1C-4F21-B58C-16DA1C586F79}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6913AE5-730D-4436-ADBA-70EE920CAD81} = {D6913AE5-730D-4436-ADBA-70EE920CAD81}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Server", "samples\NProg.Distributed.CarRental.Server\NProg.Distributed.CarRental.Server.csproj", "{AABCC111-6722-4B15-80AF-CA7833CAF4B9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6913AE5-730D-4436-ADBA-70EE920CAD81} = {D6913AE5-730D-4436-ADBA-70EE920CAD81}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NProg.Distributed.CarRental.Bootstrapper", "samples\NProg.Distributed.CarRental.Bootstraper\NProg.Distributed.CarRental.Bootstrapper.csproj", "{D6913AE5-730D-4436-ADBA-70EE920CAD81}"
 EndProject
