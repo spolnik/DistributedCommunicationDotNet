@@ -5,7 +5,7 @@ using NProg.Distributed.OrderService.Domain;
 namespace NProg.Distributed.OrderService.Requests
 {
     [Serializable]
-    public sealed class AddOrderRequest : IRequestResponse
+    public sealed class AddOrderCommand : IMessage
     {
         public Order Order { get; set; }
     }

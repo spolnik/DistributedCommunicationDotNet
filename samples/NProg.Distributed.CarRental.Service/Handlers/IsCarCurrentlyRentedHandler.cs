@@ -1,11 +1,11 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
 using NProg.Distributed.CarRental.Service.Business;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
-    public class IsCarCurrentlyRentedHandler : MessageHandlerBase<IsCarCurrentlyRentedRequest, IRentalRepository>
+    public class IsCarCurrentlyRentedHandler : MessageHandlerBase<IsCarCurrentlyRentedQuery, IRentalRepository>
     {
         private readonly ICarRentalEngine carRentalEngine;
 
@@ -18,11 +18,11 @@ namespace NProg.Distributed.CarRental.Service.Handlers
             this.carRentalEngine = carRentalEngine;
         }
 
-        #region Overrides of MessageHandlerBase<IsCarCurrentlyRentedRequest,IRentalRepository>
+        #region Overrides of MessageHandlerBase<IsCarCurrentlyRentedQuery,IRentalRepository>
 
-        protected override IRequestResponse Process(IsCarCurrentlyRentedRequest request)
+        protected override IMessage Process(IsCarCurrentlyRentedQuery command)
         {
-            return new StatusResponse {Status = carRentalEngine.IsCarCurrentlyRented(request.CarId)};
+            return new StatusResponse {Status = carRentalEngine.IsCarCurrentlyRented(command.CarId)};
         }
 
         #endregion

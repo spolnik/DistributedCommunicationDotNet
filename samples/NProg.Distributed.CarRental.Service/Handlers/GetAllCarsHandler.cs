@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using NProg.Distributed.CarRental.Data.Repository;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class GetAllCarsHandler 
-        : MessageHandlerBase<GetAllCarsRequest, ICarRepository>
+        : MessageHandlerBase<GetAllCarsQuery, ICarRepository>
     {
         private readonly IRentalRepository rentalRepository;
 
@@ -19,9 +19,9 @@ namespace NProg.Distributed.CarRental.Service.Handlers
             this.rentalRepository = rentalRepository;
         }
 
-        #region Overrides of MessageHandlerBase<GetAllCarsRequest,ICarRepository>
+        #region Overrides of MessageHandlerBase<GetAllCarsQuery,ICarRepository>
 
-        protected override IRequestResponse Process(GetAllCarsRequest request)
+        protected override IMessage Process(GetAllCarsQuery command)
         {
             var cars = repository.GetAll().ToList();
             var rentedCars = rentalRepository.GetCurrentlyRentedCars().ToList();

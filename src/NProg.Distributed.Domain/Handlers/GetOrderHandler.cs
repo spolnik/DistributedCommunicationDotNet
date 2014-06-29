@@ -8,20 +8,20 @@ using NProg.Distributed.OrderService.Responses;
 
 namespace NProg.Distributed.OrderService.Handlers
 {
-    public sealed class GetOrderHandler : MessageHandlerBase<GetOrderRequest>
+    public sealed class GetOrderHandler : MessageHandlerBase<GetOrderQuery>
     {
         public GetOrderHandler(IDataRepository<Guid, Order> orderRepository) 
             : base(orderRepository)
         {
         }
 
-        protected override IRequestResponse Process(GetOrderRequest request)
+        protected override IMessage Process(GetOrderQuery command)
         {
-            var order = repository.Get(request.OrderId);
+            var order = repository.Get(command.OrderId);
 
             if (order == null)
             {
-                throw new NotFoundException(string.Format("Order not found for id: {0}", request.OrderId));
+                throw new NotFoundException(string.Format("Order not found for id: {0}", command.OrderId));
             }
 
             return new GetOrderResponse {Order = order};

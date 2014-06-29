@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using NProg.Distributed.CarRental.Data.Repository;
 using NProg.Distributed.CarRental.Service.Business;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class GetAvailableCarsHandler
-        : MessageHandlerBase<GetAvailableCarsRequest, ICarRepository>
+        : MessageHandlerBase<GetAvailableCarsQuery, ICarRepository>
     {
         private readonly ICarRentalEngine carRentalEngine;
         private readonly IRentalRepository rentalRepository;
@@ -26,16 +26,16 @@ namespace NProg.Distributed.CarRental.Service.Handlers
             this.carRentalEngine = carRentalEngine;
         }
 
-        #region Overrides of MessageHandlerBase<GetAvailableCarsRequest,ICarRepository>
+        #region Overrides of MessageHandlerBase<GetAvailableCarsQuery,ICarRepository>
 
-        protected override IRequestResponse Process(GetAvailableCarsRequest request)
+        protected override IMessage Process(GetAvailableCarsQuery command)
         {
             var allCars = repository.GetAll();
             var rentedCars = rentalRepository.GetCurrentlyRentedCars().ToList();
             var reservedCars = reservationRepository.GetAll().ToList();
 
             var availableCars = allCars.Where(car => 
-                carRentalEngine.IsCarAvailableForRental(car.CarId, request.PickupDate, request.ReturnDate, rentedCars, reservedCars));
+                carRentalEngine.IsCarAvailableForRental(car.CarId, command.PickupDate, command.ReturnDate, rentedCars, reservedCars));
 
             return new GetCarsResponse {Cars = availableCars.ToArray()};
         }

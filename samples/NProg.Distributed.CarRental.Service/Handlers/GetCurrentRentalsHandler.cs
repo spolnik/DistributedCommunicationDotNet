@@ -3,14 +3,14 @@ using System.Linq;
 using NProg.Distributed.CarRental.Data.DTO;
 using NProg.Distributed.CarRental.Data.Repository;
 using NProg.Distributed.CarRental.Domain.DTO;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class GetCurrentRentalsHandler 
-        : MessageHandlerBase<GetCurrentRentalsRequest, IRentalRepository>
+        : MessageHandlerBase<GetCurrentRentalsQuery, IRentalRepository>
     {
 
         /// <summary>
@@ -19,9 +19,9 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         public GetCurrentRentalsHandler(IRentalRepository repository) : base(repository)
         {}
 
-        #region Overrides of MessageHandlerBase<GetCurrentRentalsRequest,IRentalRepository>
+        #region Overrides of MessageHandlerBase<GetCurrentRentalsQuery,IRentalRepository>
 
-        protected override IRequestResponse Process(GetCurrentRentalsRequest request)
+        protected override IMessage Process(GetCurrentRentalsQuery command)
         {
             var rentalInfoSet = repository.GetCurrentCustomerRentalInfo();
 

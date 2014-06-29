@@ -1,10 +1,10 @@
 ﻿using System;
 using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.CarRental.Service.Requests
+namespace NProg.Distributed.CarRental.Service.Commands
 {
     [Serializable]
-    public class DeleteCarRequest : IRequestResponse
+    public class AcceptCarReturnCommand : IMessage
     {
         public int CarId { get; set; }
     }

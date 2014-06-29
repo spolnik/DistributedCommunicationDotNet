@@ -6,16 +6,16 @@ using NProg.Distributed.OrderService.Requests;
 
 namespace NProg.Distributed.OrderService.Handlers
 {
-    public sealed class RemoveOrderHandler : MessageHandlerBase<RemoveOrderRequest>
+    public sealed class RemoveOrderHandler : MessageHandlerBase<RemoveOrderCommand>
     {
         public RemoveOrderHandler(IDataRepository<Guid, Order> orderRepository) 
             : base(orderRepository)
         {
         }
 
-        protected override IRequestResponse Process(RemoveOrderRequest request)
+        protected override IMessage Process(RemoveOrderCommand command)
         {
-            var status = repository.Remove(request.OrderId);
+            var status = repository.Remove(command.OrderId);
             return new StatusResponse { Status = status };
         }
     }

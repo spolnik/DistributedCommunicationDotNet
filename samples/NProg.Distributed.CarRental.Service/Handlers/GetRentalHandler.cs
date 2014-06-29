@@ -1,5 +1,5 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
@@ -7,7 +7,7 @@ using NProg.Distributed.Core.Service.Messaging;
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class GetRentalHandler 
-        : MessageHandlerBase<GetRentalRequest, IRentalRepository>
+        : MessageHandlerBase<GetRentalQuery, IRentalRepository>
     {
 
         /// <summary>
@@ -16,15 +16,15 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         public GetRentalHandler(IRentalRepository repository) : base(repository)
         {}
 
-        #region Overrides of MessageHandlerBase<GetRentalHistoryRequest,IRentalRepository>
+        #region Overrides of MessageHandlerBase<GetRentalHistoryQuery,IRentalRepository>
 
-        protected override IRequestResponse Process(GetRentalRequest request)
+        protected override IMessage Process(GetRentalQuery command)
         {
-            var rental = repository.Get(request.RentalId);
+            var rental = repository.Get(command.RentalId);
 
             if (rental == null)
             {
-                throw new NotFoundException(string.Format("No rental record found for id '{0}'.", request.RentalId));
+                throw new NotFoundException(string.Format("No rental record found for id '{0}'.", command.RentalId));
             }
 
             return new GetRentalResponse {Rental = rental};

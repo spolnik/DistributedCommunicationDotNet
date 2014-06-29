@@ -2,10 +2,10 @@
 using NProg.Distributed.CarRental.Domain;
 using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.CarRental.Service.Requests
+namespace NProg.Distributed.CarRental.Service.Commands
 {
     [Serializable]
-    public class UpdateCustomerAccountInfoRequest : IRequestResponse
+    public class UpdateCustomerAccountInfoCommand : IMessage
     {
         public Account Account { get; set; }
     }

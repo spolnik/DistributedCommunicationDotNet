@@ -1,10 +1,10 @@
 ﻿using System;
 using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.CarRental.Service.Requests
+namespace NProg.Distributed.CarRental.Service.Queries
 {
     [Serializable]
-    public class GetAvailableCarsRequest : IRequestResponse
+    public class GetAvailableCarsQuery : IMessage
     {
          public DateTime PickupDate { get; set; }
          

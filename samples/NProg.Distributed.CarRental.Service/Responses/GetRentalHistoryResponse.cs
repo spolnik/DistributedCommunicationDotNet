@@ -5,7 +5,7 @@ using NProg.Distributed.Core.Service.Messaging;
 namespace NProg.Distributed.CarRental.Service.Responses
 {
     [Serializable]
-    public class GetRentalHistoryResponse : IRequestResponse
+    public class GetRentalHistoryResponse : IMessage
     {
         public Rental[] Rentals { get; set; }
     }

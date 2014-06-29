@@ -50,7 +50,7 @@
     <Compile Include="IServiceFactory.cs" />
     <Compile Include="Messaging\IMessageHandler.cs" />
     <Compile Include="Messaging\IMessageReceiver.cs" />
-    <Compile Include="Messaging\IRequestResponse.cs" />
+    <Compile Include="Messaging\IMessage.cs" />
     <Compile Include="Messaging\IMessageSender.cs" />
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Messaging\MessageClientBase.cs" />

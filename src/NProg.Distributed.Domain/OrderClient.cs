@@ -26,7 +26,7 @@ namespace NProg.Distributed.OrderService
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool Add(Guid key, Order order)
         {
-            return messageSender.Send(new AddOrderRequest { Order = order })
+            return messageSender.Send(new AddOrderCommand { Order = order })
                 .Receive<StatusResponse>().Status;
         }
 
@@ -37,7 +37,7 @@ namespace NProg.Distributed.OrderService
         /// <returns>Order.</returns>
         public Order Get(Guid guid)
         {
-            return messageSender.Send(new GetOrderRequest { OrderId = guid })
+            return messageSender.Send(new GetOrderQuery { OrderId = guid })
                 .Receive<GetOrderResponse>().Order;
         }
 
@@ -48,7 +48,7 @@ namespace NProg.Distributed.OrderService
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool Remove(Guid guid)
         {
-            return messageSender.Send(new RemoveOrderRequest { OrderId = guid })
+            return messageSender.Send(new RemoveOrderCommand { OrderId = guid })
                 .Receive<StatusResponse>().Status;
         }
     }

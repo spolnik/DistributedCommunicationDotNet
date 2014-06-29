@@ -6,7 +6,7 @@ using NProg.Distributed.OrderService.Domain;
 namespace NProg.Distributed.OrderService.Handlers
 {
     public abstract class MessageHandlerBase<TRequest> 
-        : MessageHandlerBase<TRequest, IDataRepository<Guid, Order>> where TRequest : IRequestResponse
+        : MessageHandlerBase<TRequest, IDataRepository<Guid, Order>> where TRequest : IMessage
     {
 
         /// <summary>

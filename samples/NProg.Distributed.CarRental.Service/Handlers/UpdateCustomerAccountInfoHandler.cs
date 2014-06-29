@@ -1,11 +1,11 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Commands;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class UpdateCustomerAccountInfoHandler 
-        : MessageHandlerBase<UpdateCustomerAccountInfoRequest, IAccountRepository>
+        : MessageHandlerBase<UpdateCustomerAccountInfoCommand, IAccountRepository>
     {
 
         /// <summary>
@@ -14,11 +14,11 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         public UpdateCustomerAccountInfoHandler(IAccountRepository repository) : base(repository)
         {}
 
-        #region Overrides of MessageHandlerBase<UpdateCustomerAccountInfoRequest,IAccountRepository>
+        #region Overrides of MessageHandlerBase<UpdateCustomerAccountInfoCommand,IAccountRepository>
 
-        protected override IRequestResponse Process(UpdateCustomerAccountInfoRequest request)
+        protected override IMessage Process(UpdateCustomerAccountInfoCommand command)
         {
-            var updatedAccount = repository.Update(request.Account);
+            var updatedAccount = repository.Update(command.Account);
             return new StatusResponse {Status = updatedAccount != null};
         }
 

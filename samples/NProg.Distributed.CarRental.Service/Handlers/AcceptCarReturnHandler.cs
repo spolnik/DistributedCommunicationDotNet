@@ -1,13 +1,13 @@
 ﻿using System;
 using NProg.Distributed.CarRental.Data.Repository;
 using NProg.Distributed.CarRental.Service.Business;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Commands;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class AcceptCarReturnHandler 
-        : MessageHandlerBase<AcceptCarReturnRequest, IRentalRepository>
+        : MessageHandlerBase<AcceptCarReturnCommand, IRentalRepository>
     {
         /// <summary>
         /// Initializes a new instance of the MessageHandlerBase class.
@@ -16,15 +16,15 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         {
         }
 
-        #region Overrides of MessageHandlerBase<AcceptCarReturnRequest,IRentalRepository>
+        #region Overrides of MessageHandlerBase<AcceptCarReturnCommand,IRentalRepository>
 
-        protected override IRequestResponse Process(AcceptCarReturnRequest request)
+        protected override IMessage Process(AcceptCarReturnCommand command)
         {
-            var rental = repository.GetCurrentRentalByCar(request.CarId);
+            var rental = repository.GetCurrentRentalByCar(command.CarId);
 
             if (rental == null)
             {
-                throw new CarNotRentedException(string.Format("Car {0} is not currently rented.", request.CarId));
+                throw new CarNotRentedException(string.Format("Car {0} is not currently rented.", command.CarId));
             }
 
             rental.DateReturned = DateTime.Now;

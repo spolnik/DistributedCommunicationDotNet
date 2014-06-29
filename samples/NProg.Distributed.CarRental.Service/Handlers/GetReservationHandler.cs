@@ -1,5 +1,5 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
@@ -7,7 +7,7 @@ using NProg.Distributed.Core.Service.Messaging;
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class GetReservationHandler 
-        : MessageHandlerBase<GetReservationRequest, IReservationRepository>
+        : MessageHandlerBase<GetReservationQuery, IReservationRepository>
     {
         /// <summary>
         /// Initializes a new instance of the MessageHandlerBase class.
@@ -15,15 +15,15 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         public GetReservationHandler(IReservationRepository repository) : base(repository)
         {}
 
-        #region Overrides of MessageHandlerBase<GetReservationRequest,IReservationRepository>
+        #region Overrides of MessageHandlerBase<GetReservationQuery,IReservationRepository>
 
-        protected override IRequestResponse Process(GetReservationRequest request)
+        protected override IMessage Process(GetReservationQuery command)
         {
-            var reservation = repository.Get(request.ReservationId);
+            var reservation = repository.Get(command.ReservationId);
             
             if (reservation == null)
             {
-                throw new NotFoundException(string.Format("No reservation found for id '{0}'.", request.ReservationId));
+                throw new NotFoundException(string.Format("No reservation found for id '{0}'.", command.ReservationId));
             }
 
             return new GetReservationResponse {Reservation = reservation};

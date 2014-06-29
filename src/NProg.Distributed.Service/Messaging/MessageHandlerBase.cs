@@ -4,7 +4,7 @@ using NProg.Distributed.Core.Data;
 namespace NProg.Distributed.Core.Service.Messaging
 {
     public abstract class MessageHandlerBase<TRequest, TRepository> : IMessageHandler 
-        where TRequest : IRequestResponse
+        where TRequest : IMessage
         where TRepository : IDataRepository
     {
         protected TRepository repository;
@@ -50,6 +50,6 @@ namespace NProg.Distributed.Core.Service.Messaging
 
         #endregion
 
-        protected abstract IRequestResponse Process(TRequest request);
+        protected abstract IMessage Process(TRequest command);
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
 using NProg.Distributed.CarRental.Data.Repository;
 using NProg.Distributed.CarRental.Service.Business;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Commands;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class RentCarToCustomerHandler 
-        : MessageHandlerBase<RentCarToCustomerRequest, IRentalRepository>
+        : MessageHandlerBase<RentCarToCustomerCommand, IRentalRepository>
     {
         private readonly ICarRentalEngine carRentalEngine;
 
@@ -20,12 +20,12 @@ namespace NProg.Distributed.CarRental.Service.Handlers
             this.carRentalEngine = carRentalEngine;
         }
 
-        #region Overrides of MessageHandlerBase<RentCarToCustomerRequest,IRentalRepository>
+        #region Overrides of MessageHandlerBase<RentCarToCustomerCommand,IRentalRepository>
 
-        protected override IRequestResponse Process(RentCarToCustomerRequest request)
+        protected override IMessage Process(RentCarToCustomerCommand command)
         {
-            var rental = carRentalEngine.RentCarToCustomer(request.LoginEmail, request.CarId,
-                request.RentalDate ?? DateTime.Now, request.DateDueBack);
+            var rental = carRentalEngine.RentCarToCustomer(command.LoginEmail, command.CarId,
+                command.RentalDate ?? DateTime.Now, command.DateDueBack);
 
             return new GetRentalResponse {Rental = rental};
         }

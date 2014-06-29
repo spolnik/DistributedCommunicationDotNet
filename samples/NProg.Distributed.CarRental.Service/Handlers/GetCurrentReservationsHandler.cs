@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using NProg.Distributed.CarRental.Data.Repository;
 using NProg.Distributed.CarRental.Domain.DTO;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class GetCurrentReservationsHandler 
-        : MessageHandlerBase<GetCurrentReservationsRequest, IReservationRepository>
+        : MessageHandlerBase<GetCurrentReservationsQuery, IReservationRepository>
     {
 
         /// <summary>
@@ -17,9 +17,9 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         public GetCurrentReservationsHandler(IReservationRepository repository) : base(repository)
         {}
 
-        #region Overrides of MessageHandlerBase<GetCurrentReservationsRequest,IReservationRepository>
+        #region Overrides of MessageHandlerBase<GetCurrentReservationsQuery,IReservationRepository>
 
-        protected override IRequestResponse Process(GetCurrentReservationsRequest request)
+        protected override IMessage Process(GetCurrentReservationsQuery command)
         {
             var reservationInfoSet = repository.GetCurrentCustomerReservationInfo();
 

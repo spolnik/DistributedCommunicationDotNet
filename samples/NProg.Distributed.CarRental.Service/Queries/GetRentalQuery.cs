@@ -1,10 +1,10 @@
 ﻿using System;
 using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.CarRental.Service.Requests
+namespace NProg.Distributed.CarRental.Service.Queries
 {
     [Serializable]
-    public class GetRentalRequest : IRequestResponse
+    public class GetRentalQuery : IMessage
     {
         public int RentalId { get; set; }
     }

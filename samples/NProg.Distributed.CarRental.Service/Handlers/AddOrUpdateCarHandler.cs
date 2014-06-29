@@ -1,12 +1,12 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Commands;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class AddOrUpdateCarHandler 
-        : MessageHandlerBase<AddOrUpdateCarRequest, ICarRepository>
+        : MessageHandlerBase<AddOrUpdateCarCommand, ICarRepository>
     {
 
         /// <summary>
@@ -15,13 +15,13 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         public AddOrUpdateCarHandler(ICarRepository repository) : base(repository)
         {}
 
-        #region Overrides of MessageHandlerBase<AddOrUpdateCarRequest,ICarRepository>
+        #region Overrides of MessageHandlerBase<AddOrUpdateCarCommand,ICarRepository>
 
-        protected override IRequestResponse Process(AddOrUpdateCarRequest request)
+        protected override IMessage Process(AddOrUpdateCarCommand command)
         {
-            var updatedEntity = request.Car.CarId == 0
-                ? repository.Add(request.Car)
-                : repository.Update(request.Car);
+            var updatedEntity = command.Car.CarId == 0
+                ? repository.Add(command.Car)
+                : repository.Update(command.Car);
 
             return new GetCarResponse {Car = updatedEntity};
         }

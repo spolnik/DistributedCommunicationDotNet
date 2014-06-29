@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using NProg.Distributed.CarRental.Data.Repository;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
@@ -8,7 +8,7 @@ using NProg.Distributed.Core.Service.Messaging;
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class GetRentalHistoryHandler 
-        : MessageHandlerBase<GetRentalHistoryRequest, IRentalRepository>
+        : MessageHandlerBase<GetRentalHistoryQuery, IRentalRepository>
     {
         private readonly IAccountRepository accountRepository;
 
@@ -20,15 +20,15 @@ namespace NProg.Distributed.CarRental.Service.Handlers
             this.accountRepository = accountRepository;
         }
 
-        #region Overrides of MessageHandlerBase<GetRentalHistoryRequest,IRentalRepository>
+        #region Overrides of MessageHandlerBase<GetRentalHistoryQuery,IRentalRepository>
 
-        protected override IRequestResponse Process(GetRentalHistoryRequest request)
+        protected override IMessage Process(GetRentalHistoryQuery command)
         {
-            var account = accountRepository.GetByLogin(request.LoginEmail);
+            var account = accountRepository.GetByLogin(command.LoginEmail);
 
             if (account == null)
             {
-                throw new NotFoundException(string.Format("No account found for login '{0}'.", request.LoginEmail));
+                throw new NotFoundException(string.Format("No account found for login '{0}'.", command.LoginEmail));
             }
 
             var rentalHistory = repository.GetRentalHistoryByAccount(account.AccountId);

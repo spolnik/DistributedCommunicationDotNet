@@ -1,7 +1,8 @@
 ﻿using System;
 using NProg.Distributed.CarRental.Domain;
 using NProg.Distributed.CarRental.Domain.Api;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Commands;
+using NProg.Distributed.CarRental.Service.Queries;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service.Messaging;
 
@@ -19,31 +20,31 @@ namespace NProg.Distributed.CarRental.Service
 
         public Car UpdateCar(Car car)
         {
-            return messageSender.Send(new AddOrUpdateCarRequest {Car = car})
+            return messageSender.Send(new AddOrUpdateCarCommand {Car = car})
                 .Receive<GetCarResponse>().Car;
         }
 
         public bool DeleteCar(int carId)
         {
-            return messageSender.Send(new DeleteCarRequest {CarId = carId})
+            return messageSender.Send(new DeleteCarCommand {CarId = carId})
                 .Receive<StatusResponse>().Status;
         }
 
         public Car GetCar(int carId)
         {
-            return messageSender.Send(new GetCarRequest {CarId = carId})
+            return messageSender.Send(new GetCarQuery {CarId = carId})
                 .Receive<GetCarResponse>().Car;
         }
 
         public Car[] GetAllCars()
         {
-            return messageSender.Send(new GetAllCarsRequest())
+            return messageSender.Send(new GetAllCarsQuery())
                 .Receive<GetCarsResponse>().Cars;
         }
 
         public Car[] GetAvailableCars(DateTime pickupDate, DateTime returnDate)
         {
-            return messageSender.Send(new GetAvailableCarsRequest {PickupDate = pickupDate, ReturnDate = returnDate})
+            return messageSender.Send(new GetAvailableCarsQuery {PickupDate = pickupDate, ReturnDate = returnDate})
                 .Receive<GetCarsResponse>().Cars;
         }
 

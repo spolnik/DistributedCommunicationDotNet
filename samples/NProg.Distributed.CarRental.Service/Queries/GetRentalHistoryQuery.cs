@@ -1,10 +1,10 @@
 ﻿using System;
 using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.CarRental.Service.Requests
+namespace NProg.Distributed.CarRental.Service.Queries
 {
     [Serializable]
-    public class GetCustomerAccountInfoRequest : IRequestResponse
+    public class GetRentalHistoryQuery : IMessage
     {
         public string LoginEmail { get; set; }
     }

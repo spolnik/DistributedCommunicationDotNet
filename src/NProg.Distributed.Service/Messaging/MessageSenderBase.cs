@@ -21,7 +21,7 @@ namespace NProg.Distributed.Core.Service.Messaging
         /// <param name="request">The request.</param>
         /// <returns>Message.</returns>
         /// <exception cref="System.ArgumentException">Request cannot be Message instance;request</exception>
-        public Message Send<TRequest>(TRequest request) where TRequest : IRequestResponse 
+        public Message Send<TRequest>(TRequest request) where TRequest : IMessage 
         {
             var message = Message.From(request);
 

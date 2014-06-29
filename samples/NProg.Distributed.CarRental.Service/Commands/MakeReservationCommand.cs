@@ -1,10 +1,10 @@
 ﻿using System;
 using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.CarRental.Service.Requests
+namespace NProg.Distributed.CarRental.Service.Commands
 {
     [Serializable]
-    public class MakeReservationRequest : IRequestResponse
+    public class MakeReservationCommand : IMessage
     {
         public string LoginEmail { get; set; }
 

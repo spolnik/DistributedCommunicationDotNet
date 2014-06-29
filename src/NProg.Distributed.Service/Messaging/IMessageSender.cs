@@ -13,6 +13,6 @@ namespace NProg.Distributed.Core.Service.Messaging
         /// <typeparam name="TRequest">The type of the t request.</typeparam>
         /// <param name="message">The message.</param>
         /// <returns>Message.</returns>
-        Message Send<TRequest>(TRequest message) where TRequest : IRequestResponse;
+        Message Send<TRequest>(TRequest message) where TRequest : IMessage;
     }
 }

@@ -1,11 +1,11 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Commands;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class DeleteCarHandler 
-        : MessageHandlerBase<DeleteCarRequest, ICarRepository>
+        : MessageHandlerBase<DeleteCarCommand, ICarRepository>
     {
 
         /// <summary>
@@ -14,11 +14,11 @@ namespace NProg.Distributed.CarRental.Service.Handlers
         public DeleteCarHandler(ICarRepository repository) : base(repository)
         {}
 
-        #region Overrides of MessageHandlerBase<DeleteCarRequest,ICarRepository>
+        #region Overrides of MessageHandlerBase<DeleteCarCommand,ICarRepository>
 
-        protected override IRequestResponse Process(DeleteCarRequest request)
+        protected override IMessage Process(DeleteCarCommand command)
         {
-            return new StatusResponse {Status = repository.Remove(request.CarId)};
+            return new StatusResponse {Status = repository.Remove(command.CarId)};
         }
 
         #endregion

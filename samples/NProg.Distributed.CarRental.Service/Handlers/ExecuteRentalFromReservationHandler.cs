@@ -1,13 +1,13 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
 using NProg.Distributed.CarRental.Service.Business;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Commands;
 using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
 
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class ExecuteRentalFromReservationHandler 
-        : MessageHandlerBase<ExecuteRentalFromReservationRequest, IReservationRepository>
+        : MessageHandlerBase<ExecuteRentalFromReservationCommand, IReservationRepository>
     {
         private readonly IAccountRepository accountRepository;
         private readonly ICarRentalEngine carRentalEngine;
@@ -22,15 +22,15 @@ namespace NProg.Distributed.CarRental.Service.Handlers
             this.carRentalEngine = carRentalEngine;
         }
 
-        #region Overrides of MessageHandlerBase<ExecuteRentalFromReservationRequest,IReservationRepository>
+        #region Overrides of MessageHandlerBase<ExecuteRentalFromReservationCommand,IReservationRepository>
 
-        protected override IRequestResponse Process(ExecuteRentalFromReservationRequest request)
+        protected override IMessage Process(ExecuteRentalFromReservationCommand command)
         {
-            var reservation = repository.Get(request.ReservationId);
+            var reservation = repository.Get(command.ReservationId);
 
             if (reservation == null)
             {
-                throw new NotFoundException(string.Format("Reservation {0} is not found.", request.ReservationId));
+                throw new NotFoundException(string.Format("Reservation {0} is not found.", command.ReservationId));
             }
 
             var account = accountRepository.Get(reservation.AccountId);

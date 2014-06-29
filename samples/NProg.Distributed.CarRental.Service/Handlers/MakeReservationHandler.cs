@@ -1,6 +1,6 @@
 ﻿using NProg.Distributed.CarRental.Data.Repository;
 using NProg.Distributed.CarRental.Domain;
-using NProg.Distributed.CarRental.Service.Requests;
+using NProg.Distributed.CarRental.Service.Commands;
 using NProg.Distributed.CarRental.Service.Responses;
 using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
@@ -8,7 +8,7 @@ using NProg.Distributed.Core.Service.Messaging;
 namespace NProg.Distributed.CarRental.Service.Handlers
 {
     public class MakeReservationHandler 
-        : MessageHandlerBase<MakeReservationRequest, IReservationRepository>
+        : MessageHandlerBase<MakeReservationCommand, IReservationRepository>
     {
         private readonly IAccountRepository accountRepository;
 
@@ -21,23 +21,23 @@ namespace NProg.Distributed.CarRental.Service.Handlers
             this.accountRepository = accountRepository;
         }
 
-        #region Overrides of MessageHandlerBase<MakeReservationRequest,IReservationRepository>
+        #region Overrides of MessageHandlerBase<MakeReservationCommand,IReservationRepository>
 
-        protected override IRequestResponse Process(MakeReservationRequest request)
+        protected override IMessage Process(MakeReservationCommand command)
         {
-            var account = accountRepository.GetByLogin(request.LoginEmail);
+            var account = accountRepository.GetByLogin(command.LoginEmail);
 
             if (account == null)
             {
-                throw new NotFoundException(string.Format("No account found for login '{0}'.", request.LoginEmail));
+                throw new NotFoundException(string.Format("No account found for login '{0}'.", command.LoginEmail));
             }
 
             var reservation = new Reservation
                 {
                     AccountId = account.AccountId,
-                    CarId = request.CarId,
-                    RentalDate = request.RentalDate,
-                    ReturnDate = request.ReturnDate
+                    CarId = command.CarId,
+                    RentalDate = command.RentalDate,
+                    ReturnDate = command.ReturnDate
                 };
 
             var savedEntity = repository.Add(reservation);

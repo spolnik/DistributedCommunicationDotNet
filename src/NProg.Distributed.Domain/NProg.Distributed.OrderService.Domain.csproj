@@ -48,9 +48,9 @@
     <Compile Include="Handlers\RemoveOrderHandler.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\AddOrderRequest.cs" />
-    <Compile Include="Requests\GetOrderRequest.cs" />
-    <Compile Include="Requests\RemoveOrderRequest.cs" />
+    <Compile Include="Requests\AddOrderCommand.cs" />
+    <Compile Include="Requests\GetOrderQuery.cs" />
+    <Compile Include="Requests\RemoveOrderCommand.cs" />
     <Compile Include="Responses\GetOrderResponse.cs" />
     <Compile Include="OrderClient.cs" />
   </ItemGroup>
