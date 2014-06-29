@@ -39,9 +39,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\CarCurrentlyRentedException.cs" />
+    <Compile Include="Business\CarNotRentedException.cs" />
+    <Compile Include="Business\CarRentalEngine.cs" />
+    <Compile Include="Business\ICarRentalEngine.cs" />
+    <Compile Include="Business\UnableToRentForDateException.cs" />
+    <Compile Include="Handlers\AddOrUpdateCarHandler.cs" />
+    <Compile Include="Handlers\DeleteCarHandler.cs" />
+    <Compile Include="Handlers\GetAllCarsHandler.cs" />
+    <Compile Include="Handlers\GetAvailableCarsHandler.cs" />
+    <Compile Include="Handlers\GetCarHandler.cs" />
     <Compile Include="Handlers\GetCustomerAccountInfoHandler.cs" />
+    <Compile Include="Handlers\UpdateCustomerAccountInfoHandler.cs" />
+    <Compile Include="InventoryClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\AddOrUpdateCarRequest.cs" />
+    <Compile Include="Requests\DeleteCarRequest.cs" />
+    <Compile Include="Requests\GetAllCarsRequest.cs" />
+    <Compile Include="Requests\GetAvailableCarsRequest.cs" />
+    <Compile Include="Requests\GetCarRequest.cs" />
     <Compile Include="Requests\GetCustomerAccountInfoRequest.cs" />
+    <Compile Include="Requests\UpdateCustomerAccountInfoRequest.cs" />
+    <Compile Include="Responses\GetCarsResponse.cs" />
+    <Compile Include="Responses\GetCarResponse.cs" />
     <Compile Include="Responses\GetAccountResponse.cs" />
   </ItemGroup>
   <ItemGroup>

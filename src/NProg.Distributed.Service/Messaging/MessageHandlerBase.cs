@@ -1,4 +1,5 @@
-﻿using NProg.Distributed.Core.Data;
+﻿using System;
+using NProg.Distributed.Core.Data;
 
 namespace NProg.Distributed.Core.Service.Messaging
 {
@@ -36,7 +37,15 @@ namespace NProg.Distributed.Core.Service.Messaging
         public Message Handle(Message message)
         {
             var request = message.Receive<TRequest>();
-            return Message.From(Process(request));
+            try
+            {
+                var requestResponse = Process(request);
+                return Message.From(requestResponse);
+            }
+            catch (Exception exception)
+            {
+                return Message.ErrorFrom(exception);
+            }
         }
 
         #endregion

@@ -7,10 +7,14 @@ namespace NProg.Distributed.CarRental.Data
 {
     public class CarRentalContext : DbContext
     {
+        static CarRentalContext()
+        {
+            Database.SetInitializer(new DropCreateDatabaseAlways<CarRentalContext>());
+        }
+
         public CarRentalContext()
             : base("name=CarRental")
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<CarRentalContext>());
         }
 
         public DbSet<Account> AccountSet { get; set; }

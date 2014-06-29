@@ -2,7 +2,7 @@
 using log4net;
 using log4net.Config;
 
-namespace NProg.Distributed.Transport.Tests
+namespace NProg.Distributed.CarRental.Tests
 {
     internal static class Log
     {

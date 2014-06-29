@@ -1,6 +1,8 @@
-﻿namespace NProg.Distributed.CarRental.Domain.Api
+﻿using System;
+
+namespace NProg.Distributed.CarRental.Domain.Api
 {
-    public interface IAccountApi
+    public interface IAccountApi : IDisposable
     {
         Account GetCustomerAccountInfo(string loginEmail);
 

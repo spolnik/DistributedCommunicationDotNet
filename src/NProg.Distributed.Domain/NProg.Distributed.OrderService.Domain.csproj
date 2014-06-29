@@ -52,7 +52,6 @@
     <Compile Include="Requests\GetOrderRequest.cs" />
     <Compile Include="Requests\RemoveOrderRequest.cs" />
     <Compile Include="Responses\GetOrderResponse.cs" />
-    <Compile Include="Responses\StatusResponse.cs" />
     <Compile Include="OrderClient.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D6913AE5-730D-4436-ADBA-70EE920CAD81}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NProg.Distributed.CarRental.Bootstrapper</RootNamespace>
+    <AssemblyName>NProg.Distributed.CarRental.Bootstrapper</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions">
+      <HintPath>..\..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CarRentalServiceModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NProg.Distributed.CarRental.Data\NProg.Distributed.CarRental.Data.csproj">
+      <Project>{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}</Project>
+      <Name>NProg.Distributed.CarRental.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
+      <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
+      <Name>NProg.Distributed.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.Ice\NProg.Distributed.Transport.Ice.csproj">
+      <Project>{40EFD682-85BD-48B3-8C88-1A9ADF4878E3}</Project>
+      <Name>NProg.Distributed.Transport.Ice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.NetMQ\NProg.Distributed.Transport.NetMQ.csproj">
+      <Project>{AFDF644D-7775-4FCC-BBC4-DC5C3F8F43B1}</Project>
+      <Name>NProg.Distributed.Transport.NetMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
+      <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
+      <Name>NProg.Distributed.Core.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.Thrift\NProg.Distributed.Transport.Thrift.csproj">
+      <Project>{0ECFA0CF-D3C2-4DC4-A7F9-6B69F269FF08}</Project>
+      <Name>NProg.Distributed.Transport.Thrift</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.WCF\NProg.Distributed.Transport.WCF.csproj">
+      <Project>{F84A2E32-9931-4C98-AA25-CE481CB89C0E}</Project>
+      <Name>NProg.Distributed.Transport.WCF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.ZeroMQ\NProg.Distributed.Transport.ZeroMQ.csproj">
+      <Project>{1355E9DA-7326-4A28-A117-6333ADC5FF99}</Project>
+      <Name>NProg.Distributed.Transport.ZeroMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.Zyan\NProg.Distributed.Transport.Zyan.csproj">
+      <Project>{36EE5322-A915-44F7-B096-BE2901F1D9D1}</Project>
+      <Name>NProg.Distributed.Transport.Zyan</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.CarRental.Domain\NProg.Distributed.CarRental.Domain.csproj">
+      <Project>{D2D3A11C-D368-449E-BCB6-34210A7F2712}</Project>
+      <Name>NProg.Distributed.CarRental.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.CarRental.Service\NProg.Distributed.CarRental.Service.csproj">
+      <Project>{A2FB8DA1-4A8B-4CD7-8884-AEECB20AEC1A}</Project>
+      <Name>NProg.Distributed.CarRental.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

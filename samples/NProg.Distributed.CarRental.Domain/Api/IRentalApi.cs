@@ -4,7 +4,7 @@ using NProg.Distributed.CarRental.Domain.DTO;
 
 namespace NProg.Distributed.CarRental.Domain.Api
 {
-    public interface IRentalApi
+    public interface IRentalApi : IDisposable
     {
         Rental RentCarToCustomer(string loginEmail, int carId, DateTime dateDueBack);
 

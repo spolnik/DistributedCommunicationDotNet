@@ -1,7 +1,6 @@
 ﻿using System;
-using NProg.Distributed.Core.Service.Messaging;
 
-namespace NProg.Distributed.OrderService.Responses
+namespace NProg.Distributed.Core.Service.Messaging
 {
     [Serializable]
     public sealed class StatusResponse : IRequestResponse

@@ -25,7 +25,7 @@ namespace NProg.Distributed.Transport.WCF
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && proxy != null)
+            if (disposing && channelFactory != null && channelFactory.State == CommunicationState.Opened)
             {
                 channelFactory.Close();
                 channelFactory = null;

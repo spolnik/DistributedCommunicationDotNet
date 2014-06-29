@@ -90,9 +90,15 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -100,6 +106,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -108,15 +115,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayerTests.cs" />
+    <Compile Include="EndToEndTests.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
-      <SubType>Designer</SubType>
+      <SubType>
+      </SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\samples\NProg.Distributed.CarRental.Bootstraper\NProg.Distributed.CarRental.Bootstrapper.csproj">
+      <Project>{D6913AE5-730D-4436-ADBA-70EE920CAD81}</Project>
+      <Name>NProg.Distributed.CarRental.Bootstrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\samples\NProg.Distributed.CarRental.Domain\NProg.Distributed.CarRental.Domain.csproj">
       <Project>{D2D3A11C-D368-449E-BCB6-34210A7F2712}</Project>
       <Name>NProg.Distributed.CarRental.Domain</Name>
@@ -128,6 +142,10 @@
     <ProjectReference Include="..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
       <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
       <Name>NProg.Distributed.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
+      <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
+      <Name>NProg.Distributed.Core.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

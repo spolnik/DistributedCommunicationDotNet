@@ -2,11 +2,11 @@
 
 namespace NProg.Distributed.CarRental.Domain.Api
 {
-    public interface IInventoryApi
+    public interface IInventoryApi : IDisposable
     {
         Car UpdateCar(Car car);
         
-        void DeleteCar(int carId);
+        bool DeleteCar(int carId);
 
         Car GetCar(int carId);
 

@@ -79,5 +79,13 @@ namespace NProg.Distributed.Core.Service.Messaging
                 Body = request
             };
         }
+
+        public static Message ErrorFrom(Exception exception)
+        {
+            return new Message
+                {
+                    Body = exception
+                };
+        }
     }
 }
