@@ -4,17 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7FD0600F-A707-4883-9182-1229C102DB7E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{FBC30C00-9FEC-4D25-B706-B49E354ACB3F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.Transport.Tests</RootNamespace>
-    <AssemblyName>NProg.Distributed.Transport.Tests</AssemblyName>
+    <RootNamespace>NProg.Distributed.Server</RootNamespace>
+    <AssemblyName>NProg.Distributed.Server</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,22 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,10 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EndToEndTests.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="TestJsonSerialization.cs" />
+    <Compile Include="ServerProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,20 +54,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\samples\order\NProg.Distributed.OrderService.Bootstrapper\NProg.Distributed.OrderService.Bootstrapper.csproj">
+    <ProjectReference Include="..\NProg.Distributed.OrderService.Bootstrapper\NProg.Distributed.OrderService.Bootstrapper.csproj">
       <Project>{D83DDB04-654C-48B7-B68C-38E3101FF584}</Project>
       <Name>NProg.Distributed.OrderService.Bootstrapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\samples\order\NProg.Distributed.OrderService.Domain\NProg.Distributed.OrderService.Domain.csproj">
-      <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
-      <Name>NProg.Distributed.OrderService.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
-      <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
-      <Name>NProg.Distributed.Core.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
-      <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
+    <ProjectReference Include="..\..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
+      <Project>{3ab7dccb-b549-4f9f-b54d-c8025a139a8c}</Project>
       <Name>NProg.Distributed.Core.Service</Name>
     </ProjectReference>
   </ItemGroup>

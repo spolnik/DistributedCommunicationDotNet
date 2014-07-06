@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3DC445B2-A103-464B-A115-C08B77BFA504}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NProg.Distributed.OrderService</RootNamespace>
+    <AssemblyName>NProg.Distributed.OrderService.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\AddOrderCommand.cs" />
+    <Compile Include="Commands\RemoveOrderCommand.cs" />
+    <Compile Include="Handlers\AddOrderHandler.cs" />
+    <Compile Include="Handlers\GetOrderHandler.cs" />
+    <Compile Include="Handlers\MessageHandlerBase.cs" />
+    <Compile Include="Handlers\RemoveOrderHandler.cs" />
+    <Compile Include="OrderClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GetOrderQuery.cs" />
+    <Compile Include="Responses\GetOrderResponse.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
+      <Project>{beb9df18-62d2-4384-9331-8f057f0030da}</Project>
+      <Name>NProg.Distributed.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
+      <Project>{3ab7dccb-b549-4f9f-b54d-c8025a139a8c}</Project>
+      <Name>NProg.Distributed.Core.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.OrderService.Domain\NProg.Distributed.OrderService.Domain.csproj">
+      <Project>{1487C697-4873-4265-B346-8782DA31B3AF}</Project>
+      <Name>NProg.Distributed.OrderService.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -6,9 +6,9 @@ using log4net;
 using Ninject;
 using NProg.Distributed.Core.Service;
 using NProg.Distributed.Core.Service.Messaging;
-using NProg.Distributed.OrderService.Api;
-using NProg.Distributed.OrderService.Config;
+using NProg.Distributed.OrderService.Bootstrapper;
 using NProg.Distributed.OrderService.Domain;
+using NProg.Distributed.OrderService.Domain.Api;
 using NUnit.Framework;
 
 namespace NProg.Distributed.Transport.Tests
