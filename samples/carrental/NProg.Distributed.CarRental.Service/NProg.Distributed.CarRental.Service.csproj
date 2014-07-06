@@ -99,20 +99,20 @@
     <Compile Include="Responses\GetReservationsResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NProg.Distributed.CarRental.Data\NProg.Distributed.CarRental.Data.csproj">
-      <Project>{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}</Project>
-      <Name>NProg.Distributed.CarRental.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
+    <ProjectReference Include="..\..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
       <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
       <Name>NProg.Distributed.Core.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
+    <ProjectReference Include="..\..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
       <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
       <Name>NProg.Distributed.Core.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NProg.Distributed.CarRental.Data\NProg.Distributed.CarRental.Data.csproj">
+      <Project>{681FB3D2-3C5B-4FF6-8EE8-2D0184654156}</Project>
+      <Name>NProg.Distributed.CarRental.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.CarRental.Domain\NProg.Distributed.CarRental.Domain.csproj">
-      <Project>{d2d3a11c-d368-449e-bcb6-34210a7f2712}</Project>
+      <Project>{D2D3A11C-D368-449E-BCB6-34210A7F2712}</Project>
       <Name>NProg.Distributed.CarRental.Domain</Name>
     </ProjectReference>
   </ItemGroup>

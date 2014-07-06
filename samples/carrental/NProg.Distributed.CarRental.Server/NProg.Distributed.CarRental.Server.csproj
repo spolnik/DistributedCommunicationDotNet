@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{199FC54C-7F1C-4F21-B58C-16DA1C586F79}</ProjectGuid>
+    <ProjectGuid>{AABCC111-6722-4B15-80AF-CA7833CAF4B9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NProg.Distributed.CarRental.Client</RootNamespace>
-    <AssemblyName>NProg.Distributed.CarRental.Client</AssemblyName>
+    <RootNamespace>NProg.Distributed.CarRental.Server</RootNamespace>
+    <AssemblyName>NProg.Distributed.CarRental.Server</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -35,15 +35,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,25 +55,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientProgram.cs" />
+    <Compile Include="ServerProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
-      <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
-      <Name>NProg.Distributed.Core.Data</Name>
+    <ProjectReference Include="..\..\..\src\NProg.Distributed.Service\NProg.Distributed.Core.Service.csproj">
+      <Project>{3AB7DCCB-B549-4F9F-B54D-C8025A139A8C}</Project>
+      <Name>NProg.Distributed.Core.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\NProg.Distributed.CarRental.Bootstraper\NProg.Distributed.CarRental.Bootstrapper.csproj">
-      <Project>{d6913ae5-730d-4436-adba-70ee920cad81}</Project>
+      <Project>{D6913AE5-730D-4436-ADBA-70EE920CAD81}</Project>
       <Name>NProg.Distributed.CarRental.Bootstrapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NProg.Distributed.CarRental.Domain\NProg.Distributed.CarRental.Domain.csproj">
-      <Project>{D2D3A11C-D368-449E-BCB6-34210A7F2712}</Project>
-      <Name>NProg.Distributed.CarRental.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

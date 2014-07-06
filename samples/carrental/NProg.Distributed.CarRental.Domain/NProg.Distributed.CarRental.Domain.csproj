@@ -51,7 +51,7 @@
     <Compile Include="Reservation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
+    <ProjectReference Include="..\..\..\src\NProg.Distributed.Core.Data\NProg.Distributed.Core.Data.csproj">
       <Project>{BEB9DF18-62D2-4384-9331-8F057F0030DA}</Project>
       <Name>NProg.Distributed.Core.Data</Name>
     </ProjectReference>
